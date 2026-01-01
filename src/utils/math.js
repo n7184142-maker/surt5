@@ -71,6 +71,46 @@ export const v2 = {
   clamp_: (value, min, max) => Math.max(min, Math.min(max, value)),
   lerp_: (a, b, t) => a + (b - a) * t,
   
+  /**
+   * Calculate angle between two positions (direction vector)
+   * surviv-cheat approach: Math.atan2(dy, dx)
+   */
+  angleTowards_: (fromPos, toPos) => {
+    const dy = toPos.y - fromPos.y;
+    const dx = toPos.x - fromPos.x;
+    return Math.atan2(dy, dx);
+  },
+  
+  /**
+   * Shortest angle difference between two angles
+   * Properly handles wrap-around at ±PI
+   */
+  angleDifference_: (a1, a2) => {
+    let diff = a1 - a2;
+    while (diff > Math.PI) diff -= 2 * Math.PI;
+    while (diff < -Math.PI) diff += 2 * Math.PI;
+    return diff;
+  },
+  
+  /**
+   * Fast distance calculation (surviv-cheat style)
+   * sqrt(dx² + dy²)
+   */
+  distance_: (x1, y1, x2, y2) => {
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+    return Math.sqrt(dx * dx + dy * dy);
+  },
+  
+  /**
+   * Squared distance (faster when you don't need actual distance)
+   */
+  distanceSqr_: (x1, y1, x2, y2) => {
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+    return dx * dx + dy * dy;
+  },
+  
   // High-precision vector operations for ballistic calculations
   distanceTo_: (a, b) => {
     const dx = a.x - b.x;
@@ -258,11 +298,83 @@ export const sameLayer = (a, b) => {
   return (a & 0x1) === (b & 0x1) || (a & 0x2 && b & 0x2);
 };
 
-// Ballistic calculation helpers
+// Ballistic calculation helpers (surviv-cheat style + improvements)
 export const ballistics = {
-  // Solve for time when bullet reaches moving target
-  // Returns time t where ||playerPos + bulletDir * vb * t - (targetPos + targetVel * t)|| = 0
-  // Uses iterative approach for numerical stability
+  /**
+   * Quadratic ballistic solver: solves for intersection time using quadratic formula
+   * This is the surviv-cheat approach: finds where bullet intercepts moving target
+   * 
+   * Given:
+   *   - playerPos: our position
+   *   - targetPos: target current position
+   *   - targetVel: target velocity per frame (estimated from posOld)
+   *   - bulletSpeed: bullet speed per frame
+   * 
+   * Solves: a*t² + b*t + c = 0 where solution t is intercept time
+   */
+  quadraticIntercept_: (playerPos, targetPos, targetVel, bulletSpeed) => {
+    const diffX = targetPos.x - playerPos.x;
+    const diffY = targetPos.y - playerPos.y;
+    
+    // Quadratic formula coefficients
+    // a*t² + b*t + c = 0
+    // where the equation represents distance² = bulletSpeed² * t²
+    const a = targetVel.x * targetVel.x + 
+              targetVel.y * targetVel.y - 
+              bulletSpeed * bulletSpeed;
+    
+    const b = 2 * (diffX * targetVel.x + diffY * targetVel.y);
+    const c = diffX * diffX + diffY * diffY;
+    
+    const discriminant = b * b - 4 * a * c;
+    
+    if (discriminant < 0) return null; // No solution - target moving too fast
+    
+    const sqrtDisc = Math.sqrt(discriminant);
+    const t1 = (-b - sqrtDisc) / (2 * a);
+    const t2 = (-b + sqrtDisc) / (2 * a);
+    
+    // Return smallest positive time
+    if (t1 > 0.0001) return t1;
+    if (t2 > 0.0001) return t2;
+    
+    return null;
+  },
+  
+  /**
+   * Calculate lead position using quadratic ballistics solver
+   * Returns screen position to aim at for bullet interception
+   */
+  calculateLeadPosition_: (playerPos, targetPos, targetPosOld, targetPosOldOld, bulletSpeed, camera, predictionLevel = 0.2) => {
+    // Estimate velocity from position history (delta between frames)
+    const velocityX = targetPos.x - (targetPosOld?.x ?? targetPos.x);
+    const velocityY = targetPos.y - (targetPosOld?.y ?? targetPos.y);
+    
+    const targetVel = { x: velocityX, y: velocityY };
+    
+    // Solve for intercept time
+    const t = ballistics.quadraticIntercept_(playerPos, targetPos, targetVel, bulletSpeed);
+    
+    if (t === null) {
+      // Fallback: aim at current position if no valid intercept
+      return camera.pointToScreen(targetPos);
+    }
+    
+    // Calculate predicted position at intercept time
+    const predictedX = targetPos.x + velocityX * t;
+    const predictedY = targetPos.y + velocityY * t;
+    
+    // Apply prediction level blend (0 = current pos, 1 = full prediction)
+    const blendedX = playerPos.x + (predictedX - playerPos.x) * predictionLevel;
+    const blendedY = playerPos.y + (predictedY - playerPos.y) * predictionLevel;
+    
+    return camera.pointToScreen({ x: blendedX, y: blendedY });
+  },
+  
+  /**
+   * Iterative lead time solver (numerical approach)
+   * More stable for edge cases than quadratic formula
+   */
   predictLeadTime_: (playerPos, targetPos, targetVel, bulletSpeed, maxIterations = 4) => {
     let t = 0.016; // Start with one frame
     const maxTime = 5;
@@ -292,7 +404,9 @@ export const ballistics = {
     return Math.max(0.001, Math.min(t, maxTime));
   },
   
-  // Calculate lead position with acceleration prediction
+  /**
+   * Calculate lead position with acceleration prediction
+   */
   predictPosition_: (targetPos, targetVel, targetAccel, bulletSpeed, playerPos) => {
     const t = ballistics.predictLeadTime_(playerPos, targetPos, targetVel, bulletSpeed);
     
@@ -302,7 +416,21 @@ export const ballistics = {
     };
   },
   
-  // Estimate acceleration from velocity history (3-sample linear regression)
+  /**
+   * Estimate velocity from position history
+   * Two-frame derivative (simple and robust)
+   */
+  estimateVelocity_: (currentPos, previousPos) => {
+    if (!previousPos) return { x: 0, y: 0 };
+    return {
+      x: currentPos.x - previousPos.x,
+      y: currentPos.y - previousPos.y,
+    };
+  },
+  
+  /**
+   * Estimate acceleration from velocity history (3-sample linear regression)
+   */
   estimateAcceleration_: (velocityHistory) => {
     if (velocityHistory.length < 2) return { x: 0, y: 0 };
     
@@ -321,7 +449,9 @@ export const ballistics = {
     return count > 0 ? { x: sumAccelX / count, y: sumAccelY / count } : { x: 0, y: 0 };
   },
   
-  // Filter velocity spikes from lag/teleportation
+  /**
+   * Filter velocity spikes from lag/teleportation
+   */
   isValidVelocity_: (newVel, prevVel, maxChangeRatio = 3) => {
     const newMag = Math.hypot(newVel.x, newVel.y);
     const prevMag = Math.hypot(prevVel.x, prevVel.y);
@@ -337,5 +467,29 @@ export const ballistics = {
     }
     
     return true;
+  },
+  
+  /**
+   * FOV (Field of View) distance check
+   * Returns true if target is within FOV angle cone from player looking toward mouse
+   */
+  isInFOV_: (playerPos, targetPos, mouseVector, fovDegrees) => {
+    const targetDir = v2.sub_(targetPos, playerPos);
+    const targetAngle = Math.atan2(targetDir.y, targetDir.x);
+    const mouseAngle = Math.atan2(mouseVector.y, mouseVector.x);
+    
+    const angleDiff = Math.abs(v2.normalizeAngle_(targetAngle - mouseAngle));
+    return angleDiff <= (fovDegrees * Math.PI / 180);
+  },
+  
+  /**
+   * Smooth aim transition using exponential interpolation
+   * Creates natural-looking aim movement
+   */
+  smoothAim_: (currentAim, targetAim, alpha = 0.2) => {
+    return {
+      x: currentAim.x * (1 - alpha) + targetAim.x * alpha,
+      y: currentAim.y * (1 - alpha) + targetAim.y * alpha,
+    };
   },
 };

@@ -113,13 +113,6 @@ const Main = ({ settings, onSettingChange }) => {
         enabled={settings.autoFire_.enabled_}
         onEnabledChange={(v) => onSettingChange((s) => (s.autoFire_.enabled_ = v))}
       />
-
-      <SectionTitle
-        icon={Icons.Heal_}
-        label="Auto Heal"
-        enabled={settings.autoHeal_.enabled_}
-        onEnabledChange={(v) => onSettingChange((s) => (s.autoHeal_.enabled_ = v))}
-      />
     </div>
   );
 };

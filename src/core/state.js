@@ -47,9 +47,6 @@ export const defaultSettings = {
   autoFire_: {
     enabled_: true,
   },
-  autoHeal_: {
-    enabled_: false,
-  },
   xray_: {
     enabled_: true,
     smokeOpacity_: 50,
@@ -126,10 +123,6 @@ const settingsKeys = {
   autoFire_: {
     _k: '󠄸',
     enabled_: '󠄴',
-  },
-  autoHeal_: {
-    _k: '󠅫',
-    enabled_: '󠅬',
   },
   xray_: {
     _k: '󠅔',

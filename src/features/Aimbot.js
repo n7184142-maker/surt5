@@ -42,7 +42,8 @@ const computeAimAngle = (point) => {
   return Math.atan2(point.y - centerY, point.x - centerX);
 };
 
-const normalizeAngle = (angle) => Math.atan2(Math.sin(angle), Math.cos(angle));
+// Use optimized angle normalization from math.js
+const normalizeAngle = (angle) => v2.normalizeAngle_(angle);
 
 const getLocalLayer = (player) => {
   if (isBypassLayer(player.layer)) return player.layer;
@@ -241,16 +242,15 @@ const queueInput = (command) => inputState.queuedInputs_.push(command);
 
 let tickerAttached = false;
 
-function getDistance(x1, y1, x2, y2) {
-  return (x1 - x2) ** 2 + (y1 - y2) ** 2;
-}
+// Use optimized distance calculation from math.js (squared distance is faster)
+const getDistance = (x1, y1, x2, y2) => {
+  return v2.distanceSqr_(x1, y1, x2, y2);
+};
 
-function calcAngle(playerPos, mePos) {
-  const dx = mePos.x - playerPos.x;
-  const dy = mePos.y - playerPos.y;
-
-  return Math.atan2(dy, dx);
-}
+// Use optimized angle calculation from math.js
+const calcAngle = (playerPos, mePos) => {
+  return v2.angleTowards_(playerPos, mePos);
+};
 
 function predictPosition(enemy, currentPlayer) {
   if (!enemy || !currentPlayer) return null;
@@ -303,40 +303,15 @@ function predictPosition(enemy, currentPlayer) {
   const bullet = findBullet(weapon);
   const bulletSpeed = bullet?.speed || 1000;
 
-  // Use quadratic formula approach from surviv-cheat for more accurate prediction
+  // Use optimized quadratic ballistics solver from math.js
   // This solves: when will the bullet collide with the moving enemy?
-  const userX = currentPlayerPos.x;
-  const userY = currentPlayerPos.y;
-  const enemyDirX = velocityX;
-  const enemyDirY = velocityY;
-  const diffX = enemyPos.x - userX;
-  const diffY = enemyPos.y - userY;
-
-  // Quadratic equation coefficients: at² + bt + c = 0
-  // Where t is the time when bullet and enemy collide
-  const a = enemyDirX * enemyDirX + enemyDirY * enemyDirY - bulletSpeed * bulletSpeed;
-  const b = diffX * enemyDirX + diffY * enemyDirY;
-  const c = diffX * diffX + diffY * diffY;
+  const targetVel = { x: velocityX, y: velocityY };
+  const t = ballistics.quadraticIntercept_(currentPlayerPos, enemyPos, targetVel, bulletSpeed);
   
-  // Discriminant check
-  let t = 0;
-  const discriminant = b * b - a * c;
-  
-  if (a !== 0 && discriminant >= 0) {
-    // Solve quadratic formula: take the positive root
-    const sqrtDiscriminant = Math.sqrt(discriminant);
-    const t1 = (-b - sqrtDiscriminant) / a;
-    const t2 = (-b + sqrtDiscriminant) / a;
-    
-    // Use the smallest positive time value
-    t = t1 > 0 ? (t2 > 0 ? Math.min(t1, t2) : t1) : (t2 > 0 ? t2 : 0);
-  } else if (a === 0 && b !== 0) {
-    // Linear case (enemy velocity == bullet speed)
-    t = -c / (2 * b);
+  if (t === null) {
+    // No valid intercept - just aim at current position
+    return gameManager.game[translations.camera_][translations.pointToScreen_](enemyPos);
   }
-
-  // Clamp to reasonable prediction time
-  t = Math.max(0, Math.min(t, 2.0));
 
   // Calculate predicted position with optional prediction level smoothing
   const predictionLevel = settings.aimbot_.predictionLevel_ ?? 1.0;
@@ -606,39 +581,28 @@ function aimbotTicker() {
       const isGrenadeEquipped = currentWeaponIndex === 3;
       const isAiming = game[translations.inputBinds_].isBindDown(inputCommands.Fire_);
       
-      // Detect grenade cooking - grenade equipped and fire button held
       const isGrenadeCooking = isGrenadeEquipped && isAiming;
-      
-      // In automatic mode, check if there's an enemy nearby to trigger aiming
       const hasEnemyNearby = state.currentEnemy_ && 
         state.currentEnemy_.active && 
         !state.currentEnemy_[translations.netData_][translations.dead_];
       const shouldAim = isAiming || (settings.aimbot_.automatic_ && hasEnemyNearby);
       
-      // Improved: In blatant mode, melee lock activates without needing to aim
-      // Can be active even if switching to melee (will engage once equipped)
       const wantsMeleeLock = settings.meleeLock_.enabled_ && 
         (settings.aimbot_.automatic_ || isAiming);
 
       let meleeEnemy = state.meleeLockEnemy_;
       if (wantsMeleeLock) {
-        // Check if current target is still valid
         let targetStillValid = false;
         if (meleeEnemy) {
-          // For player targets, check active and dead status
           if (meleeEnemy.active !== undefined) {
             targetStillValid = meleeEnemy.active && !meleeEnemy[translations.netData_]?.[translations.dead_];
           } else {
-            // For loot objects, just check if they exist and aren't dead
             targetStillValid = !meleeEnemy.dead;
           }
         }
         
         if (!targetStillValid) {
-          // Try to find closest enemy first
           meleeEnemy = findClosestTarget(players, me);
-          
-          // If no enemies found, try to find closest loot object
           if (!meleeEnemy) {
             const lootTarget = findMeleeLootTarget(me);
             if (lootTarget) {
@@ -771,8 +735,9 @@ function aimbotTicker() {
         state.meleeLockEnemy_ = null;
       }
 
-      // Allow aiming/melee lock while cooking grenade, but disable if grenade equipped without cooking
-      if (!settings.aimbot_.enabled_ || isMeleeEquipped || (isGrenadeEquipped && !isGrenadeCooking)) {
+      // Disable regular aiming when melee is equipped or melee lock is active
+      // Also disable if grenade equipped without cooking
+      if (!settings.aimbot_.enabled_ || isMeleeEquipped || meleeLockActive || (isGrenadeEquipped && !isGrenadeCooking)) {
         setAimState(new AimState('idle'));
         aimOverlays.hideAll();
         state.lastTargetScreenPos_ = null;
@@ -831,6 +796,11 @@ function aimbotTicker() {
         const bulletRange = bullet?.distance || Infinity;
 
         // Check if target is within bullet range and not blocked by walls
+        // In blatant mode, aim regardless of wallcheck, but still check actual shootability
+        const canAimAtTarget = distanceToEnemy <= bulletRange &&
+          (settings.aimbot_.blatant_ || !settings.aimbot_.wallcheck_ || canCastToPlayer(me, enemy, weapon, bullet));
+        
+        // For actual shooting, check if target is truly shootable (not blocked)
         const isTargetShootable =
           distanceToEnemy <= bulletRange &&
           (!settings.aimbot_.wallcheck_ || canCastToPlayer(me, enemy, weapon, bullet));
@@ -855,7 +825,7 @@ function aimbotTicker() {
           canEngageAimbot &&
           (settings.aimbot_.enabled_ || (settings.meleeLock_.enabled_ && distanceToEnemy <= 8))
         ) {
-          if (isTargetShootable) {
+          if (canAimAtTarget) {
             setAimState(
               new AimState('aimbot', { x: predictedPos.x, y: predictedPos.y }, null, true)
             );
@@ -865,7 +835,7 @@ function aimbotTicker() {
             dotTargetPos = aimSnapshot
               ? { x: aimSnapshot.clientX, y: aimSnapshot.clientY }
               : { x: predictedPos.x, y: predictedPos.y };
-            isDotTargetShootable = true;
+            isDotTargetShootable = isTargetShootable;
           } else {
             dotTargetPos = { x: predictedPos.x, y: predictedPos.y };
             isDotTargetShootable = false;
@@ -894,10 +864,14 @@ function aimbotTicker() {
             const bulletRange = bullet?.distance || Infinity;
             
             // Check if loot is within bullet range
+            // In blatant mode, aim regardless of wallcheck, but still check actual shootability
+            const canAimAtLoot = distanceToLoot <= bulletRange &&
+              (settings.aimbot_.blatant_ || !settings.aimbot_.wallcheck_ || canCastToPlayer(me, lootTarget, weapon, bullet));
+            
             const isLootShootable = distanceToLoot <= bulletRange &&
               (!settings.aimbot_.wallcheck_ || canCastToPlayer(me, lootTarget, weapon, bullet));
             
-            if (isLootShootable) {
+            if (canAimAtLoot) {
               setAimState(
                 new AimState('aimbot', { x: lootScreenPos.x, y: lootScreenPos.y }, null, true)
               );
@@ -907,7 +881,7 @@ function aimbotTicker() {
               dotTargetPos = aimSnapshot
                 ? { x: aimSnapshot.clientX, y: aimSnapshot.clientY }
                 : { x: lootScreenPos.x, y: lootScreenPos.y };
-              isDotTargetShootable = true;
+              isDotTargetShootable = isLootShootable;
               previewTargetPos = { x: lootScreenPos.x, y: lootScreenPos.y };
             } else {
               dotTargetPos = { x: lootScreenPos.x, y: lootScreenPos.y };

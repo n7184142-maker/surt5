@@ -25,6 +25,10 @@ const COLORS = {
   BLUE_: 0x3a88f4,
   RED_: 0xdc3734,
   WHITE_: 0xffffff,
+  ENEMY_RED_: 0xff3333,
+  ALLY_BLUE_: 0x4da6ff,
+  NEUTRAL_: 0xffff00,
+  DANGER_: 0xff0000,
 };
 
 const GRENADE_COLORS = {
@@ -33,6 +37,19 @@ const GRENADE_COLORS = {
   FRAG_: 0xff5500,
   MIRV_: 0xff0000,
   MARTYR_: 0xee3333,
+};
+
+// Helper to draw glowing lines
+const drawGlowLine = (graphics, fromX, fromY, toX, toY, color, thickness, glowSize = 0.3) => {
+  // Glow layer (semi-transparent, larger)
+  graphics.lineStyle(thickness + glowSize * 2, color, 0.15);
+  graphics.moveTo(fromX, fromY);
+  graphics.lineTo(toX, toY);
+  
+  // Main line
+  graphics.lineStyle(thickness, color, 0.8);
+  graphics.moveTo(fromX, fromY);
+  graphics.lineTo(toX, toY);
 };
 
 const graphicsCache = {};
@@ -239,19 +256,28 @@ function renderPlayerLines(localPlayer, players, graphics) {
     const team = findTeam(player);
     const isOnEffectiveLayer = meetsLayerCriteria(player.layer, localLayer, isLocalOnBypassLayer);
     const isDowned = player.downed;
-    const lineColor =
-      team === playerTeam
-        ? COLORS.BLUE_
-        : isOnEffectiveLayer && !isDowned
-          ? COLORS.RED_
-          : COLORS.WHITE_;
+    
+    let lineColor;
+    if (team === playerTeam) {
+      lineColor = COLORS.ALLY_BLUE_;
+    } else if (!isOnEffectiveLayer || isDowned) {
+      lineColor = COLORS.WHITE_;
+    } else {
+      lineColor = COLORS.ENEMY_RED_;
+    }
 
-    graphics.lineStyle(2, lineColor, 0.45);
+    const toX = (player[translations.pos_].x - playerX) * 16;
+    const toY = (playerY - player[translations.pos_].y) * 16;
+    
+    // Glow effect
+    graphics.lineStyle(3.5, lineColor, 0.2);
     graphics.moveTo(0, 0);
-    graphics.lineTo(
-      (player[translations.pos_].x - playerX) * 16,
-      (playerY - player[translations.pos_].y) * 16
-    );
+    graphics.lineTo(toX, toY);
+    
+    // Main line
+    graphics.lineStyle(2.2, lineColor, 0.7);
+    graphics.moveTo(0, 0);
+    graphics.lineTo(toX, toY);
   });
 }
 
@@ -270,16 +296,25 @@ function renderGrenadeZones(localPlayer, graphics) {
 
   grenades.forEach((grenade) => {
     const effectiveMatch = meetsLayerCriteria(grenade.layer, playerLayer, isLocalOnBypassLayer);
-    const opacity = effectiveMatch ? 0.1 : 0.2;
-    const fillColor = effectiveMatch ? COLORS.RED_ : COLORS.WHITE_;
+    const opacity = effectiveMatch ? 0.15 : 0.08;
+    const fillColor = effectiveMatch ? COLORS.DANGER_ : COLORS.WHITE_;
     const radius = 13 * 16;
+    const screenX = (grenade.pos.x - playerX) * 16;
+    const screenY = (playerY - grenade.pos.y) * 16;
 
-    graphics.beginFill(fillColor, opacity);
-    graphics.drawCircle((grenade.pos.x - playerX) * 16, (playerY - grenade.pos.y) * 16, radius);
+    // Outer glow
+    graphics.beginFill(fillColor, opacity * 0.5);
+    graphics.drawCircle(screenX, screenY, radius * 1.2);
     graphics.endFill();
 
-    graphics.lineStyle(2, 0x000000, 0.2);
-    graphics.drawCircle((grenade.pos.x - playerX) * 16, (playerY - grenade.pos.y) * 16, radius);
+    // Main zone
+    graphics.beginFill(fillColor, opacity);
+    graphics.drawCircle(screenX, screenY, radius);
+    graphics.endFill();
+
+    // Border
+    graphics.lineStyle(2.5, fillColor, effectiveMatch ? 0.6 : 0.3);
+    graphics.drawCircle(screenX, screenY, radius);
   });
 }
 
@@ -358,21 +393,38 @@ function renderGrenadeTrajectory(localPlayer, graphics) {
     lineColor = GRENADE_COLORS.MARTYR_;
   }
 
-  graphics.lineStyle(3, lineColor, 0.7);
+  const endScreenX = (endX - playerX) * 16;
+  const endScreenY = (playerY - endY) * 16;
+
+  // Glow effect
+  graphics.lineStyle(5, lineColor, 0.2);
   graphics.moveTo(0, 0);
-  graphics.lineTo((endX - playerX) * 16, (playerY - endY) * 16);
+  graphics.lineTo(endScreenX, endScreenY);
+
+  // Main line
+  graphics.lineStyle(3, lineColor, 0.8);
+  graphics.moveTo(0, 0);
+  graphics.lineTo(endScreenX, endScreenY);
 
   const grenadeType = activeItem.replace('_cook', '');
   const explosionType = gameObjects[grenadeType]?.explosionType;
 
   if (explosionType && gameObjects[explosionType]) {
     const radius = (gameObjects[explosionType].rad.max + 1) * 16;
-    graphics.beginFill(lineColor, 0.2);
-    graphics.drawCircle((endX - playerX) * 16, (playerY - endY) * 16, radius);
+
+    // Outer glow
+    graphics.beginFill(lineColor, 0.08);
+    graphics.drawCircle(endScreenX, endScreenY, radius * 1.15);
     graphics.endFill();
 
-    graphics.lineStyle(2, lineColor, 0.4);
-    graphics.drawCircle((endX - playerX) * 16, (playerY - endY) * 16, radius);
+    // Zone fill
+    graphics.beginFill(lineColor, 0.12);
+    graphics.drawCircle(endScreenX, endScreenY, radius);
+    graphics.endFill();
+
+    // Border
+    graphics.lineStyle(2.5, lineColor, 0.6);
+    graphics.drawCircle(endScreenX, endScreenY, radius);
   }
 }
 
@@ -627,11 +679,11 @@ function renderBulletTrajectory(localPlayer, graphics) {
   );
 
   const hitPlayer = segments.some((segment) => segment.hitPlayer);
-  const trajectoryColor = hitPlayer ? COLORS.RED_ : 0xff00ff;
-  const trajectoryWidth = hitPlayer ? 2 : 1;
+  const trajectoryColor = hitPlayer ? COLORS.DANGER_ : 0xff00ff;
+  const trajectoryWidth = hitPlayer ? 3 : 2;
 
-  graphics.lineStyle(trajectoryWidth, trajectoryColor, 0.5);
-
+  // Glow effect
+  graphics.lineStyle(trajectoryWidth + 2, trajectoryColor, 0.2);
   for (const segment of segments) {
     const startScreen = {
       x: (segment.start.x - playerPos.x) * 16,
@@ -641,11 +693,24 @@ function renderBulletTrajectory(localPlayer, graphics) {
       x: (segment.end.x - playerPos.x) * 16,
       y: (playerPos.y - segment.end.y) * 16,
     };
-
     graphics.moveTo(startScreen.x, startScreen.y);
     graphics.lineTo(endScreen.x, endScreen.y);
   }
-}
+
+  // Main trajectory
+  graphics.lineStyle(trajectoryWidth, trajectoryColor, 0.75);
+  for (const segment of segments) {
+    const startScreen = {
+      x: (segment.start.x - playerPos.x) * 16,
+      y: (playerPos.y - segment.start.y) * 16,
+    };
+    const endScreen = {
+      x: (segment.end.x - playerPos.x) * 16,
+      y: (playerPos.y - segment.end.y) * 16,
+    };
+    graphics.moveTo(startScreen.x, startScreen.y);
+    graphics.lineTo(endScreen.x, endScreen.y);
+  }}
 
 function renderFlashlights(localPlayer, players, graphics) {
   const localWeapon = findWeapon(localPlayer);

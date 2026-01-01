@@ -28,98 +28,227 @@ const CSS_CONTENT = `
   background-image:url("https://i.postimg.cc/3JYQFmX0/image.png");
 }
 
-/* Glass-style stats */
+/* Enhanced Glass-style stats */
 .surt-stat {
   display: block;
   margin-bottom: 6px;
-  padding: 6px 10px;
+  padding: 8px 12px;
   font-size: 14px;
   line-height: 1;
-  border-radius: 10px;
+  border-radius: 12px;
   color: #ffffff;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-  backdrop-filter: blur(6px) saturate(120%);
-  -webkit-backdrop-filter: blur(6px) saturate(120%);
-  text-shadow: 0 1px 0 rgba(0,0,0,0.35);
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 
+    0 8px 24px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.15);
+  backdrop-filter: blur(12px) saturate(180%) brightness(1.1);
+  -webkit-backdrop-filter: blur(12px) saturate(180%) brightness(1.1);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateZ(0);
+  overflow: hidden;
+  position: relative;
 }
+
+/* Glass edge highlight */
+.surt-stat::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255,255,255,0.3), 
+    transparent);
+  z-index: 1;
+}
+
+.surt-stat:hover {
+  transform: translateY(-1px);
+  box-shadow: 
+    0 12px 28px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
 .surt-stat.surt-fps, .surt-stat.surt-ping {
   position: relative;
   left: 5px;
   top: -5px;
   font-size: 16px;
   font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 14px;
 }
+
 .surt-stat.surt-health, .surt-stat.surt-adr {
   position: fixed;
-  top: 6px;
+  top: 12px;
   z-index: 9999;
   font-size: 16px;
   font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 16px;
+  min-width: 100px;
+  text-align: center;
+  letter-spacing: 0.5px;
 }
-.surt-stat.surt-health { right: 15px; }
-.surt-stat.surt-adr { left: 15px; }
 
-/* Glow & pulse effects */
+.surt-stat.surt-health { 
+  right: 15px; 
+  background: linear-gradient(135deg, 
+    rgba(255,255,255,0.1) 0%, 
+    rgba(255,107,107,0.08) 100%);
+}
+
+.surt-stat.surt-adr { 
+  left: 15px; 
+  background: linear-gradient(135deg, 
+    rgba(255,255,255,0.1) 0%, 
+    rgba(124,252,0,0.08) 100%);
+}
+
+/* Enhanced Glow & pulse effects */
 .surt-low {
-  color: #FF6B6B !important;
-  box-shadow: 0 0 8px rgba(255,107,107,0.9), 0 0 18px rgba(255,107,107,0.45);
+  color: #FFB8B8 !important;
+  background: linear-gradient(135deg, 
+    rgba(255,255,255,0.1) 0%, 
+    rgba(255,107,107,0.15) 100%) !important;
+  border-color: rgba(255,107,107,0.35) !important;
   animation: surt-pulse-red 1.6s ease-in-out infinite;
   transform-origin: center;
-}
-.surt-warn {
-  color: #FFD166 !important;
-  box-shadow: 0 0 8px rgba(255,209,102,0.9), 0 0 14px rgba(255,209,102,0.4);
-  animation: surt-glow-warn 2s ease-in-out infinite;
-}
-.surt-good {
-  color: #7CFC00 !important;
-  box-shadow: 0 0 8px rgba(124,252,0,0.9), 0 0 14px rgba(124,252,0,0.45);
-  animation: surt-glow-green 2.4s ease-in-out infinite;
+  text-shadow: 0 0 10px rgba(255,107,107,0.7);
 }
 
+.surt-warn {
+  color: #FFE8A3 !important;
+  background: linear-gradient(135deg, 
+    rgba(255,255,255,0.1) 0%, 
+    rgba(255,209,102,0.15) 100%) !important;
+  border-color: rgba(255,209,102,0.35) !important;
+  animation: surt-glow-warn 2s ease-in-out infinite;
+  text-shadow: 0 0 8px rgba(255,209,102,0.6);
+}
+
+.surt-good {
+  color: #A8FF78 !important;
+  background: linear-gradient(135deg, 
+    rgba(255,255,255,0.1) 0%, 
+    rgba(124,252,0,0.15) 100%) !important;
+  border-color: rgba(124,252,0,0.35) !important;
+  animation: surt-glow-green 2.4s ease-in-out infinite;
+  text-shadow: 0 0 8px rgba(124,252,0,0.6);
+}
+
+/* Enhanced animations with more depth */
 @keyframes surt-glow-warn {
-  0% { box-shadow: 0 0 6px rgba(255,209,102,0.45); }
-  50% { box-shadow: 0 0 14px rgba(255,209,102,0.95); }
-  100% { box-shadow: 0 0 6px rgba(255,209,102,0.45); }
+  0%, 100% { 
+    box-shadow: 
+      0 0 10px rgba(255,209,102,0.5),
+      0 8px 24px rgba(0,0,0,0.5),
+      inset 0 1px 0 rgba(255,255,255,0.15);
+  }
+  50% { 
+    box-shadow: 
+      0 0 20px rgba(255,209,102,0.9),
+      0 12px 32px rgba(0,0,0,0.6),
+      inset 0 1px 0 rgba(255,255,255,0.2);
+  }
 }
 
 @keyframes surt-pulse-red {
   0% {
-    box-shadow: 0 0 4px rgba(255,107,107,0.6), 0 0 12px rgba(255,107,107,0.35);
-    transform: translateY(0);
+    box-shadow: 
+      0 0 8px rgba(255,107,107,0.5),
+      0 8px 24px rgba(0,0,0,0.5),
+      inset 0 1px 0 rgba(255,255,255,0.15);
+    transform: translateY(0) scale(1);
   }
   50% {
-    box-shadow: 0 0 14px rgba(255,107,107,1), 0 0 26px rgba(255,107,107,0.6);
-    transform: translateY(-2px);
+    box-shadow: 
+      0 0 20px rgba(255,107,107,0.9),
+      0 12px 32px rgba(0,0,0,0.6),
+      inset 0 1px 0 rgba(255,255,255,0.2);
+    transform: translateY(-2px) scale(1.02);
   }
   100% {
-    box-shadow: 0 0 4px rgba(255,107,107,0.6), 0 0 12px rgba(255,107,107,0.35);
-    transform: translateY(0);
+    box-shadow: 
+      0 0 8px rgba(255,107,107,0.5),
+      0 8px 24px rgba(0,0,0,0.5),
+      inset 0 1px 0 rgba(255,255,255,0.15);
+    transform: translateY(0) scale(1);
   }
 }
 
 @keyframes surt-glow-green {
-  0% {
-    box-shadow: 0 0 6px rgba(124,252,0,0.45);
+  0%, 100% { 
+    box-shadow: 
+      0 0 10px rgba(124,252,0,0.5),
+      0 8px 24px rgba(0,0,0,0.5),
+      inset 0 1px 0 rgba(255,255,255,0.15);
   }
-  50% {
-    box-shadow: 0 0 16px rgba(124,252,0,0.95);
-  }
-  100% {
-    box-shadow: 0 0 6px rgba(124,252,0,0.45);
+  50% { 
+    box-shadow: 
+      0 0 20px rgba(124,252,0,0.9),
+      0 12px 32px rgba(0,0,0,0.6),
+      inset 0 1px 0 rgba(255,255,255,0.2);
   }
 }
 
-@media (min-width:851px){
+/* Add subtle background noise for more glass texture */
+.surt-stat::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(
+      circle at 30% 30%,
+      rgba(255,255,255,0.05) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 70% 70%,
+      rgba(255,255,255,0.03) 0%,
+      transparent 50%
+    );
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: -1;
+}
 
- /* Start row header */
- #start-row-header{
-    height:140px;
-    margin-bottom:0px;
- }
- 
+/* Optional: Add a subtle shine effect on hover */
+.surt-stat:hover::after {
+  animation: surt-shine 0.8s ease-out;
+}
+
+@keyframes surt-shine {
+  0% {
+    background-position: -100px;
+  }
+  100% {
+    background-position: 200px;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 850px) {
+  .surt-stat.surt-health, .surt-stat.surt-adr {
+    padding: 8px 12px;
+    font-size: 14px;
+    min-width: 80px;
+  }
+}
+
+@media (min-width: 851px) {
+  #start-row-header {
+    height: 140px;
+    margin-bottom: 0px;
+  }
 }
 `;
 
@@ -163,6 +292,119 @@ export default function () {
   let healthInterval = null;
   let pingTimeout = null;
   let armorObservers = [];
+  let weaponObservers = [];
+
+  const setupWeaponBorderHandler = () => {
+    try {
+      if (!outerDocument) return;
+      const weaponContainers = Array.from(outerDocument.getElementsByClassName("ui-weapon-switch"));
+      weaponContainers.forEach((container) => {
+        container.style.border = container.id === "ui-weapon-id-4" ? "3px solid #2f4032" : "3px solid #FFFFFF";
+      });
+      const weaponNames = Array.from(outerDocument.getElementsByClassName("ui-weapon-name"));
+      weaponNames.forEach((weaponNameElement) => {
+        const weaponContainer = weaponNameElement.closest(".ui-weapon-switch");
+        if (!weaponContainer)
+          return;
+        const observer = new MutationObserver(() => {
+          try {
+            const weaponName = (weaponNameElement.textContent || "").trim();
+            let border = "#FFFFFF";
+            switch (weaponName.toUpperCase()) {
+              case "CZ-3A1":
+              case "G18C":
+              case "M9":
+              case "M93R":
+              case "MAC-10":
+              case "MP5":
+              case "P30L":
+              case "DUAL P30L":
+              case "UMP9":
+              case "VECTOR":
+              case "VSS":
+              case "FLAMETHROWER":
+                border = "#FFAE00";
+                break;
+              case "AK-47":
+              case "OT-38":
+              case "OTS-38":
+              case "M39 EMR":
+              case "DP-28":
+              case "MOSIN-NAGANT":
+              case "SCAR-H":
+              case "SV-98":
+              case "M1 GARAND":
+              case "PKP PECHENEG":
+              case "AN-94":
+              case "BAR M1918":
+              case "BLR 81":
+              case "SVD-63":
+              case "M134":
+              case "GROZA":
+              case "GROZA-S":
+                border = "#007FFF";
+                break;
+              case "FAMAS":
+              case "M416":
+              case "M249":
+              case "QBB-97":
+              case "MK 12 SPR":
+              case "M4A1-S":
+              case "SCOUT ELITE":
+              case "L86A2":
+                border = "#0f690d";
+                break;
+              case "M870":
+              case "MP220":
+              case "SAIGA-12":
+              case "SPAS-12":
+              case "USAS-12":
+              case "SUPER 90":
+              case "LASR GUN":
+              case "M1100":
+                border = "#FF0000";
+                break;
+              case "MODEL 94":
+              case "PEACEMAKER":
+              case "MK45G":
+              case "M1911":
+              case "M1A1":
+                border = "#800080";
+                break;
+              case "DEAGLE 50":
+              case "RAINBOW BLASTER":
+                border = "#000000";
+                break;
+              case "AWM-S":
+              case "MK 20 SSR":
+                border = "#808000";
+                break;
+              case "POTATO CANNON":
+              case "SPUD GUN":
+                border = "#A52A2A";
+                break;
+              case "FLARE GUN":
+                border = "#FF4500";
+                break;
+              case "M79":
+                border = "#008080";
+                break;
+              case "HEART CANNON":
+                border = "#FFC0CB";
+                break;
+              default:
+                break;
+            }
+            if (weaponContainer.id !== "ui-weapon-id-4") {
+              weaponContainer.style.border = `3px solid ${border}`;
+            }
+          } catch { }
+        });
+        observer.observe(weaponNameElement, { childList: true, characterData: true, subtree: true });
+        weaponObservers.push(observer);
+      });
+    } catch { }
+  };
 
   const initExtras = () => {
     if (extrasInitialized) return;
@@ -320,7 +562,12 @@ export default function () {
         });
       } catch { }
 
-      extrasInitialized = true;
+      // Weapon border handler
+      try {
+        setupWeaponBorderHandler();
+      } catch { }
+
+      extrasInitialized = true; 
     } catch { }
   };
 
@@ -333,6 +580,16 @@ export default function () {
       if (adrEl && adrEl.parentNode) adrEl.remove();
       if (healthInterval) clearInterval(healthInterval);
       if (pingTimeout) clearTimeout(pingTimeout);
+      // cleanup weapon observers and borders
+      weaponObservers.forEach((mo) => mo.disconnect());
+      weaponObservers.length = 0;
+      try {
+        const weaponContainers = Array.from(outerDocument.getElementsByClassName('ui-weapon-switch'));
+        weaponContainers.forEach((container) => {
+          if (container && container.style) container.style.border = '';
+        });
+      } catch { }
+
       armorObservers.forEach((mo) => mo.disconnect());
       armorObservers.length = 0;
       fpsTimes.length = 0;

@@ -211,15 +211,19 @@ export function translate(gameManager) {
                       if (translated.health_ == null && numericProps.length > 0) {
                         // First numeric property is likely health
                         translated.health_ = numericProps[0];
+                        if (DEV) console.log('[AutoHeal] Found health_ =', translated.health_);
                       }
                       
                       // Try to find boost - usually second numeric property after health
                       if (translated.boost_ == null && numericProps.length > 1) {
                         translated.boost_ = numericProps[1];
+                        if (DEV) console.log('[AutoHeal] Found boost_ =', translated.boost_);
                       }
                     }
                   }
-                } catch { }              }
+                } catch (e) {
+                  if (DEV) console.error('[AutoHeal] Error detecting health/boost:', e);
+                }              }
               (() => {
                 let nextIsVisual = false;
                 let cameraInteracted = false;
