@@ -90,7 +90,12 @@ export const defaultSettings = {
     spinThreeDirections_: false,
     spinTwoDirections_: false,
   },
-
+  desync_: {
+    enabled_: false,
+  },
+  aimbotHud_: {
+    enabled_: true,
+  },
   keybinds_: {
     toggleMenu_: 'ShiftRight',
     toggleAimbot_: 'KeyB',
@@ -176,7 +181,14 @@ const settingsKeys = {
     spinAllDirections_: '󠄃󠄑',
     spinTwoDirections_: '󠄃󠄓',
   },
-
+  desync_: {
+    _k: '󠄎󠄒',
+    enabled_: '󠄃󠄔',
+  },
+  aimbotHud_: {
+    _k: '󠈄',
+    enabled_: '󠈅',
+  },
   keybinds_: {
     _k: 'a',
     toggleMenu_: 'b',

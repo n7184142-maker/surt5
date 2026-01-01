@@ -30,6 +30,12 @@ const Main = ({ settings, onSettingChange }) => {
           checked={settings.aimbot_.showDot_}
           onChange={(v) => onSettingChange((s) => (s.aimbot_.showDot_ = v))}
         />
+        <Checkbox
+          id="aimbot-hud"
+          label="TargetHUD"
+          checked={settings.aimbotHud_.enabled_}
+          onChange={(v) => onSettingChange((s) => (s.aimbotHud_.enabled_ = v))}
+        />
 
         <WarningCheckbox
           id="aimbot-wallcheck"
@@ -113,6 +119,14 @@ const Main = ({ settings, onSettingChange }) => {
         enabled={settings.autoFire_.enabled_}
         onEnabledChange={(v) => onSettingChange((s) => (s.autoFire_.enabled_ = v))}
       />
+
+      <SectionTitle
+        icon={Icons.Desync_}
+        label="Desync"
+        enabled={settings.desync_.enabled_}
+        onEnabledChange={(v) => onSettingChange((s) => (s.desync_.enabled_ = v))}
+      />
+
     </div>
   );
 };

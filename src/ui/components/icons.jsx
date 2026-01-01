@@ -36,6 +36,7 @@ export const Icons = {
   Heal_: Heart,
   AutoSwitch_: ArrowLeftRight,
   SemiAuto_: Rocket,
+  Desync_: Package,
   XRay_: Eye,
   ESP_: Radio,
   Help_: HelpCircle,

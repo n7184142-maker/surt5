@@ -399,6 +399,7 @@ export const getAimMode = () => controllerState.mode_;
 const overlayState = {
   aimbotDot_: null,
   initialized_: false,
+  aimbotHUD_: null,
 };
 
 const getDirectionText = (angle) => {
@@ -428,6 +429,8 @@ const getDirectionText = (angle) => {
   }
   return 'E';
 };
+
+
 
 const ensureOverlays = (uiRoot) => {
   if (!uiRoot) return false;
@@ -480,9 +483,45 @@ const updateAimbotDot = (displayPos, isDotTargetShootable, isFocusedEnemy) => {
   }
 };
 
+const updateAimbotHUD = (targetInfo) => {
+  if (!overlayState.aimbotHUD_) return;
+
+  if (!settings.aimbot_.enabled_ || !settings.aimbotHud_.enabled_) {
+    overlayState.aimbotHUD_.style.display = 'none';
+    return;
+  }
+
+  overlayState.aimbotHUD_.style.display = 'block';
+
+  if (targetInfo) {
+    const { direction, targetName, targetPos, distance } = targetInfo;
+    
+    const dirText = direction !== undefined && direction !== null ? getDirectionText(direction) : 'N/A';
+    const name = targetName || 'Unknown';
+    const posText = targetPos 
+      ? `X: ${Math.round(targetPos.x)} Y: ${Math.round(targetPos.y)}`
+      : 'N/A';
+    const distText = distance !== undefined ? `${Math.round(distance)}m` : 'N/A';
+
+    overlayState.aimbotHUD_.innerHTML = `
+      <div class="hud-direction"><svg class="hud-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 7v5l3 3"/></svg> ${dirText}</div>
+      <div class="hud-target"><svg class="hud-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="9"/></svg> ${name}</div>
+      <div class="hud-position"><svg class="hud-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> ${posText}</div>
+      <div class="hud-distance"><svg class="hud-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19"/></svg> ${distText}</div>
+    `;
+  } else {
+    overlayState.aimbotHUD_.innerHTML = `
+      <div class="hud-target">Surplus+ TargetHUD</div>
+    `;
+  }
+};
+
 const hideAllOverlays = () => {
   if (overlayState.aimbotDot_) {
     overlayState.aimbotDot_.style.display = 'none';
+  }
+  if (overlayState.aimbotHUD_) {
+    overlayState.aimbotHUD_.style.display = 'none';
   }
 };
 
@@ -490,6 +529,7 @@ export const aimOverlays = {
   ensureInitialized: (uiRoot) => ensureOverlays(uiRoot),
   updateDot: (displayPos, isShootable, isFocused) =>
     updateAimbotDot(displayPos, isShootable, isFocused),
+  updateHUD: (targetInfo) => updateAimbotHUD(targetInfo),
   hideAll: () => hideAllOverlays(),
   isInitialized: () => overlayState.initialized_,
 };

@@ -27,6 +27,10 @@ const isSlowFiringWeapon = (weaponType) => {
   }
 };
 
+export const isHandledByWeaponSwitch = (weaponType) => {
+  return isSlowFiringWeapon(weaponType);
+};
+
 const isPlayerFiring = () =>
   gameManager.game[translations.touch_].shotDetected ||
   gameManager.game[translations.inputBinds_].isBindDown(inputCommands.Fire_);

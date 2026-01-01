@@ -562,6 +562,7 @@ function aimbotTicker() {
       game[translations.uiManager_].spectating
     ) {
       setAimState(new AimState('idle'));
+      aimOverlays.updateHUD(null);
       state.lastTargetScreenPos_ = null;
       return;
     }
@@ -844,8 +845,11 @@ function aimbotTicker() {
           dotTargetPos = { x: predictedPos.x, y: predictedPos.y };
           isDotTargetShootable = isTargetShootable;
         }
+        
+        aimOverlays.updateHUD(targetInfo);
       } else {
         // No enemy found, try to target loot items
+        aimOverlays.updateHUD(null);
         const lootTarget = findLootTarget(me);
         if (lootTarget) {
           state.currentLootTarget_ = lootTarget; // Track loot target for AutoSwitch
