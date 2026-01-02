@@ -1486,17 +1486,6 @@ li::marker {
 .aimbot-hud.hiding {
   animation: hudFadeOut 0.3s ease-in-out forwards;
 }
-
-.aimbot-hud .hud-direction {
-  color: #6edb72;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  letter-spacing: 0.05em;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
 .aimbot-hud .hud-target {
   color: #ffffff;
   margin-bottom: 0.5rem;
@@ -1507,16 +1496,6 @@ li::marker {
   align-items: center;
   gap: 0.5rem;
 }
-
-.aimbot-hud .hud-position {
-  color: #a0f7a4;
-  font-size: 0.8rem;
-  margin-bottom: 0.25rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
 .aimbot-hud .hud-distance {
   color: #7eeb82;
   font-size: 0.8rem;
@@ -1530,4 +1509,34 @@ li::marker {
   width: 1rem;
   height: 1rem;
   flex-shrink: 0;
+}
+
+.aimbot-hud .hud-equipment {
+  margin: 0.5rem 0;
+  padding: 0.5rem 0.75rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-left: 2px solid #6edb72;
+  border-radius: 0.375rem;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.aimbot-hud .equipment-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.aimbot-hud .eq-label {
+  color: #a0f7a4;
+  font-weight: 500;
+  min-width: 60px;
+}
+
+.aimbot-hud .eq-value {
+  color: #ffffff;
+  font-weight: 600;
+  text-align: right;
+  flex: 1;
 }

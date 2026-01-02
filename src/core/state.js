@@ -43,9 +43,16 @@ export const defaultSettings = {
     autoMelee_: false,
     autoAttack_: true,
     attackAllies_: false,
+    antiExplosion_: true,
   },
   autoFire_: {
     enabled_: true,
+  },
+  mapESP_: {
+    enabled_: false,
+  },
+  playerRadar_: {
+    enabled_: false,
   },
   xray_: {
     enabled_: true,
@@ -124,10 +131,19 @@ const settingsKeys = {
     autoMelee_: '󠁢',
     autoAttack_: '󠁤',
     attackAllies_: '󠁣',
+    antiExplosion_: '󠁥',
   },
   autoFire_: {
     _k: '󠄸',
     enabled_: '󠄴',
+  },
+  mapESP_: {
+    _k: '󠄹',
+    enabled_: '󠄵',
+  },
+  playerRadar_: {
+    _k: '󠄺',
+    enabled_: '󠄶',
   },
   xray_: {
     _k: '󠅔',

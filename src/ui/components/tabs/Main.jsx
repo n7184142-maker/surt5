@@ -96,6 +96,12 @@ const Main = ({ settings, onSettingChange }) => {
           onChange={(v) => onSettingChange((s) => (s.meleeLock_.attackAllies_ = v))}
           warning={true}
         />
+        <Checkbox
+          id="anti-explosion"
+          label="Anti Explosion"
+          checked={settings.meleeLock_.antiExplosion_}
+          onChange={(v) => onSettingChange((s) => (s.meleeLock_.antiExplosion_ = v))}
+        />
       </div>
 
       <SectionTitle

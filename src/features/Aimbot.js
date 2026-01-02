@@ -19,6 +19,8 @@ const state = {
   previousEnemies_: {},
   currentEnemy_: null,
   meleeLockEnemy_: null,
+  meleeLockTargetId_: null, // Track melee lock target ID for stability
+  meleeLockStartTime_: null, // Track when melee lock started
   velocityBuffer_: {},
   lastTargetScreenPos_: null,
   canAutoFire_: true,
@@ -26,12 +28,41 @@ const state = {
   targetPriority_: {}, // Track target scores for better prioritization
   currentLootTarget_: null, // Track current loot being targeted
   isSwitchingToMelee_: false, // Track if we just queued melee switch
+  meleeVelocityHistory_: {}, // Store velocity history for better prediction
+  meleeAcceleration_: {}, // Track acceleration for advanced prediction
+  
+  // Anti-Grenade state
+  nearestGrenade_: null, // Nearest active grenade
+  lastGrenadeCheckTime_: 0, // Last time we checked for grenades
+  grenadeEvasionAngle_: null, // Direction to evade from grenade
 };
 
 const MELEE_ENGAGE_DISTANCE = 5.5;
 const MELEE_DETECTION_DISTANCE = 7.5; // Extended range for detection
 const MELEE_LOCK_HYSTERESIS = 1.0; // Prevent rapid lock/unlock switching
 const MELEE_PREDICTION_TIME = 0.15; // 150ms prediction for moving targets
+const MELEE_VELOCITY_HISTORY_SIZE = 30; // Store more history for better prediction
+const MELEE_MIN_HISTORY_SAMPLES = 5; // Require more samples before predicting
+const MELEE_VELOCITY_SMOOTHING = 0.7; // Higher smoothing for stable melee targeting
+const MELEE_PREDICTION_LOOKAHEAD = 0.2; // 200ms prediction window for melee
+
+// Anti-grenade constants
+const GRENADE_EXPLOSION_RADIUS = 15; // Game units (same as ESP render)
+const GRENADE_SAFE_DISTANCE = GRENADE_EXPLOSION_RADIUS + 20; // Extended buffer for earlier detection
+const GRENADE_EVADE_SPEED = 255; // Max movement speed for evasion
+
+// Anti-Grenade constants
+const GRENADE_EXPLOSION_PATTERNS = [
+  'frag',
+  'explosion_frag',
+  'smoke',
+  'explosion_smoke',
+  'gas',
+  'concussion',
+];
+const GRENADE_BASE_RADIUS = 8; // Base explosion radius in game units
+const ANTI_GRENADE_EVADE_DISTANCE = 20; // Distance to maintain from grenade center (increased)
+const ANTI_GRENADE_CHECK_INTERVAL = 50; // Check grenades every 100ms
 
 
 
@@ -323,6 +354,263 @@ function predictPosition(enemy, currentPlayer) {
   return gameManager.game[translations.camera_][translations.pointToScreen_](predictedPos);
 }
 
+function predictMeleePosition(enemy, currentPlayer, distanceToEnemy) {
+  // Advanced prediction specifically optimized for melee combat
+  if (!enemy || !currentPlayer) return null;
+
+  const enemyPos = enemy[translations.visualPos_];
+  const enemyId = enemy.__id;
+  
+  // Initialize velocity history if needed
+  if (!state.meleeVelocityHistory_[enemyId]) {
+    state.meleeVelocityHistory_[enemyId] = {
+      positions: [],
+      velocities: [],
+      lastVelocity: { x: 0, y: 0 },
+      acceleration: { x: 0, y: 0 }
+    };
+  }
+  
+  const history = state.meleeVelocityHistory_[enemyId];
+  const now = performance.now();
+  
+  // Add current position to history
+  history.positions.push({ x: enemyPos.x, y: enemyPos.y, t: now });
+  if (history.positions.length > MELEE_VELOCITY_HISTORY_SIZE) {
+    history.positions.shift();
+  }
+  
+  // Need minimum samples for reliable velocity calculation
+  if (history.positions.length < MELEE_MIN_HISTORY_SAMPLES) {
+    return enemyPos;
+  }
+  
+  // Calculate velocity from recent position history
+  const recentIdx = Math.max(0, history.positions.length - 3);
+  const oldPos = history.positions[0];
+  const newPos = history.positions[history.positions.length - 1];
+  const timeDiffMs = newPos.t - oldPos.t;
+  const timeDiffSec = timeDiffMs / 1000;
+  
+  if (timeDiffSec > 0.001) {
+    const newVelX = (newPos.x - oldPos.x) / timeDiffSec;
+    const newVelY = (newPos.y - oldPos.y) / timeDiffSec;
+    
+    // Apply exponential smoothing to velocity for stability
+    const smoothing = MELEE_VELOCITY_SMOOTHING;
+    history.lastVelocity.x = history.lastVelocity.x * smoothing + newVelX * (1 - smoothing);
+    history.lastVelocity.y = history.lastVelocity.y * smoothing + newVelY * (1 - smoothing);
+    
+    // Calculate acceleration for advanced prediction
+    if (history.velocities.length > 0) {
+      const lastVel = history.velocities[history.velocities.length - 1];
+      history.acceleration.x = (newVelX - lastVel.x) * (1 - smoothing);
+      history.acceleration.y = (newVelY - lastVel.y) * (1 - smoothing);
+    }
+    
+    history.velocities.push({ x: newVelX, y: newVelY });
+    if (history.velocities.length > 10) {
+      history.velocities.shift();
+    }
+  }
+  
+  // Clamp velocity to reasonable range
+  const velMag = Math.hypot(history.lastVelocity.x, history.lastVelocity.y);
+  if (velMag > 2000) {
+    const scale = 2000 / velMag;
+    history.lastVelocity.x *= scale;
+    history.lastVelocity.y *= scale;
+  }
+  
+  // Adaptive prediction: more prediction for faster targets
+  const velocityFactor = Math.min(1.0, velMag / 500); // Scale 0-1 based on speed
+  const adaptiveLookahead = MELEE_PREDICTION_LOOKAHEAD * (0.8 + velocityFactor * 0.4);
+  
+  // Predict position including acceleration component
+  const predictedX = enemyPos.x + 
+    history.lastVelocity.x * adaptiveLookahead + 
+    history.acceleration.x * adaptiveLookahead * adaptiveLookahead * 0.5;
+  
+  const predictedY = enemyPos.y + 
+    history.lastVelocity.y * adaptiveLookahead + 
+    history.acceleration.y * adaptiveLookahead * adaptiveLookahead * 0.5;
+  
+  return { x: predictedX, y: predictedY };
+}
+
+function getAdaptiveMeleeDistance(enemy) {
+  // Calculate adaptive engagement distance based on target velocity
+  if (!enemy || !enemy.__id) {
+    return MELEE_ENGAGE_DISTANCE;
+  }
+  
+  const history = state.meleeVelocityHistory_[enemy.__id];
+  if (!history) {
+    return MELEE_ENGAGE_DISTANCE;
+  }
+  
+  const velMag = Math.hypot(history.lastVelocity.x, history.lastVelocity.y);
+  
+  // For faster-moving targets, increase engagement distance slightly
+  // This helps with prediction accuracy
+  const speedFactor = Math.min(0.5, velMag / 1000); // Max +0.5 units
+  return MELEE_ENGAGE_DISTANCE + speedFactor;
+}
+
+function findNearbyGrenades(playerPos, layer, maxDistance = GRENADE_SAFE_DISTANCE * 1.5) {
+  // Find all grenades nearby that could threaten the player
+  const game = gameManager.game;
+  const idToObj = game?.[translations.objectCreator_]?.[translations.idToObj_];
+  if (!idToObj) return [];
+  
+  const grenades = [];
+  
+  for (const obj of Object.values(idToObj)) {
+    // Detect grenades: __type === 9 and not smoke, or has smoke/explosion properties
+    const isGrenade = (obj.__type === 9 && obj.type !== 'smoke') || (obj.smokeEmitter && obj.explodeParticle);
+    
+    if (!isGrenade) continue;
+    if (obj.dead) continue;
+    if (!obj.pos) continue;
+    
+    // Check layer compatibility
+    const isOnBypassLayer = layer === 2 || layer === 3;
+    const grenadeOnBypass = obj.layer === 2 || obj.layer === 3;
+    
+    if (!isOnBypassLayer && !grenadeOnBypass && obj.layer !== layer) {
+      continue; // Different layer and neither is bypass layer
+    }
+    
+    const distance = Math.hypot(playerPos.x - obj.pos.x, playerPos.y - obj.pos.y);
+    
+    if (distance <= maxDistance) {
+      grenades.push({
+        pos: obj.pos,
+        distance: distance,
+        type: obj.type || 'frag',
+      });
+    }
+  }
+  
+  return grenades;
+}
+
+function calculateGrenadeEvadeDirection(playerPos, grenades) {
+  // Calculate the best direction to evade from grenades
+  // Returns angle away from danger zones
+  
+  if (grenades.length === 0) return null;
+  
+  // Calculate weighted away-vector from all grenades
+  let awayX = 0;
+  let awayY = 0;
+  
+  for (const grenade of grenades) {
+    const dx = playerPos.x - grenade.pos.x;
+    const dy = playerPos.y - grenade.pos.y;
+    const dist = Math.hypot(dx, dy);
+    
+    if (dist < 0.1) {
+      // Player is inside grenade radius - flee away HARD
+      awayX += dx / (dist + 0.1) * 10;
+      awayY += dy / (dist + 0.1) * 10;
+    } else {
+      // Weight by inverse distance - closer grenades = more weight
+      const weight = 1 / (dist + 1);
+      awayX += (dx / dist) * weight;
+      awayY += (dy / dist) * weight;
+    }
+  }
+  
+  const magnitude = Math.hypot(awayX, awayY);
+  if (magnitude < 0.1) return null;
+  
+  return Math.atan2(awayY / magnitude, awayX / magnitude);
+}
+
+
+function findGrenades(me) {
+  // Find all active grenades that pose a threat
+  const game = gameManager.game;
+  const idToObj = game?.[translations.objectCreator_]?.[translations.idToObj_];
+  if (!idToObj) return [];
+  
+  const mePos = me[translations.visualPos_];
+  const isLocalOnBypassLayer = isBypassLayer(me.layer);
+  const localLayer = getLocalLayer(me);
+  const maxThreatDistance = ANTI_GRENADE_EVADE_DISTANCE * 1.5; // Check grenades within 18 units
+  
+  const grenades = [];
+  
+  for (const obj of Object.values(idToObj)) {
+    if (!obj || obj.dead) continue;
+    
+    const objType = obj.type || '';
+    
+    // Check if object is a grenade/explosive
+    const isGrenade = GRENADE_EXPLOSION_PATTERNS.some(pattern => objType.includes(pattern));
+    if (!isGrenade) continue;
+    
+    // Check layer compatibility
+    if (obj.layer !== undefined && !meetsLayerCriteria(obj.layer, localLayer, isLocalOnBypassLayer)) {
+      continue;
+    }
+    
+    const objPos = obj[translations.visualPos_];
+    if (!objPos) continue;
+    
+    // Calculate distance
+    const distance = Math.hypot(mePos.x - objPos.x, mePos.y - objPos.y);
+    
+    // Only consider nearby grenades
+    if (distance > maxThreatDistance) continue;
+    
+    // Determine explosion radius (some grenades might have different radiuses)
+    const explosionRadius = obj.explosionRadius || GRENADE_BASE_RADIUS;
+    
+    grenades.push({
+      object: obj,
+      position: objPos,
+      distance: distance,
+      explosionRadius: explosionRadius,
+      dangerZone: explosionRadius + 1 // Add safety margin
+    });
+  }
+  
+  return grenades.sort((a, b) => a.distance - b.distance);
+}
+
+function getGrenadeEvasionDirection(grenades, mePos) {
+  // Calculate direction to evade from nearest grenades
+  if (!grenades || grenades.length === 0) return null;
+  
+  // Get the nearest grenade that threatens us
+  let threatGrenade = null;
+  for (const grenade of grenades) {
+    if (grenade.distance <= grenade.dangerZone) {
+      threatGrenade = grenade;
+      break;
+    }
+  }
+  
+  if (!threatGrenade) return null;
+  
+  // Calculate direction AWAY from grenade center
+  const grenadePos = threatGrenade.position;
+  const dx = mePos.x - grenadePos.x;
+  const dy = mePos.y - grenadePos.y;
+  const dist = Math.hypot(dx, dy);
+  
+  if (dist < 0.1) {
+    // We're on top of grenade, run in random direction
+    return Math.random() * Math.PI * 2;
+  }
+  
+  // Direction away from grenade
+  return Math.atan2(dy, dx);
+}
+
+
 function findTarget(players, me) {
   const meTeam = findTeam(me);
   const isLocalOnBypassLayer = isBypassLayer(me.layer);
@@ -574,6 +862,22 @@ function aimbotTicker() {
     let dotTargetPos = null;
     let previewTargetPos = null;
     let isDotTargetShootable = false;
+    
+    // Check for grenades if anti-explosion is enabled
+    const now = performance.now();
+    if (settings.meleeLock_.antiExplosion_ && now - state.lastGrenadeCheckTime_ > ANTI_GRENADE_CHECK_INTERVAL) {
+      const grenades = findGrenades(me);
+      state.nearestGrenade_ = grenades.length > 0 ? grenades[0] : null;
+      state.lastGrenadeCheckTime_ = now;
+      
+      // Calculate evasion direction if needed
+      if (grenades.length > 0) {
+        const mePos = me[translations.visualPos_];
+        state.grenadeEvasionAngle_ = getGrenadeEvasionDirection(grenades, mePos);
+      } else {
+        state.grenadeEvasionAngle_ = null;
+      }
+    }
 
     try {
       const currentWeaponIndex =
@@ -586,19 +890,39 @@ function aimbotTicker() {
       const hasEnemyNearby = state.currentEnemy_ && 
         state.currentEnemy_.active && 
         !state.currentEnemy_[translations.netData_][translations.dead_];
-      const shouldAim = isAiming || (settings.aimbot_.automatic_ && hasEnemyNearby);
+      
+      // In blatant mode, aim automatically without clicking. Otherwise require clicking or automatic mode
+      const shouldAim = settings.aimbot_.blatant_ || isAiming || (settings.aimbot_.automatic_ && hasEnemyNearby);
       
       const wantsMeleeLock = settings.meleeLock_.enabled_ && 
         (settings.aimbot_.automatic_ || isAiming);
+      
+      // Anti-grenade: Check for nearby grenades
+      const mePos = me[translations.visualPos_];
+      const nearbyGrenades = findNearbyGrenades(mePos, me.layer);
+      const grenadeEvadeDir = calculateGrenadeEvadeDirection(mePos, nearbyGrenades);
+      const shouldEvadeGrenade = grenadeEvadeDir !== null;
 
       let meleeEnemy = state.meleeLockEnemy_;
       if (wantsMeleeLock) {
         let targetStillValid = false;
         if (meleeEnemy) {
+          // Check both if the target is still valid AND if we should stick with it (hysteresis)
           if (meleeEnemy.active !== undefined) {
             targetStillValid = meleeEnemy.active && !meleeEnemy[translations.netData_]?.[translations.dead_];
           } else {
             targetStillValid = !meleeEnemy.dead;
+          }
+          
+          // Apply hysteresis to prevent rapid target switching
+          if (targetStillValid && state.meleeLockTargetId_ === meleeEnemy.__id) {
+            // Same target - check if it's still in reasonable range
+            const mePos = me[translations.visualPos_];
+            const enemyPos = meleeEnemy[translations.visualPos_];
+            const distance = Math.hypot(mePos.x - enemyPos.x, mePos.y - enemyPos.y);
+            const hysteresisDistance = MELEE_DETECTION_DISTANCE + MELEE_LOCK_HYSTERESIS * 2;
+            
+            targetStillValid = distance <= hysteresisDistance;
           }
         }
         
@@ -612,10 +936,14 @@ function aimbotTicker() {
           }
           
           state.meleeLockEnemy_ = meleeEnemy;
+          state.meleeLockTargetId_ = meleeEnemy?.__id || null;
+          state.meleeLockStartTime_ = meleeEnemy ? performance.now() : null;
         }
       } else {
         meleeEnemy = null;
         state.meleeLockEnemy_ = null;
+        state.meleeLockTargetId_ = null;
+        state.meleeLockStartTime_ = null;
       }
 
       let distanceToMeleeEnemy = Infinity;
@@ -633,27 +961,18 @@ function aimbotTicker() {
         // Players have 'active' property, loot objects don't
         isMeleeLootTarget = meleeEnemy.active === undefined;
         
-        // Simple velocity prediction for moving targets (players only, not loot)
+        // Use improved prediction for moving targets (players only, not loot)
         if (!isMeleeLootTarget) {
-          const playerId = meleeEnemy.__id;
-          if (state.previousEnemies_[playerId]?.lastVelocity_) {
-            const vel = state.previousEnemies_[playerId].lastVelocity_;
-            
-            // For melee: simple time to reach estimate
-            const timeToReach = Math.max(0.05, distanceToMeleeEnemy / 150);
-            
-            // Predict where enemy will be with simple linear motion
-            const predictedX = enemyPos.x + vel.x * timeToReach;
-            const predictedY = enemyPos.y + vel.y * timeToReach;
-            
-            predictedMeleePos = { x: predictedX, y: predictedY };
-          }
+          predictedMeleePos = predictMeleePosition(meleeEnemy, me, distanceToMeleeEnemy);
+        } else {
+          predictedMeleePos = enemyPos;
         }
       }
 
       // Improved: Extended detection range + hysteresis for smoother engagement
-      const meleeTargetInRange = distanceToMeleeEnemy <= MELEE_ENGAGE_DISTANCE + MELEE_LOCK_HYSTERESIS;
-      const meleeTargetDetected = distanceToMeleeEnemy <= MELEE_DETECTION_DISTANCE;
+      const adaptiveEngageDistance = meleeEnemy ? getAdaptiveMeleeDistance(meleeEnemy) : MELEE_ENGAGE_DISTANCE;
+      const meleeTargetInRange = distanceToMeleeEnemy <= adaptiveEngageDistance + MELEE_LOCK_HYSTERESIS;
+      const meleeTargetDetected = distanceToMeleeEnemy <= MELEE_DETECTION_DISTANCE + MELEE_LOCK_HYSTERESIS;
       
       // In blatant mode with auto melee, extend detection range significantly
       // This allows auto-switch to happen from further away
@@ -702,13 +1021,44 @@ function aimbotTicker() {
         }
 
         if (isMeleeTargetShootable) {
-          // Improved: Better movement calculation with predicted position
-          const moveAngle = calcAngle(targetPos, mePos) + Math.PI;
+          // Improved: Calculate movement direction to intercept predicted position
+          // Move TOWARDS the enemy, not away from them
+          const moveAngle = calcAngle(mePos, targetPos); // Direction FROM player TO target
+          
+          // Get target velocity for intelligent movement prediction
+          const history = state.meleeVelocityHistory_[meleeEnemy.__id];
+          const targetVelMag = history ? Math.hypot(history.lastVelocity.x, history.lastVelocity.y) : 0;
+          
+          // For fast-moving targets, slightly lead the movement angle
+          let adjustedAngle = moveAngle;
+          if (targetVelMag > 150) {
+            // Calculate where enemy is heading
+            const enemyHeadingAngle = Math.atan2(history.lastVelocity.y, history.lastVelocity.x);
+            
+            // Small leading adjustment (max 15 degrees for safety)
+            const leadFactor = Math.min(0.15, targetVelMag / 2000);
+            adjustedAngle = moveAngle + (enemyHeadingAngle - moveAngle) * leadFactor;
+          }
+          
+          let finalMoveAngle = adjustedAngle;
+          
+          // Anti-explosion: Override movement if critical danger
+          if (settings.meleeLock_.antiExplosion_ && nearbyGrenades.length > 0) {
+            // Check if any grenade is in immediate danger zone
+            for (const grenade of nearbyGrenades) {
+              if (grenade.distance <= GRENADE_EXPLOSION_RADIUS * 0.8) {
+                // CRITICAL: Inside explosion radius - evade immediately
+                finalMoveAngle = grenadeEvadeDir;
+                break;
+              }
+            }
+          }
+          
           const moveDir = {
             touchMoveActive: true,
             touchMoveLen: 255,
-            x: Math.cos(moveAngle),
-            y: Math.sin(moveAngle),
+            x: Math.cos(finalMoveAngle),
+            y: Math.sin(finalMoveAngle),
           };
 
           const screenPos = game[translations.camera_][translations.pointToScreen_]({
@@ -801,10 +1151,11 @@ function aimbotTicker() {
         const canAimAtTarget = distanceToEnemy <= bulletRange &&
           (settings.aimbot_.blatant_ || !settings.aimbot_.wallcheck_ || canCastToPlayer(me, enemy, weapon, bullet));
         
-        // For actual shooting, check if target is truly shootable (not blocked)
+        // For actual shooting, ALWAYS check if target is truly shootable (not blocked by walls)
+        // This ensures AutoFire doesn't shoot through walls even if wallcheck is disabled
         const isTargetShootable =
           distanceToEnemy <= bulletRange &&
-          (!settings.aimbot_.wallcheck_ || canCastToPlayer(me, enemy, weapon, bullet));
+          canCastToPlayer(me, enemy, weapon, bullet);
         
         // Update state for AutoFire to check
         state.isCurrentEnemyShootable_ = isTargetShootable;
@@ -815,11 +1166,29 @@ function aimbotTicker() {
         const direction = Math.atan2(dy, dx);
         const targetName = enemy.nameText?._text || enemy.name || 'Unknown';
         
+        // Get equipment levels from netData
+        const netData = enemy[translations.netData_];
+        const gameObjs = gameManager.game?.gameObjects || {};
+        
+        // Extract equipment type names from netData directly
+        // These properties are in the netData object (m_helmet, m_chest, m_backpack)
+        const helmetType = netData?.m_helmet || '';
+        const chestType = netData?.m_chest || '';
+        const backpackType = netData?.m_backpack || 'backpack00';
+        
+        // Look up levels from gameObjects definitions
+        const helmetLevel = (helmetType && gameObjs[helmetType]?.level) ? gameObjs[helmetType].level : 0;
+        const chestLevel = (chestType && gameObjs[chestType]?.level) ? gameObjs[chestType].level : 0;
+        const bagLevel = (backpackType && gameObjs[backpackType]?.level) ? gameObjs[backpackType].level : 0;
+        
         const targetInfo = {
           direction,
           targetName,
           targetPos: enemyPos,
           distance: distanceToEnemy,
+          helmetLevel,
+          chestLevel,
+          bagLevel,
         };
 
         if (
@@ -904,6 +1273,32 @@ function aimbotTicker() {
       }
 
       if (!aimUpdated) {
+        // Check for grenade auto-evasion even when not aiming
+        if (settings.meleeLock_.antiExplosion_ && nearbyGrenades.length > 0 && grenadeEvadeDir !== null) {
+          // Check if in danger zone
+          let inDangerZone = false;
+          for (const grenade of nearbyGrenades) {
+            if (grenade.distance <= GRENADE_SAFE_DISTANCE) {
+              inDangerZone = true;
+              break;
+            }
+          }
+          
+          if (inDangerZone) {
+            const evadeDir = {
+              touchMoveActive: true,
+              touchMoveLen: 255,
+              x: Math.cos(grenadeEvadeDir),
+              y: Math.sin(grenadeEvadeDir),
+            };
+            
+            setAimState(new AimState('idle', null, evadeDir, true));
+            aimOverlays.hideAll();
+            state.lastTargetScreenPos_ = null;
+            return;
+          }
+        }
+        
         setAimState(new AimState('idle'));
         state.lastTargetScreenPos_ = previewTargetPos
           ? { x: previewTargetPos.x, y: previewTargetPos.y }

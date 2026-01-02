@@ -42,6 +42,22 @@ const Visuals = ({ settings, onSettingChange }) => {
 
       <SectionTitle
         icon={Icons.ESP_}
+        label="Map ESP"
+        enabled={settings.mapESP_.enabled_}
+        onEnabledChange={(v) => onSettingChange((s) => (s.mapESP_.enabled_ = v))}
+        warning={true}
+      />
+
+      <SectionTitle
+        icon={Icons.ESP_}
+        label="Player Radar"
+        enabled={settings.playerRadar_.enabled_}
+        onEnabledChange={(v) => onSettingChange((s) => (s.playerRadar_.enabled_ = v))}
+        warning={true}
+      />
+
+      <SectionTitle
+        icon={Icons.ESP_}
         label="ESP"
         enabled={settings.esp_.enabled_}
         onEnabledChange={(v) => onSettingChange((s) => (s.esp_.enabled_ = v))}

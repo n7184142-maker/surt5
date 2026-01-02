@@ -4,6 +4,8 @@ import grenadeTimer from '@/features/GrenadeTimer.js';
 import autoFire, { autoFireEnabled } from '@/features/AutoFire.js';
 import aimbot, { hasValidTarget } from '@/features/Aimbot.js';
 import mapHighlights from '@/features/MapHighlights.js';
+import mapESP from '@/features/MapESP.js';
+import playerRadar from '@/features/PlayerRadar.js';
 import autoSwitch from '@/features/AutoSwitch.js';
 import spinbot from '@/features/Spinbot.js';
 import blurBackground from '@/features/BlurBackground.js';
@@ -34,6 +36,8 @@ function injectGame(oninject) {
 const loadStaticPlugins = () => {
   autoFire();
   mapHighlights();
+  mapESP();
+  playerRadar();
   blurBackground();
 };
 
