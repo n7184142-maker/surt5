@@ -84,23 +84,11 @@ const Main = ({ settings, onSettingChange }) => {
           onChange={(v) => onSettingChange((s) => (s.meleeLock_.autoMelee_ = v))}
         />
         <Checkbox
-          id="auto-attack"
-          label="Auto Attack"
-          checked={settings.meleeLock_.autoAttack_}
-          onChange={(v) => onSettingChange((s) => (s.meleeLock_.autoAttack_ = v))}
-        />
-        <Checkbox
           id="attack-allies"
           label="Attack Allies"
           checked={settings.meleeLock_.attackAllies_}
           onChange={(v) => onSettingChange((s) => (s.meleeLock_.attackAllies_ = v))}
           warning={true}
-        />
-        <Checkbox
-          id="anti-explosion"
-          label="Anti Explosion"
-          checked={settings.meleeLock_.antiExplosion_}
-          onChange={(v) => onSettingChange((s) => (s.meleeLock_.antiExplosion_ = v))}
         />
       </div>
 
@@ -132,6 +120,8 @@ const Main = ({ settings, onSettingChange }) => {
         enabled={settings.desync_.enabled_}
         onEnabledChange={(v) => onSettingChange((s) => (s.desync_.enabled_ = v))}
       />
+
+      
 
     </div>
   );

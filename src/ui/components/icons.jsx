@@ -20,6 +20,9 @@ import {
   RotateCw,
   Heart,
   BadgePlus,
+  Flame,
+  Bomb,
+  Activity,
 } from 'lucide-preact';
 
 const Discord = (props) => (
@@ -48,8 +51,11 @@ export const Icons = {
   Surplus_: BadgePlus,
   Discord_: Discord,
   Pen_: PenLineFilled,
-  Main_: Settings,
+  Main_: Flame,
   Visuals_: Eye,
   Misc_: Layers,
   Spinbot_: RotateCw,
+  AutoReload_: RotateCw,
+  AutoHeal_: Activity,
+  AntiExplosion_: Bomb,
 };

@@ -51,6 +51,9 @@ export const defaultSettings = {
   mapESP_: {
     enabled_: false,
   },
+  targetInfo_: {
+    enabled_: true,
+  },
   playerRadar_: {
     enabled_: false,
   },
@@ -140,6 +143,10 @@ const settingsKeys = {
   mapESP_: {
     _k: '󠄹',
     enabled_: '󠄵',
+  },
+  targetInfo_: {
+    _k: 'ti',
+    enabled_: 'e',
   },
   playerRadar_: {
     _k: '󠄺',

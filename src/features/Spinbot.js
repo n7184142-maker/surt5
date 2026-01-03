@@ -122,34 +122,16 @@ const createMouseAccessor = (axis, compute) => ({
   },
 });
 
-const shouldBypassSpinbot = (isEmoteUpdate) => (isMouseDown && !aimState.lastAimPos_) || isEmoteUpdate;
-
 export default function() {
   gameManager.pixi._ticker.add(spinbotTicker);
   gameManager.pixi._ticker.add(updateSpinPhysics);
 
   let lastX = 0;
   let lastY = 0;
-  let isEmoteUpdate = false;
-
-  hook(gameManager.game[translations.emoteBarn_].__proto__, translations.update_, {
-    apply(original, context, args) {
-      isEmoteUpdate = true;
-      try {
-        const result = reflect.apply(original, context, args);
-        isEmoteUpdate = false;
-        return result;
-      } catch (error) {
-        isEmoteUpdate = false;
-        throw error;
-      }
-    },
-  });
 
   const mousePos = gameManager.game[translations.input_].mousePos;
 
   object.defineProperty(mousePos, 'y', createMouseAccessor('y', function () {
-    if (shouldBypassSpinbot(isEmoteUpdate)) return this._y;
     if (isMouseDown && aimState.lastAimPos_ && settings.aimbot_.enabled_) return aimState.lastAimPos_.clientY;
     if (!isMouseDown && settings.spinbot_.enabled_) {
       lastY = calculateSpinbotMousePosition('y');
@@ -159,7 +141,6 @@ export default function() {
   }));
 
   object.defineProperty(mousePos, 'x', createMouseAccessor('x', function () {
-    if (shouldBypassSpinbot(isEmoteUpdate)) return this._x;
     if (isMouseDown && aimState.lastAimPos_ && settings.aimbot_.enabled_) return aimState.lastAimPos_.clientX;
     if (!isMouseDown && settings.spinbot_.enabled_) {
       lastX = calculateSpinbotMousePosition('x');

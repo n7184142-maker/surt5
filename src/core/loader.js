@@ -10,6 +10,7 @@ import autoSwitch from '@/features/AutoSwitch.js';
 import spinbot from '@/features/Spinbot.js';
 import blurBackground from '@/features/BlurBackground.js';
 import desync from '@/features/Desync.js';
+import targetInfo from '@/features/TargetInfo.js';
 import { translate, translations } from '@/core/obfuscatedNameTranslator.js';
 import { hook } from '@/core/hook.js';
 import { PIXI, inputCommands, packetTypes } from '@/utils/constants.js';
@@ -39,6 +40,7 @@ const loadStaticPlugins = () => {
   mapESP();
   playerRadar();
   blurBackground();
+  targetInfo();
 };
 
 const loadPIXI = () => {
@@ -58,6 +60,7 @@ const loadPlugins = () => {
     autoSwitch();
     desync();
     spinbot();
+    targetInfo();
 
     ranPlugins = true;
   }

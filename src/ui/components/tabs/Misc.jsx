@@ -1,6 +1,5 @@
 import React from 'react';
 import Checkbox from '@/ui/components/interaction/Checkbox.jsx';
-import Slider from '@/ui/components/interaction/Slider.jsx';
 import SectionTitle from '@/ui/components/layout/SectionTitle.jsx';
 import { Icons } from '@/ui/components/icons.jsx';
 
@@ -28,6 +27,14 @@ const Misc = ({ settings, onSettingChange }) => {
         enabled={settings.autoLoot_.enabled_}
         onEnabledChange={(v) => onSettingChange((s) => (s.autoLoot_.enabled_ = v))}
       />
+
+      <SectionTitle
+        icon={Icons.AntiExplosion_}
+        label="Anti Explosion"
+        enabled={settings.meleeLock_.antiExplosion_}
+        onEnabledChange={(v) => onSettingChange((s) => (s.meleeLock_.antiExplosion_ = v))}
+      />
+
     </div>
     
   );

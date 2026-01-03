@@ -39,23 +39,6 @@ const Visuals = ({ settings, onSettingChange }) => {
           onChange={(v) => onSettingChange((s) => (s.xray_.treeOpacity_ = v))}
         />
       </div>
-
-      <SectionTitle
-        icon={Icons.ESP_}
-        label="Map ESP"
-        enabled={settings.mapESP_.enabled_}
-        onEnabledChange={(v) => onSettingChange((s) => (s.mapESP_.enabled_ = v))}
-        warning={true}
-      />
-
-      <SectionTitle
-        icon={Icons.ESP_}
-        label="Player Radar"
-        enabled={settings.playerRadar_.enabled_}
-        onEnabledChange={(v) => onSettingChange((s) => (s.playerRadar_.enabled_ = v))}
-        warning={true}
-      />
-
       <SectionTitle
         icon={Icons.ESP_}
         label="ESP"
@@ -75,7 +58,6 @@ const Visuals = ({ settings, onSettingChange }) => {
           checked={settings.esp_.players_}
           onChange={(v) => onSettingChange((s) => (s.esp_.players_ = v))}
         />
-
         <div className="section-title">Grenades</div>
         <div className="subgroup">
           <Checkbox

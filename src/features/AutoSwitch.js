@@ -104,8 +104,6 @@ const handleWeaponSwitch = () => {
         }
       }
     }
-
-    // Auto-switch to melee when targeting loot items
     if (isTargetingLoot()) {
       const isMeleeEquipped = currentWeaponIndex === 2;
       if (!isMeleeEquipped) {
@@ -113,12 +111,9 @@ const handleWeaponSwitch = () => {
         return;
       }
     }
-
     if (currentWeapon.ammo === currentWeaponState.ammo_) return;
-
     const otherWeaponIndex = getAlternateWeaponIndex(currentWeaponIndex);
     const otherWeapon = weapons[otherWeaponIndex];
-
     const shouldSwitch =
       isSlowFiringWeapon(currentWeapon.type) &&
       currentWeapon.type === currentWeaponState.type_ &&
@@ -126,10 +121,8 @@ const handleWeaponSwitch = () => {
         (currentWeaponState.ammo_ === 0 &&
           currentWeapon.ammo > currentWeaponState.ammo_ &&
           isPlayerFiring()));
-
     if (shouldSwitch) {
       currentWeaponState.lastShotDate_ = Date.now();
-
       if (
         isSlowFiringWeapon(otherWeapon.type) &&
         otherWeapon.ammo &&
@@ -142,12 +135,10 @@ const handleWeaponSwitch = () => {
         queueMeleeCycleAndBack(currentWeaponIndex);
       }
     }
-
     currentWeaponState.ammo_ = currentWeapon.ammo;
     currentWeaponState.type_ = currentWeapon.type;
   } catch { }
 };
-
 export default function () {
   gameManager.pixi._ticker.add(handleWeaponSwitch);
 }

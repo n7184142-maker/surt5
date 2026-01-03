@@ -11,7 +11,7 @@ const Titlebar = ({ onMouseDown, version, onClose }) => {
       <div className="titlebar-content">
         <Icons.Surplus_ className="menu-icon" />
         <div className="titlebar-text">
-          <div className="title">SurMinus</div>
+          <div className="title">SurMinus(dev version)</div>
           <div className="credit">by shiroko</div>
         </div>
       </div>

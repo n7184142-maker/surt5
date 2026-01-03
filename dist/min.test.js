@@ -1,26 +1,26 @@
-function e(e, t = "" + lt) {
+function e(e, t = "" + ft) {
 const n = t.length;
 let r = "";
 for (let a = 0; e.length > a; a++) {
-const o = Reflect.apply(lt, e, [ a ]) ^ Reflect.apply(lt, t, [ a % n ]);
-r += ct(o);
+const o = Reflect.apply(ft, e, [ a ]) ^ Reflect.apply(ft, t, [ a % n ]);
+r += ht(o);
 }
 return r;
 }
 
 function t() {
-if (!mt.game?.initialized) return;
-const e = xt.Re.je;
+if (!Mt.game?.initialized) return;
+const e = zt.Pe.Re;
 try {
 (e => {
-e && xt.Re.Pe && mt.game[_t.A].layers[3].children.forEach(e => {
+e && zt.Pe.Te && Mt.game[jt.C].layers[3].children.forEach(e => {
 e._texture?.textureCacheIds && e._texture.textureCacheIds.some(e => e.includes("ceiling") && !e.includes("map-building-container-ceiling-05") || e.includes("map-snow-")) && (e.visible = !1);
 });
-})(e), e && mt.game[_t.L][_t.Se].forEach(e => {
-xt.Re.Te && (e.sprite._tintRGB = 1), e.sprite.alpha = xt.Re.Ee / 1e3;
+})(e), e && Mt.game[jt.I][jt.Ae].forEach(e => {
+zt.Pe.Ee && (e.sprite._tintRGB = 1), e.sprite.alpha = zt.Pe.Le / 1e3;
 }), (e => {
-e && mt.game[_t.ce][_t.ye][_t.me].forEach(e => {
-[ "tree", "table", "stairs", "bush" ].some(t => e.type.includes(t)) && (e.sprite.alpha = xt.Re.Fe / 100);
+e && Mt.game[jt.de][jt.we][jt.xe].forEach(e => {
+[ "tree", "table", "stairs", "bush" ].some(t => e.type.includes(t)) && (e.sprite.alpha = zt.Pe.Fe / 100);
 });
 })(e);
 } catch {}
@@ -29,7 +29,7 @@ e && mt.game[_t.ce][_t.ye][_t.me].forEach(e => {
 function n(e, t, n) {
 try {
 const r = e[t], a = new Proxy(r, n);
-Nt.set(a, r), Object.defineProperty(e, t, {
+Ft.set(a, r), Object.defineProperty(e, t, {
 value: a,
 writable: !0,
 enumerable: !1,
@@ -41,62 +41,62 @@ console.error(`Failed to hook ${t}:`, e);
 }
 
 function r() {
-return mt.game?.[_t.v] && null != mt.game?.[_t.$]?.[_t.se]?.[_t.ke] && mt.game?.initialized;
+return Mt.game?.[jt.M] && null != Mt.game?.[jt.Z]?.[jt.le]?.[jt._e] && Mt.game?.initialized;
 }
 
 function a(e) {
-return Object.keys(mt.game[_t.O].teamInfo).find(t => mt.game[_t.O].teamInfo[t].playerIds.includes(e.__id));
+return Object.keys(Mt.game[jt.j].teamInfo).find(t => Mt.game[jt.j].teamInfo[t].playerIds.includes(e.__id));
 }
 
 function o(e) {
-const t = e[_t.ie][_t.Me];
-return t && Dt[t] ? Dt[t] : null;
+const t = e[jt.se][jt.ze];
+return t && Kt[t] ? Kt[t] : null;
 }
 
 function i(e) {
-return e ? Dt[e.bulletType] : null;
+return e ? Kt[e.bulletType] : null;
 }
 
 function s(e) {
-if (!Kt.De) return;
-const {Le: t, Ie: n, Be: r, Ye: a} = e, o = t ?? "idle", i = performance.now();
-if (an(i), "idle" === o) {
-nn();
-const e = Vt(Kt.Ge), t = Kt.qe ?? Vt(e);
-if (!a && $t(t, e)) {
-const n = en(t, e);
-Kt.Ve = {
-startPos: Vt(t),
-targetPos: Vt(e),
+if (!Qt.De) return;
+const {Ie: t, Be: n, $e: r, Ge: a} = e, o = t ?? "idle", i = performance.now();
+if (un(i), "idle" === o) {
+cn();
+const e = en(Qt.Ye), t = Qt.Ke ?? en(e);
+if (!a && tn(t, e)) {
+const n = sn(t, e);
+Qt.qe = {
+startPos: en(t),
+targetPos: en(e),
 startTime: i,
 duration: n
-}, rn(n);
-} else Kt.Ve = null, tn(null);
-Kt.Le = "idle", Kt.Ke = null;
+}, dn(n);
+} else Qt.qe = null, ln(null);
+Qt.Ie = "idle", Qt.Ve = null;
 } else {
-nn();
+cn();
 const e = n ? {
 x: n.x,
 y: n.y
-} : Vt(Kt.Ge), t = Kt.qe ?? Vt(Kt.Ge), r = $t(e, Kt.Ke);
-o !== Kt.Le || r ? (Kt.Ve = {
-startPos: Vt(t),
-targetPos: Vt(e),
+} : en(Qt.Ye), t = Qt.Ke ?? en(Qt.Ye), r = tn(e, Qt.Ve);
+o !== Qt.Ie || r ? (Qt.qe = {
+startPos: en(t),
+targetPos: en(e),
 startTime: i,
-duration: a ? 0 : en(t, e)
-}, Kt.Ke = Vt(e)) : Kt.Ve && (Kt.Ve.targetPos = Vt(e)), Kt.Le = o;
+duration: a ? 0 : sn(t, e)
+}, Qt.Ve = en(e)) : Qt.qe && (Qt.qe.targetPos = en(e)), Qt.Ie = o;
 }
-const s = Xt(r);
-((e, t) => !((e || t) && (!e || !t || e.touchMoveActive !== t.touchMoveActive || Math.abs(e.touchMoveLen - t.touchMoveLen) > Wt || Math.abs(e.x - t.x) > Wt || Math.abs(e.y - t.y) > Wt)))(s, Kt.Ue) || (Kt.He = {
-startDir: Xt(Kt.We),
+const s = nn(r);
+((e, t) => !((e || t) && (!e || !t || e.touchMoveActive !== t.touchMoveActive || Math.abs(e.touchMoveLen - t.touchMoveLen) > Wt || Math.abs(e.x - t.x) > Wt || Math.abs(e.y - t.y) > Wt)))(s, Qt.He) || (Qt.Ue = {
+startDir: nn(Qt.We),
 targetDir: s,
 startTime: i,
-duration: Kt.Ve?.duration ?? 195
-}, Kt.Ue = s), an(i);
+duration: Qt.qe?.duration ?? 195
+}, Qt.He = s), un(i);
 }
 
 function l(e) {
-const t = mt.game[_t.$], n = a(e) === a(t), r = xt.$e.je && xt.$e.Xe;
+const t = Mt.game[jt.Z], n = a(e) === a(t), r = zt.Ze.Re && zt.Ze.Xe;
 Reflect.defineProperty(e.nameText, "visible", {
 get: () => r || n && e != t,
 set() {}
@@ -106,126 +106,126 @@ e.nameText.style.fontSize = 20, e.nameText.style.dropShadowBlur = .1;
 
 function c() {
 try {
-const e = mt.game[_t.$], t = mt.game[_t.O].playerPool[_t.me];
-if (!(mt.pixi && e && e.container && mt.game?.initialized)) return;
-const n = _n(e.container, "playerLines");
-n.clear(), xt.$e.je && xt.$e.Ze && ((e, t, n) => {
-const r = e[_t.de].x, o = e[_t.de].y, i = a(e), s = vn(e.layer), l = Mn(e);
+const e = Mt.game[jt.Z], t = Mt.game[jt.j].playerPool[jt.xe];
+if (!(Mt.pixi && e && e.container && Mt.game?.initialized)) return;
+const n = jn(e.container, "playerLines");
+n.clear(), zt.Ze.Re && zt.Ze.Je && ((e, t, n) => {
+const r = e[jt.ue].x, o = e[jt.ue].y, i = a(e), s = Sn(e.layer), l = Nn(e);
 t.forEach(t => {
-if (!t.active || t[_t.ie][_t.ze] || e.__id === t.__id) return;
-const c = a(t), u = zn(t.layer, l, s);
-let d;
-d = c === i ? pn : !u || t.downed ? bn : fn;
-const b = 16 * (t[_t.de].x - r), f = 16 * (o - t[_t.de].y);
-n.lineStyle(3.5, d, .2), n.moveTo(0, 0), n.lineTo(b, f), n.lineStyle(2.2, d, .7), 
-n.moveTo(0, 0), n.lineTo(b, f);
+if (!t.active || t[jt.se][jt.Se] || e.__id === t.__id) return;
+const c = a(t), d = Cn(t.layer, l, s);
+let u;
+u = c === i ? wn : !d || t.downed ? xn : yn;
+const b = 16 * (t[jt.ue].x - r), p = 16 * (o - t[jt.ue].y);
+n.lineStyle(3.5, u, .2), n.moveTo(0, 0), n.lineTo(b, p), n.lineStyle(2.2, u, .7), 
+n.moveTo(0, 0), n.lineTo(b, p);
 });
 })(e, t, n);
-const r = _n(e.container, "grenadeDangerZones");
-r.clear(), xt.$e.je && xt.$e.Qe.Je && ((e, t) => {
-const n = e[_t.de].x, r = e[_t.de].y, a = vn(e.layer), o = Mn(e), i = mt.game?.[_t.U]?.[_t.Ae];
+const r = jn(e.container, "grenadeDangerZones");
+r.clear(), zt.Ze.Re && zt.Ze.et.Qe && ((e, t) => {
+const n = e[jt.ue].x, r = e[jt.ue].y, a = Sn(e.layer), o = Nn(e), i = Mt.game?.[jt.H]?.[jt.Ce];
 i && Object.values(i).filter(e => 9 === e.__type && "smoke" !== e.type || e.smokeEmitter && e.explodeParticle).forEach(e => {
-const i = zn(e.layer, o, a), s = i ? .15 : .08, l = i ? hn : bn, c = 16 * (e.pos.x - n), u = 16 * (r - e.pos.y);
-t.beginFill(l, .5 * s), t.drawCircle(c, u, 249.6), t.endFill(), t.beginFill(l, s), 
-t.drawCircle(c, u, 208), t.endFill(), t.lineStyle(2.5, l, i ? .6 : .3), t.drawCircle(c, u, 208);
+const i = Cn(e.layer, o, a), s = i ? .15 : .08, l = i ? vn : xn, c = 16 * (e.pos.x - n), d = 16 * (r - e.pos.y);
+t.beginFill(l, .5 * s), t.drawCircle(c, d, 249.6), t.endFill(), t.beginFill(l, s), 
+t.drawCircle(c, d, 208), t.endFill(), t.lineStyle(2.5, l, i ? .6 : .3), t.drawCircle(c, d, 208);
 });
 })(e, r);
-const s = _n(e.container, "grenadeTrajectory");
-s.clear(), xt.$e.je && xt.$e.Qe.et && ((e, t) => {
-if (3 !== e[_t.se][_t.ke]) return;
-const n = e[_t.ie][_t.Me];
+const s = jn(e.container, "grenadeTrajectory");
+s.clear(), zt.Ze.Re && zt.Ze.et.tt && ((e, t) => {
+if (3 !== e[jt.le][jt._e]) return;
+const n = e[jt.se][jt.ze];
 if (!n) return;
-const r = mt.game, a = e[_t.de].x, o = e[_t.de].y;
+const r = Mt.game, a = e[jt.ue].x, o = e[jt.ue].y;
 let i, s;
-const l = r[_t.G].spectating, c = r[_t.M].shotDetected || r[_t.ne].isBindDown(Tt), u = l ? null : sn();
-if (u) {
-const e = r[_t.S][_t.we]({
+const l = r[jt.Y].spectating, c = r[jt.S].shotDetected || r[jt.re].isBindDown(Bt), d = l ? null : pn();
+if (d) {
+const e = r[jt.A][jt.ke]({
 x: a,
 y: o
-}), t = u.x - e.x, n = u.y - e.y, l = Math.sqrt(t * t + n * n);
+}), t = d.x - e.x, n = d.y - e.y, l = Math.sqrt(t * t + n * n);
 i = t / l, s = n / l;
-} else if (l || ht.tt && c) if (!l && ht.tt) {
-const e = r[_t.S][_t.we]({
+} else if (l || vt.nt && c) if (!l && vt.nt) {
+const e = r[jt.A][jt.ke]({
 x: a,
 y: o
-}), t = ht.tt.clientX - e.x, n = ht.tt.clientY - e.y, l = Math.sqrt(t * t + n * n);
+}), t = vt.nt.clientX - e.x, n = vt.nt.clientY - e.y, l = Math.sqrt(t * t + n * n);
 i = t / l, s = n / l;
-} else i = e[_t.pe].x, s = e[_t.pe].y; else {
-const e = r[_t.te].mousePos._x - ut.innerWidth / 2, t = r[_t.te].mousePos._y - ut.innerHeight / 2, n = Math.sqrt(e * e + t * t);
+} else i = e[jt.fe].x, s = e[jt.fe].y; else {
+const e = r[jt.ne].mousePos._x - gt.innerWidth / 2, t = r[jt.ne].mousePos._y - gt.innerHeight / 2, n = Math.sqrt(e * e + t * t);
 i = e / n, s = t / n;
 }
-const d = .03489949670250097 * i + .9993908270190958 * s;
-i = .9993908270190958 * i - .03489949670250097 * s, s = d;
-const b = Math.min(Math.max(gt.nt, 0), 32.4) / 15 * (n.includes("smoke") ? 11 : 15), f = a + i * b, p = o - s * b;
-let h = gn;
-n.includes("smoke") ? h = mn : n.includes("frag") ? h = xn : n.includes("mirv") ? h = yn : n.includes("martyr") && (h = wn);
-const g = 16 * (f - a), m = 16 * (o - p);
+const u = .03489949670250097 * i + .9993908270190958 * s;
+i = .9993908270190958 * i - .03489949670250097 * s, s = u;
+const b = Math.min(Math.max(kt.rt, 0), 32.4) / 15 * (n.includes("smoke") ? 11 : 15), p = a + i * b, f = o - s * b;
+let h = kn;
+n.includes("smoke") ? h = Mn : n.includes("frag") ? h = zn : n.includes("mirv") ? h = _n : n.includes("martyr") && (h = An);
+const g = 16 * (p - a), m = 16 * (o - f);
 t.lineStyle(5, h, .2), t.moveTo(0, 0), t.lineTo(g, m), t.lineStyle(3, h, .8), t.moveTo(0, 0), 
 t.lineTo(g, m);
-const x = n.replace("_cook", ""), y = Dt[x]?.explosionType;
-if (y && Dt[y]) {
-const e = 16 * (Dt[y].rad.max + 1);
+const x = n.replace("_cook", ""), y = Kt[x]?.explosionType;
+if (y && Kt[y]) {
+const e = 16 * (Kt[y].rad.max + 1);
 t.beginFill(h, .08), t.drawCircle(g, m, 1.15 * e), t.endFill(), t.beginFill(h, .12), 
 t.drawCircle(g, m, e), t.endFill(), t.lineStyle(2.5, h, .6), t.drawCircle(g, m, e);
 }
 })(e, s);
-const c = _n(e.container, "flashlights");
-c.clear(), xt.$e.je && (xt.$e.rt.p || xt.$e.rt.ot) && ((e, t, n) => {
-const r = o(e), s = i(r), l = vn(e.layer), c = Mn(e);
-xt.$e.rt.ot && An(e, e, s, r, n), xt.$e.rt.p && t.filter(t => !(!t.active || t[_t.ie][_t.ze] || e.__id === t.__id || !zn(t.layer, c, l) || !t.container.worldVisible || a(t) === a(e))).forEach(t => {
+const c = jn(e.container, "flashlights");
+c.clear(), zt.Ze.Re && (zt.Ze.ot.h || zt.Ze.ot.it) && ((e, t, n) => {
+const r = o(e), s = i(r), l = Sn(e.layer), c = Nn(e);
+zt.Ze.ot.it && Pn(e, e, s, r, n), zt.Ze.ot.h && t.filter(t => !(!t.active || t[jt.se][jt.Se] || e.__id === t.__id || !Cn(t.layer, c, l) || !t.container.worldVisible || a(t) === a(e))).forEach(t => {
 const r = o(t), a = i(r);
-An(e, t, a, r, n, 0, .05);
+Pn(e, t, a, r, n, 0, .05);
 });
 })(e, t, c);
-const u = _n(e.container, "bulletTrajectory");
-u.clear(), xt.$e.je && xt.$e.rt.et && ((e, t) => {
+const d = jn(e.container, "bulletTrajectory");
+d.clear(), zt.Ze.Re && zt.Ze.ot.tt && ((e, t) => {
 const n = o(e), r = i(n);
 if (!r || !n) return;
-const a = mt.game, s = e[_t.de], l = a[_t.G].spectating, c = a[_t.M].shotDetected || a[_t.ne].isBindDown(Tt);
-let u;
-const d = l ? null : sn();
-if (d) {
-const e = a[_t.S][_t.we]({
+const a = Mt.game, s = e[jt.ue], l = a[jt.Y].spectating, c = a[jt.S].shotDetected || a[jt.re].isBindDown(Bt);
+let d;
+const u = l ? null : pn();
+if (u) {
+const e = a[jt.A][jt.ke]({
 x: s.x,
 y: s.y
 });
-u = Math.atan2(e.y - d.y, e.x - d.x) - Math.PI;
-} else if (l || ht.tt && c) if (!l && ht.tt) {
-const e = a[_t.S][_t.we]({
+d = Math.atan2(e.y - u.y, e.x - u.x) - Math.PI;
+} else if (l || vt.nt && c) if (!l && vt.nt) {
+const e = a[jt.A][jt.ke]({
 x: s.x,
 y: s.y
 });
-u = Math.atan2(e.y - ht.tt.clientY, e.x - ht.tt.clientX) - Math.PI;
-} else u = Math.atan2(e[_t.pe].x, e[_t.pe].y) - Math.PI / 2; else u = Math.atan2(a[_t.te].mousePos._y - ut.innerHeight / 2, a[_t.te].mousePos._x - ut.innerWidth / 2);
-const b = Yt.it(Math.cos(u), -Math.sin(u)), f = dn(s, b, n), p = a?.[_t.U]?.[_t.Ae], h = isLayerSpoofActive && void 0 !== originalLayerValue ? originalLayerValue : e.layer;
+d = Math.atan2(e.y - vt.nt.clientY, e.x - vt.nt.clientX) - Math.PI;
+} else d = Math.atan2(e[jt.fe].x, e[jt.fe].y) - Math.PI / 2; else d = Math.atan2(a[jt.ne].mousePos._y - gt.innerHeight / 2, a[jt.ne].mousePos._x - gt.innerWidth / 2);
+const b = Zt.st(Math.cos(d), -Math.sin(d)), p = mn(s, b, n), f = a?.[jt.H]?.[jt.Ce], h = isLayerSpoofActive && void 0 !== originalLayerValue ? originalLayerValue : e.layer;
 let g = null;
-if (p) {
-const e = Object.values(p).filter(e => !(!e.collider || e.dead || void 0 !== e.height && .25 > e.height || void 0 !== e.layer && !Ht(e.layer, h) || e?.type.includes("decal")));
+if (f) {
+const e = Object.values(f).filter(e => !(!e.collider || e.dead || void 0 !== e.height && .25 > e.height || void 0 !== e.layer && !Vt(e.layer, h) || e?.type.includes("decal")));
 let t = 1 / 0;
 for (const n of e) {
 if (!1 === n.collidable) continue;
-const e = Gt.st(n.collider, s, f);
+const e = qt.lt(n.collider, s, p);
 if (e) {
-const n = Yt.lt(Yt.ct(e.point, s));
-t > n && (t = n, g = Yt.dt(e.point, Yt.ut(e.normal, .01)));
+const n = Zt.ct(Zt.dt(e.point, s));
+t > n && (t = n, g = Zt.ut(e.point, Zt.bt(e.normal, .01)));
 }
 }
 }
 const m = ((e, t, n, r, a, o = 3) => {
 const i = [];
-let s = Yt.bt(e), l = Yt.ft(t), c = n, u = 0;
-const d = mt.game, b = d?.[_t.U]?.[_t.Ae];
+let s = Zt.ft(e), l = Zt.ht(t), c = n, d = 0;
+const u = Mt.game, b = u?.[jt.H]?.[jt.Ce];
 if (!b) return i;
-const f = isLayerSpoofActive && void 0 !== originalLayerValue ? originalLayerValue : r, p = Object.values(b).filter(e => !(!e.collider || e.dead || void 0 !== e.height && .25 > e.height || void 0 !== e.layer && !Ht(e.layer, f) || e?.type.includes("decal") || e?.type.includes("decal"))), h = d?.[_t.O], g = h?.playerPool?.[_t.me], m = _t.ee, x = m ? d?.[m] : null, y = x?.player?.radius ?? 1, w = [];
+const p = isLayerSpoofActive && void 0 !== originalLayerValue ? originalLayerValue : r, f = Object.values(b).filter(e => !(!e.collider || e.dead || void 0 !== e.height && .25 > e.height || void 0 !== e.layer && !Vt(e.layer, p) || e?.type.includes("decal") || e?.type.includes("decal"))), h = u?.[jt.j], g = h?.playerPool?.[jt.xe], m = jt.te, x = m ? u?.[m] : null, y = x?.player?.radius ?? 1, w = [];
 if (Array.isArray(g)) for (const e of g) {
 if (!e || !e.active) continue;
 if (e.__id === a.__id) continue;
-const t = e[_t.ie];
+const t = e[jt.se];
 if (!t) continue;
-if (t[_t.ze]) continue;
+if (t[jt.Se]) continue;
 const n = e.layer ?? t.m_layer ?? 0;
-if (!(Ht(n, f) || 2 & n)) continue;
-const r = e[_t.de] ?? e.m_pos;
+if (!(Vt(n, p) || 2 & n)) continue;
+const r = e[jt.ue] ?? e.m_pos;
 if (!r) continue;
 const o = "number" == typeof e.m_rad ? e.m_rad : "number" == typeof e.rad ? e.rad : y * ("number" == typeof t.m_scale ? t.m_scale : "number" == typeof t.scale ? t.scale : 1);
 o > 0 && w.push({
@@ -236,27 +236,27 @@ y: r.y
 rad: o
 });
 }
-for (;o >= u && c > .1; ) {
-const e = Yt.dt(s, Yt.ut(l, c));
+for (;o >= d && c > .1; ) {
+const e = Zt.ut(s, Zt.bt(l, c));
 let t = null, n = 1 / 0, r = null, a = null;
-for (const o of p) {
+for (const o of f) {
 if (!1 === o.collidable) continue;
-const i = Gt.st(o.collider, s, e);
+const i = qt.lt(o.collider, s, e);
 if (i) {
-const e = Yt.lt(Yt.ct(i.point, s));
+const e = Zt.ct(Zt.dt(i.point, s));
 n > e && e > 1e-4 && (n = e, t = i, r = o, a = "obstacle");
 }
 }
 for (const o of w) {
-const i = Gt.ht(s, e, o.pos, o.rad);
+const i = qt.gt(s, e, o.pos, o.rad);
 if (i) {
-const e = Yt.lt(Yt.ct(i.point, s));
+const e = Zt.ct(Zt.dt(i.point, s));
 n > e && e > 1e-4 && (n = e, t = i, r = null, a = "player");
 }
 }
 if (!t) {
 i.push({
-start: Yt.bt(s),
+start: Zt.ft(s),
 end: e,
 hitPlayer: !1
 });
@@ -264,23 +264,23 @@ break;
 }
 {
 if (i.push({
-start: Yt.bt(s),
-end: Yt.bt(t.point),
+start: Zt.ft(s),
+end: Zt.ft(t.point),
 hitPlayer: "player" === a
 }), "player" === a) break;
 const e = r?.type;
-let d = !1;
-if (d = r && void 0 !== r.reflectBullets ? !0 === r.reflectBullets : [ "metal_wall", "stone_wall", "container_wall", "hedgehog", "bollard", "airdop", "silo", "collider", "warehouse_wall" ].some(t => e?.includes(t)), 
-!d || u >= o) break;
+let u = !1;
+if (u = r && void 0 !== r.reflectBullets ? !0 === r.reflectBullets : [ "metal_wall", "stone_wall", "container_wall", "hedgehog", "bollard", "airdop", "silo", "collider", "warehouse_wall" ].some(t => e?.includes(t)), 
+!u || d >= o) break;
 {
-const e = Yt.gt(l, t.normal);
-l = Yt.dt(Yt.ut(t.normal, -2 * e), l), l = Yt.ft(l), s = Yt.dt(t.point, Yt.ut(l, .01)), 
-c = Math.max(1, c - Math.sqrt(n)) / 1.5, u++;
+const e = Zt.xt(l, t.normal);
+l = Zt.ut(Zt.bt(t.normal, -2 * e), l), l = Zt.ht(l), s = Zt.ut(t.point, Zt.bt(l, .01)), 
+c = Math.max(1, c - Math.sqrt(n)) / 1.5, d++;
 }
 }
 }
 return i;
-})(g || f, b, r.distance, e.layer, e), x = m.some(e => e.hitPlayer), y = x ? hn : 16711935, w = x ? 3 : 2;
+})(g || p, b, r.distance, e.layer, e), x = m.some(e => e.hitPlayer), y = x ? vn : 16711935, w = x ? 3 : 2;
 t.lineStyle(w + 2, y, .2);
 for (const e of m) {
 const n = {
@@ -303,11 +303,11 @@ y: 16 * (s.y - e.end.y)
 };
 t.moveTo(n.x, n.y), t.lineTo(r.x, r.y);
 }
-})(e, u), t.forEach(l);
+})(e, d), t.forEach(l);
 } catch {}
 }
 
-function u(e) {
+function d(e) {
 if (!e || e.dead) return !1;
 if (!e.collider) return !1;
 if (void 0 === e.layer) return !1;
@@ -315,25 +315,25 @@ const t = e.type || "";
 return [ "crate_", "chest_", "barrel_", "bookshelf_", "drawers_", "locker_", "deposit_box_", "refrigerator_", "control_panel_", "case_", "oven_", "bed_", "couch_", "table_", "window", "pot_", "planter_" ].some(e => t.includes(e));
 }
 
-function d() {
+function u() {
 try {
-const e = mt.game;
-if (!e.initialized || !xt.xt.je && !xt.yt.je || e[_t.G].spectating) return s(new Bt("idle")), 
-void (Fn.wt = null);
-const t = e[_t.O].playerPool[_t.me], n = e[_t.$];
-let r = !1, l = null, c = null, d = !1;
+const e = Mt.game;
+if (!e.initialized || !zt.yt.Re && !zt.wt.Re || e[jt.Y].spectating) return s(new Xt("idle")), 
+void ($n.kt = null);
+const t = e[jt.j].playerPool[jt.xe], n = e[jt.Z];
+let r = !1, l = null, c = null, u = !1;
 const b = performance.now();
-if (xt.yt._t && b - Fn.kt > 50) {
+if (zt.wt.vt && b - $n._t > 50) {
 const e = (e => {
-const t = mt.game, n = t?.[_t.U]?.[_t.Ae];
+const t = Mt.game, n = t?.[jt.H]?.[jt.Ce];
 if (!n) return [];
-const r = e[_t.be], a = Ln(e), o = [];
+const r = e[jt.be], a = Gn(e), o = [];
 for (const e of Object.values(n)) {
 if (!e || e.dead) continue;
 const t = e.type || "";
-if (!Tn.some(e => t.includes(e))) continue;
-if (void 0 !== e.layer && !Dn(e.layer, a)) continue;
-const n = e[_t.be];
+if (!Bn.some(e => t.includes(e))) continue;
+if (void 0 !== e.layer && !Kn(e.layer, a)) continue;
+const n = e[jt.be];
 if (!n) continue;
 const i = Math.hypot(r.x - n.x, r.y - n.y);
 if (i > 30) continue;
@@ -348,7 +348,7 @@ dangerZone: s + 1
 }
 return o.sort((e, t) => e.distance - t.distance);
 })(n);
-Fn.vt = e.length > 0 ? e[0] : null, Fn.kt = b, Fn.Mt = e.length > 0 ? ((e, t) => {
+$n.Mt = e.length > 0 ? e[0] : null, $n._t = b, $n.zt = e.length > 0 ? ((e, t) => {
 if (!e || 0 === e.length) return null;
 let n = null;
 for (const t of e) if (t.dangerZone >= t.distance) {
@@ -358,11 +358,11 @@ break;
 if (!n) return null;
 const r = n.position, a = t.x - r.x, o = t.y - r.y;
 return .1 > Math.hypot(a, o) ? Math.random() * Math.PI * 2 : Math.atan2(o, a);
-})(e, n[_t.be]) : null;
+})(e, n[jt.be]) : null;
 }
 try {
-const b = e[_t.$][_t.se][_t.ke], f = 2 === b, p = 3 === b, h = e[_t.ne].isBindDown(Tt), g = p && h, m = xt.xt.zt || h || xt.xt.St && Fn.At && Fn.At.active && !Fn.At[_t.ie][_t.ze], x = xt.yt.je && (xt.xt.St || h), y = n[_t.be], w = ((e, t, n = 52.5) => {
-const r = mt.game, a = r?.[_t.U]?.[_t.Ae];
+const b = e[jt.Z][jt.le][jt._e], p = 2 === b, f = 3 === b, h = e[jt.re].isBindDown(Bt), g = f && h, m = zt.yt.St || h || zt.yt.At && $n.Ct && $n.Ct.active && !$n.Ct[jt.se][jt.Se], x = zt.wt.Re && (zt.yt.At || h), y = n[jt.be], w = ((e, t, n = 52.5) => {
+const r = Mt.game, a = r?.[jt.H]?.[jt.Ce];
 if (!a) return [];
 const o = [];
 for (const r of Object.values(a)) {
@@ -378,7 +378,7 @@ type: r.type || "frag"
 });
 }
 return o;
-})(y, n.layer), k = ((e, t) => {
+})(y, n.layer), v = ((e, t) => {
 if (0 === t.length) return null;
 let n = 0, r = 0;
 for (const a of t) {
@@ -391,57 +391,57 @@ n += t / i * e, r += o / i * e;
 const a = Math.hypot(n, r);
 return .1 > a ? null : Math.atan2(r / a, n / a);
 })(y, w);
-let v = Fn.Ct;
+let k = $n.Nt;
 if (x) {
 let e = !1;
-if (v && (e = void 0 !== v.active ? v.active && !v[_t.ie]?.[_t.ze] : !v.dead, e && Fn.Nt === v.__id)) {
-const t = n[_t.be], r = v[_t.be];
+if (k && (e = void 0 !== k.active ? k.active && !k[jt.se]?.[jt.Se] : !k.dead, e && $n.Ot === k.__id)) {
+const t = n[jt.be], r = k[jt.be];
 e = 9.5 >= Math.hypot(t.x - r.x, t.y - r.y);
 }
 if (!e) {
-if (v = ((e, t) => {
-const n = a(t), r = Ln(t);
+if (k = ((e, t) => {
+const n = a(t), r = Gn(t);
 let o = null, i = 1 / 0;
 for (const s of e) {
 if (!s.active) continue;
-if (s[_t.ie][_t.ze]) continue;
-if (!xt.xt.Ot && s.downed) continue;
+if (s[jt.se][jt.Se]) continue;
+if (!zt.yt.jt && s.downed) continue;
 if (t.__id === s.__id) continue;
-if (!Dn(s.layer, r)) continue;
-if (a(s) === n && !xt.yt.jt && !xt.xt.Rt) continue;
-const e = t[_t.be], l = s[_t.be], c = Bn(e.x, e.y, l.x, l.y);
+if (!Kn(s.layer, r)) continue;
+if (a(s) === n && !zt.wt.Rt && !zt.yt.Pt) continue;
+const e = t[jt.be], l = s[jt.be], c = Xn(e.x, e.y, l.x, l.y);
 i > c && (i = c, o = s);
 }
 return o;
-})(t, n), !v) {
+})(t, n), !k) {
 const e = (e => {
-if (!xt.yt.je) return null;
-const t = mt.game, n = t?.[_t.U]?.[_t.Ae];
+if (!zt.wt.Re) return null;
+const t = Mt.game, n = t?.[jt.H]?.[jt.Ce];
 if (!n) return null;
-const r = e[_t.be], a = Ln(e);
+const r = e[jt.be], a = Gn(e);
 let o = null, i = 1 / 0;
 for (const e of Object.values(n)) {
-if (!u(e)) continue;
-if (void 0 !== e.layer && !Dn(e.layer, a)) continue;
-const t = e[_t.be];
+if (!d(e)) continue;
+if (void 0 !== e.layer && !Kn(e.layer, a)) continue;
+const t = e[jt.be];
 if (!t) continue;
 const n = Math.hypot(r.x - t.x, r.y - t.y);
 n > 6.5 || i > n && (i = n, o = e);
 }
 return o;
 })(n);
-e && (v = e);
+e && (k = e);
 }
-Fn.Ct = v, Fn.Nt = v?.__id || null, Fn.Pt = v ? performance.now() : null;
+$n.Nt = k, $n.Ot = k?.__id || null, $n.Tt = k ? performance.now() : null;
 }
-} else v = null, Fn.Ct = null, Fn.Nt = null, Fn.Pt = null;
+} else k = null, $n.Nt = null, $n.Ot = null, $n.Tt = null;
 let M = 1 / 0, z = null, _ = !1;
-if (v) {
-const e = n[_t.be], t = v[_t.be];
-M = Math.hypot(e.x - t.x, e.y - t.y), _ = void 0 === v.active, z = _ ? t : ((e, t) => {
+if (k) {
+const e = n[jt.be], t = k[jt.be];
+M = Math.hypot(e.x - t.x, e.y - t.y), _ = void 0 === k.active, z = _ ? t : ((e, t) => {
 if (!e || !t) return null;
-const n = e[_t.be], r = e.__id;
-Fn.Tt[r] || (Fn.Tt[r] = {
+const n = e[jt.be], r = e.__id;
+$n.Et[r] || ($n.Et[r] = {
 positions: [],
 velocities: [],
 lastVelocity: {
@@ -453,7 +453,7 @@ x: 0,
 y: 0
 }
 });
-const a = Fn.Tt[r], o = performance.now();
+const a = $n.Et[r], o = performance.now();
 if (a.positions.push({
 x: n.x,
 y: n.y,
@@ -477,213 +477,213 @@ if (c > 2e3) {
 const e = 2e3 / c;
 a.lastVelocity.x *= e, a.lastVelocity.y *= e;
 }
-const u = .2 * (.8 + .4 * Math.min(1, c / 500));
+const d = .2 * (.8 + .4 * Math.min(1, c / 500));
 return {
-x: n.x + a.lastVelocity.x * u + a.acceleration.x * u * u * .5,
-y: n.y + a.lastVelocity.y * u + a.acceleration.y * u * u * .5
+x: n.x + a.lastVelocity.x * d + a.acceleration.x * d * d * .5,
+y: n.y + a.lastVelocity.y * d + a.acceleration.y * d * d * .5
 };
-})(v, n);
+})(k, n);
 }
-const j = v ? (e => {
-if (!e || !e.__id) return En;
-const t = Fn.Tt[e.__id];
-if (!t) return En;
+const A = k ? (e => {
+if (!e || !e.__id) return Yn;
+const t = $n.Et[e.__id];
+if (!t) return Yn;
 const n = Math.hypot(t.lastVelocity.x, t.lastVelocity.y);
-return En + Math.min(.5, n / 1e3);
-})(v) : En, A = j + 1 >= M, S = 8.5 >= M, N = xt.xt.zt && xt.yt.Et && 11.25 >= M;
-x && xt.yt.Et && !f && (A || N) && v && (gt.Ft.push(Lt), Fn.Dt = !0), (f || !A && !N) && (Fn.Dt = !1);
-const C = x && (A || N) && v && (f || Fn.Dt);
+return Yn + Math.min(.5, n / 1e3);
+})(k) : Yn, R = A + 1 >= M, S = 8.5 >= M, N = zt.yt.St && zt.wt.Lt && 11.25 >= M;
+x && zt.wt.Lt && !p && (R || N) && k && (kt.Ft.push(Gt), $n.Dt = !0), (p || !R && !N) && ($n.Dt = !1);
+const C = x && (R || N) && k && (p || $n.Dt);
 if (C) {
-const t = n[_t.be], a = z || v[_t.be], l = o(n), c = i(l);
-let u = _;
-if (u || (u = !xt.xt.Lt || Hn(n, v, l, c)), u) {
-const n = ((e, t) => Yt.It(e, t))(t, a), o = Fn.Tt[v.__id], i = o ? Math.hypot(o.lastVelocity.x, o.lastVelocity.y) : 0;
+const t = n[jt.be], a = z || k[jt.be], l = o(n), c = i(l);
+let d = _;
+if (d || (d = !zt.yt.It || Vn(n, k, l, c)), d) {
+const n = ((e, t) => Zt.Bt(e, t))(t, a), o = $n.Et[k.__id], i = o ? Math.hypot(o.lastVelocity.x, o.lastVelocity.y) : 0;
 let l = n;
 i > 150 && (l = n + (Math.atan2(o.lastVelocity.y, o.lastVelocity.x) - n) * Math.min(.15, i / 2e3));
 let c = l;
-if (xt.yt._t && w.length > 0) for (const e of w) if (12 >= e.distance) {
-c = k;
+if (zt.wt.vt && w.length > 0) for (const e of w) if (12 >= e.distance) {
+c = v;
 break;
 }
-const u = {
+const d = {
 touchMoveActive: !0,
 touchMoveLen: 255,
 x: Math.cos(c),
 y: Math.sin(c)
-}, d = e[_t.S][_t.we]({
+}, u = e[jt.A][jt.ke]({
 x: a.x,
 y: a.y
 });
-return xt.yt.Bt && f && En > M && gt.Ft.push(Tt), s(new Bt("meleeLock", {
-x: d.x,
-y: d.y
-}, u, !0)), r = !0, un(), void (Fn.wt = null);
+return zt.wt.$t && p && Yn > M && kt.Ft.push(Bt), s(new Xt("meleeLock", {
+x: u.x,
+y: u.y
+}, d, !0)), r = !0, gn(), void ($n.kt = null);
 }
 }
-if (x && !S && (Fn.Ct = null), !xt.xt.je || f || C || p && !g) return s(new Bt("idle")), 
-un(), void (Fn.wt = null);
-const O = m;
-let R = Fn.Yt?.active && !Fn.Yt[_t.ie][_t.ze] ? Fn.Yt : null;
-if (R) {
-const e = Ln(n);
-Dn(R.layer, e) || (R = null, Fn.Yt = null, s(new Bt("idle", null, null, !0)));
+if (x && !S && ($n.Nt = null), !zt.yt.Re || p || C || f && !g) return s(new Xt("idle")), 
+gn(), void ($n.kt = null);
+const j = m;
+let O = $n.Gt?.active && !$n.Gt[jt.se][jt.Se] ? $n.Gt : null;
+if (O) {
+const e = Gn(n);
+Kn(O.layer, e) || (O = null, $n.Gt = null, s(new Xt("idle", null, null, !0)));
 }
-if (R || (Fn.Yt && (Fn.Yt = null, s(new Bt("idle", null, null, !0))), R = ((e, t) => {
-const n = a(t), r = Ln(t);
-let s = null, l = -1 / 0;
-const c = xt.xt.Gt ** 2;
+if (O || ($n.Gt && ($n.Gt = null, s(new Xt("idle", null, null, !0))), O = ((e, t) => {
+const n = a(t), r = Gn(t);
+let o = null, i = -1 / 0;
+const s = zt.yt.Yt ** 2;
 performance.now();
-for (const u of e) {
-if (!u.active) continue;
-if (u[_t.ie][_t.ze]) continue;
-if (!xt.xt.Ot && u.downed) continue;
-if (t.__id === u.__id) continue;
-if (!Dn(u.layer, r)) continue;
-if (a(u) === n && !xt.xt.Rt) continue;
-const e = mt.game[_t.S][_t.we]({
-x: u[_t.be].x,
-y: u[_t.be].y
-}), d = Bn(e.x, e.y, mt.game[_t.te].mousePos._x, mt.game[_t.te].mousePos._y);
-if (d > c) continue;
-const b = Math.exp(-Math.sqrt(d) / 120), f = u === Fn.At ? .02 : 0, p = o(t), h = i(p), g = b + f + (!xt.xt.Lt || Hn(t, u, p, h) ? .03 : 0);
-g > l && (l = g, s = u);
+for (const l of e) {
+if (!l.active) continue;
+if (l[jt.se][jt.Se]) continue;
+if (!zt.yt.jt && l.downed) continue;
+if (t.__id === l.__id) continue;
+if (!Kn(l.layer, r)) continue;
+if (a(l) === n && !zt.yt.Pt) continue;
+const e = Mt.game[jt.A][jt.ke]({
+x: l[jt.be].x,
+y: l[jt.be].y
+}), c = Xn(e.x, e.y, Mt.game[jt.ne].mousePos._x, Mt.game[jt.ne].mousePos._y);
+if (c > s) continue;
+const d = Math.exp(-Math.sqrt(c) / 120) + (l === $n.Ct ? .02 : 0);
+d > i && (i = d, o = l);
 }
-return s;
-})(t, n), Fn.At = R), R) {
-const e = n[_t.be], t = R[_t.be], a = Math.hypot(e.x - t.x, e.y - t.y);
-R === Fn.At || Fn.Yt || (Fn.At = R, Fn.qt[R.__id] = [], Fn.Vt[R.__id] = []);
-const u = ((e, t) => {
+return o;
+})(t, n), $n.Ct = O), O) {
+const e = n[jt.be], t = O[jt.be], a = Math.hypot(e.x - t.x, e.y - t.y);
+O === $n.Ct || $n.Gt || ($n.Ct = O, $n.Kt[O.__id] = [], $n.qt[O.__id] = []);
+const d = ((e, t) => {
 if (!e || !t) return null;
-const n = e[_t.be], r = t[_t.be], a = e.__id, s = Fn.qt[a] ?? (Fn.qt[a] = []), l = performance.now();
+const n = e[jt.be], r = t[jt.be], a = e.__id, s = $n.Kt[a] ?? ($n.Kt[a] = []), l = performance.now();
 if (s.push([ l, {
 ...n
-} ]), s.length > 20 && s.shift(), 3 > s.length) return mt.game[_t.S][_t.we]({
+} ]), s.length > 20 && s.shift(), 3 > s.length) return Mt.game[jt.A][jt.ke]({
 x: n.x,
 y: n.y
 });
-let c = 0, u = 0;
-const d = Math.max(0, s.length - 3), b = s.length - 1, f = s[d][1], p = s[b][1], h = (s[b][0] - s[d][0]) / 1e3;
-h > .001 && (c = (p.x - f.x) / h, u = (p.y - f.y) / h);
-const g = Math.hypot(c, u);
+let c = 0, d = 0;
+const u = Math.max(0, s.length - 3), b = s.length - 1, p = s[u][1], f = s[b][1], h = (s[b][0] - s[u][0]) / 1e3;
+h > .001 && (c = (f.x - p.x) / h, d = (f.y - p.y) / h);
+const g = Math.hypot(c, d);
 if (g > 2e3) {
 const e = 2e3 / g;
-c *= e, u *= e;
+c *= e, d *= e;
 }
-const m = i(o(t)), x = qt.Kt(r, n, {
+const m = i(o(t)), x = Ht.Vt(r, n, {
 x: c,
-y: u
+y: d
 }, m?.speed || 1e3);
-if (null === x) return mt.game[_t.S][_t.we](n);
-const y = xt.xt.Ut ?? 1;
-return mt.game[_t.S][_t.we]({
+if (null === x) return Mt.game[jt.A][jt.ke](n);
+const y = zt.yt.Ht ?? 1;
+return Mt.game[jt.A][jt.ke]({
 x: n.x + c * x * y,
-y: n.y + u * x * y
+y: n.y + d * x * y
 });
-})(R, n);
-if (!u) return s(new Bt("idle")), un(), void (Fn.wt = null);
+})(O, n);
+if (!d) return s(new Xt("idle")), gn(), void ($n.kt = null);
 c = {
-x: u.x,
-y: u.y
+x: d.x,
+y: d.y
 };
-const b = o(n), f = i(b), p = f?.distance || 1 / 0, h = p >= a && (xt.xt.zt || !xt.xt.Lt || Hn(n, R, b, f)), g = p >= a && Hn(n, R, b, f);
-if (Fn.Ht = g, O && (xt.xt.je || xt.yt.je && 8 >= a)) if (h) {
-s(new Bt("aimbot", {
-x: u.x,
-y: u.y
-}, null, !0)), Fn.wt = {
-x: u.x,
-y: u.y
+const b = o(n), p = i(b), f = p?.distance || 1 / 0, h = f >= a && (zt.yt.St || !zt.yt.It || Vn(n, O, b, p)), g = f >= a && Vn(n, O, b, p);
+if ($n.Ut = g, j && (zt.yt.Re || zt.wt.Re && 8 >= a)) if (h) {
+s(new Xt("aimbot", {
+x: d.x,
+y: d.y
+}, null, !0)), $n.kt = {
+x: d.x,
+y: d.y
 }, r = !0;
-const e = ht.tt;
+const e = vt.nt;
 l = e ? {
 x: e.clientX,
 y: e.clientY
 } : {
-x: u.x,
-y: u.y
-}, d = g;
+x: d.x,
+y: d.y
+}, u = g;
 } else l = {
-x: u.x,
-y: u.y
-}, d = !1; else l = {
-x: u.x,
-y: u.y
-}, d = g;
+x: d.x,
+y: d.y
+}, u = !1; else l = {
+x: d.x,
+y: d.y
+}, u = g;
 } else {
 const e = (e => {
-if (!xt.xt.je) return null;
-const t = mt.game, n = t?.[_t.U]?.[_t.Ae];
+if (!zt.yt.Re) return null;
+const t = Mt.game, n = t?.[jt.H]?.[jt.Ce];
 if (!n) return null;
-const r = e[_t.be], a = Ln(e), o = xt.xt.Gt ** 2;
+const r = e[jt.be], a = Gn(e), o = zt.yt.Yt ** 2;
 let i = null, s = -1 / 0;
 for (const e of Object.values(n)) {
-if (!u(e)) continue;
-if (void 0 !== e.layer && !Dn(e.layer, a)) continue;
-const t = e[_t.be];
+if (!d(e)) continue;
+if (void 0 !== e.layer && !Kn(e.layer, a)) continue;
+const t = e[jt.be];
 if (!t) continue;
-const n = mt.game[_t.S][_t.we]({
+const n = Mt.game[jt.A][jt.ke]({
 x: t.x,
 y: t.y
-}), l = Bn(n.x, n.y, mt.game[_t.te].mousePos._x, mt.game[_t.te].mousePos._y);
+}), l = Xn(n.x, n.y, Mt.game[jt.ne].mousePos._x, Mt.game[jt.ne].mousePos._y);
 if (l > o) continue;
-const c = (100 > Bn(r.x, r.y, t.x, t.y) ? 50 : 0) - Math.sqrt(l);
+const c = (100 > Xn(r.x, r.y, t.x, t.y) ? 50 : 0) - Math.sqrt(l);
 c > s && (s = c, i = e);
 }
 return i;
 })(n);
 if (e) {
-Fn.Wt = e;
-const t = e[_t.be], a = mt.game[_t.S][_t.we]({
+$n.Wt = e;
+const t = e[jt.be], a = Mt.game[jt.A][jt.ke]({
 x: t.x,
 y: t.y
-}), u = Math.hypot(t.x - y.x, t.y - y.y);
-if (O && xt.xt.je) {
-const t = o(n), b = i(t), f = b?.distance || 1 / 0, p = f >= u && (xt.xt.zt || !xt.xt.Lt || Hn(n, e, t, b)), h = f >= u && (!xt.xt.Lt || Hn(n, e, t, b));
-if (p) {
-s(new Bt("aimbot", {
+}), d = Math.hypot(t.x - y.x, t.y - y.y);
+if (j && zt.yt.Re) {
+const t = o(n), b = i(t), p = b?.distance || 1 / 0, f = p >= d && (zt.yt.St || !zt.yt.It || Vn(n, e, t, b)), h = p >= d && Vn(n, e, t, b);
+if (f) {
+s(new Xt("aimbot", {
 x: a.x,
 y: a.y
-}, null, !0)), Fn.wt = {
+}, null, !0)), $n.kt = {
 x: a.x,
 y: a.y
 }, r = !0;
-const e = ht.tt;
+const e = vt.nt;
 l = e ? {
 x: e.clientX,
 y: e.clientY
 } : {
 x: a.x,
 y: a.y
-}, d = h, c = {
+}, u = h, c = {
 x: a.x,
 y: a.y
 };
 } else l = {
 x: a.x,
 y: a.y
-}, d = !1, c = {
+}, u = !1, c = {
 x: a.x,
 y: a.y
 };
 }
-} else Fn.Wt = null;
+} else $n.Wt = null;
 r || (c = null, l = null);
 }
 if (!r) {
-if (xt.yt._t && w.length > 0 && null !== k) {
+if (zt.wt.vt && w.length > 0 && null !== v) {
 let e = !1;
 for (const t of w) if (35 >= t.distance) {
 e = !0;
 break;
 }
-if (e) return s(new Bt("idle", null, {
+if (e) return s(new Xt("idle", null, {
 touchMoveActive: !0,
 touchMoveLen: 255,
-x: Math.cos(k),
-y: Math.sin(k)
-}, !0)), un(), void (Fn.wt = null);
+x: Math.cos(v),
+y: Math.sin(v)
+}, !0)), gn(), void ($n.kt = null);
 }
-s(new Bt("idle")), Fn.wt = c ? {
+s(new Xt("idle")), $n.kt = c ? {
 x: c.x,
 y: c.y
 } : null;
@@ -692,180 +692,366 @@ let P = l;
 !P && c && (P = {
 x: c.x,
 y: c.y
-}), cn(P, d, !!Fn.Yt);
+}), hn(P, u, !!$n.Gt);
 } catch (e) {
-un(), s(new Bt("idle", null, null, !0)), Fn.Ct = null, Fn.Yt = null, Fn.At = null, 
-Fn.wt = null;
+gn(), s(new Xt("idle", null, null, !0)), $n.Nt = null, $n.Gt = null, $n.Ct = null, 
+$n.kt = null;
 }
 } catch (e) {
-s(new Bt({
+s(new Xt({
 mode: "idle",
 immediate: !0
-})), Fn.wt = null;
+})), $n.kt = null;
 }
 }
 
 function b() {
-return Fn.At && Fn.At.active && !Fn.At[_t.ie][_t.ze];
+return $n.Ct && $n.Ct.active && !$n.Ct[jt.se][jt.Se];
 }
 
 function p() {
-mt.game?.initialized && (() => {
-const e = mt.game, t = e[_t.$];
-if (!t?.bodyContainer || e[_t.G].spectating) return;
-const n = e[_t.te].mousePos.x - ut.innerWidth / 2, r = e[_t.te].mousePos.y - ut.innerHeight / 2;
-t.bodyContainer.rotation = fr && ht.tt && (xt.xt.je || xt.yt.je) ? Math.atan2(ht.tt.clientY - ut.innerHeight / 2, ht.tt.clientX - ut.innerWidth / 2) || 0 : Math.atan2(r, n) || 0;
+Mt.game?.initialized && (() => {
+const e = Mt.game, t = e[jt.Z];
+if (!t?.bodyContainer || e[jt.Y].spectating) return;
+const n = e[jt.ne].mousePos.x - gt.innerWidth / 2, r = e[jt.ne].mousePos.y - gt.innerHeight / 2;
+t.bodyContainer.rotation = kr && vt.nt && (zt.yt.Re || zt.wt.Re) ? Math.atan2(vt.nt.clientY - gt.innerHeight / 2, vt.nt.clientX - gt.innerWidth / 2) || 0 : Math.atan2(r, n) || 0;
 })();
 }
 
 function h(e) {
-if ("cook" === mt.game[_t.$].throwableState) return "x" === e ? mt.game[_t.te].mousePos._x : mt.game[_t.te].mousePos._y;
+if ("cook" === Mt.game[jt.Z].throwableState) return "x" === e ? Mt.game[jt.ne].mousePos._x : Mt.game[jt.ne].mousePos._y;
 const {centerX: t, centerY: n, radius: r} = (() => {
-const e = ut.innerWidth / 2, t = ut.innerHeight / 2;
+const e = gt.innerWidth / 2, t = gt.innerHeight / 2;
 return {
 centerX: e,
 centerY: t,
-radius: Math.hypot(mt.game[_t.te].mousePos._x - e, mt.game[_t.te].mousePos._y - t)
+radius: Math.hypot(Mt.game[jt.ne].mousePos._x - e, Mt.game[jt.ne].mousePos._y - t)
 };
 })();
 let a;
-return a = xt.Xt.$t ? ur : xt.Xt.Zt || xt.Xt.Jt || xt.Xt.Qt ? xt.Xt.Zt ? mr[pr] : xt.Xt.Jt ? gr[pr] : xt.Xt.Qt ? hr[pr] : br : br, 
+return a = zt.Xt.Zt ? yr : zt.Xt.Jt || zt.Xt.Qt || zt.Xt.en ? zt.Xt.Jt ? Ar[Mr] : zt.Xt.Qt ? _r[Mr] : zt.Xt.en ? zr[Mr] : vr : vr, 
 "x" === e ? t + Math.cos(a) * r : n + Math.sin(a) * r;
 }
 
-function g(e, t) {
+function g(e) {
+if ("number" == typeof e) return Math.min(4, Math.max(0, e));
+if ("string" == typeof e) {
+const t = e.match(/(\d+)/);
+if (t) return Math.min(4, Math.max(0, parseInt(t[1])));
+}
+return 0;
+}
+
+function m(e) {
+const t = [ "linear-gradient(135deg, #666 0%, #444 100%)", "linear-gradient(135deg, #4ade80 0%, #16a34a 100%)", "linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%)", "linear-gradient(135deg, #c084fc 0%, #9333ea 100%)", "linear-gradient(135deg, #fbbf24 0%, #d97706 100%)" ], n = t[e] || t[0], r = 4 === e ? 4 : 3;
+let a = "";
+for (let t = 1; r >= t; t++) a += t > e ? '<span style="\n        color: rgba(255,255,255,0.1);\n        text-shadow: 0 0 4px rgba(0,0,0,0.3);\n        margin: 0 1px;\n      ">□</span>' : `\n        <span style="\n          background: ${n};\n          -webkit-background-clip: text;\n          background-clip: text;\n          color: transparent;\n          text-shadow: 0 0 8px currentColor;\n          font-weight: bold;\n          display: inline-block;\n          transform: scale(1.2);\n          margin: 0 1px;\n        ">■</span>`;
+return a;
+}
+
+function x(e) {
+try {
+const t = Mt.game[jt.j]?.teamInfo;
+if (!t) return null;
+for (const n of Object.keys(t)) if (t[n].playerIds?.includes(e.__id)) return n;
+} catch (e) {}
+return null;
+}
+
+function y(e, t = 14, n = "") {
+return `<div style="display: inline-flex; align-items: center; justify-content: center; width: ${t}px; height: ${t}px; vertical-align: middle; margin-right: 6px; opacity: 0.9; ${n}">\n    ${Ir[e] || ""}\n  </div>`;
+}
+
+function w() {
+if (!Lr) return;
+if (!zt.tn?.Re) return void (Lr.style.display = "none");
+const e = Mt?.game;
+if (!e?.initialized) return void (Lr.style.display = "none");
+const t = e[jt.Z];
+if (!t) return void (Lr.style.display = "none");
+const n = t[jt.be] || t.pos;
+if (!n) return void (Lr.style.display = "none");
+const r = x(t), a = e[jt.j], o = a?.playerPool;
+if (!o) return void (Lr.style.display = "none");
+let i = o[jt.xe] || o.pool || o.p || [];
+Array.isArray(i) || (i = Object.values(o).find(e => Array.isArray(e)) || []);
+let s = null, l = 2500;
+for (const a of i) try {
+if (!a?.active) continue;
+if (a.__id === t.__id) continue;
+const e = a[jt.se];
+if (e?.[jt.Se] || a.dead) continue;
+if (r && x(a) === r) continue;
+const o = a[jt.be] || a.pos;
+if (!o) continue;
+const i = o.x - n.x, c = o.y - n.y, d = i * i + c * c;
+l > d && (l = d, s = a);
+} catch (e) {}
+if (!s) return void (Lr.style.display = "none");
+const c = s[jt.se], d = s.nameText?._text || s.name || "UNKNOWN", u = (e => {
+if (!e) return "---";
+const t = e.toLowerCase(), n = {
+mp5: "MP5",
+mac10: "MAC-10",
+ump9: "UMP9",
+vector: "Vector",
+ak47: "AK-47",
+scar: "SCAR-H",
+an94: "AN-94",
+groza: "Groza",
+dp28: "DP-28",
+m249: "M249",
+pkm: "PKM",
+qbb97: "QBB-97",
+mosin: "Mosin",
+sv98: "SV-98",
+awc: "AWM-S",
+scout: "Scout",
+model94: "Model 94",
+blr: "BLR 81",
+mk12: "Mk 12",
+mk20: "Mk 20",
+m39: "M39 EMR",
+svd: "SVD-63",
+garand: "Garand",
+mp220: "MP220",
+m870: "M870",
+spas12: "SPAS-12",
+super90: "Super 90",
+saiga: "Saiga-12",
+usas: "USAS-12",
+m1100: "M1100",
+deagle: "DEagle",
+ot38: "OT-38",
+ots38: "OTs-38",
+m9: "M9",
+m93r: "M93R",
+m1911: "M1911",
+p30l: "P30L",
+peacemaker: "Peacemaker",
+flare_gun: "Flare Gun",
+flare: "Flare Gun",
+fists: "Fists",
+karambit: "Karambit",
+katana: "Katana",
+pan: "Pan",
+machete: "Machete",
+kukri: "Kukri",
+bayonet: "Bayonet",
+famas: "FAMAS",
+hk416: "HK416",
+m4a1: "M4A1-S",
+qbz83: "QBZ-83",
+bar: "BAR M1918",
+m1a1: "M1A1",
+grozas: "Groza-S"
+};
+for (const [e, r] of Object.entries(n)) if (t.includes(e)) return r;
+return e.replace(/_/g, " ");
+})(c?.[jt.ze]), b = Math.sqrt(l).toFixed(0), p = s.downed || !1, f = (e => {
+let t = 0, n = 0, r = 0;
+if (!e) return {
+helmet: t,
+armor: n,
+backpack: r
+};
+for (const a in e) try {
+const o = e[a], i = a.toLowerCase();
+if ((i.includes("helmet") || "he" === i) && (t = g(o)), (i.includes("chest") || i.includes("armor") || "ch" === i) && (n = g(o)), 
+(i.includes("backpack") || i.includes("pack") || "bp" === i) && (r = g(o)), "string" == typeof o) {
+const e = o.toLowerCase();
+e.includes("helmet") && 0 === t && (t = g(o)), (e.includes("chest") || e.includes("vest")) && 0 === n && (n = g(o)), 
+e.includes("backpack") && 0 === r && (r = g(o));
+}
+} catch (e) {}
+return {
+helmet: t,
+armor: n,
+backpack: r
+};
+})(c), h = Math.max(.2, 1 - parseFloat(b) / 100), w = p ? `<div style="\n        background: linear-gradient(135deg, rgba(255,68,68,0.3) 0%, rgba(255,68,68,0.6) 100%);\n        color: #fff;\n        padding: 4px 10px;\n        border-radius: 8px;\n        font-size: 10px;\n        font-weight: bold;\n        text-align: center;\n        margin-bottom: 10px;\n        border: 1px solid rgba(255,68,68,0.4);\n        box-shadow: 0 0 15px rgba(255,68,68,0.4);\n        backdrop-filter: blur(5px);\n        position: relative;\n        overflow: hidden;\n        display: flex;\n        align-items: center;\n        justify-content: center;\n        gap: 6px;\n        animation: pulse 1.5s infinite;\n      ">\n        ${y("ALERT", 12, "margin-right: 4px;")}\n        KNOCKED\n      </div>` : "";
+Lr.innerHTML = `\n    <style>\n      @keyframes pulse {\n        0%, 100% { box-shadow: 0 0 15px rgba(255,68,68,0.4); }\n        50% { box-shadow: 0 0 25px rgba(255,68,68,0.6); }\n      }\n      @keyframes glow {\n        0%, 100% { filter: drop-shadow(0 0 3px rgba(255,68,68,0.5)); }\n        50% { filter: drop-shadow(0 0 6px rgba(255,68,68,0.8)); }\n      }\n      @keyframes float {\n        0%, 100% { transform: translateY(0px); }\n        50% { transform: translateY(-2px); }\n      }\n    </style>\n    \n    <div style="position: relative; z-index: 2;">\n      \x3c!-- Background glow effect --\x3e\n      <div style="\n        position: absolute;\n        top: 50%;\n        left: 50%;\n        transform: translate(-50%, -50%);\n        width: 120%;\n        height: 120%;\n        background: radial-gradient(\n          circle,\n          rgba(255,68,68,${.1 * h}) 0%,\n          transparent 70%\n        );\n        filter: blur(10px);\n        z-index: -1;\n      "></div>\n      \n      \x3c!-- Header --\x3e\n      <div style="text-align: center; margin-bottom: 12px; position: relative;">\n        <div style="\n          color: #ff4444;\n          font-weight: bold;\n          font-size: 15px;\n          text-shadow: \n            0 0 10px rgba(255,68,68,${.5 * h}),\n            0 0 20px rgba(255,68,68,${.3 * h}),\n            0 2px 0 rgba(0,0,0,0.5);\n          position: relative;\n          display: flex;\n          align-items: center;\n          justify-content: center;\n          gap: 8px;\n          animation: float 3s ease-in-out infinite;\n        ">\n          <div style="\n            display: inline-flex;\n            align-items: center;\n            justify-content: center;\n            width: 16px;\n            height: 16px;\n            filter: drop-shadow(0 0 8px rgba(255,68,68,${.6 * h}));\n          ">\n            ${Ir.TARGET}\n          </div>\n          <span>${d}</span>\n        </div>\n        \n        \x3c!-- Distance --\x3e\n        <div style="\n          color: #00d4ff;\n          font-size: 11px;\n          margin-top: 4px;\n          background: rgba(0,212,255,0.1);\n          padding: 2px 8px;\n          border-radius: 10px;\n          display: inline-flex;\n          align-items: center;\n          border: 1px solid rgba(0,212,255,0.2);\n          text-shadow: 0 0 8px rgba(0,212,255,0.3);\n          animation: glow 2s ease-in-out infinite;\n        ">\n          ${y("RULER", 12, "margin-right: 4px;")}\n          ${b}m\n        </div>\n      </div>\n      \n      ${w}\n      \n      \x3c!-- Equipment Info --\x3e\n      <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px; position: relative;">\n        \x3c!-- Subtle inner glow line --\x3e\n        <div style="\n          position: absolute;\n          top: 0;\n          left: 10%;\n          width: 80%;\n          height: 1px;\n          background: linear-gradient(90deg, \n            transparent, \n            rgba(255,68,68,0.3), \n            transparent\n          );\n        "></div>\n        \n        \x3c!-- WEAPON --\x3e\n        <div style="\n          display: flex;\n          justify-content: space-between;\n          align-items: center;\n          margin-bottom: 8px;\n          padding: 4px 8px;\n          border-radius: 6px;\n          background: rgba(255,255,255,0.03);\n          transition: all 0.2s;\n        ">\n          <span style="color: rgba(255,255,255,0.7); display: flex; align-items: center;">\n            ${y("GUN")}\n            WEAPON\n          </span>\n          <span style="\n            color: #fff;\n            font-weight: 500;\n            text-shadow: 0 0 8px rgba(255,255,255,0.3);\n            padding: 2px 8px;\n            background: rgba(255,255,255,0.05);\n            border-radius: 4px;\n            border: 1px solid rgba(255,255,255,0.1);\n          ">\n            ${u}\n          </span>\n        </div>\n        \n        \x3c!-- HELMET --\x3e\n        <div style="\n          display: flex;\n          justify-content: space-between;\n          align-items: center;\n          margin-bottom: 6px;\n          padding: 3px 8px;\n          border-radius: 6px;\n          background: rgba(255,255,255,0.02);\n        ">\n          <span style="color: rgba(255,255,255,0.7); display: flex; align-items: center;">\n            ${y("HELMET")}\n            HELMET\n          </span>\n          <span style="display: flex; align-items: center; gap: 6px;">\n            ${m(f.helmet)}\n            <span style="color: rgba(255,255,255,0.5); font-size: 9px;">Lv${f.helmet}</span>\n          </span>\n        </div>\n        \n        \x3c!-- ARMOR --\x3e\n        <div style="\n          display: flex;\n          justify-content: space-between;\n          align-items: center;\n          margin-bottom: 6px;\n          padding: 3px 8px;\n          border-radius: 6px;\n          background: rgba(255,255,255,0.02);\n        ">\n          <span style="color: rgba(255,255,255,0.7); display: flex; align-items: center;">\n            ${y("ARMOR")}\n            ARMOR\n          </span>\n          <span style="display: flex; align-items: center; gap: 6px;">\n            ${m(f.armor)}\n            <span style="color: rgba(255,255,255,0.5); font-size: 9px;">Lv${f.armor}</span>\n          </span>\n        </div>\n        \n        \x3c!-- BACKPACK --\x3e\n        <div style="\n          display: flex;\n          justify-content: space-between;\n          align-items: center;\n          padding: 3px 8px;\n          border-radius: 6px;\n          background: rgba(255,255,255,0.02);\n        ">\n          <span style="color: rgba(255,255,255,0.7); display: flex; align-items: center;">\n            ${y("BACKPACK")}\n            BACKPACK\n          </span>\n          <span style="display: flex; align-items: center; gap: 6px;">\n            ${m(f.backpack)}\n            <span style="color: rgba(255,255,255,0.5); font-size: 9px;">Lv${f.backpack}</span>\n          </span>\n        </div>\n      </div>\n    </div>\n  `, 
+Lr.style.boxShadow = `\n    0 0 0 1px rgba(255, 68, 68, ${.1 + .2 * h}),\n    0 0 ${20 + 20 * h}px rgba(255, 68, 68, ${.2 + .3 * h}),\n    0 0 ${40 + 30 * h}px rgba(255, 68, 68, ${.15 + .2 * h}),\n    0 4px 30px rgba(0, 0, 0, 0.5),\n    inset 0 1px 0 rgba(255, 255, 255, 0.1)\n  `, 
+Lr.style.display = "block";
+}
+
+function v() {
+Dr || (Dr = !0, (() => {
+if (Lr) return;
+const e = gt.localStorage.getItem("surplus_target_info_pos");
+let t = null, n = null;
+if (e) try {
+const r = JSON.parse(e);
+void 0 !== r.x && void 0 !== r.y && (t = r.x, n = r.y);
+} catch (e) {}
+Lr = gt.document.createElement("div"), Lr.id = "targetinfo-overlay", Lr.style.cssText = `\n    position: fixed;\n    top: ${null !== n ? n + "px" : "50%"};\n    left: ${null !== t ? t + "px" : "auto"};\n    right: ${null !== t ? "auto" : "15px"};\n    transform: ${null !== n ? "none" : "translateY(-50%)"};\n    \n    /* Glass morphism effect */\n    background: linear-gradient(\n      135deg,\n      rgba(15, 15, 15, 0.85) 0%,\n      rgba(30, 30, 30, 0.85) 100%\n    );\n    backdrop-filter: blur(10px) saturate(180%);\n    -webkit-backdrop-filter: blur(10px) saturate(180%);\n    \n    /* Glass border with gradient */\n    border: 1px solid rgba(255, 68, 68, 0.3);\n    border-top: 2px solid rgba(255, 68, 68, 0.6);\n    border-bottom: 2px solid rgba(255, 68, 68, 0.2);\n    \n    /* Multiple layered shadows for glow effect */\n    box-shadow:\n      0 0 0 1px rgba(255, 68, 68, 0.1),\n      0 0 20px rgba(255, 68, 68, 0.2),\n      0 0 40px rgba(255, 68, 68, 0.15),\n      0 4px 30px rgba(0, 0, 0, 0.5),\n      inset 0 1px 0 rgba(255, 255, 255, 0.1);\n    \n    color: white;\n    padding: 15px 18px;\n    border-radius: 16px;\n    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n    font-size: 12px;\n    z-index: 99999;\n    pointer-events: auto;\n    cursor: move;\n    user-select: none;\n    min-width: 180px;\n    display: none;\n    overflow: hidden;\n    \n    /* Subtle texture overlay */\n    background-image: \n      radial-gradient(\n        circle at 15% 50%,\n        rgba(255, 68, 68, 0.05) 0%,\n        transparent 20%\n      ),\n      radial-gradient(\n        circle at 85% 30%,\n        rgba(0, 212, 255, 0.05) 0%,\n        transparent 20%\n      );\n    \n    transition: all 0.2s ease;\n  `;
+const r = gt.document.createElement("div");
+r.style.cssText = "\n    position: absolute;\n    top: 0;\n    left: -100%;\n    width: 100%;\n    height: 100%;\n    background: linear-gradient(\n      90deg,\n      transparent,\n      rgba(255, 255, 255, 0.1),\n      transparent\n    );\n    z-index: 1;\n    pointer-events: none;\n  ", 
+Lr.appendChild(r), Lr.addEventListener("mouseenter", () => {
+r.style.transition = "left 1.5s ease-in-out", r.style.left = "100%";
+}), Lr.addEventListener("mouseleave", () => {
+r.style.transition = "none", r.style.left = "-100%";
+});
+let a = !1, o = 0, i = 0;
+Lr.addEventListener("mousedown", e => {
+a = !0;
+const t = Lr.getBoundingClientRect();
+o = e.clientX - t.left, i = e.clientY - t.top, Lr.style.backdropFilter = "blur(5px) saturate(120%)", 
+Lr.style.boxShadow = "\n      0 0 0 2px rgba(255, 68, 68, 0.3),\n      0 0 30px rgba(255, 68, 68, 0.4),\n      0 0 60px rgba(255, 68, 68, 0.3),\n      0 8px 40px rgba(0, 0, 0, 0.6)\n    ", 
+Lr.style.opacity = "0.95", Lr.style.transform = "scale(0.98)", e.stopPropagation();
+}), gt.window.addEventListener("mousemove", e => {
+if (!a || !Lr) return;
+Lr.style.transform = "none", Lr.style.right = "auto";
+const t = e.clientY - i, n = gt.window.innerHeight - Lr.offsetHeight;
+Lr.style.left = Math.max(0, Math.min(e.clientX - o, gt.window.innerWidth - Lr.offsetWidth)) + "px", 
+Lr.style.top = Math.max(0, Math.min(t, n)) + "px";
+}), gt.window.addEventListener("mouseup", () => {
+if (a && Lr) {
+a = !1, Lr.style.backdropFilter = "blur(10px) saturate(180%)", Lr.style.boxShadow = "\n        0 0 0 1px rgba(255, 68, 68, 0.1),\n        0 0 20px rgba(255, 68, 68, 0.2),\n        0 0 40px rgba(255, 68, 68, 0.15),\n        0 4px 30px rgba(0, 0, 0, 0.5),\n        inset 0 1px 0 rgba(255, 255, 255, 0.1)\n      ", 
+Lr.style.opacity = "1", Lr.style.transform = "scale(1)";
+const e = Lr.getBoundingClientRect();
+gt.localStorage.setItem("surplus_target_info_pos", JSON.stringify({
+x: e.left,
+y: e.top
+}));
+}
+}), gt.document.body.appendChild(Lr);
+})(), setInterval(w, 100), console.log("🎯 TargetInfo initialized with SVG Icons"));
+}
+
+function k(e, t) {
 for (var n in t) e[n] = t[n];
 return e;
 }
 
-function m(e) {
+function M(e) {
 e && e.parentNode && e.parentNode.removeChild(e);
 }
 
-function x(e, t, n) {
+function z(e, t, n) {
 var r, a, o, i = {};
 for (o in t) "key" == o ? r = t[o] : "ref" == o ? a = t[o] : i[o] = t[o];
-if (arguments.length > 2 && (i.children = arguments.length > 3 ? pe.call(arguments, 2) : n), 
-"function" == typeof e && null != e.en) for (o in e.en) void 0 === i[o] && (i[o] = e.en[o]);
-return y(e, i, r, a, null);
+if (arguments.length > 2 && (i.children = arguments.length > 3 ? we.call(arguments, 2) : n), 
+"function" == typeof e && null != e.nn) for (o in e.nn) void 0 === i[o] && (i[o] = e.nn[o]);
+return _(e, i, r, a, null);
 }
 
-function y(e, t, n, r, a) {
+function _(e, t, n, r, a) {
 var o = {
 type: e,
-tn: t,
+rn: t,
 key: n,
 ref: r,
-nn: null,
-rn: null,
-an: 0,
+an: null,
 sn: null,
-ln: null,
+ln: 0,
+cn: null,
+dn: null,
 constructor: void 0,
-cn: a ?? ++ge,
-dn: -1,
-un: 0
+un: a ?? ++ke,
+pn: -1,
+bn: 0
 };
-return null == a && null != he.bn && he.bn(o), o;
+return null == a && null != ve.fn && ve.fn(o), o;
 }
 
-function w(e) {
+function A(e) {
 return e.children;
 }
 
-function k(e, t) {
-this.tn = e, this.context = t;
+function R(e, t) {
+this.rn = e, this.context = t;
 }
 
-function v(e, t) {
-if (null == t) return e.rn ? v(e.rn, e.dn + 1) : null;
-for (var n; e.nn.length > t; t++) if (null != (n = e.nn[t]) && null != n.sn) return n.sn;
-return "function" == typeof e.type ? v(e) : null;
+function S(e, t) {
+if (null == t) return e.sn ? S(e.sn, e.pn + 1) : null;
+for (var n; e.an.length > t; t++) if (null != (n = e.an[t]) && null != n.cn) return n.cn;
+return "function" == typeof e.type ? S(e) : null;
 }
 
-function M(e) {
+function N(e) {
 var t, n;
-if (null != (e = e.rn) && null != e.ln) {
-for (e.sn = e.ln.base = null, t = 0; e.nn.length > t; t++) if (null != (n = e.nn[t]) && null != n.sn) {
-e.sn = e.ln.base = n.sn;
+if (null != (e = e.sn) && null != e.dn) {
+for (e.cn = e.dn.base = null, t = 0; e.an.length > t; t++) if (null != (n = e.an[t]) && null != n.cn) {
+e.cn = e.dn.base = n.cn;
 break;
 }
-return M(e);
+return N(e);
 }
 }
 
-function z(e) {
-(!e.pn && (e.pn = !0) && me.push(e) && !_.fn++ || xe != he.hn) && ((xe = he.hn) || ye)(_);
+function C(e) {
+(!e.hn && (e.hn = !0) && Me.push(e) && !j.gn++ || ze != ve.mn) && ((ze = ve.mn) || _e)(j);
 }
 
-function _() {
-for (var e, t, n, r, a, o, i, s = 1; me.length; ) me.length > s && me.sort(we), 
-e = me.shift(), s = me.length, e.pn && (n = void 0, r = void 0, a = (r = (t = e).cn).sn, 
-o = [], i = [], t.gn && ((n = g({}, r)).cn = r.cn + 1, he.bn && he.bn(n), P(t.gn, n, r, t.mn, t.gn.namespaceURI, 32 & r.un ? [ a ] : null, o, a ?? v(r), !!(32 & r.un), i), 
-n.cn = r.cn, n.rn.nn[n.dn] = n, E(o, n, i), r.sn = r.rn = null, n.sn != a && M(n)));
-_.fn = 0;
+function j() {
+for (var e, t, n, r, a, o, i, s = 1; Me.length; ) Me.length > s && Me.sort(Ae), 
+e = Me.shift(), s = Me.length, e.hn && (n = void 0, r = void 0, a = (r = (t = e).un).cn, 
+o = [], i = [], t.xn && ((n = k({}, r)).un = r.un + 1, ve.fn && ve.fn(n), I(t.xn, n, r, t.yn, t.xn.namespaceURI, 32 & r.bn ? [ a ] : null, o, a ?? S(r), !!(32 & r.bn), i), 
+n.un = r.un, n.sn.an[n.pn] = n, Y(o, n, i), r.cn = r.sn = null, n.cn != a && N(n)));
+j.gn = 0;
 }
 
-function j(e, t, n, r, a, o, i, s, l, c, u) {
-var d, b, f, p, h, g, m, x = r && r.nn || je, k = t.length;
+function O(e, t, n, r, a, o, i, s, l, c, d) {
+var u, b, p, f, h, g, m, x = r && r.an || Oe, y = t.length;
 for (l = ((e, t, n, r, a) => {
-var o, i, s, l, c, u = n.length, d = u, b = 0;
-for (e.nn = Array(a), o = 0; a > o; o++) null != (i = t[o]) && "boolean" != typeof i && "function" != typeof i ? ("string" == typeof i || "number" == typeof i || "bigint" == typeof i || i.constructor == String ? i = e.nn[o] = y(null, i, null, null, null) : Se(i) ? i = e.nn[o] = y(w, {
+var o, i, s, l, c, d = n.length, u = d, b = 0;
+for (e.an = Array(a), o = 0; a > o; o++) null != (i = t[o]) && "boolean" != typeof i && "function" != typeof i ? ("string" == typeof i || "number" == typeof i || "bigint" == typeof i || i.constructor == String ? i = e.an[o] = _(null, i, null, null, null) : Ee(i) ? i = e.an[o] = _(A, {
 children: i
-}, null, null, null) : null == i.constructor && i.an > 0 ? i = e.nn[o] = y(i.type, i.tn, i.key, i.ref ? i.ref : null, i.cn) : e.nn[o] = i, 
-l = o + b, i.rn = e, i.an = e.an + 1, -1 != (c = i.dn = N(i, n, l, d)) && (d--, 
-(s = n[c]) && (s.un |= 2)), null == s || null == s.cn ? (-1 == c && (a > u ? b-- : u > a && b++), 
-"function" != typeof i.type && (i.un |= 4)) : c != l && (c == l - 1 ? b-- : c == l + 1 ? b++ : (c > l ? b-- : b++, 
-i.un |= 4))) : e.nn[o] = null;
-if (d) for (o = 0; u > o; o++) null != (s = n[o]) && !(2 & s.un) && (s.sn == r && (r = v(s)), 
-I(s, s));
+}, null, null, null) : null == i.constructor && i.ln > 0 ? i = e.an[o] = _(i.type, i.rn, i.key, i.ref ? i.ref : null, i.un) : e.an[o] = i, 
+l = o + b, i.sn = e, i.ln = e.ln + 1, -1 != (c = i.pn = F(i, n, l, u)) && (u--, 
+(s = n[c]) && (s.bn |= 2)), null == s || null == s.un ? (-1 == c && (a > d ? b-- : d > a && b++), 
+"function" != typeof i.type && (i.bn |= 4)) : c != l && (c == l - 1 ? b-- : c == l + 1 ? b++ : (c > l ? b-- : b++, 
+i.bn |= 4))) : e.an[o] = null;
+if (u) for (o = 0; d > o; o++) null != (s = n[o]) && !(2 & s.bn) && (s.cn == r && (r = S(s)), 
+U(s, s));
 return r;
-})(n, t, x, l, k), d = 0; k > d; d++) null != (f = n.nn[d]) && (b = -1 == f.dn ? _e : x[f.dn] || _e, 
-f.dn = d, g = P(e, f, b, a, o, i, s, l, c, u), p = f.sn, f.ref && b.ref != f.ref && (b.ref && D(b.ref, null, f), 
-u.push(f.ref, f.ln || p, f)), null == h && null != p && (h = p), (m = !!(4 & f.un)) || b.nn === f.nn ? l = A(f, l, e, m) : "function" == typeof f.type && void 0 !== g ? l = g : p && (l = p.nextSibling), 
-f.un &= -7);
-return n.sn = h, l;
+})(n, t, x, l, y), u = 0; y > u; u++) null != (p = n.an[u]) && (b = -1 == p.pn ? je : x[p.pn] || je, 
+p.pn = u, g = I(e, p, b, a, o, i, s, l, c, d), f = p.cn, p.ref && b.ref != p.ref && (b.ref && K(b.ref, null, p), 
+d.push(p.ref, p.dn || f, p)), null == h && null != f && (h = f), (m = !!(4 & p.bn)) || b.an === p.an ? l = P(p, l, e, m) : "function" == typeof p.type && void 0 !== g ? l = g : f && (l = f.nextSibling), 
+p.bn &= -7);
+return n.cn = h, l;
 }
 
-function A(e, t, n, r) {
+function P(e, t, n, r) {
 var a, o;
 if ("function" == typeof e.type) {
-for (a = e.nn, o = 0; a && a.length > o; o++) a[o] && (a[o].rn = e, t = A(a[o], t, n, r));
+for (a = e.an, o = 0; a && a.length > o; o++) a[o] && (a[o].sn = e, t = P(a[o], t, n, r));
 return t;
 }
-e.sn != t && (r && (t && e.type && !t.parentNode && (t = v(e)), n.insertBefore(e.sn, t || null)), 
-t = e.sn);
+e.cn != t && (r && (t && e.type && !t.parentNode && (t = S(e)), n.insertBefore(e.cn, t || null)), 
+t = e.cn);
 do {
 t = t && t.nextSibling;
 } while (null != t && 8 == t.nodeType);
 return t;
 }
 
-function S(e, t) {
-return t = t || [], null == e || "boolean" == typeof e || (Se(e) ? e.some(e => {
-S(e, t);
+function E(e, t) {
+return t = t || [], null == e || "boolean" == typeof e || (Ee(e) ? e.some(e => {
+E(e, t);
 }) : t.push(e)), t;
 }
 
-function N(e, t, n, r) {
-var a, o, i, s = e.key, l = e.type, c = t[n], u = null != c && !(2 & c.un);
-if (null === c && null == s || u && s == c.key && l == c.type) return n;
-if (r > (u ? 1 : 0)) for (a = n - 1, o = n + 1; a >= 0 || t.length > o; ) if (null != (c = t[i = 0 > a ? o++ : a--]) && !(2 & c.un) && s == c.key && l == c.type) return i;
+function F(e, t, n, r) {
+var a, o, i, s = e.key, l = e.type, c = t[n], d = null != c && !(2 & c.bn);
+if (null === c && null == s || d && s == c.key && l == c.type) return n;
+if (r > (d ? 1 : 0)) for (a = n - 1, o = n + 1; a >= 0 || t.length > o; ) if (null != (c = t[i = 0 > a ? o++ : a--]) && !(2 & c.bn) && s == c.key && l == c.type) return i;
 return -1;
 }
 
-function C(e, t, n) {
-"-" == t[0] ? e.setProperty(t, n ?? "") : e[t] = null == n ? "" : "number" != typeof n || Ae.test(t) ? n : n + "px";
+function T(e, t, n) {
+"-" == t[0] ? e.setProperty(t, n ?? "") : e[t] = null == n ? "" : "number" != typeof n || Pe.test(t) ? n : n + "px";
 }
 
-function O(e, t, n, r, a) {
+function L(e, t, n, r, a) {
 var o, i;
 e: if ("style" == t) if ("string" == typeof n) e.style.cssText = n; else {
-if ("string" == typeof r && (e.style.cssText = r = ""), r) for (t in r) n && t in n || C(e.style, t, "");
-if (n) for (t in n) r && n[t] == r[t] || C(e.style, t, n[t]);
-} else if ("o" == t[0] && "n" == t[1]) o = t != (t = t.replace(ke, "$1")), i = t.toLowerCase(), 
+if ("string" == typeof r && (e.style.cssText = r = ""), r) for (t in r) n && t in n || T(e.style, t, "");
+if (n) for (t in n) r && n[t] == r[t] || T(e.style, t, n[t]);
+} else if ("o" == t[0] && "n" == t[1]) o = t != (t = t.replace(Re, "$1")), i = t.toLowerCase(), 
 t = i in e || "onFocusOut" == t || "onFocusIn" == t ? i.slice(2) : t.slice(2), e.l || (e.l = {}), 
-e.l[t + o] = n, n ? r ? n.u = r.u : (n.u = ve, e.addEventListener(t, o ? ze : Me, o)) : e.removeEventListener(t, o ? ze : Me, o); else {
+e.l[t + o] = n, n ? r ? n.u = r.u : (n.u = Se, e.addEventListener(t, o ? Ce : Ne, o)) : e.removeEventListener(t, o ? Ce : Ne, o); else {
 if ("http://www.w3.org/2000/svg" == a) t = t.replace(/xlink(H|:h)/, "h").replace(/sName$/, "s"); else if ("width" != t && "height" != t && "href" != t && "list" != t && "form" != t && "tabIndex" != t && "download" != t && "rowSpan" != t && "colSpan" != t && "role" != t && "popover" != t && t in e) try {
 e[t] = n ?? "";
 break e;
@@ -874,343 +1060,343 @@ break e;
 }
 }
 
-function R(e) {
+function D(e) {
 return function(t) {
 if (this.l) {
 var n = this.l[t.type + e];
-if (null == t.t) t.t = ve++; else if (n.u > t.t) return;
-return n(he.event ? he.event(t) : t);
+if (null == t.t) t.t = Se++; else if (n.u > t.t) return;
+return n(ve.event ? ve.event(t) : t);
 }
 };
 }
 
-function P(e, t, n, r, a, o, i, s, l, c) {
-var u, d, b, f, p, h, x, y, v, M, z, _, A, S, N, C, O, R = t.type;
+function I(e, t, n, r, a, o, i, s, l, c) {
+var d, u, b, p, f, h, g, m, x, y, w, v, z, _, S, N, C, j = t.type;
 if (null != t.constructor) return null;
-128 & n.un && (l = !!(32 & n.un), o = [ s = t.sn = n.sn ]), (u = he.an) && u(t);
-e: if ("function" == typeof R) try {
-if (y = t.tn, v = "prototype" in R && R.prototype.render, M = (u = R.contextType) && r[u.ln], 
-z = u ? M ? M.tn.value : u.rn : r, n.ln ? x = (d = t.ln = n.ln).rn = d.xn : (v ? t.ln = d = new R(y, z) : (t.ln = d = new k(y, z), 
-d.constructor = R, d.render = Y), M && M.sub(d), d.state || (d.state = {}), d.mn = r, 
-b = d.pn = !0, d.yn = [], d._sb = []), v && null == d.wn && (d.wn = d.state), v && null != R._n && (d.wn == d.state && (d.wn = g({}, d.wn)), 
-g(d.wn, R._n(y, d.wn))), f = d.tn, p = d.state, d.cn = t, b) v && null == R._n && null != d.kn && d.kn(), 
-v && null != d.vn && d.yn.push(d.vn); else {
-if (v && null == R._n && y !== f && null != d.Mn && d.Mn(y, z), t.cn == n.cn || !d.sn && null != d.zn && !1 === d.zn(y, d.wn, z)) {
-for (t.cn != n.cn && (d.tn = y, d.state = d.wn, d.pn = !1), t.sn = n.sn, t.nn = n.nn, 
-t.nn.some(e => {
-e && (e.rn = t);
-}), _ = 0; d._sb.length > _; _++) d.yn.push(d._sb[_]);
-d._sb = [], d.yn.length && i.push(d);
+128 & n.bn && (l = !!(32 & n.bn), o = [ s = t.cn = n.cn ]), (d = ve.ln) && d(t);
+e: if ("function" == typeof j) try {
+if (m = t.rn, x = "prototype" in j && j.prototype.render, y = (d = j.contextType) && r[d.dn], 
+w = d ? y ? y.rn.value : d.sn : r, n.dn ? g = (u = t.dn = n.dn).sn = u.wn : (x ? t.dn = u = new j(m, w) : (t.dn = u = new R(m, w), 
+u.constructor = j, u.render = Z), y && y.sub(u), u.state || (u.state = {}), u.yn = r, 
+b = u.hn = !0, u.kn = [], u._sb = []), x && null == u.vn && (u.vn = u.state), x && null != j._n && (u.vn == u.state && (u.vn = k({}, u.vn)), 
+k(u.vn, j._n(m, u.vn))), p = u.rn, f = u.state, u.un = t, b) x && null == j._n && null != u.Mn && u.Mn(), 
+x && null != u.zn && u.kn.push(u.zn); else {
+if (x && null == j._n && m !== p && null != u.Sn && u.Sn(m, w), t.un == n.un || !u.cn && null != u.An && !1 === u.An(m, u.vn, w)) {
+for (t.un != n.un && (u.rn = m, u.state = u.vn, u.hn = !1), t.cn = n.cn, t.an = n.an, 
+t.an.some(e => {
+e && (e.sn = t);
+}), v = 0; u._sb.length > v; v++) u.kn.push(u._sb[v]);
+u._sb = [], u.kn.length && i.push(u);
 break e;
 }
-null != d.Sn && d.Sn(y, d.wn, z), v && null != d.An && d.yn.push(() => {
-d.An(f, p, h);
+null != u.Cn && u.Cn(m, u.vn, w), x && null != u.Nn && u.kn.push(() => {
+u.Nn(p, f, h);
 });
 }
-if (d.context = z, d.tn = y, d.gn = e, d.sn = !1, A = he.fn, S = 0, v) {
-for (d.state = d.wn, d.pn = !1, A && A(t), u = d.render(d.tn, d.state, d.context), 
-N = 0; d._sb.length > N; N++) d.yn.push(d._sb[N]);
-d._sb = [];
+if (u.context = w, u.rn = m, u.xn = e, u.cn = !1, z = ve.gn, _ = 0, x) {
+for (u.state = u.vn, u.hn = !1, z && z(t), d = u.render(u.rn, u.state, u.context), 
+S = 0; u._sb.length > S; S++) u.kn.push(u._sb[S]);
+u._sb = [];
 } else do {
-d.pn = !1, A && A(t), u = d.render(d.tn, d.state, d.context), d.state = d.wn;
-} while (d.pn && 25 > ++S);
-d.state = d.wn, null != d.Cn && (r = g(g({}, r), d.Cn())), v && !b && null != d.Nn && (h = d.Nn(f, p)), 
-C = u, null != u && u.type === w && null == u.key && (C = T(u.tn.children)), s = j(e, Se(C) ? C : [ C ], t, n, r, a, o, i, s, l, c), 
-d.base = t.sn, t.un &= -161, d.yn.length && i.push(d), x && (d.xn = d.rn = null);
+u.hn = !1, z && z(t), d = u.render(u.rn, u.state, u.context), u.state = u.vn;
+} while (u.hn && 25 > ++_);
+u.state = u.vn, null != u.On && (r = k(k({}, r), u.On())), x && !b && null != u.jn && (h = u.jn(p, f)), 
+N = d, null != d && d.type === A && null == d.key && (N = B(d.rn.children)), s = O(e, Ee(N) ? N : [ N ], t, n, r, a, o, i, s, l, c), 
+u.base = t.cn, t.bn &= -161, u.kn.length && i.push(u), g && (u.wn = u.sn = null);
 } catch (e) {
-if (t.cn = null, l || null != o) if (e.then) {
-for (t.un |= l ? 160 : 128; s && 8 == s.nodeType && s.nextSibling; ) s = s.nextSibling;
-o[o.indexOf(s)] = null, t.sn = s;
+if (t.un = null, l || null != o) if (e.then) {
+for (t.bn |= l ? 160 : 128; s && 8 == s.nodeType && s.nextSibling; ) s = s.nextSibling;
+o[o.indexOf(s)] = null, t.cn = s;
 } else {
-for (O = o.length; O--; ) m(o[O]);
-F(t);
-} else t.sn = n.sn, t.nn = n.nn, e.then || F(t);
-he.sn(e, t, n);
-} else null == o && t.cn == n.cn ? (t.nn = n.nn, t.sn = n.sn) : s = t.sn = L(n.sn, t, n, r, a, o, i, l, c);
-return (u = he.On) && u(t), 128 & t.un ? void 0 : s;
+for (C = o.length; C--; ) M(o[C]);
+$(t);
+} else t.cn = n.cn, t.an = n.an, e.then || $(t);
+ve.cn(e, t, n);
+} else null == o && t.un == n.un ? (t.an = n.an, t.cn = n.cn) : s = t.cn = G(n.cn, t, n, r, a, o, i, l, c);
+return (d = ve.Rn) && d(t), 128 & t.bn ? void 0 : s;
 }
 
-function F(e) {
-e && e.ln && (e.ln.sn = !0), e && e.nn && e.nn.forEach(F);
+function $(e) {
+e && e.dn && (e.dn.cn = !0), e && e.an && e.an.forEach($);
 }
 
-function E(e, t, n) {
-for (var r = 0; n.length > r; r++) D(n[r], n[++r], n[++r]);
-he.ln && he.ln(t, e), e.some(t => {
+function Y(e, t, n) {
+for (var r = 0; n.length > r; r++) K(n[r], n[++r], n[++r]);
+ve.dn && ve.dn(t, e), e.some(t => {
 try {
-e = t.yn, t.yn = [], e.some(e => {
+e = t.kn, t.kn = [], e.some(e => {
 e.call(t);
 });
 } catch (e) {
-he.sn(e, t.cn);
+ve.cn(e, t.un);
 }
 });
 }
 
-function T(e) {
-return "object" != typeof e || null == e || e.an && e.an > 0 ? e : Se(e) ? e.map(T) : g({}, e);
+function B(e) {
+return "object" != typeof e || null == e || e.ln && e.ln > 0 ? e : Ee(e) ? e.map(B) : k({}, e);
 }
 
-function L(e, t, n, r, a, o, i, s, l) {
-var c, u, d, b, f, p, h, g = n.tn || _e, x = t.tn, y = t.type;
-if ("svg" == y ? a = "http://www.w3.org/2000/svg" : "math" == y ? a = "http://www.w3.org/1998/Math/MathML" : a || (a = "http://www.w3.org/1999/xhtml"), 
-null != o) for (c = 0; o.length > c; c++) if ((f = o[c]) && "setAttribute" in f == !!y && (y ? f.localName == y : 3 == f.nodeType)) {
-e = f, o[c] = null;
+function G(e, t, n, r, a, o, i, s, l) {
+var c, d, u, b, p, f, h, g = n.rn || je, m = t.rn, x = t.type;
+if ("svg" == x ? a = "http://www.w3.org/2000/svg" : "math" == x ? a = "http://www.w3.org/1998/Math/MathML" : a || (a = "http://www.w3.org/1999/xhtml"), 
+null != o) for (c = 0; o.length > c; c++) if ((p = o[c]) && "setAttribute" in p == !!x && (x ? p.localName == x : 3 == p.nodeType)) {
+e = p, o[c] = null;
 break;
 }
 if (null == e) {
-if (null == y) return document.createTextNode(x);
-e = document.createElementNS(a, y, x.is && x), s && (he.jn && he.jn(t, o), s = !1), 
+if (null == x) return document.createTextNode(m);
+e = document.createElementNS(a, x, m.is && m), s && (ve.Pn && ve.Pn(t, o), s = !1), 
 o = null;
 }
-if (null == y) g === x || s && e.data == x || (e.data = x); else {
-if (o = o && pe.call(e.childNodes), !s && null != o) for (g = {}, c = 0; e.attributes.length > c; c++) g[(f = e.attributes[c]).name] = f.value;
-for (c in g) if (f = g[c], "children" == c) ; else if ("dangerouslySetInnerHTML" == c) d = f; else if (!(c in x)) {
-if ("value" == c && "defaultValue" in x || "checked" == c && "defaultChecked" in x) continue;
-O(e, c, null, f, a);
+if (null == x) g === m || s && e.data == m || (e.data = m); else {
+if (o = o && we.call(e.childNodes), !s && null != o) for (g = {}, c = 0; e.attributes.length > c; c++) g[(p = e.attributes[c]).name] = p.value;
+for (c in g) if (p = g[c], "children" == c) ; else if ("dangerouslySetInnerHTML" == c) u = p; else if (!(c in m)) {
+if ("value" == c && "defaultValue" in m || "checked" == c && "defaultChecked" in m) continue;
+L(e, c, null, p, a);
 }
-for (c in x) f = x[c], "children" == c ? b = f : "dangerouslySetInnerHTML" == c ? u = f : "value" == c ? p = f : "checked" == c ? h = f : s && "function" != typeof f || g[c] === f || O(e, c, f, g[c], a);
-if (u) s || d && (u.Rn == d.Rn || u.Rn == e.innerHTML) || (e.innerHTML = u.Rn), 
-t.nn = []; else if (d && (e.innerHTML = ""), j("template" == t.type ? e.content : e, Se(b) ? b : [ b ], t, n, r, "foreignObject" == y ? "http://www.w3.org/1999/xhtml" : a, o, i, o ? o[0] : n.nn && v(n, 0), s, l), 
-null != o) for (c = o.length; c--; ) m(o[c]);
-s || (c = "value", "progress" == y && null == p ? e.removeAttribute("value") : null != p && (p !== e[c] || "progress" == y && !p || "option" == y && p != g[c]) && O(e, c, p, g[c], a), 
-c = "checked", null != h && h != e[c] && O(e, c, h, g[c], a));
+for (c in m) p = m[c], "children" == c ? b = p : "dangerouslySetInnerHTML" == c ? d = p : "value" == c ? f = p : "checked" == c ? h = p : s && "function" != typeof p || g[c] === p || L(e, c, p, g[c], a);
+if (d) s || u && (d.Tn == u.Tn || d.Tn == e.innerHTML) || (e.innerHTML = d.Tn), 
+t.an = []; else if (u && (e.innerHTML = ""), O("template" == t.type ? e.content : e, Ee(b) ? b : [ b ], t, n, r, "foreignObject" == x ? "http://www.w3.org/1999/xhtml" : a, o, i, o ? o[0] : n.an && S(n, 0), s, l), 
+null != o) for (c = o.length; c--; ) M(o[c]);
+s || (c = "value", "progress" == x && null == f ? e.removeAttribute("value") : null != f && (f !== e[c] || "progress" == x && !f || "option" == x && f != g[c]) && L(e, c, f, g[c], a), 
+c = "checked", null != h && h != e[c] && L(e, c, h, g[c], a));
 }
 return e;
 }
 
-function D(e, t, n) {
+function K(e, t, n) {
 try {
 if ("function" == typeof e) {
-var r = "function" == typeof e.un;
-r && e.un(), r && null == t || (e.un = e(t));
+var r = "function" == typeof e.bn;
+r && e.bn(), r && null == t || (e.bn = e(t));
 } else e.current = t;
 } catch (e) {
-he.sn(e, n);
+ve.cn(e, n);
 }
 }
 
-function I(e, t, n) {
+function U(e, t, n) {
 var r, a;
-if (he.unmount && he.unmount(e), (r = e.ref) && (r.current && r.current != e.sn || D(r, null, t)), 
-null != (r = e.ln)) {
-if (r.Pn) try {
-r.Pn();
+if (ve.unmount && ve.unmount(e), (r = e.ref) && (r.current && r.current != e.cn || K(r, null, t)), 
+null != (r = e.dn)) {
+if (r.En) try {
+r.En();
 } catch (e) {
-he.sn(e, t);
+ve.cn(e, t);
 }
-r.base = r.gn = null;
+r.base = r.xn = null;
 }
-if (r = e.nn) for (a = 0; r.length > a; a++) r[a] && I(r[a], t, n || "function" != typeof e.type);
-n || m(e.sn), e.ln = e.rn = e.sn = void 0;
+if (r = e.an) for (a = 0; r.length > a; a++) r[a] && U(r[a], t, n || "function" != typeof e.type);
+n || M(e.cn), e.dn = e.sn = e.cn = void 0;
 }
 
-function Y(e, t, n) {
+function Z(e, t, n) {
 return this.constructor(e, n);
 }
 
-function G(e, t, n) {
+function q(e, t, n) {
 var r, a, o, i;
-t == document && (t = document.documentElement), he.rn && he.rn(e, t), a = (r = "function" == typeof n) ? null : n && n.nn || t.nn, 
-o = [], i = [], P(t, e = (!r && n || t).nn = x(w, null, [ e ]), a || _e, _e, t.namespaceURI, !r && n ? [ n ] : a ? null : t.firstChild ? pe.call(t.childNodes) : null, o, !r && n ? n : a ? a.sn : t.firstChild, r, i), 
-E(o, e, i);
+t == document && (t = document.documentElement), ve.sn && ve.sn(e, t), a = (r = "function" == typeof n) ? null : n && n.an || t.an, 
+o = [], i = [], I(t, e = (!r && n || t).an = z(A, null, [ e ]), a || je, je, t.namespaceURI, !r && n ? [ n ] : a ? null : t.firstChild ? we.call(t.childNodes) : null, o, !r && n ? n : a ? a.cn : t.firstChild, r, i), 
+Y(o, e, i);
+}
+
+function V(e, t) {
+q(e, t, V);
 }
 
 function H(e, t) {
-G(e, t, H);
-}
-
-function q(e, t) {
-Ee.yn && Ee.yn(Ce, e, Pe || t), Pe = 0;
-var n = Ce.Tn || (Ce.Tn = {
-rn: [],
-yn: []
+Ye.kn && Ye.kn(Te, e, Ie || t), Ie = 0;
+var n = Te.Ln || (Te.Ln = {
+sn: [],
+kn: []
 });
-return e >= n.rn.length && n.rn.push({}), n.rn[e];
+return e >= n.sn.length && n.sn.push({}), n.sn[e];
 }
 
-function B(e) {
-return Pe = 1, function(e, t) {
-var n, r, a, o = q(Ne++, 2);
-return o.t = e, o.ln || (o.rn = [ ee(void 0, t), e => {
-var t = o.En ? o.En[0] : o.rn[0], n = o.t(t, e);
-t !== n && (o.En = [ n, o.rn[1] ], o.ln.Fn({}));
-} ], o.ln = Ce, Ce.Dn) || (n = function(e, t, n) {
+function X(e) {
+return Ie = 1, function(e, t) {
+var n, r, a, o = H(Fe++, 2);
+return o.t = e, o.dn || (o.sn = [ ie(void 0, t), e => {
+var t = o.Fn ? o.Fn[0] : o.sn[0], n = o.t(t, e);
+t !== n && (o.Fn = [ n, o.sn[1] ], o.dn.Dn({}));
+} ], o.dn = Te, Te.In) || (n = function(e, t, n) {
 var a, i;
-return !o.ln.Tn || (a = o.ln.Tn.rn.filter(e => !!e.ln), a.every(e => !e.En) ? !r || r.call(this, e, t, n) : (i = o.ln.tn !== e, 
+return !o.dn.Ln || (a = o.dn.Ln.sn.filter(e => !!e.dn), a.every(e => !e.Fn) ? !r || r.call(this, e, t, n) : (i = o.dn.rn !== e, 
 a.forEach(e => {
-if (e.En) {
-var t = e.rn[0];
-e.rn = e.En, e.En = void 0, t !== e.rn[0] && (i = !0);
+if (e.Fn) {
+var t = e.sn[0];
+e.sn = e.Fn, e.Fn = void 0, t !== e.sn[0] && (i = !0);
 }
 }), r && r.call(this, e, t, n) || i));
-}, Ce.Dn = !0, r = Ce.zn, a = Ce.Sn, Ce.Sn = function(e, t, o) {
-if (this.sn) {
+}, Te.In = !0, r = Te.An, a = Te.Cn, Te.Cn = function(e, t, o) {
+if (this.cn) {
 var i = r;
 r = void 0, n(e, t, o), r = i;
 }
 a && a.call(this, e, t, o);
-}, Ce.zn = n), o.En || o.rn;
-}(ee, e);
+}, Te.An = n), o.Fn || o.sn;
+}(ie, e);
 }
 
 function W(e, t) {
-var n = q(Ne++, 3);
-!Ee.wn && Q(n.Tn, t) && (n.rn = e, n.u = t, Ce.Tn.yn.push(n));
+var n = H(Fe++, 3);
+!Ye.vn && oe(n.Ln, t) && (n.sn = e, n.u = t, Te.Ln.kn.push(n));
 }
 
-function U(e) {
-return Pe = 5, K(() => ({
+function J(e) {
+return Ie = 5, Q(() => ({
 current: e
 }), []);
 }
 
-function K(e, t) {
-var n = q(Ne++, 7);
-return Q(n.Tn, t) && (n.rn = e(), n.Tn = t, n.yn = e), n.rn;
-}
-
-function V(e, t) {
-return Pe = 8, K(() => e, t);
-}
-
-function $() {
-for (var e; e = Fe.shift(); ) if (e.gn && e.Tn) try {
-e.Tn.yn.forEach(Z), e.Tn.yn.forEach(J), e.Tn.yn = [];
-} catch (t) {
-e.Tn.yn = [], Ee.sn(t, e.cn);
-}
-}
-
-function X(e) {
-var t, n = () => {
-clearTimeout(r), He && cancelAnimationFrame(t), setTimeout(e);
-}, r = setTimeout(n, 35);
-He && (t = requestAnimationFrame(n));
-}
-
-function Z(e) {
-var t = Ce, n = e.ln;
-"function" == typeof n && (e.ln = void 0, n()), Ce = t;
-}
-
-function J(e) {
-var t = Ce;
-e.ln = e.rn(), Ce = t;
-}
-
 function Q(e, t) {
-return !e || e.length !== t.length || t.some((t, n) => t !== e[n]);
+var n = H(Fe++, 7);
+return oe(n.Ln, t) && (n.sn = e(), n.Ln = t, n.kn = e), n.sn;
 }
 
 function ee(e, t) {
+return Ie = 8, Q(() => e, t);
+}
+
+function te() {
+for (var e; e = $e.shift(); ) if (e.xn && e.Ln) try {
+e.Ln.kn.forEach(re), e.Ln.kn.forEach(ae), e.Ln.kn = [];
+} catch (t) {
+e.Ln.kn = [], Ye.cn(t, e.un);
+}
+}
+
+function ne(e) {
+var t, n = () => {
+clearTimeout(r), Ve && cancelAnimationFrame(t), setTimeout(e);
+}, r = setTimeout(n, 35);
+Ve && (t = requestAnimationFrame(n));
+}
+
+function re(e) {
+var t = Te, n = e.dn;
+"function" == typeof n && (e.dn = void 0, n()), Te = t;
+}
+
+function ae(e) {
+var t = Te;
+e.dn = e.sn(), Te = t;
+}
+
+function oe(e, t) {
+return !e || e.length !== t.length || t.some((t, n) => t !== e[n]);
+}
+
+function ie(e, t) {
 return "function" == typeof t ? t(e) : t;
 }
 
-function te(e, t) {
+function se(e, t) {
 var n, r;
 for (n in e) if ("__source" !== n && !(n in t)) return !0;
 for (r in t) if ("__source" !== r && e[r] !== t[r]) return !0;
 return !1;
 }
 
-function ne(e, t) {
-this.tn = e, this.context = t;
+function le(e, t) {
+this.rn = e, this.context = t;
 }
 
-function re(e, t, n) {
-return e && (e.ln && e.ln.Tn && (e.ln.Tn.rn.forEach(e => {
-"function" == typeof e.ln && e.ln();
-}), e.ln.Tn = null), null != (e = ((e, t) => {
+function ce(e, t, n) {
+return e && (e.dn && e.dn.Ln && (e.dn.Ln.sn.forEach(e => {
+"function" == typeof e.dn && e.dn();
+}), e.dn.Ln = null), null != (e = ((e, t) => {
 for (var n in t) e[n] = t[n];
 return e;
-})({}, e)).ln && (e.ln.gn === n && (e.ln.gn = t), e.ln.sn = !0, e.ln = null), e.nn = e.nn && e.nn.map(e => re(e, t, n))), 
+})({}, e)).dn && (e.dn.xn === n && (e.dn.xn = t), e.dn.cn = !0, e.dn = null), e.an = e.an && e.an.map(e => ce(e, t, n))), 
 e;
 }
 
-function ae(e, t, n) {
-return e && n && (e.cn = null, e.nn = e.nn && e.nn.map(e => ae(e, t, n)), e.ln && e.ln.gn === t && (e.sn && n.appendChild(e.sn), 
-e.ln.sn = !0, e.ln.gn = n)), e;
-}
-
-function oe() {
-this.un = 0, this.o = null, this.an = null;
-}
-
-function ie(e) {
-var t = e.rn.ln;
-return t && t.Ln && t.Ln(e);
-}
-
-function se() {
-this.i = null, this.l = null;
-}
-
-function le() {}
-
-function ce() {
-return this.cancelBubble;
+function de(e, t, n) {
+return e && n && (e.un = null, e.an = e.an && e.an.map(e => de(e, t, n)), e.dn && e.dn.xn === t && (e.cn && n.appendChild(e.cn), 
+e.dn.cn = !0, e.dn.xn = n)), e;
 }
 
 function ue() {
+this.bn = 0, this.o = null, this.ln = null;
+}
+
+function be(e) {
+var t = e.sn.dn;
+return t && t.Bn && t.Bn(e);
+}
+
+function pe() {
+this.i = null, this.l = null;
+}
+
+function fe() {}
+
+function he() {
+return this.cancelBubble;
+}
+
+function ge() {
 return this.defaultPrevented;
 }
 
-function de(e) {
+function me(e) {
 return {
 render(t) {
 ((e, t) => {
-null == t.nn && (t.textContent = ""), G(e, t);
+null == t.an && (t.textContent = ""), q(e, t);
 })(t, e);
 },
 unmount() {
 (e => {
-e.nn && G(null, e);
+e.an && q(null, e);
 })(e);
 }
 };
 }
 
-function be(e, t, n, r, a, o) {
+function xe(e, t, n, r, a, o) {
 var i, s, l, c;
 if (t || (t = {}), "ref" in (l = t)) for (s in l = {}, t) "ref" == s ? i = t[s] : l[s] = t[s];
 if (c = {
 type: e,
-tn: l,
+rn: l,
 key: n,
 ref: i,
-nn: null,
-rn: null,
-an: 0,
+an: null,
 sn: null,
-ln: null,
+ln: 0,
+cn: null,
+dn: null,
 constructor: void 0,
-cn: --st,
-dn: -1,
-un: 0,
-In: a,
-Bn: o
-}, "function" == typeof e && (i = e.en)) for (s in i) void 0 === l[s] && (l[s] = i[s]);
-return he.bn && he.bn(c), c;
+un: --pt,
+pn: -1,
+bn: 0,
+$n: a,
+Gn: o
+}, "function" == typeof e && (i = e.nn)) for (s in i) void 0 === l[s] && (l[s] = i[s]);
+return ve.fn && ve.fn(c), c;
 }
 
-function fe(e) {
-e(xt), ga();
+function ye(e) {
+e(zt), Sa();
 }
 
-var pe, he, ge, me, xe, ye, we, ke, ve, Me, ze, _e, je, Ae, Se, Ne, Ce, Oe, Re, Pe, Fe, Ee, Te, Le, De, Ie, Ye, Ge, He, qe, Be, We, Ue, Ke, Ve, $e, Xe, Ze, Je, Qe, et, tt, nt, rt, at, ot, it, st;
+var we, ve, ke, Me, ze, _e, Ae, Re, Se, Ne, Ce, je, Oe, Pe, Ee, Fe, Te, Le, De, Ie, $e, Ye, Be, Ge, Ke, Ue, Ze, qe, Ve, He, Xe, We, Je, Qe, et, tt, nt, rt, at, ot, it, st, lt, ct, dt, ut, bt, pt;
 
-const lt = "".charCodeAt, ct = String.fromCharCode, ut = window.ou, dt = window.ou.document, bt = window.sr, ft = window.pr, pt = "__cf_ray", ht = {
-tt: null,
+const ft = "".charCodeAt, ht = String.fromCharCode, gt = window.ou, mt = window.ou.document, xt = window.sr, yt = window.pr, wt = "__cf_ray", vt = {
+nt: null,
 Yn: null
-}, gt = {
+}, kt = {
 Ft: [],
-nt: 0
+rt: 0
 };
 
-let mt;
+let Mt;
 
-const xt = ((e, t) => {
+const zt = ((e, t) => {
 const n = {}, r = {}, a = (e, t, r) => {
 const o = {};
 for (const i in e) {
@@ -1262,251 +1448,258 @@ n[t] = "number" == typeof n[t] ? "number" == typeof e ? e : 0 : "string" == type
 for (const n in e) r(e[n], t[e[n]._k], n);
 }, r;
 })({
-xt: {
-_k: "\t",
-je: "𝅷",
-Ot: "",
-Gn: "",
-Lt: "",
-St: "",
-Rt: "󠄟"
-},
 yt: {
+_k: "\t",
+Re: "𝅷",
+jt: "",
+Kn: "",
+It: "",
+At: "",
+Pt: "󠄟"
+},
+wt: {
 _k: "󠁑",
-je: "󠁧",
-Et: "󠁢",
-Bt: "󠁤",
-jt: "󠁣",
-_t: "󠁥"
+Re: "󠁧",
+Lt: "󠁢",
+$t: "󠁤",
+Rt: "󠁣",
+vt: "󠁥"
 },
 qn: {
 _k: "󠄸",
-je: "󠄴"
+Re: "󠄴"
 },
 Vn: {
 _k: "󠄹",
-je: "󠄵"
+Re: "󠄵"
 },
-Kn: {
+tn: {
+_k: "ti",
+Re: "e"
+},
+Hn: {
 _k: "󠄺",
-je: "󠄶"
+Re: "󠄶"
 },
-Re: {
+Pe: {
 _k: "󠅔",
-je: "󠅑",
-Ee: "󠅢",
+Re: "󠅑",
+Le: "󠅢",
 Fe: "󠅿",
-Pe: "󠆛",
-Te: "󠆸"
+Te: "󠆛",
+Ee: "󠆸"
 },
-$e: {
+Ze: {
 _k: "󠇍",
 Xe: "󠇓",
-je: "󠇥",
-Ze: "󠇯",
-rt: {
+Re: "󠇥",
+Je: "󠇯",
+ot: {
 _k: "󠇮",
-ot: "󠅬",
-p: "󠅰",
-et: "󠅝"
+it: "󠅬",
+h: "󠅰",
+tt: "󠅝"
 },
-Qe: {
+et: {
 _k: "󠅎",
-Je: "󠅋",
-et: "󠄼"
+Qe: "󠅋",
+tt: "󠄼"
 }
 },
 Un: {
 _k: "󠄩",
-je: "󠄞",
-Hn: "󠄚"
+Re: "󠄞",
+Wn: "󠄚"
 },
-Wn: {
+Zn: {
 _k: "󠄤",
-je: "󠄥"
-},
-$n: {
-_k: "󠄏",
-je: "󠄏󠄏"
+Re: "󠄥"
 },
 Xn: {
+_k: "󠄏",
+Re: "󠄏󠄏"
+},
+Jn: {
 _k: "󠄎󠄎",
-je: "󠄃",
-Zn: "󠄃󠄃"
+Re: "󠄃",
+Qn: "󠄃󠄃"
 },
 Xt: {
 _k: "󠄎󠄐",
-je: "󠄃󠄍",
-Jn: "󠄃󠄎",
-$t: "󠄃󠄏",
-Jt: "󠄃󠄒",
-Qt: "󠄃󠄑",
-Zt: "󠄃󠄓"
-},
-Qn: {
-_k: "󠄎󠄒",
-je: "󠄃󠄔"
-},
-er: {
-_k: "󠈄",
-je: "󠈅"
+Re: "󠄃󠄍",
+er: "󠄃󠄎",
+Zt: "󠄃󠄏",
+Qt: "󠄃󠄒",
+en: "󠄃󠄑",
+Jt: "󠄃󠄓"
 },
 tr: {
-_k: "a",
-nr: "b",
-rr: "c",
-ar: "e",
-ir: "f"
+_k: "󠄎󠄒",
+Re: "󠄃󠄔"
 },
-sr: {
+nr: {
+_k: "󠈄",
+Re: "󠈅"
+},
+rr: {
+_k: "a",
+ar: "b",
+ir: "c",
+sr: "e",
+lr: "f"
+},
+cr: {
 _k: "z",
-lr: "z1"
+dr: "z1"
 }
 }, {
-xt: {
-je: !0,
-Ot: !0,
-Gn: !0,
-Lt: !0,
-St: !1,
-Xn: !1,
-Rt: !1
-},
 yt: {
-je: !0,
-Et: !1,
-Bt: !0,
-jt: !1,
-_t: !0
+Re: !0,
+jt: !0,
+Kn: !0,
+It: !0,
+At: !1,
+Jn: !1,
+Pt: !1
+},
+wt: {
+Re: !0,
+Lt: !1,
+$t: !0,
+Rt: !1,
+vt: !0
 },
 qn: {
-je: !0
+Re: !0
 },
 Vn: {
-je: !1
+Re: !1
 },
-Kn: {
-je: !1
+tn: {
+Re: !0
 },
-Re: {
-je: !0,
-Ee: 50,
-Te: !0,
+Hn: {
+Re: !1
+},
+Pe: {
+Re: !0,
+Le: 50,
+Ee: !0,
 Fe: 50,
-Pe: !0
+Te: !0
 },
-$e: {
+Ze: {
 Xe: !0,
-je: !0,
-Ze: !0,
-Qe: {
+Re: !0,
 Je: !0,
-et: !0
+et: {
+Qe: !0,
+tt: !0
 },
-rt: {
-ot: !0,
-p: !0,
-et: !0
+ot: {
+it: !0,
+h: !0,
+tt: !0
 }
 },
-$n: {
-je: !0
+Xn: {
+Re: !0
 },
 Un: {
-je: !0,
-Hn: !0
+Re: !0,
+Wn: !0
 },
-Wn: {
-je: !0
+Zn: {
+Re: !0
 },
-Xn: {
-je: !0,
-Zn: !1
+Jn: {
+Re: !0,
+Qn: !1
 },
 Xt: {
-je: !1,
-Jn: 50,
-$t: !0,
+Re: !1,
+er: 50,
+Zt: !0,
+en: !1,
 Qt: !1,
-Jt: !1,
-Zt: !1
-},
-Qn: {
-je: !1
-},
-er: {
-je: !0
+Jt: !1
 },
 tr: {
-nr: "ShiftRight",
-rr: "KeyB",
-ar: "KeyI",
-ir: "KeyO"
+Re: !1
 },
-sr: {
-lr: !1
+nr: {
+Re: !0
+},
+rr: {
+ar: "ShiftRight",
+ir: "KeyB",
+sr: "KeyI",
+lr: "KeyO"
+},
+cr: {
+dr: !1
 }
 });
 
-let yt, wt, kt = !1, vt = !1;
+let _t, At, Rt = !1, St = !1;
 
-const Mt = JSON.stringify;
+const Nt = JSON.stringify;
 
-let zt = null;
+let Ct = null;
 
-null === zt && (zt = setInterval(() => {
+null === Ct && (Ct = setInterval(() => {
 (() => {
-if (!kt || vt) return;
-vt = !0;
-const t = xt._serialize(), n = Mt(t);
-n !== wt && ((e => {
+if (!Rt || St) return;
+St = !0;
+const t = zt._serialize(), n = Nt(t);
+n !== At && ((e => {
 const t = (e => {
 let t = "";
 for (let n = 0; e.length > n; n++) t += e.charCodeAt(n).toString(16).padStart(4, "0");
 return t;
 })("string" == typeof e ? e : (e ?? "") + "");
-dt.cookie = (e => `${pt}=${e}; path=/; max-age=259200`)(t);
-})(e(n)), wt = n), vt = !1;
+mt.cookie = (e => `${wt}=${e}; path=/; max-age=259200`)(t);
+})(e(n)), At = n), St = !1;
 })();
 }, 250));
 
-let _t = {}, jt = !1;
+let jt = {}, Ot = !1;
 
-const At = {};
+const Pt = {};
 
-for (const e of Object.getOwnPropertyNames(Object)) At[e] = Object[e];
+for (const e of Object.getOwnPropertyNames(Object)) Pt[e] = Object[e];
 
-const St = {};
+const Et = {};
 
-for (const e of Object.getOwnPropertyNames(Reflect)) St[e] = Reflect[e];
+for (const e of Object.getOwnPropertyNames(Reflect)) Et[e] = Reflect[e];
 
-const Nt = new WeakMap;
+const Ft = new WeakMap;
 
-n(ut.Function.prototype, "toString", {
+n(gt.Function.prototype, "toString", {
 apply(e, t, n) {
-return Reflect.apply(e, Nt.get(t) || t, n);
+return Reflect.apply(e, Ft.get(t) || t, n);
 }
-}), n(ut.Element.prototype, "attachShadow", {
+}), n(gt.Element.prototype, "attachShadow", {
 apply(e, t, n) {
 return Reflect.apply(e, t, n);
 }
-}), n(ut, "Proxy", {
+}), n(gt, "Proxy", {
 construct(e, t) {
 return Reflect.construct(e, t);
 }
 });
 
-const Ct = EventTarget.prototype.addEventListener, Ot = EventTarget.prototype.removeEventListener, Rt = Array.from({
+const Tt = EventTarget.prototype.addEventListener, Lt = EventTarget.prototype.removeEventListener, Dt = Array.from({
 length: 12
-}, () => "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"[Math.floor(52 * Math.random())]).join(""), Pt = dt.fonts, Ft = e => {
+}, () => "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"[Math.floor(52 * Math.random())]).join(""), It = mt.fonts, $t = e => {
 try {
-return e && "object" == typeof e && e.family === Rt;
+return e && "object" == typeof e && e.family === Dt;
 } catch {
 return !1;
 }
-}, Et = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(Pt), "size");
+}, Yt = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(It), "size");
 
-Et && Et.get && (Et.get = new Proxy(Et.get, {
+Yt && Yt.get && (Yt.get = new Proxy(Yt.get, {
 apply(e, t, n) {
 try {
 const r = Reflect.apply(e, t, n);
@@ -1515,7 +1708,7 @@ return Math.max(0, r - 5);
 return 0;
 }
 }
-}), Object.defineProperty(Object.getPrototypeOf(Pt), "size", Et)), n(Pt, "values", {
+}), Object.defineProperty(Object.getPrototypeOf(It), "size", Yt)), n(It, "values", {
 apply(e, t, n) {
 const r = Reflect.apply(e, t, n);
 return {
@@ -1524,12 +1717,12 @@ return this;
 },
 next() {
 let e = r.next();
-for (;!e.done && Ft(e.value); ) e = r.next();
+for (;!e.done && $t(e.value); ) e = r.next();
 return e;
 }
 };
 }
-}), n(Pt, "entries", {
+}), n(It, "entries", {
 apply(e, t, n) {
 const r = Reflect.apply(e, t, n);
 return {
@@ -1538,12 +1731,12 @@ return this;
 },
 next() {
 let e = r.next();
-for (;!e.done && Ft(e.value[0]); ) e = r.next();
+for (;!e.done && $t(e.value[0]); ) e = r.next();
 return e;
 }
 };
 }
-}), n(Pt, "keys", {
+}), n(It, "keys", {
 apply(e, t, n) {
 const r = Reflect.apply(e, t, n);
 return {
@@ -1552,34 +1745,34 @@ return this;
 },
 next() {
 let e = r.next();
-for (;!e.done && Ft(e.value); ) e = r.next();
+for (;!e.done && $t(e.value); ) e = r.next();
 return e;
 }
 };
 }
-}), n(Pt, "forEach", {
+}), n(It, "forEach", {
 apply(e, t, n) {
 const [r, a] = n;
 return Reflect.apply(e, t, [ (e, t, n) => {
-Ft(e) || r.call(a, e, t, n);
+$t(e) || r.call(a, e, t, n);
 }, a ]);
 }
-}), n(Pt, "has", {
+}), n(It, "has", {
 apply(e, t, n) {
 const [r] = n;
-return !Ft(r) && Reflect.apply(e, t, n);
+return !$t(r) && Reflect.apply(e, t, n);
 }
-}), n(Pt, "delete", {
+}), n(It, "delete", {
 apply(e, t, n) {
 const [r] = n;
-return !Ft(r) && Reflect.apply(e, t, n);
+return !$t(r) && Reflect.apply(e, t, n);
 }
-}), n(Pt, "check", {
+}), n(It, "check", {
 apply(e, t, n) {
 const [r] = n;
-return (!r || !r.includes(Rt)) && Reflect.apply(e, t, n);
+return (!r || !r.includes(Dt)) && Reflect.apply(e, t, n);
 }
-}), n(Pt, Symbol.iterator, {
+}), n(It, Symbol.iterator, {
 apply(e, t, n) {
 const r = Reflect.apply(e, t, n);
 return {
@@ -1588,62 +1781,62 @@ return this;
 },
 next() {
 let e = r.next();
-for (;!e.done && Ft(e.value); ) e = r.next();
+for (;!e.done && $t(e.value); ) e = r.next();
 return e;
 }
 };
 }
 });
 
-const Tt = 4, Lt = 13;
+const Bt = 4, Gt = 13;
 
-let Dt;
+let Kt;
 
-n(ut.Object, "keys", {
+n(gt.Object, "keys", {
 apply(e, t, n) {
-return "bullet" == n[0]?.bullet_mp5?.type && "explosion" == n[0]?.explosion_frag?.type && "gun" == n[0]?.mp5?.type && "throwable" == n[0]?.frag?.type && (Dt = n[0], 
-ut.Object.keys = e), Reflect.apply(e, t, n);
+return "bullet" == n[0]?.bullet_mp5?.type && "explosion" == n[0]?.explosion_frag?.type && "gun" == n[0]?.mp5?.type && "throwable" == n[0]?.frag?.type && (Kt = n[0], 
+gt.Object.keys = e), Reflect.apply(e, t, n);
 }
 });
 
-let It = {
-cr: void 0,
-dr: void 0
+let Ut = {
+ur: void 0,
+pr: void 0
 };
 
-const Yt = {
-it: (e, t) => ({
+const Zt = {
+st: (e, t) => ({
 x: e,
 y: t
 }),
-bt: e => ({
+ft: e => ({
 x: e.x,
 y: e.y
 }),
-dt: (e, t) => ({
+ut: (e, t) => ({
 x: e.x + t.x,
 y: e.y + t.y
 }),
-ct: (e, t) => ({
+dt: (e, t) => ({
 x: e.x - t.x,
 y: e.y - t.y
 }),
-ut: (e, t) => ({
+bt: (e, t) => ({
 x: e.x * t,
 y: e.y * t
 }),
-gt: (e, t) => e.x * t.x + e.y * t.y,
-ur: e => Math.sqrt(e.x * e.x + e.y * e.y),
-lt: e => e.x * e.x + e.y * e.y,
-br(e, t) {
+xt: (e, t) => e.x * t.x + e.y * t.y,
+br: e => Math.sqrt(e.x * e.x + e.y * e.y),
+ct: e => e.x * e.x + e.y * e.y,
+hr(e, t) {
 const n = e.x - t.x, r = e.y - t.y;
 return Math.sqrt(n * n + r * r);
 },
-pr(e, t) {
+gr(e, t) {
 const n = e.x - t.x, r = e.y - t.y;
 return n * n + r * r;
 },
-ft(e) {
+ht(e) {
 const t = Math.sqrt(e.x * e.x + e.y * e.y);
 return t > 1e-6 ? {
 x: e.x / t,
@@ -1653,77 +1846,77 @@ x: 0,
 y: 0
 };
 },
-hr(e) {
+mr(e) {
 const t = Math.sqrt(e.x * e.x + e.y * e.y);
 return {
 x: e.x / t,
 y: e.y / t
 };
 },
-gr: e => ({
+yr: e => ({
 x: -e.y,
 y: e.x
 }),
-mr: e => Math.atan2(e.y, e.x),
-yr(e) {
+wr: e => Math.atan2(e.y, e.x),
+kr(e) {
 let t = e;
 for (;t > Math.PI; ) t -= 2 * Math.PI;
 for (;-Math.PI > t; ) t += 2 * Math.PI;
 return t;
 },
-wr(e, t) {
-const n = Yt.yr(e - t);
+vr(e, t) {
+const n = Zt.kr(e - t);
 return Math.abs(n);
 },
-_r: (e, t, n) => e + Yt.yr(t - e) * n,
-kr: (e, t = 1) => ({
+_r: (e, t, n) => e + Zt.kr(t - e) * n,
+Mr: (e, t = 1) => ({
 x: Math.cos(e) * t,
 y: Math.sin(e) * t
 }),
-vr: (e, t, n) => ({
+zr: (e, t, n) => ({
 x: e.x + (t.x - e.x) * n,
 y: e.y + (t.y - e.y) * n
 }),
-Mr(e, t) {
-const n = 2 * Yt.gt(e, t);
+Sr(e, t) {
+const n = 2 * Zt.xt(e, t);
 return {
 x: e.x - n * t.x,
 y: e.y - n * t.y
 };
 },
-zr: (e, t) => e.x * t.y - e.y * t.x,
-Sr: e => 1 - (1 - e) ** 3,
-Ar: e => .5 > e ? 2 * e * e : (4 - 2 * e) * e - 1,
-Cr: e => e * (2 - e),
-Nr: e => Math.max(0, Math.min(1, e)),
-Or: (e, t, n) => Math.max(t, Math.min(n, e)),
-vr: (e, t, n) => e + (t - e) * n,
-It: (e, t) => Math.atan2(t.y - e.y, t.x - e.x),
-jr(e, t) {
+Ar: (e, t) => e.x * t.y - e.y * t.x,
+Cr: e => 1 - (1 - e) ** 3,
+Nr: e => .5 > e ? 2 * e * e : (4 - 2 * e) * e - 1,
+Or: e => e * (2 - e),
+jr: e => Math.max(0, Math.min(1, e)),
+Rr: (e, t, n) => Math.max(t, Math.min(n, e)),
+zr: (e, t, n) => e + (t - e) * n,
+Bt: (e, t) => Math.atan2(t.y - e.y, t.x - e.x),
+Pr(e, t) {
 let n = e - t;
 for (;n > Math.PI; ) n -= 2 * Math.PI;
 for (;-Math.PI > n; ) n += 2 * Math.PI;
 return n;
 },
-br(e, t, n, r) {
+hr(e, t, n, r) {
 const a = n - e, o = r - t;
 return Math.sqrt(a * a + o * o);
 },
-pr(e, t, n, r) {
+gr(e, t, n, r) {
 const a = n - e, o = r - t;
 return a * a + o * o;
 },
-Rr: (e, t) => Math.hypot(e.x - t.x, e.y - t.y),
-Pr(e, t) {
+Tr: (e, t) => Math.hypot(e.x - t.x, e.y - t.y),
+Er(e, t) {
 const n = e.x - t.x, r = e.y - t.y;
 return n * n + r * r;
 },
-Tr(e, t) {
+Lr(e, t) {
 let n = 0, r = 0;
 for (let a = 0; e.length > a; a++) n += e[a] * t[a], r += t[a];
 return r > 0 ? n / r : 0;
 },
-Er(e, t) {
+Fr(e, t) {
 let n = 0, r = 0, a = 0;
 for (let o = 0; e.length > o; o++) n += e[o].x * t[o], r += e[o].y * t[o], a += t[o];
 return a > 0 ? {
@@ -1734,35 +1927,35 @@ x: 0,
 y: 0
 };
 },
-Fr: (e, t, n = .3) => e * n + t * (1 - n),
-Dr(e, t, n, r, a) {
+Dr: (e, t, n = .3) => e * n + t * (1 - n),
+Ir(e, t, n, r, a) {
 const o = a * a;
 return .5 * (2 * t + (-e + n) * a + (2 * e - 5 * t + 4 * n - r) * o + (3 * t - e - 3 * n + r) * o * a);
 },
-Lr(e, t) {
-const n = Yt.lt(t);
+Br(e, t) {
+const n = Zt.ct(t);
 if (1e-6 > n) return {
 x: 0,
 y: 0
 };
-const r = Yt.gt(e, t) / n;
+const r = Zt.xt(e, t) / n;
 return {
 x: t.x * r,
 y: t.y * r
 };
 },
-Ir: e => (e = Math.max(0, Math.min(1, e))) * e * (3 - 2 * e),
-Br: e => (e = Math.max(0, Math.min(1, e))) * e * e * (e * (6 * e - 15) + 10),
+$r: e => (e = Math.max(0, Math.min(1, e))) * e * (3 - 2 * e),
+Gr: e => (e = Math.max(0, Math.min(1, e))) * e * e * (e * (6 * e - 15) + 10),
 Yr(e) {
 if (1e-10 > e) return 0;
 let t = 1 / Math.sqrt(e);
 return t * (1.5 - .5 * e * t * t);
 }
-}, Gt = {
-Gr(e, t, n, r) {
-const a = Yt.ct(t, e), o = Math.abs(a.x) > 1e-4 ? 1 / a.x : 1e10, i = Math.abs(a.y) > 1e-4 ? 1 / a.y : 1e10, s = (n.x - e.x) * o, l = (r.x - e.x) * o, c = (n.y - e.y) * i, u = (r.y - e.y) * i, d = Math.max(Math.min(s, l), Math.min(c, u)), b = Math.min(Math.max(s, l), Math.max(c, u));
-if (0 > b || d > b || d > 1) return null;
-const f = Math.max(0, Math.min(1, d)), p = Yt.dt(e, Yt.ut(a, f)), h = Yt.ut(Yt.dt(n, r), .5), g = Yt.ut(Yt.ct(r, n), .5), m = Yt.ct(p, h);
+}, qt = {
+Kr(e, t, n, r) {
+const a = Zt.dt(t, e), o = Math.abs(a.x) > 1e-4 ? 1 / a.x : 1e10, i = Math.abs(a.y) > 1e-4 ? 1 / a.y : 1e10, s = (n.x - e.x) * o, l = (r.x - e.x) * o, c = (n.y - e.y) * i, d = (r.y - e.y) * i, u = Math.max(Math.min(s, l), Math.min(c, d)), b = Math.min(Math.max(s, l), Math.max(c, d));
+if (0 > b || u > b || u > 1) return null;
+const p = Math.max(0, Math.min(1, u)), f = Zt.ut(e, Zt.bt(a, p)), h = Zt.bt(Zt.ut(n, r), .5), g = Zt.bt(Zt.dt(r, n), .5), m = Zt.dt(f, h);
 let x;
 const y = Math.abs(Math.abs(m.x) - g.x);
 return x = Math.abs(Math.abs(m.y) - g.y) > y ? {
@@ -1772,44 +1965,44 @@ y: 0
 x: 0,
 y: m.y > 0 ? 1 : -1
 }, {
-point: p,
+point: f,
 normal: x,
-t: f
+t: p
 };
 },
-ht(e, t, n, r) {
-const a = Yt.ct(t, e), o = Yt.ct(e, n), i = Yt.gt(a, a), s = 2 * Yt.gt(o, a);
-let l = s * s - 4 * i * (Yt.gt(o, o) - r * r);
+gt(e, t, n, r) {
+const a = Zt.dt(t, e), o = Zt.dt(e, n), i = Zt.xt(a, a), s = 2 * Zt.xt(o, a);
+let l = s * s - 4 * i * (Zt.xt(o, o) - r * r);
 if (0 > l) return null;
 l = Math.sqrt(l);
-const c = (-s - l) / (2 * i), u = (-s + l) / (2 * i);
-let d = -1;
-if (0 > c || c > 1 ? 0 > u || u > 1 || (d = u) : d = c, 0 > d) return null;
-const b = Yt.dt(e, Yt.ut(a, d));
+const c = (-s - l) / (2 * i), d = (-s + l) / (2 * i);
+let u = -1;
+if (0 > c || c > 1 ? 0 > d || d > 1 || (u = d) : u = c, 0 > u) return null;
+const b = Zt.ut(e, Zt.bt(a, u));
 return {
 point: b,
-normal: Yt.ft(Yt.ct(b, n)),
-t: d
+normal: Zt.ht(Zt.dt(b, n)),
+t: u
 };
 },
-st: (e, t, n) => e ? 1 === e.type ? Gt.Gr(t, n, e.min, e.max) : 0 === e.type ? Gt.ht(t, n, e.pos, e.rad) : null : null,
-qr: (e, t, n) => Yt.pr(e, t) <= n * n,
+lt: (e, t, n) => e ? 1 === e.type ? qt.Kr(t, n, e.min, e.max) : 0 === e.type ? qt.gt(t, n, e.pos, e.rad) : null : null,
+qr: (e, t, n) => Zt.gr(e, t) <= n * n,
 Vr: (e, t, n) => !(t.x > e.x || e.x > n.x || t.y > e.y || e.y > n.y),
-Kr(e, t, n) {
-const r = Yt.ct(n, t), a = Yt.ct(e, t), o = Yt.lt(r);
+Hr(e, t, n) {
+const r = Zt.dt(n, t), a = Zt.dt(e, t), o = Zt.ct(r);
 if (0 === o) return t;
-const i = Yt.Nr(Yt.gt(a, r) / o);
-return Yt.dt(t, Yt.ut(r, i));
+const i = Zt.jr(Zt.xt(a, r) / o);
+return Zt.ut(t, Zt.bt(r, i));
 }
-}, Ht = (e, t) => (1 & e) == (1 & t) || 2 & e && 2 & t, qt = {
-Kt(e, t, n, r) {
+}, Vt = (e, t) => (1 & e) == (1 & t) || 2 & e && 2 & t, Ht = {
+Vt(e, t, n, r) {
 const a = t.x - e.x, o = t.y - e.y, i = n.x * n.x + n.y * n.y - r * r, s = 2 * (a * n.x + o * n.y), l = s * s - 4 * i * (a * a + o * o);
 if (0 > l) return null;
-const c = Math.sqrt(l), u = (-s - c) / (2 * i), d = (-s + c) / (2 * i);
-return u > 1e-4 ? u : d > 1e-4 ? d : null;
+const c = Math.sqrt(l), d = (-s - c) / (2 * i), u = (-s + c) / (2 * i);
+return d > 1e-4 ? d : u > 1e-4 ? u : null;
 },
 Ur(e, t, n, r, a, o, i = .2) {
-const s = t.x - (n?.x ?? t.x), l = t.y - (n?.y ?? t.y), c = qt.Kt(e, t, {
+const s = t.x - (n?.x ?? t.x), l = t.y - (n?.y ?? t.y), c = Ht.Vt(e, t, {
 x: s,
 y: l
 }, a);
@@ -1818,7 +2011,7 @@ x: e.x + (t.x + s * c - e.x) * i,
 y: e.y + (t.y + l * c - e.y) * i
 });
 },
-Hr(e, t, n, r, a = 4) {
+Wr(e, t, n, r, a = 4) {
 let o = .016;
 for (let i = 0; a > i; i++) {
 const a = Math.hypot(t.x + n.x * o - e.x, t.y + n.y * o - e.y) / r;
@@ -1827,21 +2020,21 @@ o = .6 * a + .4 * o;
 }
 return Math.max(.001, Math.min(o, 5));
 },
-Wr(e, t, n, r, a) {
-const o = qt.Hr(a, e, t, r);
+Zr(e, t, n, r, a) {
+const o = Ht.Wr(a, e, t, r);
 return {
 x: e.x + t.x * o + .5 * n.x * o * o,
 y: e.y + t.y * o + .5 * n.y * o * o
 };
 },
-$r: (e, t) => t ? {
+Xr: (e, t) => t ? {
 x: e.x - t.x,
 y: e.y - t.y
 } : {
 x: 0,
 y: 0
 },
-Xr(e) {
+Jr(e) {
 if (2 > e.length) return {
 x: 0,
 y: 0
@@ -1860,92 +2053,92 @@ x: 0,
 y: 0
 };
 },
-Zr(e, t, n = 3) {
+Qr(e, t, n = 3) {
 const r = Math.hypot(e.x, e.y), a = Math.hypot(t.x, t.y);
 return !(r > 2500 || a > .1 && Math.hypot(e.x - t.x, e.y - t.y) / (a + .1) > n);
 },
-Jr(e, t, n, r) {
-const a = Yt.ct(t, e), o = Math.abs(Yt.yr(Math.atan2(a.y, a.x) - Math.atan2(n.y, n.x)));
+ea(e, t, n, r) {
+const a = Zt.dt(t, e), o = Math.abs(Zt.kr(Math.atan2(a.y, a.x) - Math.atan2(n.y, n.x)));
 return r * Math.PI / 180 >= o;
 },
-Qr: (e, t, n = .2) => ({
+ta: (e, t, n = .2) => ({
 x: e.x * (1 - n) + t.x * n,
 y: e.y * (1 - n) + t.y * n
 })
 };
 
-class Bt {
+class Xt {
 constructor(e = "idle", t = null, n = null, r = !1) {
-this.Le = e, this.Ie = t, this.Be = n, this.Ye = r;
+this.Ie = e, this.Be = t, this.$e = n, this.Ge = r;
 }
 }
 
-const Wt = .001, Ut = Math.PI / 90, Kt = {
+const Wt = .001, Jt = Math.PI / 90, Qt = {
 De: !1,
-Le: "idle",
-Ge: {
+Ie: "idle",
+Ye: {
 x: 0,
 y: 0
 },
-qe: null,
 Ke: null,
 Ve: null,
-ea: !1,
+qe: null,
+na: !1,
 We: null,
-Ue: null,
 He: null,
-ta: !1,
-na: null
-}, Vt = e => e ? {
+Ue: null,
+ra: !1,
+aa: null
+}, en = e => e ? {
 x: e.x,
 y: e.y
-} : null, $t = (e, t) => !(!e && !t || e && t && Wt >= Math.abs(e.x - t.x) && Wt >= Math.abs(e.y - t.y)), Xt = e => e ? {
+} : null, tn = (e, t) => !(!e && !t || e && t && Wt >= Math.abs(e.x - t.x) && Wt >= Math.abs(e.y - t.y)), nn = e => e ? {
 touchMoveActive: e.touchMoveActive,
 touchMoveLen: e.touchMoveLen,
 x: e.x,
 y: e.y
-} : null, Zt = () => ({
-x: ut.innerWidth / 2,
-y: ut.innerHeight / 2
-}), Jt = (e, t) => Math.atan2(e.y - t.y, e.x - t.x), Qt = (e, t) => {
+} : null, rn = () => ({
+x: gt.innerWidth / 2,
+y: gt.innerHeight / 2
+}), an = (e, t) => Math.atan2(e.y - t.y, e.x - t.x), on = (e, t) => {
 return Math.abs(Math.atan2(Math.sin(n = t - e), Math.cos(n)));
 var n;
-}, en = (e, t) => {
+}, sn = (e, t) => {
 if (!e || !t) return 45;
-const n = Zt(), r = Jt(e, n), a = Jt(t, n), o = Qt(r, a), i = Math.hypot(t.x - e.x, t.y - e.y), s = Yt.Nr(o / Math.PI), l = Yt.Nr(i / 450);
-return 45 + 360 * Math.max(s, l) * (xt.xt.ra / 100);
-}, tn = e => {
-e ? (Kt.ea = !0, Kt.qe = Vt(e), ht.tt = {
+const n = rn(), r = an(e, n), a = an(t, n), o = on(r, a), i = Math.hypot(t.x - e.x, t.y - e.y), s = Zt.jr(o / Math.PI), l = Zt.jr(i / 450);
+return 45 + 360 * Math.max(s, l) * (zt.yt.oa / 100);
+}, ln = e => {
+e ? (Qt.na = !0, Qt.Ke = en(e), vt.nt = {
 clientX: e.x,
 clientY: e.y
-}) : (Kt.ea = !1, Kt.qe = null, ht.tt = null);
-}, nn = () => {
-null !== Kt.na && (clearTimeout(Kt.na), Kt.na = null);
-}, rn = e => {
-nn(), Kt.na = setTimeout(() => {
-Kt.na = null, "idle" === Kt.Le && (Kt.Ve = null, tn(null));
+}) : (Qt.na = !1, Qt.Ke = null, vt.nt = null);
+}, cn = () => {
+null !== Qt.aa && (clearTimeout(Qt.aa), Qt.aa = null);
+}, dn = e => {
+cn(), Qt.aa = setTimeout(() => {
+Qt.aa = null, "idle" === Qt.Ie && (Qt.qe = null, ln(null));
 }, Math.max(0, e));
-}, an = (e = performance.now()) => {
-if (!Kt.De) return;
+}, un = (e = performance.now()) => {
+if (!Qt.De) return;
 let t = null;
-const n = Kt.Ve;
+const n = Qt.qe;
 let r = !1;
 if (n) {
-const {startPos: a, targetPos: o, startTime: i, duration: s} = n, l = s > 0 ? Yt.Nr((e - i) / s) : 1, c = Yt.Sr(l);
-let u = !1;
-if (s > 0 && a && o) if (Math.hypot(o.x - a.x, o.y - a.y) > 6) u = !0; else {
-const e = Zt();
-u = Qt(Jt(a, e), Jt(o, e)) > Ut;
+const {startPos: a, targetPos: o, startTime: i, duration: s} = n, l = s > 0 ? Zt.jr((e - i) / s) : 1, c = Zt.Cr(l);
+let d = !1;
+if (s > 0 && a && o) if (Math.hypot(o.x - a.x, o.y - a.y) > 6) d = !0; else {
+const e = rn();
+d = on(an(a, e), an(o, e)) > Jt;
 }
-u && .999 > l && "idle" !== Kt.Le && (r = !0), t = {
+d && .999 > l && "idle" !== Qt.Ie && (r = !0), t = {
 x: a.x + (o.x - a.x) * c,
 y: a.y + (o.y - a.y) * c
-}, .999 > l || (Kt.Ve = null, "idle" === Kt.Le ? t = null : (Kt.Ke = Vt(o), t = Vt(o)));
-} else "idle" !== Kt.Le && Kt.Ke && (t = Vt(Kt.Ke));
-Kt.ta = r, tn(t), (e => {
-const t = Kt.He;
+}, .999 > l || (Qt.qe = null, "idle" === Qt.Ie ? t = null : (Qt.Ve = en(o), t = en(o)));
+} else "idle" !== Qt.Ie && Qt.Ve && (t = en(Qt.Ve));
+Qt.ra = r, ln(t), (e => {
+const t = Qt.Ue;
 if (t) {
-const {startDir: n, targetDir: r, startTime: a, duration: o} = t, i = o > 0 ? Yt.Nr((e - a) / o) : 1, s = Yt.Sr(i);
+const {startDir: n, targetDir: r, startTime: a, duration: o} = t, i = o > 0 ? Zt.jr((e - a) / o) : 1, s = Zt.Cr(i);
 let l;
 if (!n && r) l = {
 touchMoveActive: !0,
@@ -1966,270 +2159,274 @@ x: n.x * e,
 y: n.y * e
 };
 } else l = null;
-Kt.We = l, .999 > i || (Kt.He = null, Kt.We = r ? Xt(r) : null);
+Qt.We = l, .999 > i || (Qt.Ue = null, Qt.We = r ? nn(r) : null);
 }
-ht.Yn = Kt.We?.touchMoveActive && Kt.We.touchMoveLen > Wt ? Xt(Kt.We) : null;
+vt.Yn = Qt.We?.touchMoveActive && Qt.We.touchMoveLen > Wt ? nn(Qt.We) : null;
 })(e), (() => {
-if (!Kt.ea || "idle" === Kt.Le) return;
-const e = mt?.game;
+if (!Qt.na || "idle" === Qt.Ie) return;
+const e = Mt?.game;
 if (!e?.initialized) return;
-const t = e[_t.$], n = t?.bodyContainer, r = Kt.qe;
+const t = e[jt.Z], n = t?.bodyContainer, r = Qt.Ke;
 if (!n || !r) return;
-const a = Zt();
+const a = rn();
 n.rotation = Math.atan2(r.y - a.y, r.x - a.x) || 0;
 })();
-}, on = () => {
-if (Kt.De) return;
-const e = mt?.game, t = mt?.pixi?._ticker;
+}, bn = () => {
+if (Qt.De) return;
+const e = Mt?.game, t = Mt?.pixi?._ticker;
 if (!e || !t) return;
-const n = e[_t.te], r = n?.mousePos;
-if (!r) return void ut.requestAnimationFrame(on);
-Kt.Ge = {
-x: r._x ?? r.x ?? ut.innerWidth / 2,
-y: r._y ?? r.y ?? ut.innerHeight / 2
+const n = e[jt.ne], r = n?.mousePos;
+if (!r) return void gt.requestAnimationFrame(bn);
+Qt.Ye = {
+x: r._x ?? r.x ?? gt.innerWidth / 2,
+y: r._y ?? r.y ?? gt.innerHeight / 2
 };
 const a = e => ({
 configurable: !0,
 get() {
 return ((e, t) => {
-if (!Kt.ea) return t;
-const n = Kt.qe;
+if (!Qt.na) return t;
+const n = Qt.Ke;
 return n ? "x" === e ? n.x : n.y : t;
 })(e, this["_" + e]);
 },
 set(t) {
 this["_" + e] = t, ((e, t) => {
-if (Kt.Ge = {
-...Kt.Ge,
+if (Qt.Ye = {
+...Qt.Ye,
 [e]: t
-}, "idle" !== Kt.Le) return;
-if (!Kt.ea) return Kt.qe = null, void (Kt.Ve = null);
+}, "idle" !== Qt.Ie) return;
+if (!Qt.na) return Qt.Ke = null, void (Qt.qe = null);
 const n = performance.now();
-an(n);
-const r = Vt(Kt.Ge), a = Kt.qe ?? r;
-if (!$t(a, r)) return nn(), Kt.Ve = null, Kt.Ke = null, void tn(null);
-const o = en(a, r);
-Kt.Ve = {
-startPos: Vt(a),
+un(n);
+const r = en(Qt.Ye), a = Qt.Ke ?? r;
+if (!tn(a, r)) return cn(), Qt.qe = null, Qt.Ve = null, void ln(null);
+const o = sn(a, r);
+Qt.qe = {
+startPos: en(a),
 targetPos: r,
 startTime: n,
 duration: o
-}, rn(o);
+}, dn(o);
 })(e, t);
 }
 });
-Object.defineProperty(r, "x", a("x")), Object.defineProperty(r, "y", a("y")), t.add(() => an()), 
-Kt.De = !0;
-}, sn = () => Vt(Kt.qe), ln = {
-aa: null,
+Object.defineProperty(r, "x", a("x")), Object.defineProperty(r, "y", a("y")), t.add(() => un()), 
+Qt.De = !0;
+}, pn = () => en(Qt.Ke), fn = {
+ia: null,
 De: !1
-}, cn = (e, t, n) => ((e, t, n) => {
-if (ln.aa) if (e && xt.xt.Gn) {
+}, hn = (e, t, n) => ((e, t, n) => {
+if (fn.ia) if (e && zt.yt.Kn) {
 const {x: r, y: a} = e;
-ln.aa.style.left === r + "px" && ln.aa.style.top === a + "px" || (ln.aa.style.left = r + "px", 
-ln.aa.style.top = a + "px"), t ? n ? (ln.aa.style.borderColor = "rgba(190, 12, 185, 0.8)", 
-ln.aa.style.boxShadow = "inset 0 0 0.5rem rgba(190, 12, 185, 0.5), 0 0 1.5rem rgba(190, 12, 185, 0.7)", 
-ln.aa.style.filter = "brightness(1.1)", ln.aa.style.color = "rgb(190, 12, 185)") : (ln.aa.style.borderColor = "rgba(255, 51, 51, 0.8)", 
-ln.aa.style.boxShadow = "inset 0 0 0.5rem rgba(255, 0, 0, 0.5), 0 0 1.5rem rgba(255, 0, 0, 0.7)", 
-ln.aa.style.filter = "brightness(1.1)", ln.aa.style.color = "rgb(255, 51, 51)") : (ln.aa.style.borderColor = "rgba(128, 128, 128, 0.7)", 
-ln.aa.style.boxShadow = "inset 0 0 0.5rem rgba(128, 128, 128, 0.3), 0 0 1rem rgba(128, 128, 128, 0.4)", 
-ln.aa.style.filter = "brightness(0.9)"), ln.aa.style.display = "block";
-} else ln.aa.style.display = "none";
-})(e, t, n), un = () => {
-ln.aa && (ln.aa.style.display = "none");
-}, dn = (e, t, n) => n ? Yt.dt(e, Yt.ut(t, n.barrelLength ?? 0)) : e, bn = 16777215, fn = 16724787, pn = 5089023, hn = 16711680, gn = 16750848, mn = 11184810, xn = 16733440, yn = 16711680, wn = 15610675, kn = {}, vn = e => 2 === e || 3 === e, Mn = e => e.layer, zn = (e, t, n) => !(!vn(e) && !n) || e === t, _n = (e, t) => (e[t] || (kn[t] && kn[t].parent && kn[t].parent.removeChild(kn[t]), 
-e[t] = new It.cr, e.addChild(e[t])), e[t]), jn = (e, t, n, r) => {
-const a = mt.game, o = a?.[_t.U]?.[_t.Ae];
+fn.ia.style.left === r + "px" && fn.ia.style.top === a + "px" || (fn.ia.style.left = r + "px", 
+fn.ia.style.top = a + "px"), t ? n ? (fn.ia.style.borderColor = "rgba(190, 12, 185, 0.8)", 
+fn.ia.style.boxShadow = "inset 0 0 0.5rem rgba(190, 12, 185, 0.5), 0 0 1.5rem rgba(190, 12, 185, 0.7)", 
+fn.ia.style.filter = "brightness(1.1)", fn.ia.style.color = "rgb(190, 12, 185)") : (fn.ia.style.borderColor = "rgba(255, 51, 51, 0.8)", 
+fn.ia.style.boxShadow = "inset 0 0 0.5rem rgba(255, 0, 0, 0.5), 0 0 1.5rem rgba(255, 0, 0, 0.7)", 
+fn.ia.style.filter = "brightness(1.1)", fn.ia.style.color = "rgb(255, 51, 51)") : (fn.ia.style.borderColor = "rgba(128, 128, 128, 0.7)", 
+fn.ia.style.boxShadow = "inset 0 0 0.5rem rgba(128, 128, 128, 0.3), 0 0 1rem rgba(128, 128, 128, 0.4)", 
+fn.ia.style.filter = "brightness(0.9)"), fn.ia.style.display = "block";
+} else fn.ia.style.display = "none";
+})(e, t, n), gn = () => {
+fn.ia && (fn.ia.style.display = "none");
+}, mn = (e, t, n) => n ? Zt.ut(e, Zt.bt(t, n.barrelLength ?? 0)) : e, xn = 16777215, yn = 16724787, wn = 5089023, vn = 16711680, kn = 16750848, Mn = 11184810, zn = 16733440, _n = 16711680, An = 15610675, Rn = {}, Sn = e => 2 === e || 3 === e, Nn = e => e.layer, Cn = (e, t, n) => !(!Sn(e) && !n) || e === t, jn = (e, t) => (e[t] || (Rn[t] && Rn[t].parent && Rn[t].parent.removeChild(Rn[t]), 
+e[t] = new Ut.ur, e.addChild(e[t])), e[t]), On = (e, t, n, r) => {
+const a = Mt.game, o = a?.[jt.H]?.[jt.Ce];
 if (!o) return n;
-const i = r, s = Yt.dt(e, Yt.ut(t, n));
+const i = r, s = Zt.ut(e, Zt.bt(t, n));
 let l = n;
-const c = Object.values(o).filter(e => !(!e.collider || e.dead || void 0 !== e.height && .25 > e.height || void 0 !== e.layer && !Ht(e.layer, i) || e?.type?.includes("decal")));
+const c = Object.values(o).filter(e => !(!e.collider || e.dead || void 0 !== e.height && .25 > e.height || void 0 !== e.layer && !Vt(e.layer, i) || e?.type?.includes("decal")));
 for (const t of c) {
 if (!1 === t.collidable) continue;
-const n = Gt.st(t.collider, e, s);
+const n = qt.lt(t.collider, e, s);
 if (n) {
-const t = Yt.ur(Yt.ct(n.point, e));
+const t = Zt.br(Zt.dt(n.point, e));
 l > t && t > 1e-4 && (l = t);
 }
 }
 return l;
-}, An = (e, t, n, r, a, o = 255, i = .1) => {
+}, Pn = (e, t, n, r, a, o = 255, i = .1) => {
 if (!n || !r) return;
-const s = mt.game, l = t === e, c = s[_t.G].spectating, u = s[_t.M].shotDetected || s[_t.ne].isBindDown(Tt);
-let d;
-const b = l && !c ? sn() : null;
+const s = Mt.game, l = t === e, c = s[jt.Y].spectating, d = s[jt.S].shotDetected || s[jt.re].isBindDown(Bt);
+let u;
+const b = l && !c ? pn() : null;
 if (b) {
-const e = s[_t.S][_t.we]({
-x: t[_t.de].x,
-y: t[_t.de].y
+const e = s[jt.A][jt.ke]({
+x: t[jt.ue].x,
+y: t[jt.ue].y
 });
-d = Math.atan2(e.y - b.y, e.x - b.x) - Math.PI;
-} else if (!l || c || ht.tt && u) if (l && !c && ht.tt) {
-const e = s[_t.S][_t.we]({
-x: t[_t.de].x,
-y: t[_t.de].y
+u = Math.atan2(e.y - b.y, e.x - b.x) - Math.PI;
+} else if (!l || c || vt.nt && d) if (l && !c && vt.nt) {
+const e = s[jt.A][jt.ke]({
+x: t[jt.ue].x,
+y: t[jt.ue].y
 });
-d = Math.atan2(e.y - ht.tt.clientY, e.x - ht.tt.clientX) - Math.PI;
-} else d = Math.atan2(t[_t.pe].x, t[_t.pe].y) - Math.PI / 2; else d = Math.atan2(s[_t.te].mousePos._y - ut.innerHeight / 2, s[_t.te].mousePos._x - ut.innerWidth / 2);
-const f = Yt.it(Math.cos(d), -Math.sin(d)), p = dn(t[_t.de], f, r), h = {
-x: 16 * (p.x - e[_t.de].x),
-y: 16 * (e[_t.de].y - p.y)
+u = Math.atan2(e.y - vt.nt.clientY, e.x - vt.nt.clientX) - Math.PI;
+} else u = Math.atan2(t[jt.fe].x, t[jt.fe].y) - Math.PI / 2; else u = Math.atan2(s[jt.ne].mousePos._y - gt.innerHeight / 2, s[jt.ne].mousePos._x - gt.innerWidth / 2);
+const p = Zt.st(Math.cos(u), -Math.sin(u)), f = mn(t[jt.ue], p, r), h = {
+x: 16 * (f.x - e[jt.ue].x),
+y: 16 * (e[jt.ue].y - f.y)
 }, g = r.shotSpread * (Math.PI / 180), m = n.distance, x = Math.max(30, Math.ceil(2 * r.shotSpread));
 let y = o, w = i;
 l ? w = .75 * i : (y = 16711680, w = 1.2 * i), l && (a.beginFill(11184810, 1.5 * i), 
-a.moveTo(h.x, h.y), a.arc(h.x, h.y, 16.25 * m, d - g / 2, d + g / 2), a.lineTo(h.x, h.y), 
+a.moveTo(h.x, h.y), a.arc(h.x, h.y, 16.25 * m, u - g / 2, u + g / 2), a.lineTo(h.x, h.y), 
 a.endFill()), a.beginFill(y, w);
 for (let n = 0; x > n; n++) {
-const r = d - g / 2 + g * (n / (x - 1)), o = Yt.it(Math.cos(r), -Math.sin(r)), i = jn(p, o, m, t.layer), s = Yt.dt(p, Yt.ut(o, i)), l = {
-x: 16 * (s.x - e[_t.de].x),
-y: 16 * (e[_t.de].y - s.y)
+const r = u - g / 2 + g * (n / (x - 1)), o = Zt.st(Math.cos(r), -Math.sin(r)), i = On(f, o, m, t.layer), s = Zt.ut(f, Zt.bt(o, i)), l = {
+x: 16 * (s.x - e[jt.ue].x),
+y: 16 * (e[jt.ue].y - s.y)
 };
 0 === n ? (a.moveTo(h.x, h.y), a.lineTo(l.x, l.y)) : a.lineTo(l.x, l.y);
 }
 a.lineTo(h.x, h.y), a.endFill();
-}, Sn = [ "frag", "mirv", "martyr_nade" ];
+}, En = [ "frag", "mirv", "martyr_nade" ];
 
-let Nn = Date.now(), Cn = !1, On = null;
+let Fn = Date.now(), Tn = !1, Ln = null;
 
-const Rn = () => {
-Cn = !1, On && (On.destroy(), On = null);
-}, Pn = () => {
+const Dn = () => {
+Tn = !1, Ln && (Ln.destroy(), Ln = null);
+}, In = () => {
 var e;
 if ((() => {
-const e = mt.game;
+const e = Mt.game;
 if (!e?.initialized) return !1;
-const t = e[_t.$];
-return null != t?.[_t.se]?.[_t.ke] && null != t?.[_t.ie]?.[_t.Me];
-})()) if (3 === mt.game[_t.$][_t.se][_t.ke]) try {
-const t = mt.game, n = t[_t.$], r = n[_t.ie][_t.Me], a = (Date.now() - Nn) / 1e3;
-if (!(e => "cook" === e.throwableState)(n) || (e = r, !Sn.some(t => e.includes(t)))) return void Rn();
-if (a > 4 && (Cn = !1), !Cn) return Rn(), On = new mt.game[_t.G][_t.le].constructor, 
-mt.pixi.stage.addChild(On.container), On.start("Grenade", 0, 4), Cn = !0, void (Nn = Date.now());
-On.update(a - On.elapsed, t[_t.S]);
-} catch {} else Rn();
-}, Fn = {
-Yt: null,
-qt: {},
-At: null,
+const t = e[jt.Z];
+return null != t?.[jt.le]?.[jt._e] && null != t?.[jt.se]?.[jt.ze];
+})()) if (3 === Mt.game[jt.Z][jt.le][jt._e]) try {
+const t = Mt.game, n = t[jt.Z], r = n[jt.se][jt.ze], a = (Date.now() - Fn) / 1e3;
+if (!(e => "cook" === e.throwableState)(n) || (e = r, !En.some(t => e.includes(t)))) return void Dn();
+if (a > 4 && (Tn = !1), !Tn) return Dn(), Ln = new Mt.game[jt.Y][jt.ce].constructor, 
+Mt.pixi.stage.addChild(Ln.container), Ln.start("Grenade", 0, 4), Tn = !0, void (Fn = Date.now());
+Ln.update(a - Ln.elapsed, t[jt.A]);
+} catch {} else Dn();
+}, $n = {
+Gt: null,
+Kt: {},
 Ct: null,
 Nt: null,
-Pt: null,
-Vt: {},
-wt: null,
-Ht: !1,
+Ot: null,
+Tt: null,
+qt: {},
+kt: null,
+Ut: !1,
 Wt: null,
 Dt: !1,
-Tt: {},
-vt: null,
-kt: 0,
-Mt: null
-}, En = 5.5, Tn = [ "frag", "explosion_frag", "smoke", "explosion_smoke", "gas", "concussion" ], Ln = e => e.layer, Dn = (e, t) => !!(e => 2 === e || 3 === e)(e) || e === t, In = [ "metal_wall_", "brick_wall_", "concrete_wall_", "stone_wall_", "container_wall_", "_wall_int_", "bank_wall_", "barn_wall_", "cabin_wall_", "hut_wall_", "house_wall_", "mansion_wall_", "police_wall_", "shack_wall_", "outhouse_wall_", "teahouse_wall_", "warehouse_wall_", "silo_", "bollard_", "sandbags_", "hedgehog", "stone_01", "stone_02", "stone_03", "stone_04", "stone_05", "stone_06", "stone_07", "stone_08", "stone_09", "stone_0", "tree_", "glass_wall_", "locker_", "deposit_box_" ], Yn = [ "bush_", "brush_", "crate_", "barrel_", "refrigerator_", "control_panel_", "chest_", "case_", "oven_", "bed_", "bookshelf_", "couch_", "table_", "drawers_", "window", "toilet_", "pot_", "planter_", "pumpkin_", "potato_", "egg_", "woodpile_", "decal" ], Gn = e => {
+Et: {},
+Mt: null,
+_t: 0,
+zt: null
+}, Yn = 5.5, Bn = [ "frag", "explosion_frag", "smoke", "explosion_smoke", "gas", "concussion" ], Gn = e => e.layer, Kn = (e, t) => !!(e => 2 === e || 3 === e)(e) || e === t, Un = [ "metal_wall_", "brick_wall_", "concrete_wall_", "stone_wall_", "container_wall_", "_wall_int_", "bank_wall_", "barn_wall_", "cabin_wall_", "hut_wall_", "house_wall_", "mansion_wall_", "police_wall_", "shack_wall_", "outhouse_wall_", "teahouse_wall_", "warehouse_wall_", "silo_", "bollard_", "sandbags_", "hedgehog", "stone_01", "stone_02", "stone_03", "stone_04", "stone_05", "stone_06", "stone_07", "stone_08", "stone_09", "stone_0", "tree_", "glass_wall_", "locker_", "deposit_box_" ], Zn = [ "bush_", "brush_", "crate_", "barrel_", "refrigerator_", "control_panel_", "chest_", "case_", "oven_", "bed_", "bookshelf_", "couch_", "table_", "drawers_", "window", "toilet_", "pot_", "planter_", "pumpkin_", "potato_", "egg_", "woodpile_", "decal" ], qn = e => {
 if (!1 === e.collidable) return !1;
 const t = e.type || "";
 if (!0 === e.isWall) return !0;
 if (!1 === e.destructible) return !0;
-for (const e of In) if (t.includes(e)) return !0;
-for (const e of Yn) if (t.includes(e)) return !1;
+for (const e of Un) if (t.includes(e)) return !0;
+for (const e of Zn) if (t.includes(e)) return !1;
 return void 0 !== e.health && e.health > 200;
-}, Hn = (e, t, n, r) => {
+}, Vn = (e, t, n, r) => {
 if (!n || !r) return !0;
-const a = mt.game, o = a?.[_t.U]?.[_t.Ae];
+const a = Mt.game, o = a?.[jt.H]?.[jt.Ce];
 if (!o) return !0;
-const i = e.layer, s = e[_t.be], l = t[_t.be], c = l.x - s.x, u = l.y - s.y, d = Math.atan2(u, c), b = (n.shotSpread || 0) * (Math.PI / 180) * 1.5, f = Math.hypot(c, u), p = Math.max(Math.min(30, n.shotSpread ? Math.ceil(2 * (n.shotSpread || 0)) : 15), Math.ceil(f / 50)), h = Object.values(o).filter(e => !(!e.collider || e.dead || void 0 !== e.height && .25 > e.height || void 0 !== e.layer && !Ht(e.layer, i))).filter(Gn);
+const i = e.layer, s = e[jt.be], l = t[jt.be], c = l.x - s.x, d = l.y - s.y, u = Math.atan2(d, c), b = (n.shotSpread || 0) * (Math.PI / 180) * 1.5, p = Math.hypot(c, d), f = Math.max(Math.min(30, n.shotSpread ? Math.ceil(2 * (n.shotSpread || 0)) : 15), Math.ceil(p / 50)), h = Object.values(o).filter(e => !(!e.collider || e.dead || void 0 !== e.height && .25 > e.height || void 0 !== e.layer && !Vt(e.layer, i))).filter(qn);
 if (0 === h.length) return !0;
 const g = new Map;
 for (const e of h) g.set(e, new Map);
 let m = 0;
-for (let e = 0; p > e; e++) {
-const t = d - b / 2 + b * (1 === p ? .5 : e / (p - 1)), n = Yt.it(Math.cos(t), Math.sin(t)), r = Yt.dt(s, Yt.ut(n, f));
+for (let e = 0; f > e; e++) {
+const t = u - b / 2 + b * (1 === f ? .5 : e / (f - 1)), n = Zt.st(Math.cos(t), Math.sin(t)), r = Zt.ut(s, Zt.bt(n, p));
 let a = !1;
 for (const e of h) {
 let n = g.get(e).get(t);
-if (void 0 === n && (n = Gt.st(e.collider, s, r), g.get(e).set(t, n)), n && f - .75 > Yt.ur(Yt.ct(n.point, s))) {
+if (void 0 === n && (n = qt.lt(e.collider, s, r), g.get(e).set(t, n)), n && p - .75 > Zt.br(Zt.dt(n.point, s))) {
 a = !0;
 break;
 }
 }
-if (!a && (m++, m > .4 * p)) return !0;
+if (!a && (m++, m > .4 * f)) return !0;
 }
-return m > .3 * p;
+return m > .3 * f;
 };
 
-let qn = !1;
+let Hn = !1;
 
-const Bn = (e, t, n, r) => Yt.pr(e, t, n, r);
+const Xn = (e, t, n, r) => Zt.gr(e, t, n, r);
 
-let Wn, Un = !1;
+let Wn, Jn = !1;
 
-const Kn = () => {
-Wn = xt.qn.je;
-}, Vn = () => xt.xt.je && xt.xt.St, $n = () => {
-ut.dispatchEvent(new MouseEvent("mouseup", {
-bubbles: !0,
-cancelable: !0,
-view: ut,
-button: 0
-}));
-}, Xn = e => {
-0 === e.button && Kn();
-}, Zn = e => {
-0 === e.button && (Wn = !1, Un = !1);
-}, Jn = () => {
-if (xt.qn.je) {
-if (Vn()) {
-const e = (() => {
-if (Vn()) return b() && Fn.Ht;
+const Qn = () => {
+Wn = zt.qn.Re;
+}, er = () => zt.yt.Re && zt.yt.At, tr = () => {
 try {
-const e = mt.game;
-if (!e || !e.initialized) return !1;
-if (!e[_t.$]) return !1;
-const t = e[_t.Ze];
-if (!t || 0 === t.length) return !1;
-const n = e[_t.oa];
-return !(!n || !n.ia) && t.some(e => e && e.active && !e[_t.ie][_t.ze] && e.__id !== n.__id);
-} catch {
-return !1;
-}
-})(), t = (() => {
-try {
-const e = mt.game;
-if (!e || !e.initialized) return !1;
-const t = e[_t.$];
-if (!t) return !1;
-const n = t[_t.se];
-if (!n) return !1;
-const r = n[_t.ke];
-return 0 === r || 1 === r || !(2 !== r || !xt.yt.je || !xt.xt.zt) && 5.5 > (() => {
-try {
-const e = mt.game;
+const e = Mt.game;
 if (!e || !e.initialized) return 1 / 0;
-const t = e[_t.sa][_t.Ze], n = e[_t.$];
+const t = e[jt.sa][jt.Je], n = e[jt.Z];
 if (!t || !n) return 1 / 0;
 let r = 1 / 0;
 for (const e of t) {
 if (!e.active || n.__id === e.__id) continue;
-if (e[_t.ie][_t.ze]) continue;
-const t = n[_t.be], a = e[_t.be], o = Math.hypot(t.x - a.x, t.y - a.y);
+if (e[jt.se][jt.Se]) continue;
+const t = n[jt.be], a = e[jt.be], o = Math.hypot(t.x - a.x, t.y - a.y);
 r > o && (r = o);
 }
 return r;
 } catch {
 return 1 / 0;
 }
-})();
+}, nr = () => !(!zt.wt.Re || !zt.yt.St) && 5.5 > tr(), rr = () => {
+kt.Ft.push(Bt);
+}, ar = e => {
+0 === e.button && Qn();
+}, or = e => {
+0 === e.button && (Wn = !1, Jn = !1);
+}, ir = () => {
+if (zt.qn.Re) {
+if (zt.wt.Re && zt.yt.St) {
+const e = Mt.game;
+if (e && e.initialized) {
+const t = e[jt.Z];
+if (t) {
+const e = t[jt.le], n = e?.[jt._e];
+if (2 === n) {
+const e = nr();
+return void (e && !Jn ? (rr(), Jn = !0) : !e && Jn && (Jn = !1));
+}
+}
+}
+}
+if (er()) {
+const e = (() => {
+if (zt.wt.Re && zt.yt.St && nr()) return !0;
+if (er()) return b() && $n.Ut;
+try {
+const e = Mt.game;
+if (!e || !e.initialized) return !1;
+if (!e[jt.Z]) return !1;
+const t = e[jt.Je];
+if (!t || 0 === t.length) return !1;
+const n = e[jt.la];
+return !(!n || !n.ca) && t.some(e => e && e.active && !e[jt.se][jt.Se] && e.__id !== n.__id);
+} catch {
+return !1;
+}
+})(), t = (() => {
+try {
+const e = Mt.game;
+if (!e || !e.initialized) return !1;
+const t = e[jt.Z];
+if (!t) return !1;
+const n = t[jt.le];
+if (!n) return !1;
+const r = n[jt._e];
+return 0 === r || 1 === r || !(2 !== r || !zt.wt.Re || !zt.yt.St) && 5.5 > tr();
 } catch {
 return !1;
 }
 })();
-e && t && !Un ? (ut.dispatchEvent(new MouseEvent("mousedown", {
-bubbles: !0,
-cancelable: !0,
-view: ut,
-button: 0
-})), Un = !0) : e && t || !Un || ($n(), Un = !1);
+e && t && !Jn ? (rr(), Jn = !0) : e && t || !Jn || (Jn = !1);
 }
-} else Un && ($n(), Un = !1);
-}, Qn = [ "container_01", "barn_02", "stone_01", "tree_01", "tree_03", "tree_03cb", "tree_03d", "tree_03f", "tree_03h", "tree_03sp", "tree_03su", "tree_03sv", "tree_03w", "stone_04", "stone_05", "bunker_storm_01" ], er = {
+} else Jn && (Jn = !1);
+}, sr = [ "container_01", "barn_02", "stone_01", "tree_01", "tree_03", "tree_03cb", "tree_03d", "tree_03f", "tree_03h", "tree_03sp", "tree_03su", "tree_03sv", "tree_03w", "stone_04", "stone_05", "bunker_storm_01" ], lr = {
 container_01: 16776960,
 barn_02: 65535,
 stone_01: 8947848,
@@ -2246,7 +2443,7 @@ tree_03w: 16711680,
 stone_04: 16711935,
 stone_05: 16711935,
 bunker_storm_01: 10027263
-}, tr = {
+}, cr = {
 container_01: 1,
 barn_02: 1,
 stone_01: 6,
@@ -2263,47 +2460,51 @@ tree_03w: 20,
 stone_04: 6,
 stone_05: 6,
 bunker_storm_01: 2
-}, nr = [ 11, 12 ], rr = [ {
-la: "",
-ca: null,
-da: Date.now(),
-ua: ""
+};
+
+let dr = !1;
+
+const ur = [ 11, 12 ], br = [ {
+da: "",
+ua: null,
+pa: Date.now(),
+ba: ""
 }, {
-la: "",
-ca: null,
-da: Date.now(),
-ua: ""
+da: "",
+ua: null,
+pa: Date.now(),
+ba: ""
 }, {
-la: "",
-ca: null,
-ua: ""
+da: "",
+ua: null,
+ba: ""
 }, {
-la: "",
-ca: null,
-ua: ""
-} ], ar = e => gt.Ft.push(e), or = e => {
+da: "",
+ua: null,
+ba: ""
+} ], pr = e => kt.Ft.push(e), fr = e => {
 try {
-const t = Dt[e];
+const t = Kt[e];
 return ("single" === t.fireMode || "burst" === t.fireMode) && t.fireDelay >= .2;
 } catch {
 return !1;
 }
-}, ir = e => or(e), sr = e => {
-ar(nr[e]);
-}, lr = () => {
+}, hr = e => fr(e), gr = e => {
+pr(ur[e]);
+}, mr = () => {
 var e, t;
-if (r() && xt.Xn.je) try {
-const n = mt.game[_t.$][_t.se], r = n[_t.ke], a = n[_t.ve], o = a[r], i = rr[r];
-if (xt.xt.zt && xt.yt.je && 150 > (() => {
+if (r() && zt.Jn.Re) try {
+const n = Mt.game[jt.Z][jt.le], r = n[jt._e], a = n[jt.Me], o = a[r], i = br[r];
+if (zt.yt.St && zt.wt.Re && 150 > (() => {
 try {
-const e = mt.game, t = e[_t.sa][_t.Ze], n = e[_t.$], r = e[_t.te].mousePos;
+const e = Mt.game, t = e[jt.sa][jt.Je], n = e[jt.Z], r = e[jt.ne].mousePos;
 let a = 1 / 0;
 for (const o of t) {
 if (!o.active || n.__id === o.__id) continue;
-if (o[_t.ie][_t.ze]) continue;
-const t = e[_t.S][_t.we]({
-x: o[_t.be].x,
-y: o[_t.be].y
+if (o[jt.se][jt.Se]) continue;
+const t = e[jt.A][jt.ke]({
+x: o[jt.be].x,
+y: o[jt.be].y
 }), i = Math.hypot(t.x - r._x, t.y - r._y);
 a > i && (a = i);
 }
@@ -2311,29 +2512,29 @@ return a;
 } catch {
 return 1 / 0;
 }
-})() && 2 !== r) return void ar(Lt);
-if (null !== Fn.Wt && 2 !== r) return void ar(Lt);
-if (o.ammo === i.ca) return;
+})() && 2 !== r) return void pr(Gt);
+if (null !== $n.Wt && 2 !== r) return void pr(Gt);
+if (o.ammo === i.ua) return;
 const s = 0 === r ? 1 : 0, l = a[s];
-or(o.type) && o.type === i.ua && (i.ca > o.ammo || 0 === i.ca && o.ammo > i.ca && (mt.game[_t.M].shotDetected || mt.game[_t.ne].isBindDown(Tt))) && (i.da = Date.now(), 
-or(l.type) && l.ammo && !xt.Xn.Zn ? sr(s) : "" !== l.type ? (t = r, sr(s), sr(t)) : (e = r, 
-ar(Lt), sr(e))), i.ca = o.ammo, i.ua = o.type;
+fr(o.type) && o.type === i.ba && (i.ua > o.ammo || 0 === i.ua && o.ammo > i.ua && (Mt.game[jt.S].shotDetected || Mt.game[jt.re].isBindDown(Bt))) && (i.pa = Date.now(), 
+fr(l.type) && l.ammo && !zt.Jn.Qn ? gr(s) : "" !== l.type ? (t = r, gr(s), gr(t)) : (e = r, 
+pr(Gt), gr(e))), i.ua = o.ammo, i.ba = o.type;
 } catch {}
-}, cr = 2 * Math.PI;
+}, xr = 2 * Math.PI;
 
-let ur = 0, dr = 0, br = Math.random() * cr, fr = !1, pr = 0;
+let yr = 0, wr = 0, vr = Math.random() * xr, kr = !1, Mr = 0;
 
-const hr = [ 0, -Math.PI / 2, Math.PI, Math.PI / 2 ], gr = [ 0, 2 * Math.PI / 3, 4 * Math.PI / 3 ], mr = [ 0, Math.PI ], xr = () => {
-if (!fr && xt.Xt.je) return xt.Xt.$t ? (dr += (2 * Math.random() - 1) * (xt.Xt.Jn / 50) * .15, 
-dr *= .92, void (ur += dr)) : void (xt.Xt.Zt ? Math.random() < xt.Xt.Jn / 100 * 2 && (pr = (pr + 1) % 2) : xt.Xt.Jt ? Math.random() < xt.Xt.Jn / 100 * 2 && (pr = (pr + 1) % 3) : xt.Xt.Qt ? Math.random() < xt.Xt.Jn / 100 * 2 && (pr = (pr + 1) % 4) : Math.random() < xt.Xt.Jn / 100 * 2 && (br = Math.random() * cr));
-}, yr = (e, t) => ({
+const zr = [ 0, -Math.PI / 2, Math.PI, Math.PI / 2 ], _r = [ 0, 2 * Math.PI / 3, 4 * Math.PI / 3 ], Ar = [ 0, Math.PI ], Rr = () => {
+if (!kr && zt.Xt.Re) return zt.Xt.Zt ? (wr += (2 * Math.random() - 1) * (zt.Xt.er / 50) * .15, 
+wr *= .92, void (yr += wr)) : void (zt.Xt.Jt ? Math.random() < zt.Xt.er / 100 * 2 && (Mr = (Mr + 1) % 2) : zt.Xt.Qt ? Math.random() < zt.Xt.er / 100 * 2 && (Mr = (Mr + 1) % 3) : zt.Xt.en ? Math.random() < zt.Xt.er / 100 * 2 && (Mr = (Mr + 1) % 4) : Math.random() < zt.Xt.er / 100 * 2 && (vr = Math.random() * xr));
+}, Sr = (e, t) => ({
 get() {
 return t.call(this);
 },
 set(t) {
 this["_" + e] = t;
 }
-}), wr = e => fr && !ht.tt || e, kr = "surt-blur-start-overlay", vr = {
+}), Nr = "surt-blur-start-overlay", Cr = {
 sv98: 1,
 mosin: 1,
 awc: 1,
@@ -2382,37 +2583,37 @@ glock: .25,
 m93r: .25,
 vss: .25,
 scorpion: .25
-}, Mr = {
-ba: !1,
-pa: null,
-fa: 0,
-ha: 0,
-ga: null,
-ma: null
-}, zr = e => {
+}, jr = {
+fa: !1,
+ha: null,
+ga: 0,
+ma: 0,
+xa: null,
+ya: null
+}, Or = e => {
 if (!e) return .75;
 const t = e.toLowerCase().replace(/[-_\s]/g, "");
-for (const [e, n] of Object.entries(vr)) if (t.includes(e) || e.includes(t)) return n;
+for (const [e, n] of Object.entries(Cr)) if (t.includes(e) || e.includes(t)) return n;
 try {
-const t = Dt[e];
+const t = Kt[e];
 if (t?.switchDelay) return t.switchDelay;
 } catch {}
 return .75;
-}, _r = e => {
+}, Pr = e => {
 if (!e) return !1;
 const t = e.toLowerCase();
 return [ "sv98", "mosin", "awc", "scout", "blr", "model94", "m870", "saiga", "spas12", "super90", "m1100", "usas", "mp220", "deagle", "ot38", "ots38", "peacemaker", "garand", "m39", "svd", "mk12", "scarssr" ].some(e => t.includes(e));
-}, jr = [ 11, 12 ], Ar = () => {
-if (!r() || !xt.Qn?.je) return Mr.ba = !1, void (Mr.pa = null);
+}, Er = [ 11, 12 ], Fr = () => {
+if (!r() || !zt.tr?.Re) return jr.fa = !1, void (jr.ha = null);
 try {
-const e = mt.game[_t.$][_t.se], t = e[_t.ke], n = e[_t.ve];
-if (0 !== t && 1 !== t) return void (Mr.ba = !1);
+const e = Mt.game[jt.Z][jt.le], t = e[jt._e], n = e[jt.Me];
+if (0 !== t && 1 !== t) return void (jr.fa = !1);
 const r = n[0], a = n[1];
-if (r.type === Mr.ga && a.type === Mr.ma || (Mr.ga = r.type, Mr.ma = a.type, Mr.pa = null, 
-Mr.fa = 0), ir(r.type) || ir(a.type)) return void (Mr.ba = !1);
-if (!_r(r.type) && !_r(a.type)) return void (Mr.ba = !1);
-Mr.ba = !0, Mr.pa || (Mr.pa = ((e, t) => {
-const n = zr(e), r = zr(t);
+if (r.type === jr.xa && a.type === jr.ya || (jr.xa = r.type, jr.ya = a.type, jr.ha = null, 
+jr.ga = 0), hr(r.type) || hr(a.type)) return void (jr.fa = !1);
+if (!Pr(r.type) && !Pr(a.type)) return void (jr.fa = !1);
+jr.fa = !0, jr.ha || (jr.ha = ((e, t) => {
+const n = Or(e), r = Or(t);
 if (.3 === n && .9 === r) return [ {
 weapon: 0,
 wait: .3
@@ -2564,136 +2765,146 @@ wait: a
 weapon: r > n ? 1 : 0,
 wait: Math.max(n, r) - a
 } ];
-})(r.type, a.type), Mr.fa = 0, Mr.ha = Date.now());
-const o = Date.now(), i = Mr.pa, s = i[Mr.fa];
-s.wait > (o - Mr.ha) / 1e3 || (t !== s.weapon && gt.Ft.push(jr[s.weapon]), Mr.fa = (Mr.fa + 1) % i.length, 
-Mr.ha = o);
+})(r.type, a.type), jr.ga = 0, jr.ma = Date.now());
+const o = Date.now(), i = jr.ha, s = i[jr.ga];
+s.wait > (o - jr.ma) / 1e3 || (t !== s.weapon && kt.Ft.push(Er[s.weapon]), jr.ga = (jr.ga + 1) % i.length, 
+jr.ma = o);
 } catch (e) {
-Mr.ba = !1;
+jr.fa = !1;
 }
 };
 
-let Sr = !1;
+let Tr = !1, Lr = null, Dr = !1;
 
-_e = {}, Ae = /acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i, 
-Se = Array.isArray, pe = (je = []).slice, he = {
-sn(e, t, n, r) {
-for (var a, o, i; t = t.rn; ) if ((a = t.ln) && !a.rn) try {
-if ((o = a.constructor) && null != o.xa && (a.Fn(o.xa(e)), i = a.pn), null != a.ya && (a.ya(e, r || {}), 
-i = a.pn), i) return a.xn = a;
+const Ir = {
+TARGET: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n    <circle cx="12" cy="12" r="10"></circle>\n    <circle cx="12" cy="12" r="6"></circle>\n    <circle cx="12" cy="12" r="2"></circle>\n  </svg>',
+RULER: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n    <path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"></path>\n    <path d="m14.5 12.5 2-2"></path>\n    <path d="m11.5 9.5 2-2"></path>\n    <path d="m8.5 6.5 2-2"></path>\n    <path d="m17.5 15.5 2-2"></path>\n  </svg>',
+ALERT: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n    <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>\n    <path d="M12 9v4"></path>\n    <path d="M12 17h.01"></path>\n  </svg>',
+GUN: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n    <path d="M18 6 6 18"></path>\n    <path d="m8 6 10 10"></path>\n    <path d="M14 14 4 20l2-6 6-2Z"></path>\n    <path d="m6 8 2-2"></path>\n    <path d="m8 6 2-2"></path>\n  </svg>',
+HELMET: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n    <path d="M10 10v.2A3 3 0 0 1 8.9 16v0H5.3a.7.7 0 0 1-.5-1.2l3.6-3.6"></path>\n    <path d="M14 10v.2a3 3 0 0 0 1.1 5.8v0h3.6a.7.7 0 0 0 .5-1.2l-3.6-3.6"></path>\n    <circle cx="12" cy="12" r="10"></circle>\n  </svg>',
+ARMOR: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path>\n    <path d="m14.5 9-5 5"></path>\n    <path d="m9.5 9 5 5"></path>\n  </svg>',
+BACKPACK: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\n    <path d="M4 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"></path>\n    <path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>\n    <path d="M8 21v-5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v5"></path>\n    <path d="M8 10h8"></path>\n    <path d="M8 18h8"></path>\n  </svg>'
+};
+
+je = {}, Pe = /acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i, 
+Ee = Array.isArray, we = (Oe = []).slice, ve = {
+cn(e, t, n, r) {
+for (var a, o, i; t = t.sn; ) if ((a = t.dn) && !a.sn) try {
+if ((o = a.constructor) && null != o.wa && (a.Dn(o.wa(e)), i = a.hn), null != a.ka && (a.ka(e, r || {}), 
+i = a.hn), i) return a.wn = a;
 } catch (t) {
 e = t;
 }
 throw e;
 }
-}, ge = 0, k.prototype.Fn = function(e, t) {
+}, ke = 0, R.prototype.Dn = function(e, t) {
 var n;
-n = null != this.wn && this.wn != this.state ? this.wn : this.wn = g({}, this.state), 
-"function" == typeof e && (e = e(g({}, n), this.tn)), e && g(n, e), null != e && this.cn && (t && this._sb.push(t), 
-z(this));
-}, k.prototype.wa = function(e) {
-this.cn && (this.sn = !0, e && this.yn.push(e), z(this));
-}, k.prototype.render = w, me = [], ye = "function" == typeof Promise ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout, 
-we = (e, t) => e.cn.an - t.cn.an, _.fn = 0, ke = /(PointerCapture)$|Capture$/i, 
-ve = 0, Me = R(!1), ze = R(!0), Pe = 0, Fe = [], Te = (Ee = he).an, Le = Ee.fn, 
-De = Ee.On, Ie = Ee.ln, Ye = Ee.unmount, Ge = Ee.rn, Ee.an = e => {
-Ce = null, Te && Te(e);
-}, Ee.rn = (e, t) => {
-e && t.nn && t.nn.jn && (e.jn = t.nn.jn), Ge && Ge(e, t);
-}, Ee.fn = e => {
-Le && Le(e), Ne = 0;
-var t = (Ce = e.ln).Tn;
-t && (Oe === Ce ? (t.yn = [], Ce.yn = [], t.rn.forEach(e => {
-e.En && (e.rn = e.En), e.u = e.En = void 0;
-})) : (t.yn.forEach(Z), t.yn.forEach(J), t.yn = [], Ne = 0)), Oe = Ce;
-}, Ee.On = e => {
-De && De(e);
-var t = e.ln;
-t && t.Tn && (t.Tn.yn.length && (1 !== Fe.push(t) && Re === Ee.requestAnimationFrame || ((Re = Ee.requestAnimationFrame) || X)($)), 
-t.Tn.rn.forEach(e => {
-e.u && (e.Tn = e.u), e.u = void 0;
-})), Oe = Ce = null;
-}, Ee.ln = (e, t) => {
+n = null != this.vn && this.vn != this.state ? this.vn : this.vn = k({}, this.state), 
+"function" == typeof e && (e = e(k({}, n), this.rn)), e && k(n, e), null != e && this.un && (t && this._sb.push(t), 
+C(this));
+}, R.prototype.va = function(e) {
+this.un && (this.cn = !0, e && this.kn.push(e), C(this));
+}, R.prototype.render = A, Me = [], _e = "function" == typeof Promise ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout, 
+Ae = (e, t) => e.un.ln - t.un.ln, j.gn = 0, Re = /(PointerCapture)$|Capture$/i, 
+Se = 0, Ne = D(!1), Ce = D(!0), Ie = 0, $e = [], Be = (Ye = ve).ln, Ge = Ye.gn, 
+Ke = Ye.Rn, Ue = Ye.dn, Ze = Ye.unmount, qe = Ye.sn, Ye.ln = e => {
+Te = null, Be && Be(e);
+}, Ye.sn = (e, t) => {
+e && t.an && t.an.Pn && (e.Pn = t.an.Pn), qe && qe(e, t);
+}, Ye.gn = e => {
+Ge && Ge(e), Fe = 0;
+var t = (Te = e.dn).Ln;
+t && (Le === Te ? (t.kn = [], Te.kn = [], t.sn.forEach(e => {
+e.Fn && (e.sn = e.Fn), e.u = e.Fn = void 0;
+})) : (t.kn.forEach(re), t.kn.forEach(ae), t.kn = [], Fe = 0)), Le = Te;
+}, Ye.Rn = e => {
+Ke && Ke(e);
+var t = e.dn;
+t && t.Ln && (t.Ln.kn.length && (1 !== $e.push(t) && De === Ye.requestAnimationFrame || ((De = Ye.requestAnimationFrame) || ne)(te)), 
+t.Ln.sn.forEach(e => {
+e.u && (e.Ln = e.u), e.u = void 0;
+})), Le = Te = null;
+}, Ye.dn = (e, t) => {
 t.some(e => {
 try {
-e.yn.forEach(Z), e.yn = e.yn.filter(e => !e.rn || J(e));
+e.kn.forEach(re), e.kn = e.kn.filter(e => !e.sn || ae(e));
 } catch (n) {
 t.some(e => {
-e.yn && (e.yn = []);
-}), t = [], Ee.sn(n, e.cn);
+e.kn && (e.kn = []);
+}), t = [], Ye.cn(n, e.un);
 }
-}), Ie && Ie(e, t);
-}, Ee.unmount = e => {
-Ye && Ye(e);
-var t, n = e.ln;
-n && n.Tn && (n.Tn.rn.forEach(e => {
+}), Ue && Ue(e, t);
+}, Ye.unmount = e => {
+Ze && Ze(e);
+var t, n = e.dn;
+n && n.Ln && (n.Ln.sn.forEach(e => {
 try {
-Z(e);
+re(e);
 } catch (e) {
 t = e;
 }
-}), n.Tn = void 0, t && Ee.sn(t, n.cn));
-}, He = "function" == typeof requestAnimationFrame, (ne.prototype = new k)._a = !0, 
-ne.prototype.zn = function(e, t) {
-return te(this.tn, e) || te(this.state, t);
-}, qe = he.an, he.an = e => {
-e.type && e.type.Dn && e.ref && (e.tn.ref = e.ref, e.ref = null), qe && qe(e);
-}, Be = he.sn, he.sn = (e, t, n, r) => {
-if (e.then) for (var a, o = t; o = o.rn; ) if ((a = o.ln) && a.ln) return null == t.sn && (t.sn = n.sn, 
-t.nn = n.nn), a.ln(e, t);
-Be(e, t, n, r);
-}, We = he.unmount, he.unmount = e => {
-var t = e.ln;
-t && t.ka && t.ka(), t && 32 & e.un && (e.type = null), We && We(e);
-}, (oe.prototype = new k).ln = function(e, t) {
-var n, r, a, o, i = t.ln, s = this;
-null == s.o && (s.o = []), s.o.push(i), n = ie(s.cn), r = !1, a = () => {
-r || (r = !0, i.ka = null, n ? n(o) : o());
-}, i.ka = a, o = () => {
+}), n.Ln = void 0, t && Ye.cn(t, n.un));
+}, Ve = "function" == typeof requestAnimationFrame, (le.prototype = new R)._a = !0, 
+le.prototype.An = function(e, t) {
+return se(this.rn, e) || se(this.state, t);
+}, He = ve.ln, ve.ln = e => {
+e.type && e.type.In && e.ref && (e.rn.ref = e.ref, e.ref = null), He && He(e);
+}, Xe = ve.cn, ve.cn = (e, t, n, r) => {
+if (e.then) for (var a, o = t; o = o.sn; ) if ((a = o.dn) && a.dn) return null == t.cn && (t.cn = n.cn, 
+t.an = n.an), a.dn(e, t);
+Xe(e, t, n, r);
+}, We = ve.unmount, ve.unmount = e => {
+var t = e.dn;
+t && t.Ma && t.Ma(), t && 32 & e.bn && (e.type = null), We && We(e);
+}, (ue.prototype = new R).dn = function(e, t) {
+var n, r, a, o, i = t.dn, s = this;
+null == s.o && (s.o = []), s.o.push(i), n = be(s.un), r = !1, a = () => {
+r || (r = !0, i.Ma = null, n ? n(o) : o());
+}, i.Ma = a, o = () => {
 var e, t;
-if (! --s.un) for (s.state.Ln && (s.cn.nn[0] = ae(e = s.state.Ln, e.ln.gn, e.ln.va)), 
-s.Fn({
-Ln: s.an = null
-}); t = s.o.pop(); ) t.wa();
-}, s.un++ || 32 & t.un || s.Fn({
-Ln: s.an = s.cn.nn[0]
+if (! --s.bn) for (s.state.Bn && (s.un.an[0] = de(e = s.state.Bn, e.dn.xn, e.dn.za)), 
+s.Dn({
+Bn: s.ln = null
+}); t = s.o.pop(); ) t.va();
+}, s.bn++ || 32 & t.bn || s.Dn({
+Bn: s.ln = s.un.an[0]
 }), e.then(a, a);
-}, oe.prototype.Pn = function() {
+}, ue.prototype.En = function() {
 this.o = [];
-}, oe.prototype.render = function(e, t) {
+}, ue.prototype.render = function(e, t) {
 var n, r, a;
-return this.an && (this.cn.nn && (n = document.createElement("div"), this.cn.nn[0] = re(this.an, n, (r = this.cn.nn[0].ln).va = r.gn)), 
-this.an = null), (a = t.Ln && x(w, null, e.fallback)) && (a.un &= -33), [ x(w, null, t.Ln ? null : e.children), a ];
-}, Ue = (e, t, n) => {
-if (++n[1] === n[0] && e.l.delete(t), e.tn.Ma && ("t" !== e.tn.Ma[0] || !e.l.size)) for (n = e.i; n; ) {
+return this.ln && (this.un.an && (n = document.createElement("div"), this.un.an[0] = ce(this.ln, n, (r = this.un.an[0].dn).za = r.xn)), 
+this.ln = null), (a = t.Bn && z(A, null, e.fallback)) && (a.bn &= -33), [ z(A, null, t.Bn ? null : e.children), a ];
+}, Je = (e, t, n) => {
+if (++n[1] === n[0] && e.l.delete(t), e.rn.Sa && ("t" !== e.rn.Sa[0] || !e.l.size)) for (n = e.i; n; ) {
 for (;n.length > 3; ) n.pop()();
 if (n[0] > n[1]) break;
 e.i = n = n[2];
 }
-}, (se.prototype = new k).Ln = function(e) {
-var t = this, n = ie(t.cn), r = t.l.get(e);
+}, (pe.prototype = new R).Bn = function(e) {
+var t = this, n = be(t.un), r = t.l.get(e);
 return r[0]++, a => {
 var o = () => {
-t.tn.Ma ? (r.push(a), Ue(t, e, r)) : a();
+t.rn.Sa ? (r.push(a), Je(t, e, r)) : a();
 };
 n ? n(o) : o();
 };
-}, se.prototype.render = function(e) {
+}, pe.prototype.render = function(e) {
 var t, n;
-for (this.i = null, this.l = new Map, t = S(e.children), e.Ma && "b" === e.Ma[0] && t.reverse(), 
+for (this.i = null, this.l = new Map, t = E(e.children), e.Sa && "b" === e.Sa[0] && t.reverse(), 
 n = t.length; n--; ) this.l.set(t[n], this.i = [ 1, 0, this.i ]);
 return e.children;
-}, se.prototype.An = se.prototype.vn = function() {
+}, pe.prototype.Nn = pe.prototype.zn = function() {
 var e = this;
 this.l.forEach((t, n) => {
-Ue(e, n, t);
+Je(e, n, t);
 });
-}, Ke = "undefined" != typeof Symbol && Symbol.for && Symbol.for("react.element") || 60103, 
-Ve = /^(?:accent|alignment|arabic|baseline|cap|clip(?!PathU)|color|dominant|fill|flood|font|glyph(?!R)|horiz|image(!S)|letter|lighting|marker(?!H|W|U)|overline|paint|pointer|shape|stop|strikethrough|stroke|text(?!L)|transform|underline|unicode|units|v|vector|vert|word|writing|x(?!C))[A-Z]/, 
-$e = /^on(Ani|Tra|Tou|BeforeInp|Compo)/, Xe = /[A-Z0-9]/g, Ze = "undefined" != typeof document, 
-Je = e => ("undefined" != typeof Symbol && "symbol" == typeof Symbol() ? /fil|che|rad/ : /fil|che|ra/).test(e), 
-k.prototype.za = {}, [ "componentWillMount", "componentWillReceiveProps", "componentWillUpdate" ].forEach(function(e) {
-Object.defineProperty(k.prototype, e, {
+}, Qe = "undefined" != typeof Symbol && Symbol.for && Symbol.for("react.element") || 60103, 
+et = /^(?:accent|alignment|arabic|baseline|cap|clip(?!PathU)|color|dominant|fill|flood|font|glyph(?!R)|horiz|image(!S)|letter|lighting|marker(?!H|W|U)|overline|paint|pointer|shape|stop|strikethrough|stroke|text(?!L)|transform|underline|unicode|units|v|vector|vert|word|writing|x(?!C))[A-Z]/, 
+tt = /^on(Ani|Tra|Tou|BeforeInp|Compo)/, nt = /[A-Z0-9]/g, rt = "undefined" != typeof document, 
+at = e => ("undefined" != typeof Symbol && "symbol" == typeof Symbol() ? /fil|che|rad/ : /fil|che|ra/).test(e), 
+R.prototype.Aa = {}, [ "componentWillMount", "componentWillReceiveProps", "componentWillUpdate" ].forEach(function(e) {
+Object.defineProperty(R.prototype, e, {
 configurable: !0,
 get() {
 return this["UNSAFE_" + e];
@@ -2706,45 +2917,45 @@ value: t
 });
 }
 });
-}), Qe = he.event, he.event = e => (Qe && (e = Qe(e)), e.persist = le, e.Sa = ce, 
-e.Aa = ue, e.Ca = e), et = {
+}), ot = ve.event, ve.event = e => (ot && (e = ot(e)), e.persist = fe, e.Ca = he, 
+e.Na = ge, e.Oa = e), it = {
 enumerable: !1,
 configurable: !0,
 get() {
 return this.class;
 }
-}, tt = he.bn, he.bn = e => {
+}, st = ve.fn, ve.fn = e => {
 "string" == typeof e.type && (e => {
-var t, n, r, a = e.tn, o = e.type, i = {}, s = -1 === o.indexOf("-");
-for (t in a) n = a[t], "value" === t && "defaultValue" in a && null == n || Ze && "children" === t && "noscript" === o || "class" === t || "className" === t || (r = t.toLowerCase(), 
-"defaultValue" === t && "value" in a && null == a.value ? t = "value" : "download" === t && !0 === n ? n = "" : "translate" === r && "no" === n ? n = !1 : "o" === r[0] && "n" === r[1] ? "ondoubleclick" === r ? t = "ondblclick" : "onchange" !== r || "input" !== o && "textarea" !== o || Je(a.type) ? "onfocus" === r ? t = "onfocusin" : "onblur" === r ? t = "onfocusout" : $e.test(t) && (t = r) : r = t = "oninput" : s && Ve.test(t) ? t = t.replace(Xe, "-$&").toLowerCase() : null === n && (n = void 0), 
+var t, n, r, a = e.rn, o = e.type, i = {}, s = -1 === o.indexOf("-");
+for (t in a) n = a[t], "value" === t && "defaultValue" in a && null == n || rt && "children" === t && "noscript" === o || "class" === t || "className" === t || (r = t.toLowerCase(), 
+"defaultValue" === t && "value" in a && null == a.value ? t = "value" : "download" === t && !0 === n ? n = "" : "translate" === r && "no" === n ? n = !1 : "o" === r[0] && "n" === r[1] ? "ondoubleclick" === r ? t = "ondblclick" : "onchange" !== r || "input" !== o && "textarea" !== o || at(a.type) ? "onfocus" === r ? t = "onfocusin" : "onblur" === r ? t = "onfocusout" : tt.test(t) && (t = r) : r = t = "oninput" : s && et.test(t) ? t = t.replace(nt, "-$&").toLowerCase() : null === n && (n = void 0), 
 "oninput" === r && i[t = r] && (t = "oninputCapture"), i[t] = n);
-"select" == o && i.multiple && Array.isArray(i.value) && (i.value = S(a.children).forEach(e => {
-e.tn.selected = -1 != i.value.indexOf(e.tn.value);
-})), "select" == o && null != i.defaultValue && (i.value = S(a.children).forEach(e => {
-e.tn.selected = i.multiple ? -1 != i.defaultValue.indexOf(e.tn.value) : i.defaultValue == e.tn.value;
-})), a.class && !a.className ? (i.class = a.class, Object.defineProperty(i, "className", et)) : (a.className && !a.class || a.class && a.className) && (i.class = i.className = a.className), 
-e.tn = i;
-})(e), e.$$typeof = Ke, tt && tt(e);
-}, nt = he.fn, he.fn = e => {
-nt && nt(e);
-}, rt = he.On, he.On = e => {
-rt && rt(e);
-var t = e.tn, n = e.sn;
+"select" == o && i.multiple && Array.isArray(i.value) && (i.value = E(a.children).forEach(e => {
+e.rn.selected = -1 != i.value.indexOf(e.rn.value);
+})), "select" == o && null != i.defaultValue && (i.value = E(a.children).forEach(e => {
+e.rn.selected = i.multiple ? -1 != i.defaultValue.indexOf(e.rn.value) : i.defaultValue == e.rn.value;
+})), a.class && !a.className ? (i.class = a.class, Object.defineProperty(i, "className", it)) : (a.className && !a.class || a.class && a.className) && (i.class = i.className = a.className), 
+e.rn = i;
+})(e), e.$$typeof = Qe, st && st(e);
+}, lt = ve.gn, ve.gn = e => {
+lt && lt(e);
+}, ct = ve.Rn, ve.Rn = e => {
+ct && ct(e);
+var t = e.rn, n = e.cn;
 null != n && "textarea" === e.type && "value" in t && t.value !== n.value && (n.value = t.value ?? "");
-}, at = w, ot = {
-createRoot: de,
+}, dt = A, ut = {
+createRoot: me,
 hydrateRoot: (e, t) => (((e, t) => {
-H(e, t);
-})(t, e), de(e))
+V(e, t);
+})(t, e), me(e))
 };
 
-const Nr = e => e.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase(), Cr = e => {
+const $r = e => e.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase(), Yr = e => {
 const t = (e => e.replace(/^([A-Z])|[\s-_]+(\w)/g, (e, t, n) => n ? n.toUpperCase() : t.toLowerCase()))(e);
 return t.charAt(0).toUpperCase() + t.slice(1);
-}, Or = (...e) => e.filter((e, t, n) => !!e && "" !== e.trim() && n.indexOf(e) === t).join(" ").trim();
+}, Br = (...e) => e.filter((e, t, n) => !!e && "" !== e.trim() && n.indexOf(e) === t).join(" ").trim();
 
-it = {
+bt = {
 xmlns: "http://www.w3.org/2000/svg",
 width: 24,
 height: 24,
@@ -2756,22 +2967,22 @@ stroke: "currentColor",
 "stroke-linejoin": "round"
 };
 
-const Rr = ({color: e = "currentColor", size: t = 24, strokeWidth: n = 2, absoluteStrokeWidth: r, children: a, iconNode: o, class: i = "", ...s}) => x("svg", {
-...it,
+const Gr = ({color: e = "currentColor", size: t = 24, strokeWidth: n = 2, absoluteStrokeWidth: r, children: a, iconNode: o, class: i = "", ...s}) => z("svg", {
+...bt,
 width: t + "",
 height: t,
 stroke: e,
 "stroke-width": r ? 24 * +n / +t : n,
 class: [ "lucide", i ].join(" "),
 ...s
-}, [ ...o.map(([e, t]) => x(e, t)), ...S(a) ]), Pr = (e, t) => {
-const n = ({class: n = "", children: r, ...a}) => x(Rr, {
+}, [ ...o.map(([e, t]) => z(e, t)), ...E(a) ]), Kr = (e, t) => {
+const n = ({class: n = "", children: r, ...a}) => z(Gr, {
 ...a,
 iconNode: t,
-class: Or("lucide-" + Nr(Cr(e)), "lucide-" + Nr(e), n)
+class: Br("lucide-" + $r(Yr(e)), "lucide-" + $r(e), n)
 }, r);
-return n.displayName = Cr(e), n;
-}, Fr = Pr("arrow-left-right", [ [ "path", {
+return n.displayName = Yr(e), n;
+}, Ur = Kr("arrow-left-right", [ [ "path", {
 d: "M8 3 4 7l4 4",
 key: "9rb6wj"
 } ], [ "path", {
@@ -2783,7 +2994,7 @@ key: "siv7j2"
 } ], [ "path", {
 d: "M20 17H4",
 key: "h6l3hr"
-} ] ]), Er = Pr("badge-plus", [ [ "path", {
+} ] ]), Zr = Kr("badge-plus", [ [ "path", {
 d: "M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z",
 key: "3c2336"
 } ], [ "line", {
@@ -2798,10 +3009,21 @@ x2: "16",
 y1: "12",
 y2: "12",
 key: "1jonct"
-} ] ]), Tr = Pr("check", [ [ "path", {
+} ] ]), qr = Kr("bomb", [ [ "circle", {
+cx: "11",
+cy: "13",
+r: "9",
+key: "hd149"
+} ], [ "path", {
+d: "M14.35 4.65 16.3 2.7a2.41 2.41 0 0 1 3.4 0l1.6 1.6a2.4 2.4 0 0 1 0 3.4l-1.95 1.95",
+key: "jp4j1b"
+} ], [ "path", {
+d: "m22 2-1.5 1.5",
+key: "ay92ug"
+} ] ]), Vr = Kr("check", [ [ "path", {
 d: "M20 6 9 17l-5-5",
 key: "1gmf2c"
-} ] ]), Lr = Pr("circle-question-mark", [ [ "circle", {
+} ] ]), Hr = Kr("circle-question-mark", [ [ "circle", {
 cx: "12",
 cy: "12",
 r: "10",
@@ -2812,7 +3034,7 @@ key: "1u773s"
 } ], [ "path", {
 d: "M12 17h.01",
 key: "p32p05"
-} ] ]), Dr = Pr("database", [ [ "ellipse", {
+} ] ]), Xr = Kr("database", [ [ "ellipse", {
 cx: "12",
 cy: "5",
 rx: "9",
@@ -2824,7 +3046,7 @@ key: "1wlel7"
 } ], [ "path", {
 d: "M3 12A9 3 0 0 0 21 12",
 key: "mv7ke4"
-} ] ]), Ir = Pr("eye", [ [ "path", {
+} ] ]), Wr = Kr("eye", [ [ "path", {
 d: "M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0",
 key: "1nclc0"
 } ], [ "circle", {
@@ -2832,7 +3054,10 @@ cx: "12",
 cy: "12",
 r: "3",
 key: "1v7zrd"
-} ] ]), Yr = Pr("layers", [ [ "path", {
+} ] ]), Jr = Kr("flame", [ [ "path", {
+d: "M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z",
+key: "96xj49"
+} ] ]), Qr = Kr("layers", [ [ "path", {
 d: "M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z",
 key: "zw3jo"
 } ], [ "path", {
@@ -2841,7 +3066,7 @@ key: "1wduqc"
 } ], [ "path", {
 d: "M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17",
 key: "kqbvx6"
-} ] ]), Gr = Pr("map", [ [ "path", {
+} ] ]), ea = Kr("map", [ [ "path", {
 d: "M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z",
 key: "169xi5"
 } ], [ "path", {
@@ -2850,7 +3075,7 @@ key: "1pn4in"
 } ], [ "path", {
 d: "M9 3.236v15",
 key: "1uimfh"
-} ] ]), Hr = Pr("package", [ [ "path", {
+} ] ]), ta = Kr("package", [ [ "path", {
 d: "M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z",
 key: "1a0edw"
 } ], [ "path", {
@@ -2862,13 +3087,13 @@ key: "ousv84"
 } ], [ "path", {
 d: "m7.5 4.27 9 5.15",
 key: "1c824w"
-} ] ]), qr = Pr("pen-line", [ [ "path", {
+} ] ]), na = Kr("pen-line", [ [ "path", {
 d: "M13 21h8",
 key: "1jsn5i"
 } ], [ "path", {
 d: "M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z",
 key: "1a8usu"
-} ] ]), Br = Pr("radio", [ [ "path", {
+} ] ]), ra = Kr("radio", [ [ "path", {
 d: "M16.247 7.761a6 6 0 0 1 0 8.478",
 key: "1fwjs5"
 } ], [ "path", {
@@ -2885,7 +3110,7 @@ cx: "12",
 cy: "12",
 r: "2",
 key: "1c9p78"
-} ] ]), Wr = Pr("rocket", [ [ "path", {
+} ] ]), aa = Kr("rocket", [ [ "path", {
 d: "M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z",
 key: "m3kijz"
 } ], [ "path", {
@@ -2897,21 +3122,13 @@ key: "1f8sc4"
 } ], [ "path", {
 d: "M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5",
 key: "qeys4"
-} ] ]), Ur = Pr("rotate-cw", [ [ "path", {
+} ] ]), oa = Kr("rotate-cw", [ [ "path", {
 d: "M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8",
 key: "1p45f6"
 } ], [ "path", {
 d: "M21 3v5h-5",
 key: "1q7to0"
-} ] ]), Kr = Pr("settings", [ [ "path", {
-d: "M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915",
-key: "1i5ecw"
-} ], [ "circle", {
-cx: "12",
-cy: "12",
-r: "3",
-key: "1v7zrd"
-} ] ]), Vr = Pr("sword", [ [ "polyline", {
+} ] ]), ia = Kr("sword", [ [ "polyline", {
 points: "14.5 17.5 3 6 3 3 6 3 17.5 14.5",
 key: "1hfsw2"
 } ], [ "line", {
@@ -2932,7 +3149,7 @@ x2: "21",
 y1: "21",
 y2: "19",
 key: "13pww6"
-} ] ]), $r = Pr("target", [ [ "circle", {
+} ] ]), sa = Kr("target", [ [ "circle", {
 cx: "12",
 cy: "12",
 r: "10",
@@ -2947,7 +3164,7 @@ cx: "12",
 cy: "12",
 r: "2",
 key: "1c9p78"
-} ] ]), Xr = Pr("x", [ [ "path", {
+} ] ]), la = Kr("x", [ [ "path", {
 d: "M18 6 6 18",
 key: "1bl5f8"
 } ], [ "path", {
@@ -2955,96 +3172,97 @@ d: "m6 6 12 12",
 key: "d8bk6v"
 } ] ]);
 
-st = 0;
+pt = 0;
 
-const Zr = {
-Na: $r,
-Oa: Vr,
-ja: Fr,
-Ra: Wr,
-Pa: Hr,
-Ta: Ir,
-Ea: Br,
-Fa: Lr,
-Da: Dr,
-La: Gr,
-Ia: Hr,
-Ba: Er,
-Ya: e => be(qr, {
+const ca = {
+ja: sa,
+Ra: ia,
+Pa: Ur,
+Ta: aa,
+Ea: ta,
+La: Wr,
+Fa: ra,
+Da: Hr,
+Ia: Xr,
+Ba: ea,
+$a: ta,
+Ga: Zr,
+Ya: e => xe(na, {
 ...e,
 strokeWidth: "2.5"
 }),
-Ga: Kr,
-qa: Ir,
-Va: Yr,
-Ka: Ur
-}, Jr = ({onMouseDown: e, version: t, Ua: n}) => be("div", {
+Ka: Jr,
+qa: Wr,
+Va: Qr,
+Ha: oa,
+Ua: qr
+}, da = ({onMouseDown: e, version: t, Wa: n}) => xe("div", {
 className: "titlebar",
 onMouseDown(t) {
 e(t);
 },
-children: [ be("div", {
+children: [ xe("div", {
 className: "titlebar-content",
-children: [ be(Zr.Ba, {
+children: [ xe(ca.Ga, {
 className: "menu-icon"
-}), be("div", {
+}), xe("div", {
 className: "titlebar-text",
-children: [ be("div", {
+children: [ xe("div", {
 className: "title",
-children: "SurMinus"
-}), be("div", {
+children: "SurMinus(dev version)"
+}), xe("div", {
 className: "credit",
 children: "by shiroko"
 }) ]
 }) ]
-}), t && be("div", {
+}), t && xe("div", {
 className: "version-text",
 children: t
-}), be("button", {
+}), xe("button", {
 className: "close-btn",
 onClick: n,
 children: "×"
 }) ]
-}), Qr = ({activeTab: e, onTabChange: t}) => be("div", {
+}), ua = ({activeTab: e, onTabChange: t}) => xe("div", {
 className: "sidebar",
-children: be("div", {
+children: xe("div", {
 className: "sidebar-tabs",
 children: [ {
 id: "main",
 label: "Main",
-icon: Zr.Ga
+icon: ca.Ka
 }, {
 id: "visuals",
 label: "Visuals",
-icon: Zr.qa
+icon: ca.qa
 }, {
 id: "misc",
 label: "Misc",
-icon: Zr.Va
+icon: ca.Va
 }, {
 id: "help",
 label: "Help",
-icon: Zr.Fa
-} ].map(n => be("button", {
+icon: ca.Da
+} ].map(n => xe("button", {
 className: "sidebar-tab " + (e === n.id ? "active" : ""),
 "data-tab": n.id,
 onClick: () => t(n.id),
 title: n.label,
-children: [ be(n.icon, {
+children: [ xe(n.icon, {
 className: "tab-icon"
-}), be("span", {
+}), xe("span", {
 className: "tab-label",
 children: n.label
 }) ]
 }, n.id))
 })
-}), ea = ({id: e, label: t, checked: n, onChange: r, style: a = {}, warning: o = !1}) => be("div", {
+}), ba = ({id: e, label: t, checked: n, onChange: r, style: a = {}, warning: o = !1}) => xe("div", {
 className: "checkbox-item",
 style: a,
 onClick(e) {
 "checkbox" !== e.target.type && r(!n);
 },
-children: [ be("input", {
+children: [ xe("input", {
 type: "checkbox",
 id: e,
 checked: n,
@@ -3052,44 +3270,44 @@ onChange(e) {
 e.stopPropagation(), r(e.target.checked);
 },
 className: "checkbox " + (n ? "checkbox-checked" : "")
-}), be("label", {
+}), xe("label", {
 htmlFor: e,
 className: "checkbox-item-label",
 onClick: e => e.stopPropagation(),
 children: t
-}), o && be("span", {
+}), o && xe("span", {
 className: "risky-label",
 style: {
 marginLeft: "0.5rem"
 },
 children: "RISKY!!!"
 }) ]
-}), ta = e => {
+}), pa = e => {
 const t = e.checked;
-return be(ea, {
+return xe(ba, {
 ...e,
 warning: e.shouldWarning?.(t) ?? !1
 });
-}, na = ({id: e, label: t, value: n, min: r = 0, max: a = 100, warning: o = !1, onChange: i}) => {
-const [s, l] = B(!1), c = U(null), u = (n - r) / (a - r) * 100, d = {
-background: `linear-gradient(to right, #6edb72 0%, #58c05c ${u}%, #333 ${u}%, #333 100%)`
+}, fa = ({id: e, label: t, value: n, min: r = 0, max: a = 100, warning: o = !1, onChange: i}) => {
+const [s, l] = X(!1), c = J(null), d = (n - r) / (a - r) * 100, u = {
+background: `linear-gradient(to right, #6edb72 0%, #58c05c ${d}%, #333 ${d}%, #333 100%)`
 }, b = e => {
 e.stopPropagation(), i(parseInt(e.target.value));
-}, f = e => {
+}, p = e => {
 e.stopPropagation();
-}, p = V(() => l(!0), []), h = V(() => l(!1), []), g = V(e => {
-e.stopPropagation(), p();
-}, [ p ]), m = V(e => {
-e.stopPropagation(), p();
-}, [ p ]), x = V(e => {
+}, f = ee(() => l(!0), []), h = ee(() => l(!1), []), g = ee(e => {
+e.stopPropagation(), f();
+}, [ f ]), m = ee(e => {
+e.stopPropagation(), f();
+}, [ f ]), x = ee(e => {
 e && e.stopPropagation(), h();
-}, [ h ]), y = V(e => {
+}, [ h ]), y = ee(e => {
 e && e.stopPropagation(), h();
 }, [ h ]);
-return be("div", {
+return xe("div", {
 className: "checkbox-item slider-container",
-onClick: f,
-children: [ be("label", {
+onClick: p,
+children: [ xe("label", {
 htmlFor: e,
 style: {
 color: "#ddd",
@@ -3098,7 +3316,7 @@ cursor: "default",
 pointerEvents: "none"
 },
 children: t
-}), be("input", {
+}), xe("input", {
 ref: c,
 type: "range",
 className: "slider " + (s ? "slider-dragging" : ""),
@@ -3108,15 +3326,15 @@ max: a,
 value: n,
 onChange: b,
 onInput: b,
-onClick: f,
+onClick: p,
 onMouseDown: g,
 onMouseUp: x,
 onMouseLeave: x,
 onTouchStart: m,
 onTouchEnd: y,
 onTouchCancel: y,
-style: d
-}), o && be("span", {
+style: u
+}), o && xe("span", {
 className: "risky-label",
 style: {
 marginLeft: "0.5rem"
@@ -3124,16 +3342,16 @@ marginLeft: "0.5rem"
 children: "RISKY!!!"
 }) ]
 });
-}, ra = ({keybind: e, mode: t = "single", style: n = {}, onClick: r, editable: a = !1}) => {
-const [o, i] = B(!1);
-if ("multiple" === t && Array.isArray(e)) return be("div", {
+}, ha = ({keybind: e, mode: t = "single", style: n = {}, onClick: r, editable: a = !1}) => {
+const [o, i] = X(!1);
+if ("multiple" === t && Array.isArray(e)) return xe("div", {
 className: "keybind-slot-container",
 style: n,
-children: e.map((t, n) => be(at, {
-children: [ be("div", {
+children: e.map((t, n) => xe(dt, {
+children: [ xe("div", {
 className: "keybind-slot",
 children: t
-}), e.length - 1 > n && be("span", {
+}), e.length - 1 > n && xe("span", {
 className: "keybind-slot-separator",
 children: "+"
 }) ]
@@ -3153,45 +3371,45 @@ Escape: "Escape"
 };
 return t[e] ? t[e] : e.startsWith("Key") ? e.slice(3) : e.startsWith("Digit") ? e.slice(5) : e;
 })(e);
-return be("div", {
+return xe("div", {
 className: `keybind-slot ${a ? "keybind-slot-editable" : ""} ${o ? "keybind-slot-waiting" : ""}`,
 style: n,
 onClick(e) {
 if (!a || !r) return;
 e.stopPropagation(), i(!0);
 const t = e => {
-e.preventDefault(), e.stopPropagation(), r(e.code), i(!1), Reflect.apply(Ot, ut, [ "keydown", t, !0 ]);
+e.preventDefault(), e.stopPropagation(), r(e.code), i(!1), Reflect.apply(Lt, gt, [ "keydown", t, !0 ]);
 };
-Reflect.apply(Ct, ut, [ "keydown", t, !0 ]);
+Reflect.apply(Tt, gt, [ "keydown", t, !0 ]);
 },
-children: [ s, a && !o && be(Zr.Ya, {
+children: [ s, a && !o && xe(ca.Ya, {
 className: "keybind-pen-icon"
 }) ]
 });
-}, aa = ({icon: e, label: t, keybind: n, keybindMode: r, keybindEditable: a, onKeybindChange: o, enabled: i, onEnabledChange: s, warning: l = !1}) => be("div", {
+}, ga = ({icon: e, label: t, keybind: n, keybindMode: r, keybindEditable: a, onKeybindChange: o, enabled: i, onEnabledChange: s, warning: l = !1}) => xe("div", {
 className: "section-title",
-children: [ e && be(e, {
+children: [ e && xe(e, {
 size: 16
-}), be("div", {
+}), xe("div", {
 className: "section-title-container",
-children: [ t, l && be("span", {
+children: [ t, l && xe("span", {
 className: "risky-label",
 style: {
 marginLeft: "0.5rem"
 },
 children: "RISKY!!!"
 }) ]
-}), n && be(ra, {
+}), n && xe(ha, {
 keybind: n,
 mode: r,
 editable: a,
 onClick: o
-}), be(ea, {
+}), xe(ba, {
 id: t.toLowerCase().replace(/\s+/g, "-") + "-enable",
 label: "Enabled",
 checked: i,
 onChange(e) {
-s(e), dt.dispatchEvent(new CustomEvent("featureToggled", {
+s(e), mt.dispatchEvent(new CustomEvent("featureToggled", {
 detail: {
 featureName: t,
 enabled: e
@@ -3205,402 +3423,385 @@ padding: "4px 6px",
 margin: 0
 }
 }) ]
-}), oa = ({Ha: e, Wa: t}) => be("div", {
+}), ma = ({Za: e, Xa: t}) => xe("div", {
 className: "section",
-children: [ be(aa, {
-icon: Zr.Na,
+children: [ xe(ga, {
+icon: ca.ja,
 label: "Aimbot",
-keybind: e.tr.rr,
+keybind: e.rr.ir,
 keybindEditable: !0,
-onKeybindChange: e => t(t => t.tr.rr = e),
-enabled: e.xt.je,
-onEnabledChange: e => t(t => t.xt.je = e)
-}), be("div", {
-className: "group " + (e.xt.je ? "" : "hidden"),
-children: [ be(ea, {
+onKeybindChange: e => t(t => t.rr.ir = e),
+enabled: e.yt.Re,
+onEnabledChange: e => t(t => t.yt.Re = e)
+}), xe("div", {
+className: "group " + (e.yt.Re ? "" : "hidden"),
+children: [ xe(ba, {
 id: "target-knocked",
 label: "Target Knocked",
-checked: e.xt.Ot,
-onChange: e => t(t => t.xt.Ot = e)
-}), be(ea, {
+checked: e.yt.jt,
+onChange: e => t(t => t.yt.jt = e)
+}), xe(ba, {
 id: "aimbot-show-dot",
 label: "Aimbot Dot",
-checked: e.xt.Gn,
-onChange: e => t(t => t.xt.Gn = e)
-}), be(ea, {
+checked: e.yt.Kn,
+onChange: e => t(t => t.yt.Kn = e)
+}), xe(ba, {
 id: "aimbot-hud",
 label: "TargetHUD",
-checked: e.er.je,
-onChange: e => t(t => t.er.je = e)
-}), be(ta, {
+checked: e.nr.Re,
+onChange: e => t(t => t.nr.Re = e)
+}), xe(pa, {
 id: "aimbot-wallcheck",
 label: "Wallcheck",
-checked: e.xt.Lt,
-onChange: e => t(t => t.xt.Lt = e),
+checked: e.yt.It,
+onChange: e => t(t => t.yt.It = e),
 shouldWarning: e => !e
-}), be("div", {
+}), xe("div", {
 style: {
 display: "flex",
 flexDirection: "column"
 },
-children: be(ta, {
+children: xe(pa, {
 id: "aimbot-aim-allies",
 label: "Aim Allies (Aim Teammates)",
-checked: e.xt.Rt,
-onChange: e => t(t => t.xt.Rt = e),
+checked: e.yt.Pt,
+onChange: e => t(t => t.yt.Pt = e),
 shouldWarning: e => e
 })
-}), be("div", {
+}), xe("div", {
 style: {
 display: "flex",
 alignItems: "center",
 gap: "0.625rem"
 },
-children: [ be(ea, {
+children: [ xe(ba, {
 id: "aimbot-automatic",
 label: "Blatant",
-checked: e.xt.St,
-onChange: e => t(t => t.xt.St = e),
+checked: e.yt.At,
+onChange: e => t(t => t.yt.At = e),
 warning: !0
-}), be(ra, {
-keybind: e.tr.ar,
+}), xe(ha, {
+keybind: e.rr.sr,
 editable: !0,
-onClick: e => t(t => t.tr.ar = e)
+onClick: e => t(t => t.rr.sr = e)
 }) ]
 }) ]
-}), be(aa, {
-icon: Zr.Oa,
+}), xe(ga, {
+icon: ca.Ra,
 label: "Melee Lock",
-enabled: e.yt.je,
-onEnabledChange: e => t(t => t.yt.je = e),
+enabled: e.wt.Re,
+onEnabledChange: e => t(t => t.wt.Re = e),
 warning: !0
-}), be("div", {
-className: "group " + (e.yt.je ? "" : "hidden"),
-children: [ be(ea, {
+}), xe("div", {
+className: "group " + (e.wt.Re ? "" : "hidden"),
+children: [ xe(ba, {
 id: "auto-melee",
 label: "Auto Melee",
-checked: e.yt.Et,
-onChange: e => t(t => t.yt.Et = e)
-}), be(ea, {
-id: "auto-attack",
-label: "Auto Attack",
-checked: e.yt.Bt,
-onChange: e => t(t => t.yt.Bt = e)
-}), be(ea, {
+checked: e.wt.Lt,
+onChange: e => t(t => t.wt.Lt = e)
+}), xe(ba, {
 id: "attack-allies",
 label: "Attack Allies",
-checked: e.yt.jt,
-onChange: e => t(t => t.yt.jt = e),
+checked: e.wt.Rt,
+onChange: e => t(t => t.wt.Rt = e),
 warning: !0
-}), be(ea, {
-id: "anti-explosion",
-label: "Anti Explosion",
-checked: e.yt._t,
-onChange: e => t(t => t.yt._t = e)
 }) ]
-}), be(aa, {
-icon: Zr.ja,
+}), xe(ga, {
+icon: ca.Pa,
 label: "Auto Switch",
-enabled: e.Xn.je,
-onEnabledChange: e => t(t => t.Xn.je = e)
-}), be("div", {
-className: "group " + (e.Xn.je ? "" : "hidden"),
-children: be(ea, {
+enabled: e.Jn.Re,
+onEnabledChange: e => t(t => t.Jn.Re = e)
+}), xe("div", {
+className: "group " + (e.Jn.Re ? "" : "hidden"),
+children: xe(ba, {
 id: "useonegun",
 label: "Use One Gun",
-checked: e.Xn.Zn,
-onChange: e => t(t => t.Xn.Zn = e)
+checked: e.Jn.Qn,
+onChange: e => t(t => t.Jn.Qn = e)
 })
-}), be(aa, {
-icon: Zr.Ra,
+}), xe(ga, {
+icon: ca.Ta,
 label: "Semi Auto",
-enabled: e.qn.je,
-onEnabledChange: e => t(t => t.qn.je = e)
-}), be(aa, {
-icon: Zr.Pa,
+enabled: e.qn.Re,
+onEnabledChange: e => t(t => t.qn.Re = e)
+}), xe(ga, {
+icon: ca.Ea,
 label: "Desync",
-enabled: e.Qn.je,
-onEnabledChange: e => t(t => t.Qn.je = e)
+enabled: e.tr.Re,
+onEnabledChange: e => t(t => t.tr.Re = e)
 }) ]
-}), ia = ({Ha: e, Wa: t}) => be("div", {
+}), xa = ({Za: e, Xa: t}) => xe("div", {
 className: "section",
-children: [ be(aa, {
-icon: Zr.Ta,
+children: [ xe(ga, {
+icon: ca.La,
 label: "X-Ray",
-enabled: e.Re.je,
-onEnabledChange: e => t(t => t.Re.je = e)
-}), be("div", {
-className: "group " + (e.Re.je ? "" : "hidden"),
-children: [ be(ea, {
+enabled: e.Pe.Re,
+onEnabledChange: e => t(t => t.Pe.Re = e)
+}), xe("div", {
+className: "group " + (e.Pe.Re ? "" : "hidden"),
+children: [ xe(ba, {
 id: "remove-ceilings",
 label: "Remove Ceilings",
-checked: e.Re.Pe,
-onChange: e => t(t => t.Re.Pe = e)
-}), be(ea, {
+checked: e.Pe.Te,
+onChange: e => t(t => t.Pe.Te = e)
+}), xe(ba, {
 id: "darker-smokes",
 label: "Darker Smokes",
-checked: e.Re.Te,
-onChange: e => t(t => t.Re.Te = e)
-}), be(na, {
+checked: e.Pe.Ee,
+onChange: e => t(t => t.Pe.Ee = e)
+}), xe(fa, {
 id: "smoke-opacity",
 label: "Smoke Opacity",
-value: e.Re.Ee,
-onChange: e => t(t => t.Re.Ee = e)
-}), be(na, {
+value: e.Pe.Le,
+onChange: e => t(t => t.Pe.Le = e)
+}), xe(fa, {
 id: "tree-opacity",
 label: "Tree Opacity",
-value: e.Re.Fe,
-onChange: e => t(t => t.Re.Fe = e)
+value: e.Pe.Fe,
+onChange: e => t(t => t.Pe.Fe = e)
 }) ]
-}), be(aa, {
-icon: Zr.Ea,
-label: "Map ESP",
-enabled: e.Vn.je,
-onEnabledChange: e => t(t => t.Vn.je = e),
-warning: !0
-}), be(aa, {
-icon: Zr.Ea,
-label: "Player Radar",
-enabled: e.Kn.je,
-onEnabledChange: e => t(t => t.Kn.je = e),
-warning: !0
-}), be(aa, {
-icon: Zr.Ea,
+}), xe(ga, {
+icon: ca.Fa,
 label: "ESP",
-enabled: e.$e.je,
-onEnabledChange: e => t(t => t.$e.je = e)
-}), be("div", {
-className: "group " + (e.$e.je ? "" : "hidden"),
-children: [ be(ea, {
+enabled: e.Ze.Re,
+onEnabledChange: e => t(t => t.Ze.Re = e)
+}), xe("div", {
+className: "group " + (e.Ze.Re ? "" : "hidden"),
+children: [ xe(ba, {
 id: "visible-nametags",
 label: "Visible Nametags",
-checked: e.$e.Xe,
-onChange: e => t(t => t.$e.Xe = e)
-}), be(ea, {
+checked: e.Ze.Xe,
+onChange: e => t(t => t.Ze.Xe = e)
+}), xe(ba, {
 id: "player-esp",
 label: "Player Lines",
-checked: e.$e.Ze,
-onChange: e => t(t => t.$e.Ze = e)
-}), be("div", {
+checked: e.Ze.Je,
+onChange: e => t(t => t.Ze.Je = e)
+}), xe("div", {
 className: "section-title",
 children: "Grenades"
-}), be("div", {
+}), xe("div", {
 className: "subgroup",
-children: [ be(ea, {
+children: [ xe(ba, {
 id: "grenade-esp",
 label: "Explosions",
-checked: e.$e.Qe.Je,
-onChange: e => t(t => t.$e.Qe.Je = e),
+checked: e.Ze.et.Qe,
+onChange: e => t(t => t.Ze.et.Qe = e),
 style: {
 marginRight: "0.375rem"
 }
-}), be(ea, {
+}), xe(ba, {
 id: "grenade-trajectory",
 label: "Trajectory",
-checked: e.$e.Qe.et,
-onChange: e => t(t => t.$e.Qe.et = e),
+checked: e.Ze.et.tt,
+onChange: e => t(t => t.Ze.et.tt = e),
 style: {
 marginRight: "0.375rem"
 }
 }) ]
-}), be("div", {
+}), xe("div", {
 className: "section-title",
 children: "Flashlights"
-}), be("div", {
+}), xe("div", {
 className: "subgroup",
-children: [ be(ea, {
+children: [ xe(ba, {
 id: "own-flashlight",
 label: "Own",
-checked: e.$e.rt.ot,
-onChange: e => t(t => t.$e.rt.ot = e),
+checked: e.Ze.ot.it,
+onChange: e => t(t => t.Ze.ot.it = e),
 style: {
 marginRight: "0.375rem"
 }
-}), be(ea, {
+}), xe(ba, {
 id: "others-flashlight",
 label: "Others",
-checked: e.$e.rt.p,
-onChange: e => t(t => t.$e.rt.p = e),
+checked: e.Ze.ot.h,
+onChange: e => t(t => t.Ze.ot.h = e),
 style: {
 marginRight: "0.375rem"
 }
 }) ]
 }) ]
-}), be(aa, {
-icon: Zr.Ka,
+}), xe(ga, {
+icon: ca.Ha,
 label: "Spinbot",
-keybind: e.tr.ir,
+keybind: e.rr.lr,
 keybindEditable: !0,
-onKeybindChange: e => t(t => t.tr.ir = e),
-enabled: e.Xt.je,
-onEnabledChange: e => t(t => t.Xt.je = e)
-}), be("div", {
-className: "group " + (e.Xt.je ? "" : "hidden"),
-children: [ be(na, {
+onKeybindChange: e => t(t => t.rr.lr = e),
+enabled: e.Xt.Re,
+onEnabledChange: e => t(t => t.Xt.Re = e)
+}), xe("div", {
+className: "group " + (e.Xt.Re ? "" : "hidden"),
+children: [ xe(fa, {
 id: "spinbot-speed",
 label: "Speed",
 min: 0,
 max: 100,
-value: e.Xt.Jn,
-onChange: e => t(t => t.Xt.Jn = e)
-}), be(ea, {
+value: e.Xt.er,
+onChange: e => t(t => t.Xt.er = e)
+}), xe(ba, {
 id: "spinbot-realistic",
 label: "Realistic",
-checked: e.Xt.$t,
-onChange(e) {
-t(e ? e => {
-e.Xt.$t = !0, e.Xt.Zt = !1, e.Xt.Jt = !1, e.Xt.Qt = !1;
-} : e => e.Xt.$t = !1);
-}
-}), be(ea, {
-id: "spinbot-two-directions",
-label: "Spin 2 Directions (Horizontal)",
 checked: e.Xt.Zt,
 onChange(e) {
 t(e ? e => {
-e.Xt.Zt = !0, e.Xt.Jt = !1, e.Xt.Qt = !1;
+e.Xt.Zt = !0, e.Xt.Jt = !1, e.Xt.Qt = !1, e.Xt.en = !1;
 } : e => e.Xt.Zt = !1);
 }
-}), be(ea, {
-id: "spinbot-three-directions",
-label: "Spin 3 Directions (Triangle)",
+}), xe(ba, {
+id: "spinbot-two-directions",
+label: "Spin 2 Directions (Horizontal)",
 checked: e.Xt.Jt,
 onChange(e) {
 t(e ? e => {
-e.Xt.Jt = !0, e.Xt.Zt = !1, e.Xt.Qt = !1;
+e.Xt.Jt = !0, e.Xt.Qt = !1, e.Xt.en = !1;
 } : e => e.Xt.Jt = !1);
 }
-}), be(ea, {
-id: "spinbot-all-directions",
-label: "Spin 4 Directions (Square)",
+}), xe(ba, {
+id: "spinbot-three-directions",
+label: "Spin 3 Directions (Triangle)",
 checked: e.Xt.Qt,
 onChange(e) {
 t(e ? e => {
-e.Xt.Qt = !0, e.Xt.Zt = !1, e.Xt.Jt = !1;
+e.Xt.Qt = !0, e.Xt.Jt = !1, e.Xt.en = !1;
 } : e => e.Xt.Qt = !1);
+}
+}), xe(ba, {
+id: "spinbot-all-directions",
+label: "Spin 4 Directions (Square)",
+checked: e.Xt.en,
+onChange(e) {
+t(e ? e => {
+e.Xt.en = !0, e.Xt.Jt = !1, e.Xt.Qt = !1;
+} : e => e.Xt.en = !1);
 }
 }) ]
 }) ]
-}), sa = ({Ha: e, Wa: t}) => be("div", {
+}), ya = ({Za: e, Xa: t}) => xe("div", {
 className: "section",
-children: [ be(aa, {
-icon: Zr.La,
+children: [ xe(ga, {
+icon: ca.Ba,
 label: "Map Highlights",
-enabled: e.Un.je,
-onEnabledChange: e => t(t => t.Un.je = e)
-}), be("div", {
-className: "group " + (e.Un.je ? "" : "hidden"),
-children: be(ea, {
+enabled: e.Un.Re,
+onEnabledChange: e => t(t => t.Un.Re = e)
+}), xe("div", {
+className: "group " + (e.Un.Re ? "" : "hidden"),
+children: xe(ba, {
 id: "smaller-trees",
 label: "Smaller Trees",
-checked: e.Un.Hn,
-onChange: e => t(t => t.Un.Hn = e)
+checked: e.Un.Wn,
+onChange: e => t(t => t.Un.Wn = e)
 })
-}), be(aa, {
-icon: Zr.Ia,
+}), xe(ga, {
+icon: ca.$a,
 label: "Auto Loot",
-enabled: e.$n.je,
-onEnabledChange: e => t(t => t.$n.je = e)
+enabled: e.Xn.Re,
+onEnabledChange: e => t(t => t.Xn.Re = e)
+}), xe(ga, {
+icon: ca.Ua,
+label: "Anti Explosion",
+enabled: e.wt.vt,
+onEnabledChange: e => t(t => t.wt.vt = e)
 }) ]
-}), la = ({Ha: e}) => be("div", {
+}), wa = ({Za: e}) => xe("div", {
 className: "section help-section",
-children: [ be("div", {
+children: [ xe("div", {
 className: "help-title",
-children: [ be(Zr.Fa, {
+children: [ xe(ca.Da, {
 size: 16
-}), be("span", {
+}), xe("span", {
 children: "Controls & Information"
 }) ]
-}), be("div", {
+}), xe("div", {
 className: "help-panel",
 style: {
 marginBottom: "0.75rem"
 },
-children: [ be("div", {
+children: [ xe("div", {
 style: {
 display: "flex",
 alignItems: "center",
 marginBottom: "0.375rem"
 },
-children: [ be(ra, {
-keybind: e?.tr?.nr || "ShiftRight"
-}), be("span", {
+children: [ xe(ha, {
+keybind: e?.rr?.ar || "ShiftRight"
+}), xe("span", {
 className: "keybind-description",
 children: "Show/Hide Menu"
 }) ]
-}), be("p", {
+}), xe("p", {
 className: "keybind-help-text",
 children: "Toggle the menu visibility at any time using this keybind."
 }) ]
-}), be("div", {
+}), xe("div", {
 className: "section-subtitle",
 children: "Feature Keybinds"
-}), be("div", {
+}), xe("div", {
 className: "help-panel",
-children: [ be("p", {
+children: [ xe("p", {
 className: "keybind-help-text",
 style: {
 marginBottom: "0.5rem"
 },
 children: "Keybinds can be customized next to each feature in their respective tabs:"
-}), be("div", {
+}), xe("div", {
 className: "features-container",
-children: [ be("div", {
+children: [ xe("div", {
 className: "feature-item",
-children: [ be("span", {
+children: [ xe("span", {
 className: "feature-name",
 children: "Aimbot"
-}), be(ra, {
-keybind: e?.tr?.rr || "KeyB"
+}), xe(ha, {
+keybind: e?.rr?.ir || "KeyB"
 }) ]
-}), be("div", {
+}), xe("div", {
 className: "feature-item",
-children: [ be("span", {
+children: [ xe("span", {
 className: "feature-name",
 children: "Blatant Aimbot"
-}), be(ra, {
-keybind: e?.tr?.ar || "KeyI"
+}), xe(ha, {
+keybind: e?.rr?.sr || "KeyI"
 }) ]
-}), be("div", {
+}), xe("div", {
 className: "feature-item",
-children: [ be("span", {
+children: [ xe("span", {
 className: "feature-name",
 children: "Spinbot"
-}), be(ra, {
-keybind: e?.tr?.ir || "KeyO"
+}), xe(ha, {
+keybind: e?.rr?.lr || "KeyO"
 }) ]
 }) ]
 }) ]
-}), be("div", {
+}), xe("div", {
 className: "help-title",
-children: [ be(Zr.Da, {
+children: [ xe(ca.Ia, {
 size: 16
-}), be("span", {
+}), xe("span", {
 children: "Credits"
 }) ]
-}), be("div", {
+}), xe("div", {
 className: "credits-panel",
-children: be("div", {
+children: xe("div", {
 className: "credits-container",
-children: be("div", {
+children: xe("div", {
 className: "credit-item",
-children: [ be("div", {
+children: [ xe("div", {
 className: "credit-name",
 children: "shiroko"
-}), be("div", {
+}), xe("div", {
 children: "Developer, Designer"
 }) ]
 })
 })
 }) ]
-}), ca = ({Ha: e, Wa: t, Ua: n, version: r}) => {
-const [a, o] = B("main"), [i, s] = B({
+}), va = ({Za: e, Xa: t, Wa: n, version: r}) => {
+const [a, o] = X("main"), [i, s] = X({
 x: 50,
 y: 50
-}), [l, c] = B(!1), [u, d] = B({
+}), [l, c] = X(!1), [d, u] = X({
 x: 0,
 y: 0
-}), b = U(null);
+}), b = J(null);
 W(() => {
 const e = e => {
 if (l) {
@@ -3609,9 +3810,9 @@ if (!t) return;
 const n = t.querySelector(".titlebar");
 if (!n) return;
 const r = n.getBoundingClientRect(), a = 100;
-let o = e.clientX - u.x, i = e.clientY - u.y;
-const l = 0, c = ut.innerHeight - r.height;
-o = Math.max(-(t.offsetWidth - a), Math.min(ut.innerWidth - a, o)), i = Math.max(l, Math.min(c, i)), 
+let o = e.clientX - d.x, i = e.clientY - d.y;
+const l = 0, c = gt.innerHeight - r.height;
+o = Math.max(-(t.offsetWidth - a), Math.min(gt.innerWidth - a, o)), i = Math.max(l, Math.min(c, i)), 
 s({
 x: o,
 y: i
@@ -3620,30 +3821,30 @@ y: i
 }, t = () => {
 c(!1);
 };
-return l && (Reflect.apply(Ct, dt, [ "mousemove", e ]), Reflect.apply(Ct, dt, [ "mouseup", t ])), 
+return l && (Reflect.apply(Tt, mt, [ "mousemove", e ]), Reflect.apply(Tt, mt, [ "mouseup", t ])), 
 () => {
-Reflect.apply(Ot, dt, [ "mousemove", e ]), Reflect.apply(Ot, dt, [ "mouseup", t ]);
+Reflect.apply(Lt, mt, [ "mousemove", e ]), Reflect.apply(Lt, mt, [ "mouseup", t ]);
 };
-}, [ l, u ]), W(() => {
+}, [ l, d ]), W(() => {
 const e = () => {
 const e = b.current;
 if (!e) return;
 const t = e.querySelector(".titlebar");
 if (!t) return;
-const n = t.getBoundingClientRect(), r = -(e.offsetWidth - 100), a = ut.innerWidth - 100, o = ut.innerHeight - n.height;
+const n = t.getBoundingClientRect(), r = -(e.offsetWidth - 100), a = gt.innerWidth - 100, o = gt.innerHeight - n.height;
 s(e => ({
 x: Math.max(r, Math.min(a, e.x)),
 y: Math.max(0, Math.min(o, e.y))
 }));
 };
-return Reflect.apply(Ct, ut, [ "resize", e ]), () => {
-Reflect.apply(Ot, ut, [ "resize", e ]);
+return Reflect.apply(Tt, gt, [ "resize", e ]), () => {
+Reflect.apply(Lt, gt, [ "resize", e ]);
 };
 }, []);
-const f = e => {
+const p = e => {
 e.stopPropagation();
 };
-return be("div", {
+return xe("div", {
 id: "ui",
 ref: b,
 style: {
@@ -3652,55 +3853,55 @@ zIndex: "99999",
 left: i.x + "px",
 top: i.y + "px"
 },
-onClick: f,
-onMouseDown: f,
-onPointerDown: f,
-onPointerUp: f,
-onTouchStart: f,
-onTouchEnd: f,
-children: be("div", {
+onClick: p,
+onMouseDown: p,
+onPointerDown: p,
+onPointerUp: p,
+onTouchStart: p,
+onTouchEnd: p,
+children: xe("div", {
 className: "popup",
-children: [ be(Jr, {
+children: [ xe(da, {
 onMouseDown(e) {
-c(!0), d({
+c(!0), u({
 x: e.clientX - i.x,
 y: e.clientY - i.y
 });
 },
 version: r,
-Ua: n
-}), be("div", {
+Wa: n
+}), xe("div", {
 className: "menu-container",
-children: [ be(Qr, {
+children: [ xe(ua, {
 activeTab: a,
 onTabChange: o
-}), be("div", {
+}), xe("div", {
 className: "content-container active",
 children: (() => {
 switch (a) {
 case "main":
 default:
-return be(oa, {
-Ha: e,
-Wa: t
+return xe(ma, {
+Za: e,
+Xa: t
 });
 
 case "visuals":
-return be(ia, {
-Ha: e,
-Wa: t
+return xe(xa, {
+Za: e,
+Xa: t
 });
 
 case "misc":
-return be(sa, {
-Ha: e,
-Wa: t
+return xe(ya, {
+Za: e,
+Xa: t
 });
 
 case "help":
-return be(la, {
-Ha: e,
-Wa: t
+return xe(wa, {
+Za: e,
+Xa: t
 });
 }
 })()
@@ -3708,8 +3909,8 @@ Wa: t
 }) ]
 })
 });
-}, ua = () => {
-const [e, t] = B([]);
+}, ka = () => {
+const [e, t] = X([]);
 return W(() => {
 const e = e => {
 const {featureName: n, enabled: r} = e.detail, a = {
@@ -3721,26 +3922,26 @@ t(e => [ ...e, a ]), setTimeout(() => {
 t(e => e.filter(e => e.id !== a.id));
 }, 4e3);
 };
-return dt.addEventListener("featureToggled", e), () => {
-dt.removeEventListener("featureToggled", e);
+return mt.addEventListener("featureToggled", e), () => {
+mt.removeEventListener("featureToggled", e);
 };
-}, []), be("div", {
+}, []), xe("div", {
 className: "feature-notifications",
-children: e.map(e => be("div", {
+children: e.map(e => xe("div", {
 className: "feature-notification " + (e.enabled ? "enabled" : "disabled"),
-children: be("div", {
+children: xe("div", {
 className: "notification-content",
-children: [ be("div", {
+children: [ xe("div", {
 className: "feature-icon " + (e.enabled ? "enabled" : "disabled"),
-children: be(e.enabled ? Tr : Xr, {
+children: xe(e.enabled ? Vr : la, {
 size: 16
 })
-}), be("div", {
+}), xe("div", {
 className: "feature-text",
-children: [ be("span", {
+children: [ xe("span", {
 className: "feature-name",
 children: e.featureName
-}), be("span", {
+}), xe("span", {
 className: "feature-status",
 children: e.enabled ? "Enabled" : "Disabled"
 }) ]
@@ -3750,18 +3951,18 @@ children: e.enabled ? "Enabled" : "Disabled"
 });
 };
 
-let da = null, ba = null, fa = () => {}, pa = "", ha = !1;
+let Ma = null, za = null, _a = () => {}, Aa = "", Ra = !1;
 
-const ga = () => {
-da && ha && da.render(be(ca, {
-Ha: xt,
-Wa: fe,
-Ua: () => fa(!1),
-version: pa
+const Sa = () => {
+Ma && Ra && Ma.render(xe(va, {
+Za: zt,
+Xa: ye,
+Wa: () => _a(!1),
+version: Aa
 }));
-}, ma = (e, t, n) => {
-const r = !e(xt);
-t(xt, r), ga(), dt.dispatchEvent(new CustomEvent("featureToggled", {
+}, Na = (e, t, n) => {
+const r = !e(zt);
+t(zt, r), Sa(), mt.dispatchEvent(new CustomEvent("featureToggled", {
 detail: {
 featureName: n,
 enabled: r
@@ -3769,20 +3970,20 @@ enabled: r
 }));
 };
 
-let xa = !1;
+let Ca = !1;
 
-const ya = () => {
-Kn(), Reflect.apply(Ct, ut, [ "mousedown", Xn ]), Reflect.apply(Ct, ut, [ "mouseup", Zn ]), 
-setInterval(Jn, 16), n(ut.Array.prototype, "sort", {
+const ja = () => {
+Qn(), Reflect.apply(Tt, gt, [ "mousedown", ar ]), Reflect.apply(Tt, gt, [ "mouseup", or ]), 
+setInterval(ir, 16), n(gt.Array.prototype, "sort", {
 apply(e, t, n) {
 try {
-xt.Un.je && t.some(e => null != e?.obj?.ori) && (e => {
+zt.Un.Re && t.some(e => null != e?.obj?.ori) && (e => {
 try {
 e.forEach(e => {
 if (!e || !e.obj || !e.shapes) return;
 const t = e.obj.type;
-if (!Qn.includes(t)) return;
-const n = er[t], r = tr[t] || 1;
+if (!sr.includes(t)) return;
+const n = lr[t], r = cr[t] || 1;
 e.shapes.forEach(e => {
 e.color = n, e.scale = r;
 }), e.zIdx = 999;
@@ -3794,25 +3995,25 @@ return Reflect.apply(e, t, n);
 }
 }), function() {
 try {
-const e = mt.game;
+const e = Mt.game;
 if (!e || !e.initialized) return;
 let t = {};
-const n = e[_t.G];
+const n = e[jt.Y];
 if (!n) return;
 const r = n.mapIndicatorBarn;
 if (!r) return;
 const a = r.updateIndicatorData.bind(r);
 r.updateIndicatorData = function(n) {
-if (a(n), !xt.Vn?.je) return;
-const r = e[_t.sa] || e[_t.O];
+if (a(n), !zt.Vn?.Re) return;
+const r = e[jt.sa] || e[jt.j];
 if (!r) return;
-const o = r.m_getPool?.() || r.playerPool?.[_t.me] || [], i = e[_t.$];
+const o = r.m_getPool?.() || r.playerPool?.[jt.xe] || [], i = e[jt.Z];
 if (!o || !i) return;
 const s = {};
 for (const t of o) {
 if (!t || !t.active) continue;
 if (t.__id === i.__id) continue;
-const n = t[_t.ie]?.[_t.ze];
+const n = t[jt.se]?.[jt.Se];
 if (n) continue;
 const r = t.__id;
 s[r] = !0;
@@ -3821,8 +4022,8 @@ a || (a = {
 id: r,
 type: "player_" + r,
 pos: {
-x: t[_t.be]?.x || 0,
-y: t[_t.be]?.y || 0
+x: t[jt.be]?.x || 0,
+y: t[jt.be]?.y || 0
 },
 equipped: !1,
 mapSprite: this.mapSpriteBarn.addSprite(),
@@ -3835,19 +4036,19 @@ pulseDir: 1,
 pulseSpeed: .3,
 isPlayerIndicator: !0
 }, this.mapIndicators.push(a), this.idToMapIdicator[r] = a);
-const o = t[_t.be];
+const o = t[jt.be];
 o && (a.pos.x = o.x, a.pos.y = o.y, a.mapSprite.pos.x = o.x, a.mapSprite.pos.y = o.y, 
 a.pulseSprite.pos.x = o.x, a.pulseSprite.pos.y = o.y);
-const l = e[_t.$]?.[_t.ie]?.[_t.$a], c = t[_t.ie]?.[_t.$a];
-let u = l && c && l === c ? 5089023 : 16724787;
+const l = e[jt.Z]?.[jt.se]?.[jt.Ja], c = t[jt.se]?.[jt.Ja];
+let d = l && c && l === c ? 5089023 : 16724787;
 if (!a.mapSprite.sprite.texture || void 0 === a.mapSprite.sprite._texture) {
-const t = new (e.m_renderer?.m_pixi?.cr || window.PIXI?.Graphics);
-t.beginFill(u), t.drawCircle(0, 0, 8), t.endFill();
+const t = new (e.m_renderer?.m_pixi?.ur || window.PIXI?.Graphics);
+t.beginFill(d), t.drawCircle(0, 0, 8), t.endFill();
 const n = t.generateCanvasTexture();
 a.mapSprite.sprite.texture = n;
 }
 a.mapSprite.scale = .35, a.mapSprite.alpha = 1, a.mapSprite.zOrder = 655350, a.mapSprite.visible = !0, 
-a.mapSprite.sprite.tint = u, a.pulseSprite.sprite && (a.pulseSprite.pos.x = a.pos.x, 
+a.mapSprite.sprite.tint = d, a.pulseSprite.sprite && (a.pulseSprite.pos.x = a.pos.x, 
 a.pulseSprite.pos.y = a.pos.y, a.pulseSprite.scale = 1, a.pulseSprite.zOrder = 655349, 
 a.pulseSprite.visible = !0, a.pulseSprite.alpha = .5);
 }
@@ -3859,7 +4060,7 @@ t = s;
 };
 const o = r.updateIndicatorPulses?.bind(r);
 o && (r.updateIndicatorPulses = function(e) {
-if (o(e), xt.Vn?.je) for (const e of this.mapIndicators) e.isPlayerIndicator && (e.mapSprite && (e.mapSprite.visible = !0, 
+if (o(e), zt.Vn?.Re) for (const e of this.mapIndicators) e.isPlayerIndicator && (e.mapSprite && (e.mapSprite.visible = !0, 
 e.mapSprite.alpha = 1), e.pulseSprite && (e.pulseSprite.visible = !0));
 });
 } catch (e) {
@@ -3867,27 +4068,35 @@ console.error("[MapESP] Error:", e);
 }
 }(), (() => {
 try {
-const e = mt.game;
-if (!e || !e.initialized) return;
-const t = e[_t.G];
+const e = Mt.game;
+if (!e || !e.initialized || dr) return;
+const t = e[jt.Y];
 if (!t) return;
-function r(n) {
+if (dr = !0, t.updatePlayerStatus) {
+const r = t.updatePlayerStatus.bind(t);
+t.updatePlayerStatus = a => {
+const o = r(a);
+return zt.Hn?.Re && a && Array.isArray(a) && n(a, t, e), o;
+};
+}
+function n(e, t, n) {
 try {
 const r = t.mapIndicatorBarn;
 if (!r) return;
-if (!e[_t.$]) return;
-const a = new Set;
-for (const t of n) {
-if (!t.hasData) continue;
-const n = t.playerId || Math.random();
-a.add(n);
-let o = r.idToMapIdicator[n];
-o || (o = {
-id: n,
-type: "radar_player_" + n,
+if (!n[jt.Z]) return;
+const a = new Set, o = n.m_renderer?.m_pixi;
+for (let t = 0; e.length > t; t++) {
+const n = e[t];
+if (!n || !n.hasData || !n.pos) continue;
+const i = "radar_" + t;
+a.add(i);
+let s = r.idToMapIdicator[i];
+s || (s = {
+id: i,
+type: "radar_player_" + t,
 pos: {
-x: t.pos.x,
-y: t.pos.y
+x: n.pos.x || 0,
+y: n.pos.y || 0
 },
 equipped: !1,
 mapSprite: r.mapSpriteBarn.addSprite(),
@@ -3899,75 +4108,59 @@ pulseTicker: 0,
 pulseDir: 1,
 pulseSpeed: .3,
 isRadarIndicator: !0
-}, r.mapIndicators.push(o), r.idToMapIdicator[n] = o), t.pos && (o.pos.x = t.pos.x, 
-o.pos.y = t.pos.y, o.mapSprite.pos.x = t.pos.x, o.mapSprite.pos.y = t.pos.y, o.pulseSprite.pos.x = t.pos.x, 
-o.pulseSprite.pos.y = t.pos.y);
-let i = 16724787;
-if (t.downed ? i = 16755200 : !1 === t.visible && (i = 13369344), !o.mapSprite.sprite.texture || void 0 === o.mapSprite.sprite._texture) {
-const t = e.m_renderer?.m_pixi;
-if (t && t.cr) {
-const e = new t.cr;
-e.beginFill(i), e.drawCircle(0, 0, 6), e.endFill();
-const n = e.generateCanvasTexture?.();
-n && (o.mapSprite.sprite.texture = n);
+}, r.mapIndicators.push(s), r.idToMapIdicator[i] = s), s.pos.x = n.pos.x, s.pos.y = n.pos.y, 
+s.mapSprite.pos.x = n.pos.x, s.mapSprite.pos.y = n.pos.y, s.pulseSprite.pos.x = n.pos.x, 
+s.pulseSprite.pos.y = n.pos.y;
+let l = 16724787;
+if (n.downed ? l = 16755200 : !1 === n.visible && (l = 13369344), (!s.mapSprite.sprite || !s.mapSprite.sprite.texture) && o && o.ur) try {
+const e = new o.ur;
+if (e.beginFill(l), e.drawCircle(0, 0, 5), e.endFill(), e.generateCanvasTexture) {
+const t = e.generateCanvasTexture();
+t && s.mapSprite.sprite && (s.mapSprite.sprite.texture = t);
 }
+} catch (e) {}
+s.mapSprite.sprite && (s.mapSprite.scale = .25, s.mapSprite.alpha = n.visible ? 1 : .6, 
+s.mapSprite.zOrder = 655340, s.mapSprite.visible = !0, s.mapSprite.sprite.tint = l), 
+s.pulseSprite && s.pulseSprite.sprite && (s.pulseSprite.scale = .5, s.pulseSprite.zOrder = 655339, 
+s.pulseSprite.visible = !1, s.pulseSprite.alpha = 0);
 }
-o.mapSprite.scale = .25, o.mapSprite.alpha = t.visible ? 1 : .6, o.mapSprite.zOrder = 655340, 
-o.mapSprite.visible = !0, o.mapSprite.sprite.tint = i, o.pulseSprite.sprite && (o.pulseSprite.scale = 1, 
-o.pulseSprite.zOrder = 655339, o.pulseSprite.visible = !0, o.pulseSprite.alpha = .3);
+const i = [];
+for (let e = 0; r.mapIndicators.length > e; e++) {
+const t = r.mapIndicators[e];
+t.isRadarIndicator && !a.has(t.id) && i.push(t.id);
 }
-const o = [];
-for (const e of r.mapIndicators) e.isRadarIndicator && !a.has(e.id) && o.push(e.id);
-for (const e of o) r.removeIndicator(e);
-} catch (e) {
-console.error("[PlayerRadar] Error creating indicators:", e);
+for (const e of i) r.removeIndicator(e);
+} catch (e) {}
 }
-}
-t.updatePlayerStatus?.bind(t), n(e, _t.Xa, {
-apply(e, t, n) {
-try {
-const a = Reflect.apply(e, t, n);
-if (xt.Kn?.je) {
-const e = n[0];
-e && e.playerStatus && Array.isArray(e.playerStatus) && r(e.playerStatus);
-}
-return a;
-} catch (r) {
-return Reflect.apply(e, t, n);
-}
-}
-});
-} catch (a) {
-console.error("[PlayerRadar] Initialization error:", a);
-}
+} catch (a) {}
 })(), (() => {
 const e = () => {
 try {
-if (!dt) return;
-const e = dt.getElementById(kr);
-if (xt.Wn && xt.Wn.je) {
+if (!mt) return;
+const e = mt.getElementById(Nr);
+if (zt.Zn && zt.Zn.Re) {
 if (!e) {
-const e = dt.createElement("style");
-e.id = kr, e.type = "text/css", e.innerHTML = "\n#start-overlay {\n  backdrop-filter: blur(10px) brightness(0.9);\n  -webkit-backdrop-filter: blur(10px) brightness(0.9);\n}\n#btn-game-quit {\n  /* Ensure URL is quoted and provide sensible sizing */\n  background-image: url(\"../img/gui/quit.svg\") !important;\n  background-repeat: no-repeat !important;\n  background-size: contain !important;\n}\n#news-block {\n  opacity: 0 !important;\n  transition: 0.3s !important;\n}\n#news-block:hover {\n  opacity: 1 !important;\n}\n#ad-block-left, #social-share-block, #start-bottom-middle .footer-after, #start-bottom-middle {\n  pointer-events: none !important;\n  opacity: 0 !important;\n}\n#start-row-header{\n  background-image:url(\"https://i.postimg.cc/3JYQFmX0/image.png\");\n}\n\n/* Enhanced Glass-style stats */\n.surt-stat {\n  display: block;\n  margin-bottom: 6px;\n  padding: 8px 12px;\n  font-size: 14px;\n  line-height: 1;\n  border-radius: 12px;\n  color: #ffffff;\n  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);\n  border: 1px solid rgba(255,255,255,0.18);\n  box-shadow: \n    0 8px 24px rgba(0,0,0,0.5),\n    inset 0 1px 0 rgba(255,255,255,0.15);\n  backdrop-filter: blur(12px) saturate(180%) brightness(1.1);\n  -webkit-backdrop-filter: blur(12px) saturate(180%) brightness(1.1);\n  text-shadow: 0 2px 4px rgba(0,0,0,0.4);\n  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);\n  transform: translateZ(0);\n  overflow: hidden;\n  position: relative;\n}\n\n/* Glass edge highlight */\n.surt-stat::before {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 1px;\n  background: linear-gradient(90deg, \n    transparent, \n    rgba(255,255,255,0.3), \n    transparent);\n  z-index: 1;\n}\n\n.surt-stat:hover {\n  transform: translateY(-1px);\n  box-shadow: \n    0 12px 28px rgba(0,0,0,0.6),\n    inset 0 1px 0 rgba(255,255,255,0.2);\n}\n\n.surt-stat.surt-fps, .surt-stat.surt-ping {\n  position: relative;\n  left: 5px;\n  top: -5px;\n  font-size: 16px;\n  font-weight: 600;\n  padding: 10px 14px;\n  border-radius: 14px;\n}\n\n.surt-stat.surt-health, .surt-stat.surt-adr {\n  position: fixed;\n  top: 12px;\n  z-index: 9999;\n  font-size: 16px;\n  font-weight: 700;\n  padding: 10px 16px;\n  border-radius: 16px;\n  min-width: 100px;\n  text-align: center;\n  letter-spacing: 0.5px;\n}\n\n.surt-stat.surt-health { \n  right: 15px; \n  background: linear-gradient(135deg, \n    rgba(255,255,255,0.1) 0%, \n    rgba(255,107,107,0.08) 100%);\n}\n\n.surt-stat.surt-adr { \n  left: 15px; \n  background: linear-gradient(135deg, \n    rgba(255,255,255,0.1) 0%, \n    rgba(124,252,0,0.08) 100%);\n}\n\n/* Enhanced Glow & pulse effects */\n.surt-low {\n  color: #FFB8B8 !important;\n  background: linear-gradient(135deg, \n    rgba(255,255,255,0.1) 0%, \n    rgba(255,107,107,0.15) 100%) !important;\n  border-color: rgba(255,107,107,0.35) !important;\n  animation: surt-pulse-red 1.6s ease-in-out infinite;\n  transform-origin: center;\n  text-shadow: 0 0 10px rgba(255,107,107,0.7);\n}\n\n.surt-warn {\n  color: #FFE8A3 !important;\n  background: linear-gradient(135deg, \n    rgba(255,255,255,0.1) 0%, \n    rgba(255,209,102,0.15) 100%) !important;\n  border-color: rgba(255,209,102,0.35) !important;\n  animation: surt-glow-warn 2s ease-in-out infinite;\n  text-shadow: 0 0 8px rgba(255,209,102,0.6);\n}\n\n.surt-good {\n  color: #A8FF78 !important;\n  background: linear-gradient(135deg, \n    rgba(255,255,255,0.1) 0%, \n    rgba(124,252,0,0.15) 100%) !important;\n  border-color: rgba(124,252,0,0.35) !important;\n  animation: surt-glow-green 2.4s ease-in-out infinite;\n  text-shadow: 0 0 8px rgba(124,252,0,0.6);\n}\n\n/* Enhanced animations with more depth */\n@keyframes surt-glow-warn {\n  0%, 100% { \n    box-shadow: \n      0 0 10px rgba(255,209,102,0.5),\n      0 8px 24px rgba(0,0,0,0.5),\n      inset 0 1px 0 rgba(255,255,255,0.15);\n  }\n  50% { \n    box-shadow: \n      0 0 20px rgba(255,209,102,0.9),\n      0 12px 32px rgba(0,0,0,0.6),\n      inset 0 1px 0 rgba(255,255,255,0.2);\n  }\n}\n\n@keyframes surt-pulse-red {\n  0% {\n    box-shadow: \n      0 0 8px rgba(255,107,107,0.5),\n      0 8px 24px rgba(0,0,0,0.5),\n      inset 0 1px 0 rgba(255,255,255,0.15);\n    transform: translateY(0) scale(1);\n  }\n  50% {\n    box-shadow: \n      0 0 20px rgba(255,107,107,0.9),\n      0 12px 32px rgba(0,0,0,0.6),\n      inset 0 1px 0 rgba(255,255,255,0.2);\n    transform: translateY(-2px) scale(1.02);\n  }\n  100% {\n    box-shadow: \n      0 0 8px rgba(255,107,107,0.5),\n      0 8px 24px rgba(0,0,0,0.5),\n      inset 0 1px 0 rgba(255,255,255,0.15);\n    transform: translateY(0) scale(1);\n  }\n}\n\n@keyframes surt-glow-green {\n  0%, 100% { \n    box-shadow: \n      0 0 10px rgba(124,252,0,0.5),\n      0 8px 24px rgba(0,0,0,0.5),\n      inset 0 1px 0 rgba(255,255,255,0.15);\n  }\n  50% { \n    box-shadow: \n      0 0 20px rgba(124,252,0,0.9),\n      0 12px 32px rgba(0,0,0,0.6),\n      inset 0 1px 0 rgba(255,255,255,0.2);\n  }\n}\n\n/* Add subtle background noise for more glass texture */\n.surt-stat::after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: \n    radial-gradient(\n      circle at 30% 30%,\n      rgba(255,255,255,0.05) 0%,\n      transparent 50%\n    ),\n    radial-gradient(\n      circle at 70% 70%,\n      rgba(255,255,255,0.03) 0%,\n      transparent 50%\n    );\n  border-radius: inherit;\n  pointer-events: none;\n  z-index: -1;\n}\n\n/* Optional: Add a subtle shine effect on hover */\n.surt-stat:hover::after {\n  animation: surt-shine 0.8s ease-out;\n}\n\n@keyframes surt-shine {\n  0% {\n    background-position: -100px;\n  }\n  100% {\n    background-position: 200px;\n  }\n}\n\n/* Responsive adjustments */\n@media (max-width: 850px) {\n  .surt-stat.surt-health, .surt-stat.surt-adr {\n    padding: 8px 12px;\n    font-size: 14px;\n    min-width: 80px;\n  }\n}\n\n@media (min-width: 851px) {\n  #start-row-header {\n    height: 140px;\n    margin-bottom: 0px;\n  }\n}\n", 
-dt.head.appendChild(e);
+const e = mt.createElement("style");
+e.id = Nr, e.type = "text/css", e.innerHTML = "\n#start-overlay {\n  backdrop-filter: blur(10px) brightness(0.9);\n  -webkit-backdrop-filter: blur(10px) brightness(0.9);\n}\n#btn-game-quit {\n  /* Ensure URL is quoted and provide sensible sizing */\n  background-image: url(\"../img/gui/quit.svg\") !important;\n  background-repeat: no-repeat !important;\n  background-size: contain !important;\n}\n#news-block {\n  opacity: 0 !important;\n  transition: 0.3s !important;\n}\n#news-block:hover {\n  opacity: 1 !important;\n}\n#ad-block-left, #social-share-block, #start-bottom-middle .footer-after, #start-bottom-middle {\n  pointer-events: none !important;\n  opacity: 0 !important;\n}\n#start-row-header{\n  background-image:url(\"https://i.postimg.cc/3JYQFmX0/image.png\");\n}\n\n/* Enhanced Glass-style stats */\n.surt-stat {\n  display: block;\n  margin-bottom: 6px;\n  padding: 8px 12px;\n  font-size: 14px;\n  line-height: 1;\n  border-radius: 12px;\n  color: #ffffff;\n  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);\n  border: 1px solid rgba(255,255,255,0.18);\n  box-shadow: \n    0 8px 24px rgba(0,0,0,0.5),\n    inset 0 1px 0 rgba(255,255,255,0.15);\n  backdrop-filter: blur(12px) saturate(180%) brightness(1.1);\n  -webkit-backdrop-filter: blur(12px) saturate(180%) brightness(1.1);\n  text-shadow: 0 2px 4px rgba(0,0,0,0.4);\n  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);\n  transform: translateZ(0);\n  overflow: hidden;\n  position: relative;\n}\n\n/* Glass edge highlight */\n.surt-stat::before {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 1px;\n  background: linear-gradient(90deg, \n    transparent, \n    rgba(255,255,255,0.3), \n    transparent);\n  z-index: 1;\n}\n\n.surt-stat:hover {\n  transform: translateY(-1px);\n  box-shadow: \n    0 12px 28px rgba(0,0,0,0.6),\n    inset 0 1px 0 rgba(255,255,255,0.2);\n}\n\n.surt-stat.surt-fps, .surt-stat.surt-ping {\n  position: relative;\n  left: 5px;\n  top: -5px;\n  font-size: 16px;\n  font-weight: 600;\n  padding: 10px 14px;\n  border-radius: 14px;\n}\n\n.surt-stat.surt-health, .surt-stat.surt-adr {\n  position: fixed;\n  top: 12px;\n  z-index: 9999;\n  font-size: 16px;\n  font-weight: 700;\n  padding: 10px 16px;\n  border-radius: 16px;\n  min-width: 100px;\n  text-align: center;\n  letter-spacing: 0.5px;\n}\n\n.surt-stat.surt-health { \n  right: 15px; \n  background: linear-gradient(135deg, \n    rgba(255,255,255,0.1) 0%, \n    rgba(255,107,107,0.08) 100%);\n}\n\n.surt-stat.surt-adr { \n  left: 15px; \n  background: linear-gradient(135deg, \n    rgba(255,255,255,0.1) 0%, \n    rgba(124,252,0,0.08) 100%);\n}\n\n/* Enhanced Glow & pulse effects */\n.surt-low {\n  color: #FFB8B8 !important;\n  background: linear-gradient(135deg, \n    rgba(255,255,255,0.1) 0%, \n    rgba(255,107,107,0.15) 100%) !important;\n  border-color: rgba(255,107,107,0.35) !important;\n  animation: surt-pulse-red 1.6s ease-in-out infinite;\n  transform-origin: center;\n  text-shadow: 0 0 10px rgba(255,107,107,0.7);\n}\n\n.surt-warn {\n  color: #FFE8A3 !important;\n  background: linear-gradient(135deg, \n    rgba(255,255,255,0.1) 0%, \n    rgba(255,209,102,0.15) 100%) !important;\n  border-color: rgba(255,209,102,0.35) !important;\n  animation: surt-glow-warn 2s ease-in-out infinite;\n  text-shadow: 0 0 8px rgba(255,209,102,0.6);\n}\n\n.surt-good {\n  color: #A8FF78 !important;\n  background: linear-gradient(135deg, \n    rgba(255,255,255,0.1) 0%, \n    rgba(124,252,0,0.15) 100%) !important;\n  border-color: rgba(124,252,0,0.35) !important;\n  animation: surt-glow-green 2.4s ease-in-out infinite;\n  text-shadow: 0 0 8px rgba(124,252,0,0.6);\n}\n\n/* Enhanced animations with more depth */\n@keyframes surt-glow-warn {\n  0%, 100% { \n    box-shadow: \n      0 0 10px rgba(255,209,102,0.5),\n      0 8px 24px rgba(0,0,0,0.5),\n      inset 0 1px 0 rgba(255,255,255,0.15);\n  }\n  50% { \n    box-shadow: \n      0 0 20px rgba(255,209,102,0.9),\n      0 12px 32px rgba(0,0,0,0.6),\n      inset 0 1px 0 rgba(255,255,255,0.2);\n  }\n}\n\n@keyframes surt-pulse-red {\n  0% {\n    box-shadow: \n      0 0 8px rgba(255,107,107,0.5),\n      0 8px 24px rgba(0,0,0,0.5),\n      inset 0 1px 0 rgba(255,255,255,0.15);\n    transform: translateY(0) scale(1);\n  }\n  50% {\n    box-shadow: \n      0 0 20px rgba(255,107,107,0.9),\n      0 12px 32px rgba(0,0,0,0.6),\n      inset 0 1px 0 rgba(255,255,255,0.2);\n    transform: translateY(-2px) scale(1.02);\n  }\n  100% {\n    box-shadow: \n      0 0 8px rgba(255,107,107,0.5),\n      0 8px 24px rgba(0,0,0,0.5),\n      inset 0 1px 0 rgba(255,255,255,0.15);\n    transform: translateY(0) scale(1);\n  }\n}\n\n@keyframes surt-glow-green {\n  0%, 100% { \n    box-shadow: \n      0 0 10px rgba(124,252,0,0.5),\n      0 8px 24px rgba(0,0,0,0.5),\n      inset 0 1px 0 rgba(255,255,255,0.15);\n  }\n  50% { \n    box-shadow: \n      0 0 20px rgba(124,252,0,0.9),\n      0 12px 32px rgba(0,0,0,0.6),\n      inset 0 1px 0 rgba(255,255,255,0.2);\n  }\n}\n\n/* Add subtle background noise for more glass texture */\n.surt-stat::after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: \n    radial-gradient(\n      circle at 30% 30%,\n      rgba(255,255,255,0.05) 0%,\n      transparent 50%\n    ),\n    radial-gradient(\n      circle at 70% 70%,\n      rgba(255,255,255,0.03) 0%,\n      transparent 50%\n    );\n  border-radius: inherit;\n  pointer-events: none;\n  z-index: -1;\n}\n\n/* Optional: Add a subtle shine effect on hover */\n.surt-stat:hover::after {\n  animation: surt-shine 0.8s ease-out;\n}\n\n@keyframes surt-shine {\n  0% {\n    background-position: -100px;\n  }\n  100% {\n    background-position: 200px;\n  }\n}\n\n/* Responsive adjustments */\n@media (max-width: 850px) {\n  .surt-stat.surt-health, .surt-stat.surt-adr {\n    padding: 8px 12px;\n    font-size: 14px;\n    min-width: 80px;\n  }\n}\n\n@media (min-width: 851px) {\n  #start-row-header {\n    height: 140px;\n    margin-bottom: 0px;\n  }\n}\n", 
+mt.head.appendChild(e);
 }
 } else e && e.remove();
 } catch {}
 };
 e(), setInterval(e, 500);
-let t = !1, n = null, r = [], a = null, o = null, i = null, s = null, l = null, c = null, u = [], d = [];
+let t = !1, n = null, r = [], a = null, o = null, i = null, s = null, l = null, c = null, d = [], u = [];
 const b = () => {
-xt.Wn && xt.Wn.je ? (() => {
+zt.Zn && zt.Zn.Re ? (() => {
 if (!t) try {
 const e = 240;
-ut && ut.requestAnimationFrame && (n = ut.requestAnimationFrame, ut.requestAnimationFrame = t => setTimeout(() => t(performance.now()), 1e3 / e));
+gt && gt.requestAnimationFrame && (n = gt.requestAnimationFrame, gt.requestAnimationFrame = t => setTimeout(() => t(performance.now()), 1e3 / e));
 try {
-const e = dt.getElementsByClassName("ui-team-member ui-bg-standard")[0];
-e && !dt.getElementById("surt-fps-display") && (a = dt.createElement("p"), a.id = "surt-fps-display", 
+const e = mt.getElementsByClassName("ui-team-member ui-bg-standard")[0];
+e && !mt.getElementById("surt-fps-display") && (a = mt.createElement("p"), a.id = "surt-fps-display", 
 e.parentNode.insertBefore(a, e), a.classList.add("surt-stat", "surt-fps"));
 const t = () => {
 try {
-ut.requestAnimationFrame(() => {
+gt.requestAnimationFrame(() => {
 const e = performance.now();
 for (;r.length > 0 && e - 1e3 >= r[0]; ) r.shift();
 if (r.push(e), a) {
@@ -3982,13 +4175,13 @@ t();
 t();
 } catch {}
 try {
-const e = dt.getElementsByClassName("ui-team-member ui-bg-standard")[0];
-e && !dt.getElementById("surt-ping-display") && (o = dt.createElement("p"), o.id = "surt-ping-display", 
+const e = mt.getElementsByClassName("ui-team-member ui-bg-standard")[0];
+e && !mt.getElementById("surt-ping-display") && (o = mt.createElement("p"), o.id = "surt-ping-display", 
 e.parentNode.insertBefore(o, e), o.classList.add("surt-stat", "surt-ping"));
 const t = () => {
 try {
-const e = Date.now(), n = new ut.XMLHttpRequest;
-n.open("GET", ut.location.href, !0), n.onload = () => {
+const e = Date.now(), n = new gt.XMLHttpRequest;
+n.open("GET", gt.location.href, !0), n.onload = () => {
 const n = Date.now() - e;
 o && (o.innerHTML = n + " ms", o.classList.remove("surt-low", "surt-warn", "surt-good"), 
 o.classList.add(200 > n ? 100 > n ? "surt-good" : "surt-warn" : "surt-low")), c = setTimeout(t, 500);
@@ -4002,29 +4195,29 @@ c = setTimeout(t, 1e3);
 t();
 } catch {}
 try {
-const e = dt.querySelector("#ui-health-container");
-if (e && !dt.getElementById("surt-health-display")) {
-i = dt.createElement("span"), i.id = "surt-health-display", i.classList.add("surt-stat", "surt-health"), 
-e.appendChild(i), s = dt.createElement("span"), s.id = "surt-adr-display", s.classList.add("surt-stat", "surt-adr"), 
+const e = mt.querySelector("#ui-health-container");
+if (e && !mt.getElementById("surt-health-display")) {
+i = mt.createElement("span"), i.id = "surt-health-display", i.classList.add("surt-stat", "surt-health"), 
+e.appendChild(i), s = mt.createElement("span"), s.id = "surt-adr-display", s.classList.add("surt-stat", "surt-adr"), 
 e.appendChild(s);
 let t = null;
 l = setInterval(() => {
 try {
-const e = dt.getElementById("ui-health-actual"), n = e ? e.style.width.slice(0, -1) : null;
+const e = mt.getElementById("ui-health-actual"), n = e ? e.style.width.slice(0, -1) : null;
 if (null !== n && n !== t) {
 t = n;
 const e = Number.parseFloat(n) || 0;
 i.innerHTML = Math.round(e), i.classList.remove("surt-low", "surt-warn", "surt-good"), 
 i.classList.add(e > 30 ? e > 60 ? "surt-good" : "surt-warn" : "surt-low");
 }
-const r = dt.getElementById("ui-boost-counter-0")?.querySelector(".ui-bar-inner"), a = dt.getElementById("ui-boost-counter-1")?.querySelector(".ui-bar-inner"), o = dt.getElementById("ui-boost-counter-2")?.querySelector(".ui-bar-inner"), l = dt.getElementById("ui-boost-counter-3")?.querySelector(".ui-bar-inner");
+const r = mt.getElementById("ui-boost-counter-0")?.querySelector(".ui-bar-inner"), a = mt.getElementById("ui-boost-counter-1")?.querySelector(".ui-bar-inner"), o = mt.getElementById("ui-boost-counter-2")?.querySelector(".ui-bar-inner"), l = mt.getElementById("ui-boost-counter-3")?.querySelector(".ui-bar-inner");
 s.innerHTML = Math.round(25 * (r ? parseFloat(r.style.width) : 0) / 100 + 25 * (a ? parseFloat(a.style.width) : 0) / 100 + 37.5 * (o ? parseFloat(o.style.width) : 0) / 100 + 12.5 * (l ? parseFloat(l.style.width) : 0) / 100);
 } catch {}
 }, 250);
 }
 } catch {}
 try {
-Array.from(dt.getElementsByClassName("ui-armor-level")).forEach(e => {
+Array.from(mt.getElementsByClassName("ui-armor-level")).forEach(e => {
 const t = new MutationObserver(() => {
 try {
 const t = e.textContent?.trim();
@@ -4057,16 +4250,16 @@ t.observe(e, {
 characterData: !0,
 subtree: !0,
 childList: !0
-}), u.push(t);
+}), d.push(t);
 });
 } catch {}
 try {
 (() => {
 try {
-if (!dt) return;
-Array.from(dt.getElementsByClassName("ui-weapon-switch")).forEach(e => {
+if (!mt) return;
+Array.from(mt.getElementsByClassName("ui-weapon-switch")).forEach(e => {
 e.style.border = "ui-weapon-id-4" === e.id ? "3px solid #2f4032" : "3px solid #FFFFFF";
-}), Array.from(dt.getElementsByClassName("ui-weapon-name")).forEach(e => {
+}), Array.from(mt.getElementsByClassName("ui-weapon-name")).forEach(e => {
 const t = e.closest(".ui-weapon-switch");
 if (!t) return;
 const n = new MutationObserver(() => {
@@ -4172,7 +4365,7 @@ n.observe(e, {
 childList: !0,
 characterData: !0,
 subtree: !0
-}), d.push(n);
+}), u.push(n);
 });
 } catch {}
 })();
@@ -4181,142 +4374,130 @@ t = !0;
 } catch {}
 })() : (() => {
 try {
-n && (ut.requestAnimationFrame = n), a && a.parentNode && a.remove(), o && o.parentNode && o.remove(), 
+n && (gt.requestAnimationFrame = n), a && a.parentNode && a.remove(), o && o.parentNode && o.remove(), 
 i && i.parentNode && i.remove(), s && s.parentNode && s.remove(), l && clearInterval(l), 
-c && clearTimeout(c), d.forEach(e => e.disconnect()), d.length = 0;
+c && clearTimeout(c), u.forEach(e => e.disconnect()), u.length = 0;
 try {
-Array.from(dt.getElementsByClassName("ui-weapon-switch")).forEach(e => {
+Array.from(mt.getElementsByClassName("ui-weapon-switch")).forEach(e => {
 e && e.style && (e.style.border = "");
 });
 } catch {}
-u.forEach(e => e.disconnect()), u.length = 0, r.length = 0, t = !1;
+d.forEach(e => e.disconnect()), d.length = 0, r.length = 0, t = !1;
 } catch {}
 })();
 };
 b(), setInterval(b, 1e3);
-})();
+})(), v();
 };
 
-let wa = !1;
+let Oa = !1;
 
-const ka = () => {
-wa || (It.dr = mt.pixi.stage.constructor, It.cr = mt.pixi.stage.children.find(e => e.lineStyle)?.constructor, 
-on(), mt.pixi._ticker.add(c), mt.pixi._ticker.add(Pn), (() => {
+const Pa = () => {
+Oa || (Ut.pr = Mt.pixi.stage.constructor, Ut.ur = Mt.pixi.stage.children.find(e => e.lineStyle)?.constructor, 
+bn(), Mt.pixi._ticker.add(c), Mt.pixi._ticker.add(In), (() => {
 const e = () => {
-(e => !!e && (ln.aa || (ln.aa = ut.document.createElement("div"), ln.aa.classList.add("aimbot-dot"), 
-e.appendChild(ln.aa)), ln.De = !0, !0))(yt) ? qn || (mt.pixi._ticker.add(d), qn = !0) : requestAnimationFrame(e);
+(e => !!e && (fn.ia || (fn.ia = gt.document.createElement("div"), fn.ia.classList.add("aimbot-dot"), 
+e.appendChild(fn.ia)), fn.De = !0, !0))(_t) ? Hn || (Mt.pixi._ticker.add(u), Hn = !0) : requestAnimationFrame(e);
 };
 e();
-})(), mt.pixi._ticker.add(lr), (() => {
-if (Sr) return;
-Sr = !0;
+})(), Mt.pixi._ticker.add(mr), (() => {
+if (Tr) return;
+Tr = !0;
 const e = setInterval(() => {
-mt?.pixi?._ticker && (clearInterval(e), mt.pixi._ticker.add(Ar));
+Mt?.pixi?._ticker && (clearInterval(e), Mt.pixi._ticker.add(Fr));
 }, 100);
 })(), function() {
-mt.pixi._ticker.add(p), mt.pixi._ticker.add(xr);
-let e = 0, t = 0, r = !1;
-n(mt.game[_t.V].__proto__, _t.ge, {
-apply(e, t, n) {
-r = !0;
-try {
-const a = St.apply(e, t, n);
-return r = !1, a;
-} catch (e) {
-throw r = !1, e;
-}
-}
-});
-const a = mt.game[_t.te].mousePos;
-At.defineProperty(a, "y", yr("y", function() {
-return wr(r) ? this._y : fr && ht.tt && xt.xt.je ? ht.tt.clientY : !fr && xt.Xt.je ? (t = h("y"), 
+Mt.pixi._ticker.add(p), Mt.pixi._ticker.add(Rr);
+let e = 0, t = 0;
+const n = Mt.game[jt.ne].mousePos;
+Pt.defineProperty(n, "y", Sr("y", function() {
+return kr && vt.nt && zt.yt.Re ? vt.nt.clientY : !kr && zt.Xt.Re ? (t = h("y"), 
 t) : this._y;
-})), At.defineProperty(a, "x", yr("x", function() {
-return wr(r) ? this._x : fr && ht.tt && xt.xt.je ? ht.tt.clientX : !fr && xt.Xt.je ? (e = h("x"), 
+})), Pt.defineProperty(n, "x", Sr("x", function() {
+return kr && vt.nt && zt.yt.Re ? vt.nt.clientX : !kr && zt.Xt.Re ? (e = h("x"), 
 e) : this._x;
-})), St.apply(Ct, ut, [ "mousedown", e => {
-0 === e.button && (fr = !0);
-} ]), St.apply(Ct, ut, [ "mouseup", e => {
-0 === e.button && (fr = !1);
+})), Et.apply(Tt, gt, [ "mousedown", e => {
+0 === e.button && (kr = !0);
+} ]), Et.apply(Tt, gt, [ "mouseup", e => {
+0 === e.button && (kr = !1);
 } ]);
-}(), wa = !0), jt || (mt.pixi._ticker.add(t), jt = !0);
-}, va = {
-Za: null,
-Ja: null,
-Qa: 0
-}, Ma = {
-eo: !1,
-no: !1,
+}(), v(), Oa = !0), Ot || (Mt.pixi._ticker.add(t), Ot = !0);
+}, Ea = {
+Qa: null,
+eo: null,
+no: 0
+}, Fa = {
 ro: !1,
 ao: !1,
-oo: 0
-}, za = () => {
-n(mt.game, "init", {
+oo: !1,
+io: !1,
+so: 0
+}, Ta = () => {
+n(Mt.game, "init", {
 apply(e, t, n) {
 const r = Reflect.apply(e, t, n);
 return (e => new Promise(t => {
 function n(e) {
 if (!e || "object" != typeof e || e instanceof Array) return null;
 let t = {
-p: 0,
 h: 0,
 m: 0,
-_: 0,
-k: 0
+k: 0,
+v: 0,
+_: 0
 };
 return new Set([ ...Object.keys(e), ...Object.getOwnPropertyNames(Object.getPrototypeOf(e) || {}) ]).forEach(n => {
 let r = e[n];
-Array.isArray(r) ? t._++ : "object" == typeof r && null !== r ? t.m++ : "function" == typeof r ? t.h++ : t.p++, 
-t.k++;
+Array.isArray(r) ? t.v++ : "object" == typeof r && null !== r ? t.k++ : "function" == typeof r ? t.m++ : t.h++, 
+t._++;
 }), Object.values(t).map(e => String.fromCharCode(97 + e)).join("");
 }
 function r() {
-const e = Object.keys(a), t = Object.keys(_t);
+const e = Object.keys(a), t = Object.keys(jt);
 return e.every(e => t.includes(e));
 }
 const a = {
-v: "10-7-0-0-17",
-M: "21-20-11-1-53",
-S: [ "7-9-1-0-17", "9-10-1-0-20", "10-11-1-0-22" ],
-A: "9-9-3-1-22",
-C: "1-7-1-2-11",
-N: "0-4-1-1-6",
-O: [ "1-19-5-1-26", "1-18-5-1-25" ],
-j: "0-6-1-1-8",
-R: "0-4-0-1-5",
-P: "0-2-1-0-3",
-T: "0-4-0-2-6",
+M: "10-7-0-0-17",
+S: "21-20-11-1-53",
+A: [ "7-9-1-0-17", "9-10-1-0-20", "10-11-1-0-22" ],
+C: "9-9-3-1-22",
+N: "1-7-1-2-11",
+O: "0-4-1-1-6",
+j: [ "1-19-5-1-26", "1-18-5-1-25" ],
+R: "0-6-1-1-8",
+P: "0-4-0-1-5",
+T: "0-2-1-0-3",
+L: "0-4-0-2-6",
 F: "0-7-2-2-11",
 D: "0-3-1-0-4",
-L: "1-3-1-1-6",
-I: "0-3-1-0-4",
-B: "1-3-1-0-5",
-Y: [ "3-8-3-0-14", "5-8-3-0-16" ],
-G: "51-64-87-2-204",
-q: [ "1-28-5-4-38", "1-29-5-4-39" ],
-V: "",
-K: "0-3-0-1-4",
-U: "1-7-2-0-10",
-H: "36-42-12-3-93",
+I: "1-3-1-1-6",
+B: "0-3-1-0-4",
+$: "1-3-1-0-5",
+G: [ "3-8-3-0-14", "5-8-3-0-16" ],
+Y: "51-64-87-2-204",
+K: [ "1-28-5-4-38", "1-29-5-4-39" ],
+q: "",
+V: "0-3-0-1-4",
+H: "1-7-2-0-10",
+U: "36-42-12-3-93",
 W: "12-4-2-1-19",
-$: "52-40-44-3-139",
+Z: "52-40-44-3-139",
 X: "2-8-5-0-15",
-Z: [ "8-23-3-1-35", "9-24-3-1-37" ],
-J: [ "1-7-1-1-10", "2-7-1-1-11" ],
-ee: "2-8-1-1-12",
-te: "4-28-6-1-39",
-ne: "1-17-3-1-22",
-re: [ "0-3-2-0-5", "0-3-3-0-6" ],
-ae: "3-5-1-1-10",
-oe: "5-7-4-0-16",
-ie: [ "21-11-3-1-36", "23-11-3-1-38", "22-11-3-1-37" ],
-se: "6-11-2-1-20",
-le: "6-6-5-0-17",
-ce: "",
+J: [ "8-23-3-1-35", "9-24-3-1-37" ],
+ee: [ "1-7-1-1-10", "2-7-1-1-11" ],
+te: "2-8-1-1-12",
+ne: "4-28-6-1-39",
+re: "1-17-3-1-22",
+ae: [ "0-3-2-0-5", "0-3-3-0-6" ],
+oe: "3-5-1-1-10",
+ie: "5-7-4-0-16",
+se: [ "21-11-3-1-36", "23-11-3-1-38", "22-11-3-1-37" ],
+le: "6-11-2-1-20",
+ce: "6-6-5-0-17",
 de: "",
 ue: "",
-be: "",
 pe: "",
+be: "",
 fe: "",
 he: "",
 ge: "",
@@ -4324,16 +4505,17 @@ me: "",
 xe: "",
 ye: "",
 we: "",
-_e: "",
 ke: "",
 ve: "",
+_e: "",
 Me: "",
 ze: "",
 Se: "",
 Ae: "",
 Ce: "",
 Ne: "",
-Oe: ""
+Oe: "",
+je: ""
 }, o = {};
 for (const [e, t] of Object.entries(a)) if ("" != t) if (t instanceof Array) t.forEach((e, n) => {
 const r = e.split("-").map(Number).map(e => String.fromCharCode(97 + e)).join("");
@@ -4343,7 +4525,7 @@ const n = t.split("-").map(Number).map(e => String.fromCharCode(97 + e)).join(""
 o[e] = n;
 } else o[e] = "";
 const i = setInterval(() => {
-_t = (() => {
+jt = (() => {
 function t(e, t) {
 const r = n(e[t]);
 if (r) for (const [e, n] of Object.entries(o)) a[e] || (n instanceof Array && n.some(e => e == r) && (a[e] = t), 
@@ -4351,38 +4533,29 @@ n == r && (a[e] = t));
 }
 if (!e || !e.game) return {};
 const r = e.game, a = {
-..._t
+...jt
 };
 for (const e in r) if (r.hasOwnProperty(e)) {
 try {
-r[e].hasOwnProperty("deadBodyPool") ? a.I = e : r[e].hasOwnProperty("airdropPool") && (a.D = e);
+r[e].hasOwnProperty("deadBodyPool") ? a.B = e : r[e].hasOwnProperty("airdropPool") && (a.D = e);
 } catch {}
 try {
 if (r[e].hasOwnProperty("bones")) {
-a.$ = e;
+a.Z = e;
 const n = new r[e].constructor;
 for (const a in n) try {
 t(r[e], a);
 } catch {}
-if (null != a.se && (a.ve = Object.getOwnPropertyNames(r[e][a.se]).find(t => r[e][a.se][t] instanceof ut.Array)), 
-null != a.se && null != a.S) {
-const t = Object.getOwnPropertyNames(r[e][a.se]), n = Object.getOwnPropertyNames(r[a.S]);
-a.he = t.filter(e => n.includes(e)).find(t => "number" == typeof r[e][a.se][t]);
+if (null != a.le && (a.Me = Object.getOwnPropertyNames(r[e][a.le]).find(t => r[e][a.le][t] instanceof gt.Array)), 
+null != a.le && null != a.A) {
+const t = Object.getOwnPropertyNames(r[e][a.le]), n = Object.getOwnPropertyNames(r[a.A]);
+a.ge = t.filter(e => n.includes(e)).find(t => "number" == typeof r[e][a.le][t]);
 }
-if (null == a.ie) continue;
-if (null != a.$) {
+if (null == a.se) continue;
+if (null != a.Z) {
 try {
-r[a.$].selectIdlePose.call({
-[a.ie]: new Proxy({}, {
-get(e, t) {
-a.Me = t;
-}
-})
-});
-} catch {}
-try {
-r[a.$].canInteract.call({
-[a.ie]: new Proxy({}, {
+r[a.Z].selectIdlePose.call({
+[a.se]: new Proxy({}, {
 get(e, t) {
 a.ze = t;
 }
@@ -4390,18 +4563,27 @@ a.ze = t;
 });
 } catch {}
 try {
-if (null != a.ie) {
-const e = r[a.$][a.ie];
+r[a.Z].canInteract.call({
+[a.se]: new Proxy({}, {
+get(e, t) {
+a.Se = t;
+}
+})
+});
+} catch {}
+try {
+if (null != a.se) {
+const e = r[a.Z][a.se];
 if (e) {
 const t = Object.getOwnPropertyNames(e).filter(t => "number" == typeof e[t] && e[t] >= 0 && 100 >= e[t]);
-null == a.Ne && t.length > 0 && (a.Ne = t[0]), null == a.Oe && t.length > 1 && (a.Oe = t[1]);
+null == a.Oe && t.length > 0 && (a.Oe = t[0]), null == a.je && t.length > 1 && (a.je = t[1]);
 }
 }
 } catch (e) {}
 }
 (() => {
 let e = !1, t = !1;
-const r = [ null, null, e => a.de = e, e => a.pe = e ], o = [ e => a.ue = e, e => a.fe = e, null ], i = Object.getOwnPropertyNames(n.__proto__).find(e => 13 == n[e].length);
+const r = [ null, null, e => a.ue = e, e => a.fe = e ], o = [ e => a.pe = e, e => a.he = e, null ], i = Object.getOwnPropertyNames(n.__proto__).find(e => 13 == n[e].length);
 try {
 n[i].call(new Proxy({}, {
 get(e, t) {
@@ -4432,21 +4614,21 @@ e = !0, t = !0;
 }
 }));
 } catch {}
-t || (a.be = a.de);
+t || (a.be = a.ue);
 })();
 continue;
 }
 if (r[e].hasOwnProperty("triggerPing")) {
-a.V = e;
+a.q = e;
 continue;
 }
 if (r[e].hasOwnProperty("mapTexture")) {
-a.ce = e;
+a.de = e;
 continue;
 }
 if (r[e].hasOwnProperty("topLeft")) {
-a.G = e, Object.getOwnPropertyNames(r[e]).forEach(t => {
-"object" == typeof r[e][t] && null != r[e][t] && n(r[e][t]) == o.le && (a.le = t);
+a.Y = e, Object.getOwnPropertyNames(r[e]).forEach(t => {
+"object" == typeof r[e][t] && null != r[e][t] && n(r[e][t]) == o.ce && (a.ce = t);
 });
 continue;
 }
@@ -4456,107 +4638,107 @@ t(r, e);
 } catch (e) {}
 }
 try {
-null != a.O && Object.getOwnPropertyNames(r[a.O].playerPool).forEach(e => {
-Array.isArray(r[a.O].playerPool[e]) && (a.me = e);
+null != a.j && Object.getOwnPropertyNames(r[a.j].playerPool).forEach(e => {
+Array.isArray(r[a.j].playerPool[e]) && (a.xe = e);
 });
 } catch {}
 try {
-null == a.xe && (a.xe = Object.getOwnPropertyNames(r.__proto__).filter(e => "function" == typeof r[e]).find(e => 3 == r[e].length));
+null == a.ye && (a.ye = Object.getOwnPropertyNames(r.__proto__).filter(e => "function" == typeof r[e]).find(e => 3 == r[e].length));
 } catch {}
 try {
-if (null != a.ce && null != a.ge && null == a.ye) try {
-r[a.ce][a.ge].call(new Proxy({}, {
+if (null != a.de && null != a.me && null == a.we) try {
+r[a.de][a.me].call(new Proxy({}, {
 get(e, t) {
-throw a.ye = t, null;
+throw a.we = t, null;
 }
 }));
 } catch {}
 } catch {}
 try {
-if (null != a.ye && null == a.we) {
-const e = r[a.ce][a.ye][a.me], t = new Proxy({}, {
+if (null != a.we && null == a.ke) {
+const e = r[a.de][a.we][a.xe], t = new Proxy({}, {
 get(e, t) {
-a.we = t;
+a.ke = t;
 }
 });
 e[0].render.call({}, t, t);
 }
 } catch {}
 try {
-if (null != a.V && null == a._e) {
-let e = new r[a.V].constructor;
+if (null != a.q && null == a.ve) {
+let e = new r[a.q].constructor;
 e.activePlayer = 1, e.emoteSelector.ping = "ping_danger", e.uiManager = {
 getWorldPosFromMapPos() {}
 }, e.camera = new Proxy({}, {
 get(e, t) {
-a._e = t;
+a.ve = t;
 }
 }), e.triggerPing();
 }
 } catch {}
 try {
-null != a.V && null == a.ge && (a.ge = Object.getOwnPropertyNames(r[a.V].__proto__).find(e => 10 == r[a.V][e].length));
+null != a.q && null == a.me && (a.me = Object.getOwnPropertyNames(r[a.q].__proto__).find(e => 10 == r[a.q][e].length));
 } catch {}
 try {
-null != a.M && null == a.ke && r[a.M].getAimMovement.call({}, {
-[a.se]: new Proxy({}, {
+null != a.S && null == a._e && r[a.S].getAimMovement.call({}, {
+[a.le]: new Proxy({}, {
 get(e, t) {
-a.ke = t;
+a._e = t;
 }
 })
 });
 } catch {}
 try {
-null != a.L && null == a.Se && (a.Se = Object.getOwnPropertyNames(e.game[a.L]).find(t => e.game[a.L][t] instanceof ut.Array));
+null != a.I && null == a.Ae && (a.Ae = Object.getOwnPropertyNames(e.game[a.I]).find(t => e.game[a.I][t] instanceof gt.Array));
 } catch {}
 try {
-null != a.U && null == a.Ae && (f = Object.getOwnPropertyNames(e.game[a.U].__proto__).find(t => 4 == e.game[a.U][t].length), 
-e.game[a.U][f].call(new Proxy(e.game[a.U], {
+null != a.H && null == a.Ce && (f = Object.getOwnPropertyNames(e.game[a.H].__proto__).find(t => 4 == e.game[a.H][t].length), 
+e.game[a.H][f].call(new Proxy(e.game[a.H], {
 get(e, t) {
 return e[t].bind(new Proxy({}, {
 get(e, t) {
-a.Ae = t;
+a.Ce = t;
 }
 }));
 }
 })));
 } catch {}
 return a;
-})(), r() && (clearInterval(i), t(_t));
+})(), r() && (clearInterval(i), t(jt));
 });
 setTimeout(() => {
-r() || (clearInterval(i), t(_t));
+r() || (clearInterval(i), t(jt));
 }, 1e3);
-}))(mt).then(() => {
-ka(), wa = !0;
+}))(Mt).then(() => {
+Pa(), Oa = !0;
 }), r;
 }
 }), (() => {
-const e = Object.getOwnPropertyNames(mt.game.__proto__).find(e => "function" == typeof mt.game[e] && 3 === mt.game[e].length);
-n(mt.game, e, {
+const e = Object.getOwnPropertyNames(Mt.game.__proto__).find(e => "function" == typeof Mt.game[e] && 3 === Mt.game[e].length);
+n(Mt.game, e, {
 apply(e, t, n) {
 const [r, a] = n;
-return 1 === r && (a.isMobile = xt.$n.je), 3 === r && (e => {
-for (const t of gt.Ft) e.addInput(t);
-gt.Ft.length = 0;
+return 1 === r && (a.isMobile = zt.Xn.Re), 3 === r && (e => {
+for (const t of kt.Ft) e.addInput(t);
+kt.Ft.length = 0;
 })(a), a.inputs ? ((e => {
 if (!Wn) {
-if (!xt.xt.je || !xt.xt.St || !b()) return;
+if (!zt.yt.Re || !zt.yt.At || !b()) return;
 try {
-const e = mt.game, t = e?.[_t.oa];
+const e = Mt.game, t = e?.[jt.la];
 if (!t) return;
-const n = t[_t.ie]?.[_t.Me];
+const n = t[jt.se]?.[jt.ze];
 if (2 === n || 3 === n) return;
 if ((() => {
 try {
-const e = mt.game, t = e?.[_t.oa];
+const e = Mt.game, t = e?.[jt.la];
 if (!t) return !1;
-const n = t[_t.ie]?.[_t.Me], r = t[_t.se]?.[_t.ve];
+const n = t[jt.se]?.[jt.ze], r = t[jt.le]?.[jt.Me];
 if (!r || void 0 === n) return !1;
 const a = r[n];
 if (!a) return !1;
-const o = 0 === n ? "primary_" : "secondary_", i = va[o];
-return null !== i && i > a.ammo || (va[o] = a.ammo, va.Qa = performance.now(), !1);
+const o = 0 === n ? "primary_" : "secondary_", i = Ea[o];
+return null !== i && i > a.ammo || (Ea[o] = a.ammo, Ea.no = performance.now(), !1);
 } catch {
 return !1;
 }
@@ -4566,22 +4748,22 @@ return;
 }
 }
 e.shootStart = !0, e.shootHold = !0;
-})(a), o = a, ht.Yn && (o.touchMoveActive = !0, o.touchMoveLen = !0, o.touchMoveDir.x = ht.Yn.x, 
-o.touchMoveDir.y = ht.Yn.y), (e => {
+})(a), o = a, vt.Yn && (o.touchMoveActive = !0, o.touchMoveLen = !0, o.touchMoveDir.x = vt.Yn.x, 
+o.touchMoveDir.y = vt.Yn.y), (e => {
 if (!e) return;
-const t = Kt.Le, n = !!e.shootStart || !!e.shootHold || Array.isArray(e.inputs) && e.inputs.includes(Tt);
-n && !Ma.ao && xt.xt.je && (Ma.oo = 3), Ma.ao = n, n || (Ma.oo = 0);
-const r = Ma.oo > 0;
-if (r && Ma.oo--, !(Kt.ta && "idle" !== t || r)) return Ma.eo && (e.shootStart = !0, 
-Ma.no && (e.shootHold = !0, Array.isArray(e.inputs) && Ma.ro && !e.inputs.includes(Tt) && e.inputs.push(Tt))), 
-Ma.eo = !1, Ma.no = !1, Ma.ro = !1, void (Ma.oo = 0);
+const t = Qt.Ie, n = !!e.shootStart || !!e.shootHold || Array.isArray(e.inputs) && e.inputs.includes(Bt);
+n && !Fa.io && zt.yt.Re && (Fa.so = 3), Fa.io = n, n || (Fa.so = 0);
+const r = Fa.so > 0;
+if (r && Fa.so--, !(Qt.ra && "idle" !== t || r)) return Fa.ro && (e.shootStart = !0, 
+Fa.ao && (e.shootHold = !0, Array.isArray(e.inputs) && Fa.oo && !e.inputs.includes(Bt) && e.inputs.push(Bt))), 
+Fa.ro = !1, Fa.ao = !1, Fa.oo = !1, void (Fa.so = 0);
 let a = !1;
-if (Array.isArray(e.inputs)) for (let t = e.inputs.length - 1; t >= 0; t -= 1) e.inputs[t] === Tt && (e.inputs.splice(t, 1), 
+if (Array.isArray(e.inputs)) for (let t = e.inputs.length - 1; t >= 0; t -= 1) e.inputs[t] === Bt && (e.inputs.splice(t, 1), 
 a = !0);
 const o = !!e.shootStart, i = !!e.shootHold || a;
-(o || i) && (e.shootStart = !1, e.shootHold = !1, Ma.eo = Ma.eo || o || i, Ma.no = Ma.no || i, 
-Ma.ro = Ma.ro || a);
-})(a), gt.nt = a.toMouseLen, Reflect.apply(e, t, n)) : Reflect.apply(e, t, n);
+(o || i) && (e.shootStart = !1, e.shootHold = !1, Fa.ro = Fa.ro || o || i, Fa.ao = Fa.ao || i, 
+Fa.oo = Fa.oo || a);
+})(a), kt.rt = a.toMouseLen, Reflect.apply(e, t, n)) : Reflect.apply(e, t, n);
 var o;
 }
 });
@@ -4600,36 +4782,36 @@ construct: () => ({})
 configurable: !1,
 writable: !1
 });
-} catch (x) {}
+} catch (z) {}
 
 try {
 window.onerror = () => {};
-} catch (x) {}
+} catch (z) {}
 
 try {
 window.onunhandledrejection = () => {};
-} catch (x) {}
+} catch (z) {}
 
 try {
 window.onrejectionhandled = () => {};
-} catch (x) {}
+} catch (z) {}
 
 try {
 window.onabort = () => {};
-} catch (x) {}
+} catch (z) {}
 
 try {
 window.onunload = () => {};
-} catch (x) {}
+} catch (z) {}
 
 try {
 window.onbeforeunload = () => {};
-} catch (x) {}
+} catch (z) {}
 
 try {
 window.addEventListener("error", () => {}, !0), window.addEventListener("unhandledrejection", () => {}, !0), 
 window.addEventListener("rejectionhandled", () => {}, !0), window.addEventListener("abort", () => {}, !0);
-} catch (x) {}
+} catch (z) {}
 
 try {
 Object.defineProperty(window, "Error", {
@@ -4637,65 +4819,65 @@ value: void 0,
 configurable: !1,
 writable: !1
 });
-} catch (x) {}
+} catch (z) {}
 
 try {
 window.alert = () => {};
-} catch (x) {}
+} catch (z) {}
 
 try {
 window.confirm = () => {};
-} catch (x) {}
+} catch (z) {}
 
 try {
 window.prompt = () => {};
-} catch (x) {}
+} catch (z) {}
 
 try {
 Object.freeze(window.console);
-} catch (x) {}
+} catch (z) {}
 
 try {
 Object.freeze(window);
-} catch (x) {}
+} catch (z) {}
 
 (async () => {
 (() => {
 try {
-const e = "surviv_config", t = ut.localStorage.getItem(e);
+const e = "surviv_config", t = gt.localStorage.getItem(e);
 if (t) {
 const n = JSON.parse(t);
-n.interpolation = !0, n.localRotation = !0, ut.localStorage.setItem(e, JSON.stringify(n));
+n.interpolation = !0, n.localRotation = !0, gt.localStorage.setItem(e, JSON.stringify(n));
 }
 } catch {}
 var t;
 (() => {
-if (xa) return;
-xa = !0;
+if (Ca) return;
+Ca = !0;
 const t = () => (() => {
 (async () => {
 const e = [ {
-name: Rt,
+name: Dt,
 file: "GothamPro.woff2",
 weight: 200,
 style: "normal"
 }, {
-name: Rt,
+name: Dt,
 file: "GothamPro-Italic.woff2",
 weight: 200,
 style: "italic"
 }, {
-name: Rt,
+name: Dt,
 file: "GothamPro-Medium.woff2",
 weight: 400,
 style: "normal"
 }, {
-name: Rt,
+name: Dt,
 file: "GothamPro-MediumItalic.woff2",
 weight: 400,
 style: "italic"
 }, {
-name: Rt,
+name: Dt,
 file: "GothamPro-Bold.woff2",
 weight: 600,
 style: "normal"
@@ -4705,36 +4887,36 @@ const t = new FontFace(e.name, `url(https://cdn.rawgit.com/mfd/f3d96ec7f0e8f034c
 weight: "" + e.weight,
 style: e.style
 });
-await t.load(), dt.fonts.add(t);
+await t.load(), mt.fonts.add(t);
 } catch {}
 });
 await Promise.all(e);
 })();
 const t = (() => {
-yt = bt;
+_t = xt;
 const e = document.createElement("style");
-return e.textContent = "#ui{--border-radius:0.375rem;--border-width:0.0625rem;--transition-duration:100ms;--green-gradient:linear-gradient(180deg, #6edb72 0%, #58c05c 100%);--shadow-size:0.125rem;--shadow-opacity:0.2;--glow-size:0.25rem;--glow-opacity:0.2;animation:.6s cubic-bezier(.34,1.56,.64,1) slideInUp}@keyframes slideInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}@keyframes slideInDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}@keyframes glassGlow{0%,100%{box-shadow:0 8px 32px 0 rgba(31,38,135,.37),inset 0 0 20px rgba(255,255,255,.1),0 0 60px rgba(110,219,114,.2),0 20px 60px rgba(0,0,0,.3)}50%{box-shadow:0 8px 32px 0 rgba(31,38,135,.45),inset 0 0 25px rgba(255,255,255,.15),0 0 80px rgba(110,219,114,.3),0 20px 60px rgba(0,0,0,.35)}}*{font-family:GothamPro,sans-serif;box-sizing:border-box;margin:0;padding:0}:focus-visible{outline:0}.popup{user-select:none;position:relative;background:rgba(15,15,20,.6);backdrop-filter:blur(25px) saturate(200%) brightness(1.05) contrast(1.1);-webkit-backdrop-filter:blur(25px) saturate(200%) brightness(1.05) contrast(1.1);border-radius:1.25rem;box-shadow:0 8px 32px 0 rgba(31,38,135,.37),inset 0 0 20px rgba(255,255,255,.1),0 0 60px rgba(110,219,114,.2),0 20px 60px rgba(0,0,0,.3),inset -1px -1px 1px rgba(0,0,0,.3),inset 1px 1px 1px rgba(255,255,255,.2);width:28rem;overflow:hidden;border:1px solid rgba(255,255,255,.25);transition:.4s cubic-bezier(.23, 1, .32, 1);animation:3s ease-in-out infinite glassGlow}.popup:hover{backdrop-filter:blur(35px) saturate(220%) brightness(1.1) contrast(1.15);-webkit-backdrop-filter:blur(35px) saturate(220%) brightness(1.1) contrast(1.15);border-color:rgba(255,255,255,.35)}.titlebar{background:rgba(15,15,22,.65);backdrop-filter:blur(40px) saturate(220%) brightness(1.08) contrast(1.15) hue-rotate(-5deg);-webkit-backdrop-filter:blur(40px) saturate(220%) brightness(1.08) contrast(1.15) hue-rotate(-5deg);padding:.75rem .53125rem;user-select:none;transition:.3s cubic-bezier(.23, 1, .32, 1);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;cursor:grab;border-bottom:1px solid rgba(110,219,114,.35);border-top:1px solid rgba(255,255,255,.15);box-shadow:0 6px 20px rgba(0,0,0,.25),inset 0 1px 2px rgba(255,255,255,.2),inset 0 -1px 1px rgba(0,0,0,.3),0 0 40px rgba(110,219,114,.15),inset -1px -1px 1px rgba(0,0,0,.25),inset 1px 1px 1px rgba(255,255,255,.18);animation:4s ease-in-out infinite glassGlow}.titlebar::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background-image:repeating-linear-gradient(45deg,transparent 0,transparent .25rem,rgba(110,219,114,.05) .25rem,rgba(110,219,114,.05) .5rem),repeating-linear-gradient(-45deg,transparent 0,transparent .25rem,rgba(255,255,255,.02) .25rem,rgba(255,255,255,.02) .5rem);filter:blur(.125rem);opacity:.7;z-index:0;pointer-events:none}.titlebar::after{display:none}.titlebar:hover{background:rgba(18,18,28,.75)!important;backdrop-filter:blur(50px) saturate(240%) brightness(1.15) contrast(1.2) hue-rotate(-5deg);-webkit-backdrop-filter:blur(50px) saturate(240%) brightness(1.15) contrast(1.2) hue-rotate(-5deg);border-color:rgba(110,219,114,.5);box-shadow:0 10px 40px rgba(110,219,114,.2),inset 0 1px 2px rgba(255,255,255,.25),inset 0 -1px 1px rgba(0,0,0,.4),0 0 60px rgba(110,219,114,.25),inset -1px -1px 1px rgba(0,0,0,.3),inset 1px 1px 1px rgba(255,255,255,.22);transition:.25s cubic-bezier(.23, 1, .32, 1);transform:translateY(-3px)}.titlebar:active{background:rgba(15,15,22,.68)!important;backdrop-filter:blur(35px) saturate(220%) brightness(1.1) contrast(1.15);-webkit-backdrop-filter:blur(35px) saturate(220%) brightness(1.1) contrast(1.15);transition:.15s cubic-bezier(.4, 0, .2, 1);cursor:grabbing;box-shadow:0 6px 20px rgba(0,0,0,.3),inset 0 1px 1px rgba(255,255,255,.15),inset 0 -1px 1px rgba(0,0,0,.35),0 0 35px rgba(110,219,114,.1);transform:translateY(-1px)}.menu-icon{width:.875rem;height:.875rem;color:#fff;pointer-events:none;position:absolute;left:.375rem;top:.375rem}.version-text{position:absolute;left:.375rem;bottom:.375rem;font-size:.65rem;color:rgba(255,255,255,.5);z-index:10}.update-available-text{font-size:.55rem;color:rgba(105,247,76,.8);font-weight:400;animation:3.5s ease-in-out infinite update-pulse}@keyframes update-pulse{0%,100%{text-shadow:0 0 .1rem rgba(105,247,76,.3)}50%{text-shadow:0 0 .2rem rgba(105,247,76,.5)}}.navbar{background:rgba(18,18,26,.4);backdrop-filter:blur(20px) saturate(190%) brightness(1.05);-webkit-backdrop-filter:blur(20px) saturate(190%) brightness(1.05);padding:.5rem;border-bottom:1px solid rgba(255,255,255,.15);transition:.3s}.title{font-size:1.1rem;font-weight:700;color:#fff;text-align:center;position:relative;z-index:10;text-shadow:0 0 10px rgba(110,219,114,.3);letter-spacing:.05em}.credit{font-size:.75rem;font-style:italic;color:rgba(255,255,255,.45);text-align:center;display:block;position:relative;z-index:10}.nav-tabs{display:flex;gap:.5rem;align-items:center;justify-content:center;transition:.3s;animation:.5s ease-out .2s both slideInDown}.nav-tab{padding:.375rem .75rem;background:rgba(32,32,32,.4);backdrop-filter:blur(12px) saturate(180%);-webkit-backdrop-filter:blur(12px) saturate(180%);border:1px solid rgba(255,255,255,.15);border-radius:var(--border-radius);color:#bababa;font-size:.75rem;font-weight:600;cursor:pointer;transition:.2s cubic-bezier(.4, 0, .2, 1);position:relative;box-shadow:0 2px 8px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.08)}.nav-tab:hover{background:rgba(50,50,50,.5);backdrop-filter:blur(18px) saturate(200%);-webkit-backdrop-filter:blur(18px) saturate(200%);box-shadow:0 6px 20px rgba(110,219,114,.15),inset 0 1px 0 rgba(255,255,255,.12);transform:translateY(-2px);border-color:rgba(110,219,114,.4)}.nav-tab:active{background:rgba(40,40,40,.5);transform:translateY(-1px);box-shadow:0 3px 12px rgba(110,219,114,.1)}.nav-tab.active{color:#fff;background:rgba(110,219,114,.15);border-color:rgba(110,219,114,.6);box-shadow:0 0 20px rgba(110,219,114,.3),inset 0 1px 0 rgba(255,255,255,.15);backdrop-filter:blur(15px) saturate(210%);-webkit-backdrop-filter:blur(15px) saturate(210%)}.close-btn{position:absolute;top:.0625rem;right:.5rem;cursor:pointer;border:none;background:rgba(255,255,255,.05);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:1.25rem;color:#666;transition:.2s cubic-bezier(.4, 0, .2, 1);border-radius:6px;padding:4px 8px;box-shadow:0 2px 8px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.08)}.close-btn:hover{color:#ff6b6b;background:rgba(255,107,107,.15);backdrop-filter:blur(12px) saturate(180%);-webkit-backdrop-filter:blur(12px) saturate(180%);transform:rotate(90deg) scale(1.3);text-shadow:0 0 12px rgba(255,107,107,.5),0 0 24px rgba(255,50,50,.3);filter:drop-shadow(0 0 4px rgba(255, 50, 50, .4));box-shadow:0 4px 12px rgba(255,107,107,.25),inset 0 1px 0 rgba(255,255,255,.1)}.close-btn:active{color:#ccc;transform:rotate(90deg) scale(.9);box-shadow:0 2px 6px rgba(0,0,0,.15)}.content-container{padding-top:.625rem;padding-left:1rem;padding-right:1rem;max-height:0;opacity:0;overflow:hidden;transition:max-height .5s cubic-bezier(.34, 1.56, .64, 1),opacity .4s cubic-bezier(.4, 0, .2, 1),padding .3s cubic-bezier(.4, 0, .2, 1);transform:translateY(-15px)}.content-container.active{max-height:400px;opacity:1;padding:.625rem .5rem 1rem 1rem;transform:translateY(0);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:rgba(110,219,114,0.6) rgba(255,255,255,0.05);animation:.5s ease-out .1s both slideInDown}.section{margin-bottom:1.25rem}.section:last-child{margin-bottom:0}.section-title{color:#fff;font-size:.9rem;font-weight:600;margin:0 0 .375rem;letter-spacing:.03125rem;display:flex;justify-content:space-between;align-items:center;gap:.375rem;position:relative}.risky-label{color:#ff3232;font-size:.7rem;font-weight:700;letter-spacing:.03125rem;animation:2s ease-in-out infinite risky-glow}@keyframes risky-glow{0%,100%{text-shadow:0 0 .125rem rgba(255,50,50,.4)}50%{text-shadow:0 0 .3rem rgba(255,50,50,.7)}}.section-title .checkbox-item{border:none;background:0 0;padding:.25rem .375rem;margin:0}.section-title .checkbox-item:hover{background:rgba(255,255,255,.05);border-radius:var(--border-radius)}.section-title label{font-size:.75rem;color:#ddd!important}.section-title-container{flex-grow:1}.subsection-title{color:#bbb;font-size:.75rem;font-weight:600;margin:.875rem 0 .25rem .9375rem;position:relative}.subsection-title::before{content:'';position:absolute;left:-.625rem;top:50%;height:.0625rem;width:.375rem;background:#666}.group{display:flex;flex-direction:column;background:rgba(255,255,255,.06);backdrop-filter:blur(15px) saturate(180%);-webkit-backdrop-filter:blur(15px) saturate(180%);border-radius:var(--border-radius);padding:.625rem;margin-bottom:.625rem;gap:.375rem;border:1px solid rgba(255,255,255,.12);box-shadow:inset 0 0 15px rgba(255,255,255,.08),0 4px 15px rgba(0,0,0,.1);border:var(--border-width) solid rgba(255,255,255,.15);max-height:20rem;opacity:1;overflow:hidden;transition:max-height 350ms cubic-bezier(.4, 0, .2, 1),opacity .3s cubic-bezier(.4, 0, .2, 1),padding .3s cubic-bezier(.4, 0, .2, 1),margin .3s cubic-bezier(.4, 0, .2, 1),transform .3s cubic-bezier(.4, 0, .2, 1);box-shadow:0 4px 15px rgba(0,0,0,.1),inset 0 0 10px rgba(255,255,255,.05);animation:.4s cubic-bezier(.34,1.56,.64,1) group-entrance}@keyframes group-entrance{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}.group:hover{box-shadow:0 6px 20px rgba(0,0,0,.15),inset 0 0 15px rgba(255,255,255,.08)}.group.hidden{max-height:0;opacity:0;padding:0 .625rem;margin-bottom:0}.group .section-title{margin-top:.625rem}.subgroup{margin-left:.09375rem;padding-left:.0625rem;display:flex;flex-wrap:wrap;gap:.375rem}.sub-section{display:flex;flex-direction:column;gap:.375rem;padding:.5rem;background:rgba(0,0,0,.2);border-radius:var(--border-radius);border-left:2px solid rgba(110,219,114,.3);margin-top:.25rem}.checkbox-item{border:var(--border-width) solid rgba(255,255,255,.1);display:inline-flex;align-items:center;padding:.375rem .5rem;border-radius:var(--border-radius);transition:180ms cubic-bezier(.4, 0, .2, 1);cursor:pointer;width:fit-content;background-color:rgba(255,255,255,.04);backdrop-filter:blur(10px) saturate(180%);-webkit-backdrop-filter:blur(10px) saturate(180%);box-shadow:0 2px 8px rgba(0,0,0,.1),inset 0 1px 0 rgba(255,255,255,.06)}.checkbox-item:hover{background:rgba(255,255,255,.1);backdrop-filter:blur(15px) saturate(200%);-webkit-backdrop-filter:blur(15px) saturate(200%);border-color:rgba(255,255,255,.2);transform:translateY(-2px);box-shadow:0 4px 12px rgba(110,219,114,.15),inset 0 1px 0 rgba(255,255,255,.08)}.checkbox-item:active{background:rgba(255,255,255,.06);transform:translateY(0);box-shadow:0 2px 6px rgba(0,0,0,.1)}.checkbox-item-label{color:#ddd;font-size:.8125rem;margin-left:.5rem;cursor:pointer;pointer-events:none}.checkbox{appearance:none;width:1rem;height:1rem;border:none;border-radius:25%;background:radial-gradient(circle at 35% 35%,#6a6a6a,#4d4d4d,#3d3d3d,#2a2a2a);box-shadow:0 var(--shadow-size) calc(var(--shadow-size) * 3) rgba(0,0,0,var(--shadow-opacity)),inset calc(var(--shadow-size) * -1) calc(var(--shadow-size) * -1) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset var(--shadow-size) var(--shadow-size) var(--shadow-size) rgba(255,255,255,.1);cursor:pointer;position:relative;transition:.2s cubic-bezier(.4, 0, .2, 1)}.checkbox::before{content:'';position:absolute;inset:0;border-radius:25%;background:radial-gradient(circle at 35% 35%,#7a7a7a,#5d5d5d,#4d4d4d,#3a3a3a);opacity:0;transition:opacity .2s ease-out}.checkbox:hover:not(.checkbox-checked)::before{opacity:1;transform:scale(1.05)}.checkbox:active:not(.checkbox-checked){transform:scale(.95)}.checkbox-checked{background:radial-gradient(circle at 35% 35%,#8ef592,#6edb72,#4fb052,#3a8a3d);box-shadow:0 var(--shadow-size) calc(var(--shadow-size) * 3) rgba(0,0,0,var(--shadow-opacity)),inset calc(var(--shadow-size) * -1) calc(var(--shadow-size) * -1) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset var(--shadow-size) var(--shadow-size) var(--shadow-size) rgba(255,255,255,.3),0 0 .5rem rgba(110,219,114,.6);animation:150ms cubic-bezier(.34,1.56,.64,1) checkbox-pop}.checkbox-checked::before{content:'';position:absolute;inset:0;border-radius:25%;background:radial-gradient(circle at 35% 35%,#7ee582,#5ecb62,#3fa042,#2a7a2d);opacity:0;transition:opacity .2s ease-out}.checkbox-checked:hover::before{opacity:1}.checkbox-checked:active{transform:scale(.95)}@keyframes checkbox-pop{0%{transform:scale(.6) rotate(-45deg);opacity:.7}50%{transform:scale(1.15)}70%{transform:scale(1.05)}100%{transform:scale(1) rotate(0);opacity:1}}.slider-container{display:flex;align-items:center;gap:.625rem}.slider{appearance:none;width:5.625rem;height:.3125rem;border-radius:var(--border-radius);outline:0;cursor:pointer;background:#4d4d4d;box-shadow:inset 0 0 5px rgba(0,0,0,.3);transition:150ms}.slider:hover{box-shadow:inset 0 0 8px rgba(0,0,0,.4),0 0 12px rgba(110,219,114,.3);animation:1.5s ease-in-out infinite slider-glow}@keyframes slider-glow{0%,100%{box-shadow:inset 0 0 8px rgba(0,0,0,.4),0 0 8px rgba(110,219,114,.2)}50%{box-shadow:inset 0 0 8px rgba(0,0,0,.4),0 0 15px rgba(110,219,114,.4)}}.keybind-slot{min-width:1.125rem;height:1.125rem;padding:0 .375rem;background:radial-gradient(ellipse at 50% 30%,rgba(85,85,85,.6),rgba(77,77,77,.5),rgba(61,61,61,.4),rgba(42,42,42,.3));backdrop-filter:blur(8px) saturate(180%);-webkit-backdrop-filter:blur(8px) saturate(180%);color:#ddd;font-size:.625rem;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:.15rem;border-radius:var(--border-radius);border:1px solid rgba(255,255,255,.1);box-shadow:0 var(--shadow-size) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset calc(var(--shadow-size) * -1) calc(var(--shadow-size) * -1) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset var(--shadow-size) var(--shadow-size) var(--shadow-size) rgba(255,255,255,.1);position:relative;z-index:1;white-space:nowrap;transition:150ms cubic-bezier(.4, 0, .2, 1)}.keybind-pen-icon{width:.5rem;height:.5rem;color:#ddd}.keybind-slot::before{content:'';position:absolute;inset:0;border-radius:var(--border-radius);background:radial-gradient(ellipse at 50% 30%,#656565,#5d5d5d,#4d4d4d,#3a3a3a);opacity:0;transition:opacity var(--transition-duration) ease;pointer-events:none;z-index:-1}.keybind-slot-editable{cursor:pointer}.keybind-slot-editable:hover::before{opacity:1;transform:scale(1.08);animation:.6s ease-in-out keybind-shine}.keybind-slot-editable:hover{background:radial-gradient(ellipse at 50% 30%,rgba(100,100,100,.7),rgba(90,90,90,.6),rgba(75,75,75,.5),rgba(55,55,55,.4));backdrop-filter:blur(15px) saturate(200%);-webkit-backdrop-filter:blur(15px) saturate(200%);transform:translateY(-3px) scale(1.05);animation:.6s ease-in-out infinite keybind-float;border-color:rgba(110,219,114,.3);box-shadow:0 4px 12px rgba(110,219,114,.15),inset 0 1px 0 rgba(255,255,255,.1)}.keybind-slot-editable:active::before{background:radial-gradient(ellipse at 50% 30%,#6a6a6a,#626262,#525252,#3f3f3f);opacity:1;transform:scale(.95)}.keybind-slot-editable:active{transform:translateY(0)}.keybind-slot-waiting{background:radial-gradient(ellipse at 50% 30%,#7a7a7a,#6d6d6d,#5d5d5d,#4a4a4a);animation:1.2s cubic-bezier(.4,0,.6,1) infinite keybind-waiting-pulse}@keyframes keybind-waiting-pulse{0%,100%{box-shadow:0 var(--shadow-size) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset calc(var(--shadow-size) * -1) calc(var(--shadow-size) * -1) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset var(--shadow-size) var(--shadow-size) var(--shadow-size) rgba(255,255,255,.1),0 0 0 rgba(110,219,114,0);transform:scale(1)}50%{box-shadow:0 var(--shadow-size) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset calc(var(--shadow-size) * -1) calc(var(--shadow-size) * -1) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset var(--shadow-size) var(--shadow-size) var(--shadow-size) rgba(255,255,255,.3),0 0 12px rgba(110,219,114,.6);transform:scale(1.08)}}@keyframes keybind-shine{0%,100%{background:radial-gradient(ellipse at 50% 30%,#656565,#5d5d5d,#4d4d4d,#3a3a3a)}50%{background:radial-gradient(ellipse at 50% 30%,#7a7a7a,#6d6d6d,#5d5d5d,#4a4a4a)}}@keyframes keybind-float{0%,100%{transform:translateY(-3px) scale(1.05)}50%{transform:translateY(-5px) scale(1.08)}}.keybind-slot-container{display:inline-flex;align-items:center;gap:.25rem}.keybind-slot-separator{color:#888;font-size:.625rem;font-weight:600}.help-section{font-size:.8125rem}.help-title{color:#fff;font-size:.9375rem;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;font-weight:600}.help-panel{background:rgba(255,255,255,.05);border-radius:var(--border-radius);padding:.625rem;margin-bottom:.75rem;border:var(--border-width) solid rgba(255,255,255,.08)}.keybind-description{margin-left:.625rem;color:#fff;font-size:.8125rem}.keybind-help-text{color:#bbb;font-size:.75rem;line-height:1.4;margin:0}.discord-panel{background:rgba(88,101,242,.15);border-radius:var(--border-radius);padding:.625rem;margin-bottom:.75rem;border:var(--border-width) solid rgba(88,101,242,.3);flex:1;display:flex;flex-direction:column;min-height:9.375rem}.website-panel{background:rgba(105,247,76,.1);border-radius:var(--border-radius);padding:.625rem;margin-bottom:.75rem;border:var(--border-width) solid rgba(105,247,76,.3);flex:1;display:flex;flex-direction:column;min-height:9.375rem}.discord-link{display:block;background:rgba(88,101,242,.2);backdrop-filter:blur(12px) saturate(180%);-webkit-backdrop-filter:blur(12px) saturate(180%);color:#fff;text-decoration:none;padding:.5rem;border-radius:var(--border-radius);font-size:.8125rem;text-align:center;font-weight:600;border:var(--border-width) solid rgba(88,101,242,.4);transition:.2s cubic-bezier(.4, 0, .2, 1);margin-top:auto;position:relative;box-shadow:0 4px 15px rgba(88,101,242,.2),inset 0 1px 0 rgba(255,255,255,.15)}.discord-link:hover{background:rgba(88,101,242,.3);backdrop-filter:blur(15px) saturate(200%);-webkit-backdrop-filter:blur(15px) saturate(200%);transform:translateY(-2px);box-shadow:0 6px 20px rgba(88,101,242,.35),inset 0 1px 0 rgba(255,255,255,.2);border-color:rgba(88,101,242,.6)}.discord-link:active{background:rgba(88,101,242,.25);transform:translateY(0);box-shadow:0 3px 10px rgba(88,101,242,.25)}.website-link{display:block;background:rgba(105,247,76,.12);backdrop-filter:blur(12px) saturate(180%);-webkit-backdrop-filter:blur(12px) saturate(180%);color:#fff;text-decoration:none;padding:.5rem;border-radius:var(--border-radius);font-size:.8125rem;text-align:center;font-weight:600;border:var(--border-width) solid rgba(105,247,76,.3);transition:.2s cubic-bezier(.4, 0, .2, 1);margin-top:auto;position:relative;box-shadow:0 4px 15px rgba(105,247,76,.2),inset 0 1px 0 rgba(255,255,255,.15)}.website-link:hover{background:rgba(105,247,76,.2);backdrop-filter:blur(15px) saturate(200%);-webkit-backdrop-filter:blur(15px) saturate(200%);transform:translateY(-2px);box-shadow:0 6px 20px rgba(105,247,76,.35),inset 0 1px 0 rgba(255,255,255,.2);border-color:rgba(105,247,76,.5)}.website-link:active{background:rgba(105,247,76,.15);transform:translateY(0);box-shadow:0 3px 10px rgba(105,247,76,.25)}.credits-panel{background:rgba(255,255,255,.05);border-radius:var(--border-radius);padding:.625rem;margin-bottom:.75rem;border:var(--border-width) solid rgba(255,255,255,.08)}.credits-container{display:flex;flex-wrap:wrap;gap:1rem;color:#ddd;font-size:.8125rem}.credit-item{flex:1;min-width:7.5rem}.credit-name{font-weight:600;margin-bottom:.25rem;color:#fff}.section-subtitle{color:#fff;font-size:.875rem;margin-bottom:.5rem;font-weight:600}.features-container{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem}.feature-item{display:flex;align-items:center;border-radius:var(--border-radius)}.community-container{display:flex;gap:.75rem;margin-bottom:.75rem}@keyframes aimbot-pulse{0%,100%{box-shadow:0 0 .5rem rgba(255,0,0,.6),0 0 1rem rgba(255,0,0,.4),0 0 1.5rem rgba(255,0,0,.2),inset 0 0 .25rem rgba(255,255,255,.3);transform:translate(-50%,-50%) scale(1)}50%{box-shadow:0 0 .75rem rgba(255,0,0,.8),0 0 1.5rem rgba(255,0,0,.5),0 0 2.5rem rgba(255,0,0,.3),inset 0 0 .5rem rgba(255,255,255,.4);transform:translate(-50%,-50%) scale(1.15)}}@keyframes aimbot-ring{0%{border-color:rgba(255,0,0,.8);box-shadow:0 0 0 0 rgba(255,0,0,.7)}50%{border-color:rgba(255,100,100,.6);box-shadow:0 0 0 .25rem rgba(255,0,0,.3)}100%{border-color:rgba(255,0,0,.8);box-shadow:0 0 0 0 rgba(255,0,0,0)}}.aimbot-dot{position:fixed;width:.625rem;height:.625rem;border-radius:50%;background:radial-gradient(circle at 35% 35%,#f44,#c00);border:.15rem solid rgba(255,255,255,.9);box-shadow:0 0 .75rem rgba(255,0,0,.8),0 0 1.5rem rgba(255,0,0,.5),0 0 2.5rem rgba(255,0,0,.3),inset 0 0 .5rem rgba(255,255,255,.4),inset 0 0 .25rem rgba(255,0,0,.3);transform:translate(-50%,-50%) scale(1);pointer-events:none;display:none;z-index:2147483647;animation:1.2s ease-in-out infinite aimbot-pulse,1.5s ease-in-out infinite aimbot-ring;filter:drop-shadow(0 0 1px rgba(255, 0, 0, .4))}input[type=checkbox]{appearance:none;width:1rem;height:1rem;border:none;border-radius:25%;background:radial-gradient(circle at 35% 35%,#6a6a6a,#4d4d4d,#3d3d3d,#2a2a2a);box-shadow:0 var(--shadow-size) calc(var(--shadow-size) * 3) rgba(0,0,0,var(--shadow-opacity)),inset calc(var(--shadow-size) * -1) calc(var(--shadow-size) * -1) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset var(--shadow-size) var(--shadow-size) var(--shadow-size) rgba(255,255,255,.1);cursor:pointer;position:relative}input[type=checkbox]::before{content:'';position:absolute;inset:0;border-radius:25%;background:radial-gradient(circle at 35% 35%,#7a7a7a,#5d5d5d,#4d4d4d,#3a3a3a);opacity:0;transition:opacity var(--transition-duration) ease-out}input[type=checkbox]:checked:hover::before,input[type=checkbox]:hover:not(:checked)::before{opacity:1}input[type=checkbox]:checked{background:radial-gradient(circle at 35% 35%,#8ef592,#6edb72,#4fb052,#3a8a3d);box-shadow:0 var(--shadow-size) calc(var(--shadow-size) * 3) rgba(0,0,0,var(--shadow-opacity)),inset calc(var(--shadow-size) * -1) calc(var(--shadow-size) * -1) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset var(--shadow-size) var(--shadow-size) var(--shadow-size) rgba(255,255,255,.3),0 0 var(--glow-size) rgba(110,219,114,var(--glow-opacity))}input[type=checkbox]:checked::before{content:'';position:absolute;inset:0;border-radius:25%;background:radial-gradient(circle at 35% 35%,#7ee582,#5ecb62,#3fa042,#2a7a2d);opacity:0;transition:opacity var(--transition-duration) ease-out}input[type=range]{appearance:none;width:5.625rem;height:.3125rem;border-radius:var(--border-radius);outline:0;cursor:pointer}input[type=range]::-webkit-slider-thumb{appearance:none;width:1rem;height:1rem;background:radial-gradient(circle at 35% 35%,#8ef592,#6edb72,#4fb052,#3a8a3d);border:none;border-radius:50%;cursor:pointer;box-shadow:0 var(--shadow-size) calc(var(--shadow-size) * 3) rgba(0,0,0,var(--shadow-opacity)),inset calc(var(--shadow-size) * -1) calc(var(--shadow-size) * -1) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset var(--shadow-size) var(--shadow-size) var(--shadow-size) rgba(255,255,255,.3);transition:.2s cubic-bezier(.34, 1.56, .64, 1)}input[type=range]::-moz-range-thumb{width:1rem;height:1rem;background:radial-gradient(circle at 35% 35%,#8ef592,#6edb72,#4fb052,#3a8a3d);border:none;border-radius:50%;cursor:pointer;box-shadow:0 var(--shadow-size) calc(var(--shadow-size) * 3) rgba(0,0,0,var(--shadow-opacity)),inset calc(var(--shadow-size) * -1) calc(var(--shadow-size) * -1) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset var(--shadow-size) var(--shadow-size) var(--shadow-size) rgba(255,255,255,.3);transition:.2s cubic-bezier(.34, 1.56, .64, 1)}input[type=range]::-moz-range-thumb:hover,input[type=range]::-webkit-slider-thumb:hover{background:radial-gradient(circle at 35% 35%,#a0f7a4,#7eeb82,#5fc563,#4a9a4d);transform:scale(1.1);box-shadow:0 2px 8px rgba(0,0,0,var(--shadow-opacity)),inset calc(var(--shadow-size) * -1) calc(var(--shadow-size) * -1) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset var(--shadow-size) var(--shadow-size) var(--shadow-size) rgba(255,255,255,.3),0 0 12px rgba(110,219,114,.5)}input[type=range]::-webkit-slider-thumb:active{transform:scale(.95)}input[type=range]::-moz-range-thumb:active{transform:scale(.95)}input[type=range].slider-dragging::-webkit-slider-thumb{transform:scale(.95)}input[type=range].slider-dragging::-moz-range-thumb{transform:scale(.95)}li::marker{color:silver}.sidebar{display:flex;flex-direction:column;background:rgba(18,18,26,.3);backdrop-filter:blur(15px) saturate(180%);-webkit-backdrop-filter:blur(15px) saturate(180%);border-right:1px solid rgba(255,255,255,.15);padding:.5rem;gap:.5rem}.sidebar-tabs{display:flex;flex-direction:column;gap:.375rem}.sidebar-tab{display:flex;align-items:center;justify-content:center;gap:.5rem;padding:.5rem;background:rgba(32,32,32,.35);backdrop-filter:blur(10px) saturate(180%);-webkit-backdrop-filter:blur(10px) saturate(180%);border:1px solid rgba(255,255,255,.1);border-radius:var(--border-radius);color:#bababa;cursor:pointer;transition:150ms cubic-bezier(.4, 0, .2, 1);font-size:.75rem;font-weight:600;min-height:2.5rem;box-shadow:0 2px 8px rgba(0,0,0,.1),inset 0 1px 0 rgba(255,255,255,.06)}.sidebar-tab:hover{background:rgba(44,44,44,.5);backdrop-filter:blur(15px) saturate(200%);-webkit-backdrop-filter:blur(15px) saturate(200%);box-shadow:0 4px 15px rgba(110,219,114,.1),inset 0 1px 0 rgba(255,255,255,.08);transform:translateY(-1px);border-color:rgba(110,219,114,.3)}.sidebar-tab.active{color:#fff;background:rgba(110,219,114,.12);border-color:rgba(110,219,114,.5);box-shadow:0 0 15px rgba(110,219,114,.2),inset 0 1px 0 rgba(255,255,255,.1);backdrop-filter:blur(12px) saturate(210%);-webkit-backdrop-filter:blur(12px) saturate(210%)}.tab-icon{width:1rem;height:1rem}.tab-label{font-size:.75rem}.menu-container{display:flex;height:23.75rem;background:rgba(10,10,15,.3)}.content-container.active::-webkit-scrollbar{width:8px}.content-container.active::-webkit-scrollbar-track{background:rgba(255,255,255,.03);border-radius:4px;margin:5px 0}.content-container.active::-webkit-scrollbar-thumb{background:rgba(110,219,114,.5);border-radius:4px;border:2px solid rgba(255,255,255,.05)}.content-container.active::-webkit-scrollbar-thumb:hover{background:rgba(110,219,114,.7)}.feature-notifications{position:fixed;top:20px;right:20px;display:flex;flex-direction:column;gap:12px;pointer-events:none;z-index:999998}.feature-notification{display:flex;align-items:center;padding:16px 20px;border-radius:16px;animation:.3s cubic-bezier(.2,.8,.2,1) notificationSlideIn;pointer-events:auto;backdrop-filter:blur(20px) saturate(180%);max-width:320px;transition:.3s cubic-bezier(.4, 0, .2, 1);position:relative;overflow:hidden;will-change:transform,opacity}.feature-notification::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;border-radius:16px;background:linear-gradient(135deg,rgba(255,255,255,.12) 0,rgba(255,255,255,.06) 50%,rgba(255,255,255,.02) 100%);z-index:-1}.feature-notification.enabled{background:linear-gradient(135deg,rgba(110,219,114,.15) 0,rgba(144,238,144,.08) 100%);border:1px solid rgba(110,219,114,.25);box-shadow:0 8px 32px rgba(110,219,114,.3),0 2px 8px rgba(110,219,114,.2),0 0 0 1px rgba(110,219,114,.1),inset 0 1px 0 rgba(255,255,255,.15),inset 0 -1px 0 rgba(0,0,0,.1)}.feature-notification.enabled:hover{transform:translateY(-1px);box-shadow:0 12px 40px rgba(110,219,114,.35),0 4px 16px rgba(110,219,114,.25)}.feature-notification.disabled{background:linear-gradient(135deg,rgba(255,80,80,.15) 0,rgba(255,150,150,.08) 100%);border:1px solid rgba(255,80,80,.25);box-shadow:0 8px 32px rgba(255,80,80,.3),0 2px 8px rgba(255,80,80,.2),0 0 0 1px rgba(255,80,80,.1),inset 0 1px 0 rgba(255,255,255,.15),inset 0 -1px 0 rgba(0,0,0,.1)}.feature-notification.disabled:hover{transform:translateY(-1px);box-shadow:0 12px 40px rgba(255,80,80,.35),0 4px 16px rgba(255,80,80,.25)}@keyframes notificationSlideIn{from{opacity:0;transform:translateX(100px) scale(.95)}to{opacity:1;transform:translateX(0) scale(1)}}@keyframes notificationSlideOut{from{opacity:1;transform:translateX(0) scale(1)}to{opacity:0;transform:translateX(100px) scale(.95);filter:blur(4px)}}@keyframes notificationSlideOutFast{0%{opacity:1;transform:translateX(0) scale(1)}50%{opacity:.5;transform:translateX(50px) scale(.98)}100%{opacity:0;transform:translateX(100px) scale(.95)}}@keyframes notificationScaleOut{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.9)}}@keyframes notificationFadeOut{from{opacity:1}to{opacity:0}}.feature-notification.exiting{animation:.15s ease-out forwards notificationFadeOut;pointer-events:none}.feature-notification.exiting-fast{animation:.12s cubic-bezier(.4,0,.2,1) forwards notificationScaleOut;pointer-events:none}@keyframes iconPop{0%{transform:scale(0);opacity:0}80%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}.notification-content{display:flex;align-items:center;gap:12px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;width:100%;position:relative;z-index:1}.feature-icon{width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;animation:.25s cubic-bezier(.34,1.56,.64,1) 50ms both iconPop;border-radius:6px;background:rgba(255,255,255,.1);padding:4px}.feature-icon.enabled{color:#6edb72;text-shadow:0 0 8px rgba(110,219,114,.4)}.feature-icon.disabled{color:#ff5050;text-shadow:0 0 8px rgba(255,80,80,.4)}.feature-text{flex-grow:1;display:flex;flex-direction:column;gap:4px}.feature-name{margin-right:.375rem;color:rgba(255,255,255,.98);font-size:14px;font-weight:500;letter-spacing:.2px}.feature-status{font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase}.feature-notification.enabled .feature-status{color:#6edb72}.feature-notification.disabled .feature-status{color:#ff5050}.notification-close{background:rgba(255,255,255,.08);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.6);cursor:pointer;font-size:16px;margin-left:12px;padding:6px;width:24px;height:24px;display:flex;align-items:center;justify-content:center;transition:.15s cubic-bezier(.4, 0, .2, 1);border-radius:8px;flex-shrink:0;box-shadow:0 2px 6px rgba(0,0,0,.15)}.notification-close:hover{background:rgba(255,255,255,.15);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);color:rgba(255,255,255,.9);transform:scale(1.1);box-shadow:0 4px 12px rgba(255,255,255,.2);border-color:rgba(255,255,255,.25)}.notification-close:active{transform:scale(.95);transition:transform 80ms;box-shadow:0 2px 6px rgba(0,0,0,.2)}@media (max-width:768px){.feature-notifications{top:10px;right:10px;left:10px;align-items:stretch}.feature-notification{max-width:none;width:100%}@keyframes notificationSlideIn{from{opacity:0;transform:translateY(-20px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}.feature-notification.exiting{animation:.1s ease-out forwards notificationFadeOut}}.aimbot-hud{position:fixed;top:-20px;left:250px;background:rgba(15,15,20,.5);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-radius:1.25rem;padding:1.25rem 1rem;color:#fff;font-family:'Courier New',monospace;font-size:.875rem;line-height:1.6;z-index:2147483646;box-shadow:0 8px 32px 0 rgba(31,38,135,.37),inset 0 0 20px rgba(255,255,255,.1),0 0 60px rgba(110,219,114,.2),0 20px 60px rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.2);min-width:220px;animation:.3s ease-in-out hudFadeIn;transition:.3s ease-out}@keyframes hudFadeIn{from{opacity:.7;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}@keyframes hudFadeOut{from{opacity:1;transform:translateY(0)}to{opacity:.7;transform:translateY(-5px)}}.aimbot-hud.hiding{animation:.3s ease-in-out forwards hudFadeOut}.aimbot-hud .hud-target{color:#fff;margin-bottom:.5rem;word-break:break-word;max-width:180px;text-shadow:0 0 5px rgba(255,255,255,.2);display:flex;align-items:center;gap:.5rem}.aimbot-hud .hud-distance{color:#7eeb82;font-size:.8rem;font-weight:500;display:flex;align-items:center;gap:.5rem}.aimbot-hud .hud-icon{width:1rem;height:1rem;flex-shrink:0}.aimbot-hud .hud-equipment{margin:.5rem 0;padding:.5rem .75rem;background:rgba(0,0,0,.3);border-left:2px solid #6edb72;border-radius:.375rem;font-size:.8rem;line-height:1.4}.aimbot-hud .equipment-row{display:flex;justify-content:space-between;gap:.5rem;align-items:center}.aimbot-hud .eq-label{color:#a0f7a4;font-weight:500;min-width:60px}.aimbot-hud .eq-value{color:#fff;font-weight:600;text-align:right;flex:1}".replace(/GothamPro/g, Rt), 
-bt.appendChild(e), bt;
+return e.textContent = "#ui{--border-radius:0.375rem;--border-width:0.0625rem;--transition-duration:100ms;--green-gradient:linear-gradient(180deg, #6edb72 0%, #58c05c 100%);--shadow-size:0.125rem;--shadow-opacity:0.2;--glow-size:0.25rem;--glow-opacity:0.2;animation:.6s cubic-bezier(.34,1.56,.64,1) slideInUp}@keyframes slideInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}@keyframes slideInDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}@keyframes glassGlow{0%,100%{box-shadow:0 8px 32px 0 rgba(31,38,135,.37),inset 0 0 20px rgba(255,255,255,.1),0 0 60px rgba(110,219,114,.2),0 20px 60px rgba(0,0,0,.3)}50%{box-shadow:0 8px 32px 0 rgba(31,38,135,.45),inset 0 0 25px rgba(255,255,255,.15),0 0 80px rgba(110,219,114,.3),0 20px 60px rgba(0,0,0,.35)}}*{font-family:GothamPro,sans-serif;box-sizing:border-box;margin:0;padding:0}:focus-visible{outline:0}.popup{user-select:none;position:relative;background:rgba(15,15,20,.6);backdrop-filter:blur(25px) saturate(200%) brightness(1.05) contrast(1.1);-webkit-backdrop-filter:blur(25px) saturate(200%) brightness(1.05) contrast(1.1);border-radius:1.25rem;box-shadow:0 8px 32px 0 rgba(31,38,135,.37),inset 0 0 20px rgba(255,255,255,.1),0 0 60px rgba(110,219,114,.2),0 20px 60px rgba(0,0,0,.3),inset -1px -1px 1px rgba(0,0,0,.3),inset 1px 1px 1px rgba(255,255,255,.2);width:28rem;overflow:hidden;border:1px solid rgba(255,255,255,.25);transition:.4s cubic-bezier(.23, 1, .32, 1);animation:3s ease-in-out infinite glassGlow}.popup:hover{backdrop-filter:blur(35px) saturate(220%) brightness(1.1) contrast(1.15);-webkit-backdrop-filter:blur(35px) saturate(220%) brightness(1.1) contrast(1.15);border-color:rgba(255,255,255,.35)}.titlebar{background:rgba(15,15,22,.65);backdrop-filter:blur(40px) saturate(220%) brightness(1.08) contrast(1.15) hue-rotate(-5deg);-webkit-backdrop-filter:blur(40px) saturate(220%) brightness(1.08) contrast(1.15) hue-rotate(-5deg);padding:.75rem .53125rem;user-select:none;transition:.3s cubic-bezier(.23, 1, .32, 1);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;cursor:grab;border-bottom:1px solid rgba(110,219,114,.35);border-top:1px solid rgba(255,255,255,.15);box-shadow:0 6px 20px rgba(0,0,0,.25),inset 0 1px 2px rgba(255,255,255,.2),inset 0 -1px 1px rgba(0,0,0,.3),0 0 40px rgba(110,219,114,.15),inset -1px -1px 1px rgba(0,0,0,.25),inset 1px 1px 1px rgba(255,255,255,.18);animation:4s ease-in-out infinite glassGlow}.titlebar::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background-image:repeating-linear-gradient(45deg,transparent 0,transparent .25rem,rgba(110,219,114,.05) .25rem,rgba(110,219,114,.05) .5rem),repeating-linear-gradient(-45deg,transparent 0,transparent .25rem,rgba(255,255,255,.02) .25rem,rgba(255,255,255,.02) .5rem);filter:blur(.125rem);opacity:.7;z-index:0;pointer-events:none}.titlebar::after{display:none}.titlebar:hover{background:rgba(18,18,28,.75)!important;backdrop-filter:blur(50px) saturate(240%) brightness(1.15) contrast(1.2) hue-rotate(-5deg);-webkit-backdrop-filter:blur(50px) saturate(240%) brightness(1.15) contrast(1.2) hue-rotate(-5deg);border-color:rgba(110,219,114,.5);box-shadow:0 10px 40px rgba(110,219,114,.2),inset 0 1px 2px rgba(255,255,255,.25),inset 0 -1px 1px rgba(0,0,0,.4),0 0 60px rgba(110,219,114,.25),inset -1px -1px 1px rgba(0,0,0,.3),inset 1px 1px 1px rgba(255,255,255,.22);transition:.25s cubic-bezier(.23, 1, .32, 1);transform:translateY(-3px)}.titlebar:active{background:rgba(15,15,22,.68)!important;backdrop-filter:blur(35px) saturate(220%) brightness(1.1) contrast(1.15);-webkit-backdrop-filter:blur(35px) saturate(220%) brightness(1.1) contrast(1.15);transition:.15s cubic-bezier(.4, 0, .2, 1);cursor:grabbing;box-shadow:0 6px 20px rgba(0,0,0,.3),inset 0 1px 1px rgba(255,255,255,.15),inset 0 -1px 1px rgba(0,0,0,.35),0 0 35px rgba(110,219,114,.1);transform:translateY(-1px)}.menu-icon{width:.875rem;height:.875rem;color:#fff;pointer-events:none;position:absolute;left:.375rem;top:.375rem}.version-text{position:absolute;left:.375rem;bottom:.375rem;font-size:.65rem;color:rgba(255,255,255,.5);z-index:10}.update-available-text{font-size:.55rem;color:rgba(105,247,76,.8);font-weight:400;animation:3.5s ease-in-out infinite update-pulse}@keyframes update-pulse{0%,100%{text-shadow:0 0 .1rem rgba(105,247,76,.3)}50%{text-shadow:0 0 .2rem rgba(105,247,76,.5)}}.navbar{background:rgba(18,18,26,.4);backdrop-filter:blur(20px) saturate(190%) brightness(1.05);-webkit-backdrop-filter:blur(20px) saturate(190%) brightness(1.05);padding:1rem;border-bottom:1px solid rgba(255,255,255,.15);transition:.3s}.title{font-size:1.1rem;font-weight:700;color:#fff;text-align:center;position:relative;z-index:10;text-shadow:0 0 10px rgba(110,219,114,.3);letter-spacing:.05em}.credit{font-size:.75rem;font-style:italic;color:rgba(255,255,255,.45);text-align:center;display:block;position:relative;z-index:10}.nav-tabs{display:flex;gap:.5rem;align-items:center;justify-content:center;transition:.3s;animation:.5s ease-out .2s both slideInDown}.nav-tab{padding:.375rem .75rem;background:rgba(32,32,32,.4);backdrop-filter:blur(12px) saturate(180%);-webkit-backdrop-filter:blur(12px) saturate(180%);border:1px solid rgba(255,255,255,.15);border-radius:var(--border-radius);color:#bababa;font-size:.75rem;font-weight:600;cursor:pointer;transition:.2s cubic-bezier(.4, 0, .2, 1);position:relative;box-shadow:0 2px 8px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.08)}.nav-tab:hover{background:rgba(50,50,50,.5);backdrop-filter:blur(18px) saturate(200%);-webkit-backdrop-filter:blur(18px) saturate(200%);box-shadow:0 6px 20px rgba(110,219,114,.15),inset 0 1px 0 rgba(255,255,255,.12);transform:translateY(-2px);border-color:rgba(110,219,114,.4)}.nav-tab:active{background:rgba(40,40,40,.5);transform:translateY(-1px);box-shadow:0 3px 12px rgba(110,219,114,.1)}.nav-tab.active{color:#fff;background:rgba(110,219,114,.15);border-color:rgba(110,219,114,.6);box-shadow:0 0 20px rgba(110,219,114,.3),inset 0 1px 0 rgba(255,255,255,.15);backdrop-filter:blur(15px) saturate(210%);-webkit-backdrop-filter:blur(15px) saturate(210%)}.close-btn{position:absolute;top:.0625rem;right:.5rem;cursor:pointer;border:none;background:rgba(255,255,255,.05);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:1.25rem;color:#666;transition:.2s cubic-bezier(.4, 0, .2, 1);border-radius:6px;padding:4px 8px;box-shadow:0 2px 8px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.08)}.close-btn:hover{color:#ff6b6b;background:rgba(255,107,107,.15);backdrop-filter:blur(12px) saturate(180%);-webkit-backdrop-filter:blur(12px) saturate(180%);transform:rotate(90deg) scale(1.3);text-shadow:0 0 12px rgba(255,107,107,.5),0 0 24px rgba(255,50,50,.3);filter:drop-shadow(0 0 4px rgba(255, 50, 50, .4));box-shadow:0 4px 12px rgba(255,107,107,.25),inset 0 1px 0 rgba(255,255,255,.1)}.close-btn:active{color:#ccc;transform:rotate(90deg) scale(.9);box-shadow:0 2px 6px rgba(0,0,0,.15)}.content-container{padding-top:.625rem;padding-left:1rem;padding-right:1rem;max-height:0;opacity:0;overflow:hidden;transition:max-height .5s cubic-bezier(.34, 1.56, .64, 1),opacity .4s cubic-bezier(.4, 0, .2, 1),padding .3s cubic-bezier(.4, 0, .2, 1);transform:translateY(-15px)}.content-container.active{max-height:400px;opacity:1;padding:.625rem .5rem 1rem 1rem;transform:translateY(0);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:rgba(110,219,114,0.6) rgba(255,255,255,0.05);animation:.5s ease-out .1s both slideInDown}.section{margin-bottom:1.25rem}.section:last-child{margin-bottom:0}.section-title{color:#fff;font-size:.9rem;font-weight:600;margin:0 0 .375rem;letter-spacing:.03125rem;display:flex;justify-content:space-between;align-items:center;gap:.375rem;position:relative}.risky-label{color:#ff3232;font-size:.7rem;font-weight:700;letter-spacing:.03125rem;animation:2s ease-in-out infinite risky-glow}@keyframes risky-glow{0%,100%{text-shadow:0 0 .125rem rgba(255,50,50,.4)}50%{text-shadow:0 0 .3rem rgba(255,50,50,.7)}}.section-title .checkbox-item{border:none;background:0 0;padding:.25rem .375rem;margin:0}.section-title .checkbox-item:hover{background:rgba(255,255,255,.05);border-radius:var(--border-radius)}.section-title label{font-size:.75rem;color:#ddd!important}.section-title-container{flex-grow:1}.subsection-title{color:#bbb;font-size:.75rem;font-weight:600;margin:.875rem 0 .25rem .9375rem;position:relative}.subsection-title::before{content:'';position:absolute;left:-.625rem;top:50%;height:.0625rem;width:.375rem;background:#666}.group{display:flex;flex-direction:column;background:rgba(255,255,255,.06);backdrop-filter:blur(15px) saturate(180%);-webkit-backdrop-filter:blur(15px) saturate(180%);border-radius:var(--border-radius);padding:.625rem;margin-bottom:.625rem;gap:.375rem;border:1px solid rgba(255,255,255,.12);box-shadow:inset 0 0 15px rgba(255,255,255,.08),0 4px 15px rgba(0,0,0,.1);border:var(--border-width) solid rgba(255,255,255,.15);max-height:20rem;opacity:1;overflow:hidden;transition:max-height 350ms cubic-bezier(.4, 0, .2, 1),opacity .3s cubic-bezier(.4, 0, .2, 1),padding .3s cubic-bezier(.4, 0, .2, 1),margin .3s cubic-bezier(.4, 0, .2, 1),transform .3s cubic-bezier(.4, 0, .2, 1);box-shadow:0 4px 15px rgba(0,0,0,.1),inset 0 0 10px rgba(255,255,255,.05);animation:.4s cubic-bezier(.34,1.56,.64,1) group-entrance}@keyframes group-entrance{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}.group:hover{box-shadow:0 6px 20px rgba(0,0,0,.15),inset 0 0 15px rgba(255,255,255,.08)}.group.hidden{max-height:0;opacity:0;padding:0 .625rem;margin-bottom:0}.group .section-title{margin-top:.625rem}.subgroup{margin-left:.09375rem;padding-left:.0625rem;display:flex;flex-wrap:wrap;gap:.375rem}.sub-section{display:flex;flex-direction:column;gap:.375rem;padding:.5rem;background:rgba(0,0,0,.2);border-radius:var(--border-radius);border-left:2px solid rgba(110,219,114,.3);margin-top:.25rem}.checkbox-item{border:var(--border-width) solid rgba(255,255,255,.1);display:inline-flex;align-items:center;padding:.375rem .5rem;border-radius:var(--border-radius);transition:180ms cubic-bezier(.4, 0, .2, 1);cursor:pointer;width:fit-content;background-color:rgba(255,255,255,.04);backdrop-filter:blur(10px) saturate(180%);-webkit-backdrop-filter:blur(10px) saturate(180%);box-shadow:0 2px 8px rgba(0,0,0,.1),inset 0 1px 0 rgba(255,255,255,.06)}.checkbox-item:hover{background:rgba(255,255,255,.1);backdrop-filter:blur(15px) saturate(200%);-webkit-backdrop-filter:blur(15px) saturate(200%);border-color:rgba(255,255,255,.2);transform:translateY(-2px);box-shadow:0 4px 12px rgba(110,219,114,.15),inset 0 1px 0 rgba(255,255,255,.08)}.checkbox-item:active{background:rgba(255,255,255,.06);transform:translateY(0);box-shadow:0 2px 6px rgba(0,0,0,.1)}.checkbox-item-label{color:#ddd;font-size:.8125rem;margin-left:.5rem;cursor:pointer;pointer-events:none}.checkbox{appearance:none;width:1rem;height:1rem;border:none;border-radius:25%;background:radial-gradient(circle at 35% 35%,#6a6a6a,#4d4d4d,#3d3d3d,#2a2a2a);box-shadow:0 var(--shadow-size) calc(var(--shadow-size) * 3) rgba(0,0,0,var(--shadow-opacity)),inset calc(var(--shadow-size) * -1) calc(var(--shadow-size) * -1) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset var(--shadow-size) var(--shadow-size) var(--shadow-size) rgba(255,255,255,.1);cursor:pointer;position:relative;transition:.2s cubic-bezier(.4, 0, .2, 1)}.checkbox::before{content:'';position:absolute;inset:0;border-radius:25%;background:radial-gradient(circle at 35% 35%,#7a7a7a,#5d5d5d,#4d4d4d,#3a3a3a);opacity:0;transition:opacity .2s ease-out}.checkbox:hover:not(.checkbox-checked)::before{opacity:1;transform:scale(1.05)}.checkbox:active:not(.checkbox-checked){transform:scale(.95)}.checkbox-checked{background:radial-gradient(circle at 35% 35%,#8ef592,#6edb72,#4fb052,#3a8a3d);box-shadow:0 var(--shadow-size) calc(var(--shadow-size) * 3) rgba(0,0,0,var(--shadow-opacity)),inset calc(var(--shadow-size) * -1) calc(var(--shadow-size) * -1) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset var(--shadow-size) var(--shadow-size) var(--shadow-size) rgba(255,255,255,.3),0 0 .5rem rgba(110,219,114,.6);animation:150ms cubic-bezier(.34,1.56,.64,1) checkbox-pop}.checkbox-checked::before{content:'';position:absolute;inset:0;border-radius:25%;background:radial-gradient(circle at 35% 35%,#7ee582,#5ecb62,#3fa042,#2a7a2d);opacity:0;transition:opacity .2s ease-out}.checkbox-checked:hover::before{opacity:1}.checkbox-checked:active{transform:scale(.95)}@keyframes checkbox-pop{0%{transform:scale(.6) rotate(-45deg);opacity:.7}50%{transform:scale(1.15)}70%{transform:scale(1.05)}100%{transform:scale(1) rotate(0);opacity:1}}.slider-container{display:flex;align-items:center;gap:.75rem;padding:.5rem;background:rgba(30,30,30,.8);border-radius:12px;backdrop-filter:blur(10px);border:1px solid rgba(110,219,114,.1);box-shadow:0 4px 20px rgba(0,0,0,.3)}.slider{appearance:none;width:6.25rem;height:.5rem;border-radius:10px;outline:0;cursor:pointer;background:linear-gradient(90deg,#2d2d2d,#3d3d3d);box-shadow:inset 0 1px 3px rgba(0,0,0,.5),inset 0 -1px 2px rgba(255,255,255,.05);transition:.3s cubic-bezier(.4, 0, .2, 1);position:relative;overflow:hidden}.slider::-webkit-slider-runnable-track{height:.5rem;border-radius:10px;background:0 0}.slider::-moz-range-track{height:.5rem;border-radius:10px;background:0 0}.slider::-webkit-slider-thumb{appearance:none;width:1.25rem;height:1.25rem;border-radius:50%;background:radial-gradient(circle at 30% 30%,#6edb72,#4cad50);border:2px solid #fff;box-shadow:0 0 20px rgba(110,219,114,.6),0 0 40px rgba(110,219,114,.3),0 4px 8px rgba(0,0,0,.3);cursor:grab;transition:.2s;transform:scale(1);position:relative;z-index:2}.slider::-moz-range-thumb{width:1.25rem;height:1.25rem;border-radius:50%;background:radial-gradient(circle at 30% 30%,#6edb72,#4cad50);border:2px solid #fff;box-shadow:0 0 20px rgba(110,219,114,.6),0 0 40px rgba(110,219,114,.3),0 4px 8px rgba(0,0,0,.3);cursor:grab;transition:.2s}.slider:hover{background:linear-gradient(90deg,#363636,#464646);transform:scale(1.02)}.slider:hover::-webkit-slider-thumb{transform:scale(1.15);box-shadow:0 0 25px rgba(110,219,114,.8),0 0 50px rgba(110,219,114,.4),0 0 80px rgba(110,219,114,.2),0 4px 10px rgba(0,0,0,.4);animation:1.5s ease-in-out infinite thumb-pulse}.slider:hover::-moz-range-thumb{transform:scale(1.15);box-shadow:0 0 25px rgba(110,219,114,.8),0 0 50px rgba(110,219,114,.4),0 0 80px rgba(110,219,114,.2),0 4px 10px rgba(0,0,0,.4)}.slider:active::-webkit-slider-thumb{cursor:grabbing;transform:scale(1.1);box-shadow:0 0 30px #6edb72,0 0 60px rgba(110,219,114,.6),0 0 100px rgba(110,219,114,.3)}.slider:active::-moz-range-thumb{cursor:grabbing;transform:scale(1.1);box-shadow:0 0 30px #6edb72,0 0 60px rgba(110,219,114,.6),0 0 100px rgba(110,219,114,.3)}.slider:focus{outline:rgba(110,219,114,.5) solid 2px;outline-offset:2px}@keyframes slider-glow{0%,100%{box-shadow:inset 0 0 5px rgba(0,0,0,.3),0 0 15px rgba(110,219,114,.3)}50%{box-shadow:inset 0 0 5px rgba(0,0,0,.3),0 0 25px rgba(110,219,114,.6),0 0 40px rgba(110,219,114,.2)}}@keyframes thumb-pulse{0%,100%{box-shadow:0 0 20px rgba(110,219,114,.6),0 0 40px rgba(110,219,114,.3),0 4px 8px rgba(0,0,0,.3)}50%{box-shadow:0 0 25px rgba(110,219,114,.8),0 0 50px rgba(110,219,114,.4),0 0 80px rgba(110,219,114,.2),0 4px 10px rgba(0,0,0,.4)}}.slider::before{content:'';position:absolute;top:0;left:0;height:100%;background:linear-gradient(90deg,rgba(110,219,114,.4),rgba(110,219,114,.8));border-radius:10px;width:var(--progress,50%);pointer-events:none;transition:width 150ms;z-index:1}.slider-container:hover{border-color:rgba(110,219,114,.3);box-shadow:0 6px 25px rgba(0,0,0,.4),0 0 30px rgba(110,219,114,.1)}.keybind-slot{min-width:1.125rem;height:1.125rem;padding:0 .375rem;background:radial-gradient(ellipse at 50% 30%,rgba(85,85,85,.6),rgba(77,77,77,.5),rgba(61,61,61,.4),rgba(42,42,42,.3));backdrop-filter:blur(8px) saturate(180%);-webkit-backdrop-filter:blur(8px) saturate(180%);color:#ddd;font-size:.625rem;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:.15rem;border-radius:var(--border-radius);border:1px solid rgba(255,255,255,.1);box-shadow:0 var(--shadow-size) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset calc(var(--shadow-size) * -1) calc(var(--shadow-size) * -1) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset var(--shadow-size) var(--shadow-size) var(--shadow-size) rgba(255,255,255,.1);position:relative;z-index:1;white-space:nowrap;transition:150ms cubic-bezier(.4, 0, .2, 1)}.keybind-pen-icon{width:.5rem;height:.5rem;color:#ddd}.keybind-slot::before{content:'';position:absolute;inset:0;border-radius:var(--border-radius);background:radial-gradient(ellipse at 50% 30%,#656565,#5d5d5d,#4d4d4d,#3a3a3a);opacity:0;transition:opacity var(--transition-duration) ease;pointer-events:none;z-index:-1}.keybind-slot-editable{cursor:pointer}.keybind-slot-editable:hover::before{opacity:1;transform:scale(1.08);animation:.6s ease-in-out keybind-shine}.keybind-slot-editable:hover{background:radial-gradient(ellipse at 50% 30%,rgba(100,100,100,.7),rgba(90,90,90,.6),rgba(75,75,75,.5),rgba(55,55,55,.4));backdrop-filter:blur(15px) saturate(200%);-webkit-backdrop-filter:blur(15px) saturate(200%);transform:translateY(-3px) scale(1.05);animation:.6s ease-in-out infinite keybind-float;border-color:rgba(110,219,114,.3);box-shadow:0 4px 12px rgba(110,219,114,.15),inset 0 1px 0 rgba(255,255,255,.1)}.keybind-slot-editable:active::before{background:radial-gradient(ellipse at 50% 30%,#6a6a6a,#626262,#525252,#3f3f3f);opacity:1;transform:scale(.95)}.keybind-slot-editable:active{transform:translateY(0)}.keybind-slot-waiting{background:radial-gradient(ellipse at 50% 30%,#7a7a7a,#6d6d6d,#5d5d5d,#4a4a4a);animation:1.2s cubic-bezier(.4,0,.6,1) infinite keybind-waiting-pulse}@keyframes keybind-waiting-pulse{0%,100%{box-shadow:0 var(--shadow-size) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset calc(var(--shadow-size) * -1) calc(var(--shadow-size) * -1) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset var(--shadow-size) var(--shadow-size) var(--shadow-size) rgba(255,255,255,.1),0 0 0 rgba(110,219,114,0);transform:scale(1)}50%{box-shadow:0 var(--shadow-size) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset calc(var(--shadow-size) * -1) calc(var(--shadow-size) * -1) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset var(--shadow-size) var(--shadow-size) var(--shadow-size) rgba(255,255,255,.3),0 0 12px rgba(110,219,114,.6);transform:scale(1.08)}}@keyframes keybind-shine{0%,100%{background:radial-gradient(ellipse at 50% 30%,#656565,#5d5d5d,#4d4d4d,#3a3a3a)}50%{background:radial-gradient(ellipse at 50% 30%,#7a7a7a,#6d6d6d,#5d5d5d,#4a4a4a)}}@keyframes keybind-float{0%,100%{transform:translateY(-3px) scale(1.05)}50%{transform:translateY(-5px) scale(1.08)}}.keybind-slot-container{display:inline-flex;align-items:center;gap:.25rem}.keybind-slot-separator{color:#888;font-size:.625rem;font-weight:600}.help-section{font-size:.8125rem}.help-title{color:#fff;font-size:.9375rem;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem;font-weight:600}.help-panel{background:rgba(255,255,255,.05);border-radius:var(--border-radius);padding:.625rem;margin-bottom:.75rem;border:var(--border-width) solid rgba(255,255,255,.08)}.keybind-description{margin-left:.625rem;color:#fff;font-size:.8125rem}.keybind-help-text{color:#bbb;font-size:.75rem;line-height:1.4;margin:0}.discord-panel{background:rgba(88,101,242,.15);border-radius:var(--border-radius);padding:.625rem;margin-bottom:.75rem;border:var(--border-width) solid rgba(88,101,242,.3);flex:1;display:flex;flex-direction:column;min-height:9.375rem}.website-panel{background:rgba(105,247,76,.1);border-radius:var(--border-radius);padding:.625rem;margin-bottom:.75rem;border:var(--border-width) solid rgba(105,247,76,.3);flex:1;display:flex;flex-direction:column;min-height:9.375rem}.discord-link{display:block;background:rgba(88,101,242,.2);backdrop-filter:blur(12px) saturate(180%);-webkit-backdrop-filter:blur(12px) saturate(180%);color:#fff;text-decoration:none;padding:.5rem;border-radius:var(--border-radius);font-size:.8125rem;text-align:center;font-weight:600;border:var(--border-width) solid rgba(88,101,242,.4);transition:.2s cubic-bezier(.4, 0, .2, 1);margin-top:auto;position:relative;box-shadow:0 4px 15px rgba(88,101,242,.2),inset 0 1px 0 rgba(255,255,255,.15)}.discord-link:hover{background:rgba(88,101,242,.3);backdrop-filter:blur(15px) saturate(200%);-webkit-backdrop-filter:blur(15px) saturate(200%);transform:translateY(-2px);box-shadow:0 6px 20px rgba(88,101,242,.35),inset 0 1px 0 rgba(255,255,255,.2);border-color:rgba(88,101,242,.6)}.discord-link:active{background:rgba(88,101,242,.25);transform:translateY(0);box-shadow:0 3px 10px rgba(88,101,242,.25)}.website-link{display:block;background:rgba(105,247,76,.12);backdrop-filter:blur(12px) saturate(180%);-webkit-backdrop-filter:blur(12px) saturate(180%);color:#fff;text-decoration:none;padding:.5rem;border-radius:var(--border-radius);font-size:.8125rem;text-align:center;font-weight:600;border:var(--border-width) solid rgba(105,247,76,.3);transition:.2s cubic-bezier(.4, 0, .2, 1);margin-top:auto;position:relative;box-shadow:0 4px 15px rgba(105,247,76,.2),inset 0 1px 0 rgba(255,255,255,.15)}.website-link:hover{background:rgba(105,247,76,.2);backdrop-filter:blur(15px) saturate(200%);-webkit-backdrop-filter:blur(15px) saturate(200%);transform:translateY(-2px);box-shadow:0 6px 20px rgba(105,247,76,.35),inset 0 1px 0 rgba(255,255,255,.2);border-color:rgba(105,247,76,.5)}.website-link:active{background:rgba(105,247,76,.15);transform:translateY(0);box-shadow:0 3px 10px rgba(105,247,76,.25)}.credits-panel{background:rgba(255,255,255,.05);border-radius:var(--border-radius);padding:.625rem;margin-bottom:.75rem;border:var(--border-width) solid rgba(255,255,255,.08)}.credits-container{display:flex;flex-wrap:wrap;gap:1rem;color:#ddd;font-size:.8125rem}.credit-item{flex:1;min-width:7.5rem}.credit-name{font-weight:600;margin-bottom:.25rem;color:#fff}.section-subtitle{color:#fff;font-size:.875rem;margin-bottom:.5rem;font-weight:600}.features-container{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem}.feature-item{display:flex;align-items:center;border-radius:var(--border-radius)}.community-container{display:flex;gap:.75rem;margin-bottom:.75rem}@keyframes aimbot-pulse{0%,100%{box-shadow:0 0 .5rem rgba(255,0,0,.6),0 0 1rem rgba(255,0,0,.4),0 0 1.5rem rgba(255,0,0,.2),inset 0 0 .25rem rgba(255,255,255,.3);transform:translate(-50%,-50%) scale(1)}50%{box-shadow:0 0 .75rem rgba(255,0,0,.8),0 0 1.5rem rgba(255,0,0,.5),0 0 2.5rem rgba(255,0,0,.3),inset 0 0 .5rem rgba(255,255,255,.4);transform:translate(-50%,-50%) scale(1.15)}}@keyframes aimbot-ring{0%{border-color:rgba(255,0,0,.8);box-shadow:0 0 0 0 rgba(255,0,0,.7)}50%{border-color:rgba(255,100,100,.6);box-shadow:0 0 0 .25rem rgba(255,0,0,.3)}100%{border-color:rgba(255,0,0,.8);box-shadow:0 0 0 0 rgba(255,0,0,0)}}.aimbot-dot{position:fixed;width:.625rem;height:.625rem;border-radius:50%;background:radial-gradient(circle at 35% 35%,#f44,#c00);border:.15rem solid rgba(255,255,255,.9);box-shadow:0 0 .75rem rgba(255,0,0,.8),0 0 1.5rem rgba(255,0,0,.5),0 0 2.5rem rgba(255,0,0,.3),inset 0 0 .5rem rgba(255,255,255,.4),inset 0 0 .25rem rgba(255,0,0,.3);transform:translate(-50%,-50%) scale(1);pointer-events:none;display:none;z-index:2147483647;animation:1.2s ease-in-out infinite aimbot-pulse,1.5s ease-in-out infinite aimbot-ring;filter:drop-shadow(0 0 1px rgba(255, 0, 0, .4))}input[type=checkbox]{appearance:none;width:1rem;height:1rem;border:none;border-radius:25%;background:radial-gradient(circle at 35% 35%,#6a6a6a,#4d4d4d,#3d3d3d,#2a2a2a);box-shadow:0 var(--shadow-size) calc(var(--shadow-size) * 3) rgba(0,0,0,var(--shadow-opacity)),inset calc(var(--shadow-size) * -1) calc(var(--shadow-size) * -1) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset var(--shadow-size) var(--shadow-size) var(--shadow-size) rgba(255,255,255,.1);cursor:pointer;position:relative}input[type=checkbox]::before{content:'';position:absolute;inset:0;border-radius:25%;background:radial-gradient(circle at 35% 35%,#7a7a7a,#5d5d5d,#4d4d4d,#3a3a3a);opacity:0;transition:opacity var(--transition-duration) ease-out}input[type=checkbox]:checked:hover::before,input[type=checkbox]:hover:not(:checked)::before{opacity:1}input[type=checkbox]:checked{background:radial-gradient(circle at 35% 35%,#8ef592,#6edb72,#4fb052,#3a8a3d);box-shadow:0 var(--shadow-size) calc(var(--shadow-size) * 3) rgba(0,0,0,var(--shadow-opacity)),inset calc(var(--shadow-size) * -1) calc(var(--shadow-size) * -1) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset var(--shadow-size) var(--shadow-size) var(--shadow-size) rgba(255,255,255,.3),0 0 var(--glow-size) rgba(110,219,114,var(--glow-opacity))}input[type=checkbox]:checked::before{content:'';position:absolute;inset:0;border-radius:25%;background:radial-gradient(circle at 35% 35%,#7ee582,#5ecb62,#3fa042,#2a7a2d);opacity:0;transition:opacity var(--transition-duration) ease-out}input[type=range]{appearance:none;width:5.625rem;height:.3125rem;border-radius:var(--border-radius);outline:0;cursor:pointer}input[type=range]::-webkit-slider-thumb{appearance:none;width:1rem;height:1rem;background:radial-gradient(circle at 35% 35%,#8ef592,#6edb72,#4fb052,#3a8a3d);border:none;border-radius:50%;cursor:pointer;box-shadow:0 var(--shadow-size) calc(var(--shadow-size) * 3) rgba(0,0,0,var(--shadow-opacity)),inset calc(var(--shadow-size) * -1) calc(var(--shadow-size) * -1) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset var(--shadow-size) var(--shadow-size) var(--shadow-size) rgba(255,255,255,.3);transition:.2s cubic-bezier(.34, 1.56, .64, 1)}input[type=range]::-moz-range-thumb{width:1rem;height:1rem;background:radial-gradient(circle at 35% 35%,#8ef592,#6edb72,#4fb052,#3a8a3d);border:none;border-radius:50%;cursor:pointer;box-shadow:0 var(--shadow-size) calc(var(--shadow-size) * 3) rgba(0,0,0,var(--shadow-opacity)),inset calc(var(--shadow-size) * -1) calc(var(--shadow-size) * -1) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset var(--shadow-size) var(--shadow-size) var(--shadow-size) rgba(255,255,255,.3);transition:.2s cubic-bezier(.34, 1.56, .64, 1)}input[type=range]::-moz-range-thumb:hover,input[type=range]::-webkit-slider-thumb:hover{background:radial-gradient(circle at 35% 35%,#a0f7a4,#7eeb82,#5fc563,#4a9a4d);transform:scale(1.1);box-shadow:0 2px 8px rgba(0,0,0,var(--shadow-opacity)),inset calc(var(--shadow-size) * -1) calc(var(--shadow-size) * -1) calc(var(--shadow-size) * 2) rgba(0,0,0,var(--shadow-opacity)),inset var(--shadow-size) var(--shadow-size) var(--shadow-size) rgba(255,255,255,.3),0 0 12px rgba(110,219,114,.5)}input[type=range]::-webkit-slider-thumb:active{transform:scale(.95)}input[type=range]::-moz-range-thumb:active{transform:scale(.95)}input[type=range].slider-dragging::-webkit-slider-thumb{transform:scale(.95)}input[type=range].slider-dragging::-moz-range-thumb{transform:scale(.95)}li::marker{color:silver}.sidebar{display:flex;flex-direction:column;background:rgba(18,18,26,.3);backdrop-filter:blur(15px) saturate(180%);-webkit-backdrop-filter:blur(15px) saturate(180%);border-right:1px solid rgba(255,255,255,.15);padding:.5rem;gap:.5rem}.sidebar-tabs{display:flex;flex-direction:column;gap:.375rem}.sidebar-tab{display:flex;align-items:center;justify-content:center;gap:.5rem;padding:.5rem;background:rgba(32,32,32,.35);backdrop-filter:blur(10px) saturate(180%);-webkit-backdrop-filter:blur(10px) saturate(180%);border:1px solid rgba(255,255,255,.1);border-radius:var(--border-radius);color:#bababa;cursor:pointer;transition:150ms cubic-bezier(.4, 0, .2, 1);font-size:.75rem;font-weight:600;min-height:2.5rem;box-shadow:0 2px 8px rgba(0,0,0,.1),inset 0 1px 0 rgba(255,255,255,.06)}.sidebar-tab:hover{background:rgba(44,44,44,.5);backdrop-filter:blur(15px) saturate(200%);-webkit-backdrop-filter:blur(15px) saturate(200%);box-shadow:0 4px 15px rgba(110,219,114,.1),inset 0 1px 0 rgba(255,255,255,.08);transform:translateY(-1px);border-color:rgba(110,219,114,.3)}.sidebar-tab.active{color:#fff;background:rgba(110,219,114,.12);border-color:rgba(110,219,114,.5);box-shadow:0 0 15px rgba(110,219,114,.2),inset 0 1px 0 rgba(255,255,255,.1);backdrop-filter:blur(12px) saturate(210%);-webkit-backdrop-filter:blur(12px) saturate(210%)}.tab-icon{width:1rem;height:1rem}.tab-label{font-size:.75rem}.menu-container{display:flex;height:23.75rem;background:rgba(10,10,15,.3)}.content-container.active::-webkit-scrollbar{width:8px}.content-container.active::-webkit-scrollbar-track{background:rgba(255,255,255,.03);border-radius:4px;margin:5px 0}.content-container.active::-webkit-scrollbar-thumb{background:rgba(110,219,114,.5);border-radius:4px;border:2px solid rgba(255,255,255,.05)}.content-container.active::-webkit-scrollbar-thumb:hover{background:rgba(110,219,114,.7)}.feature-notifications{position:fixed;top:20px;right:20px;display:flex;flex-direction:column;gap:12px;pointer-events:none;z-index:999998}.feature-notification{display:flex;align-items:center;padding:16px 20px;border-radius:16px;animation:.3s cubic-bezier(.2,.8,.2,1) notificationSlideIn;pointer-events:auto;backdrop-filter:blur(20px) saturate(180%);max-width:320px;transition:.3s cubic-bezier(.4, 0, .2, 1);position:relative;overflow:hidden;will-change:transform,opacity}.feature-notification::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;border-radius:16px;background:linear-gradient(135deg,rgba(255,255,255,.12) 0,rgba(255,255,255,.06) 50%,rgba(255,255,255,.02) 100%);z-index:-1}.feature-notification.enabled{background:linear-gradient(135deg,rgba(110,219,114,.15) 0,rgba(144,238,144,.08) 100%);border:1px solid rgba(110,219,114,.25);box-shadow:0 8px 32px rgba(110,219,114,.3),0 2px 8px rgba(110,219,114,.2),0 0 0 1px rgba(110,219,114,.1),inset 0 1px 0 rgba(255,255,255,.15),inset 0 -1px 0 rgba(0,0,0,.1)}.feature-notification.enabled:hover{transform:translateY(-1px);box-shadow:0 12px 40px rgba(110,219,114,.35),0 4px 16px rgba(110,219,114,.25)}.feature-notification.disabled{background:linear-gradient(135deg,rgba(255,80,80,.15) 0,rgba(255,150,150,.08) 100%);border:1px solid rgba(255,80,80,.25);box-shadow:0 8px 32px rgba(255,80,80,.3),0 2px 8px rgba(255,80,80,.2),0 0 0 1px rgba(255,80,80,.1),inset 0 1px 0 rgba(255,255,255,.15),inset 0 -1px 0 rgba(0,0,0,.1)}.feature-notification.disabled:hover{transform:translateY(-1px);box-shadow:0 12px 40px rgba(255,80,80,.35),0 4px 16px rgba(255,80,80,.25)}@keyframes notificationSlideIn{from{opacity:0;transform:translateX(100px) scale(.95)}to{opacity:1;transform:translateX(0) scale(1)}}@keyframes notificationSlideOut{from{opacity:1;transform:translateX(0) scale(1)}to{opacity:0;transform:translateX(100px) scale(.95);filter:blur(4px)}}@keyframes notificationSlideOutFast{0%{opacity:1;transform:translateX(0) scale(1)}50%{opacity:.5;transform:translateX(50px) scale(.98)}100%{opacity:0;transform:translateX(100px) scale(.95)}}@keyframes notificationScaleOut{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.9)}}@keyframes notificationFadeOut{from{opacity:1}to{opacity:0}}.feature-notification.exiting{animation:.15s ease-out forwards notificationFadeOut;pointer-events:none}.feature-notification.exiting-fast{animation:.12s cubic-bezier(.4,0,.2,1) forwards notificationScaleOut;pointer-events:none}@keyframes iconPop{0%{transform:scale(0);opacity:0}80%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}.notification-content{display:flex;align-items:center;gap:12px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;width:100%;position:relative;z-index:1}.feature-icon{width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;animation:.25s cubic-bezier(.34,1.56,.64,1) 50ms both iconPop;border-radius:6px;background:rgba(255,255,255,.1);padding:4px}.feature-icon.enabled{color:#6edb72;text-shadow:0 0 8px rgba(110,219,114,.4)}.feature-icon.disabled{color:#ff5050;text-shadow:0 0 8px rgba(255,80,80,.4)}.feature-text{flex-grow:1;display:flex;flex-direction:column;gap:4px}.feature-name{margin-right:.375rem;color:rgba(255,255,255,.98);font-size:14px;font-weight:500;letter-spacing:.2px}.feature-status{font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase}.feature-notification.enabled .feature-status{color:#6edb72}.feature-notification.disabled .feature-status{color:#ff5050}.notification-close{background:rgba(255,255,255,.08);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.6);cursor:pointer;font-size:16px;margin-left:12px;padding:6px;width:24px;height:24px;display:flex;align-items:center;justify-content:center;transition:.15s cubic-bezier(.4, 0, .2, 1);border-radius:8px;flex-shrink:0;box-shadow:0 2px 6px rgba(0,0,0,.15)}.notification-close:hover{background:rgba(255,255,255,.15);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);color:rgba(255,255,255,.9);transform:scale(1.1);box-shadow:0 4px 12px rgba(255,255,255,.2);border-color:rgba(255,255,255,.25)}.notification-close:active{transform:scale(.95);transition:transform 80ms;box-shadow:0 2px 6px rgba(0,0,0,.2)}@media (max-width:768px){.feature-notifications{top:10px;right:10px;left:10px;align-items:stretch}.feature-notification{max-width:none;width:100%}@keyframes notificationSlideIn{from{opacity:0;transform:translateY(-20px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}.feature-notification.exiting{animation:.1s ease-out forwards notificationFadeOut}}.aimbot-hud{position:fixed;top:-20px;left:250px;background:rgba(15,15,20,.5);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-radius:1.25rem;padding:1.25rem 1rem;color:#fff;font-family:'Courier New',monospace;font-size:.875rem;line-height:1.6;z-index:2147483646;box-shadow:0 8px 32px 0 rgba(31,38,135,.37),inset 0 0 20px rgba(255,255,255,.1),0 0 60px rgba(110,219,114,.2),0 20px 60px rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.2);min-width:220px;animation:.3s ease-in-out hudFadeIn;transition:.3s ease-out}@keyframes hudFadeIn{from{opacity:.7;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}@keyframes hudFadeOut{from{opacity:1;transform:translateY(0)}to{opacity:.7;transform:translateY(-5px)}}.aimbot-hud.hiding{animation:.3s ease-in-out forwards hudFadeOut}.aimbot-hud .hud-target{color:#fff;margin-bottom:.5rem;word-break:break-word;max-width:180px;text-shadow:0 0 5px rgba(255,255,255,.2);display:flex;align-items:center;gap:.5rem}.aimbot-hud .hud-distance{color:#7eeb82;font-size:.8rem;font-weight:500;display:flex;align-items:center;gap:.5rem}.aimbot-hud .hud-icon{width:1rem;height:1rem;flex-shrink:0}.aimbot-hud .hud-equipment{margin:.5rem 0;padding:.5rem .75rem;background:rgba(0,0,0,.3);border-left:2px solid #6edb72;border-radius:.375rem;font-size:.8rem;line-height:1.4}.aimbot-hud .equipment-row{display:flex;justify-content:space-between;gap:.5rem;align-items:center}.aimbot-hud .eq-label{color:#a0f7a4;font-weight:500;min-width:60px}.aimbot-hud .eq-value{color:#fff;font-weight:600;text-align:right;flex:1}".replace(/GothamPro/g, Dt), 
+xt.appendChild(e), xt;
 })(), n = (e => {
 const t = document.createElement("div");
-return e.appendChild(t), da = ot.createRoot(t), t;
+return e.appendChild(t), Ma = ut.createRoot(t), t;
 })(t);
 (e => {
 const t = document.createElement("div");
-e.appendChild(t), ba = ot.createRoot(t), ba.render(be(ua, {}));
+e.appendChild(t), za = ut.createRoot(t), za.render(xe(ka, {}));
 })(t), (e => {
-Reflect.apply(Ct, ut, [ "keydown", t => {
-if (t.code === xt.tr.nr) {
+Reflect.apply(Tt, gt, [ "keydown", t => {
+if (t.code === zt.rr.ar) {
 const t = e.querySelector("#ui");
 if (!t) return;
-return t.style.display = "none" === t.style.display ? "" : "none", void (fa = e => {
+return t.style.display = "none" === t.style.display ? "" : "none", void (_a = e => {
 t && (t.style.display = e ? "" : "none");
 });
 }
-t.code !== xt.tr.rr ? t.code !== xt.tr.ar ? t.code !== xt.tr.ir || ma(e => e.Xt.je, (e, t) => e.Xt.je = t, "Spinbot") : ma(e => e.xt.St, (e, t) => e.xt.St = t, "Blatant") : ma(e => e.xt.je, (e, t) => e.xt.je = t, "Aimbot");
+t.code !== zt.rr.ir ? t.code !== zt.rr.sr ? t.code !== zt.rr.lr || Na(e => e.Xt.Re, (e, t) => e.Xt.Re = t, "Spinbot") : Na(e => e.yt.At, (e, t) => e.yt.At = t, "Blatant") : Na(e => e.yt.Re, (e, t) => e.yt.Re = t, "Aimbot");
 } ]);
 })(n), (e => {
-fa = t => {
+_a = t => {
 const n = e.querySelector("#ui");
 n && (n.style.display = t ? "" : "none");
 };
@@ -4744,9 +4926,9 @@ setTimeout(() => {
 try {
 const n = (() => {
 const e = (() => {
-const e = dt.cookie;
+const e = mt.cookie;
 if (!e) return null;
-const t = pt + "=", n = e.split(";");
+const t = wt + "=", n = e.split(";");
 for (const e of n) {
 const n = e.trim();
 if (n.startsWith(t)) return n.slice(9);
@@ -4766,27 +4948,27 @@ return t;
 })();
 if (null != n) {
 const r = e(n), a = t(r);
-xt._deserialize(a);
+zt._deserialize(a);
 }
 } catch {} finally {
-kt = !0, ha = !0, ga(), ba && ha && !0 !== xt.sr.lr && ba.render(be(DiscordNotification, {
-Ha: xt,
-Wa: fe
+Rt = !0, Ra = !0, Sa(), za && Ra && !0 !== zt.cr.dr && za.render(xe(DiscordNotification, {
+Za: zt,
+Xa: ye
 }));
 }
 }, 1e3);
-})(), ft.then(() => {
-pa = "3.2", ha && ga();
+})(), yt.then(() => {
+Aa = "3.2", Ra && Sa();
 }).catch(() => {
-pa = "3.2", ha && ga();
+Aa = "3.2", Ra && Sa();
 });
 })();
-"loading" === dt.readyState ? Reflect.apply(Ct, dt, [ "DOMContentLoaded", t ]) : t();
-})(), ya(), t = za, n(ut.Function.prototype, "call", {
+"loading" === mt.readyState ? Reflect.apply(Tt, mt, [ "DOMContentLoaded", t ]) : t();
+})(), ja(), t = Ta, n(gt.Function.prototype, "call", {
 apply(e, n, r) {
 try {
-null != r[0]?.nameInput && null != r[0]?.game && (ut.Function.prototype.call = e, 
-mt = r[0], t());
+null != r[0]?.nameInput && null != r[0]?.game && (gt.Function.prototype.call = e, 
+Mt = r[0], t());
 } catch {}
 return Reflect.apply(e, n, r);
 }

@@ -641,28 +641,13 @@ function findTarget(players, me) {
     );
 
     if (distance > fovRadiusSquared) continue;
-
-    // Advanced target scoring system:
-    // 1. Distance factor: Exponential decay (closer targets score higher)
-    // 2. Continuity factor: Weak preference for current target (prevents jitter)
-    // 3. Shootability: Can we hit them through walls?
-    
     const screenDistance = Math.sqrt(distance);
-    
-    // Distance is PRIMARY factor - exponential decay (closer = much better)
-    const distanceFactor = Math.exp(-screenDistance / 120); // Slightly tighter focus
-    
-    // Weak continuity bonus to prevent target switching jitter
+    const distanceFactor = Math.exp(-screenDistance / 120);
     const isCurrent = player === state.currentEnemy_;
     const continuityBonus = isCurrent ? 0.02 : 0;
     
-    // Small bonus for shootable targets (helps when multiple targets at same distance)
-    const weapon = findWeapon(me);
-    const bullet = findBullet(weapon);
-    const isShootable = !settings.aimbot_.wallcheck_ || canCastToPlayer(me, player, weapon, bullet) ? 0.03 : 0;
-    
-    // Simple final score
-    const score = distanceFactor + continuityBonus + isShootable;
+    // Simple final score (no shootability check - aim at all enemies equally)
+    const score = distanceFactor + continuityBonus;
 
     if (score > bestScore) {
       bestScore = score;
@@ -1146,13 +1131,13 @@ function aimbotTicker() {
         const bullet = findBullet(weapon);
         const bulletRange = bullet?.distance || Infinity;
 
-        // Check if target is within bullet range and not blocked by walls
-        // In blatant mode, aim regardless of wallcheck, but still check actual shootability
+        // Check if target is within bullet range
+        // Blatant mode: aim regardless of walls. Otherwise check shootability
         const canAimAtTarget = distanceToEnemy <= bulletRange &&
           (settings.aimbot_.blatant_ || !settings.aimbot_.wallcheck_ || canCastToPlayer(me, enemy, weapon, bullet));
         
         // For actual shooting, ALWAYS check if target is truly shootable (not blocked by walls)
-        // This ensures AutoFire doesn't shoot through walls even if wallcheck is disabled
+        // AutoFire must always respect actual walls regardless of wallcheck setting
         const isTargetShootable =
           distanceToEnemy <= bulletRange &&
           canCastToPlayer(me, enemy, weapon, bullet);
@@ -1237,12 +1222,12 @@ function aimbotTicker() {
             const bulletRange = bullet?.distance || Infinity;
             
             // Check if loot is within bullet range
-            // In blatant mode, aim regardless of wallcheck, but still check actual shootability
+            // Blatant mode: aim regardless of walls. Otherwise check shootability
             const canAimAtLoot = distanceToLoot <= bulletRange &&
               (settings.aimbot_.blatant_ || !settings.aimbot_.wallcheck_ || canCastToPlayer(me, lootTarget, weapon, bullet));
             
             const isLootShootable = distanceToLoot <= bulletRange &&
-              (!settings.aimbot_.wallcheck_ || canCastToPlayer(me, lootTarget, weapon, bullet));
+              canCastToPlayer(me, lootTarget, weapon, bullet);
             
             if (canAimAtLoot) {
               setAimState(
